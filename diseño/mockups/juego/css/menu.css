@@ -1,5 +1,5 @@
 body{
-    background-image: url("../tierra.png");
+    background-image: url("../imgs/tierra.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,10 +25,10 @@ a {
     background-color: white;
     border: 2px solid black;
     border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
     display: flex;          
     align-items: center; 
     justify-content: center;
-    box-shadow: 5px 5px 10px black;
 }
 
 a:hover{

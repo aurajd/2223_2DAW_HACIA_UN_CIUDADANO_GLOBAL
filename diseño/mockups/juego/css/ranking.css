@@ -1,0 +1,131 @@
+body{
+    margin: 0;
+}
+
+nav{
+    font-size: 1.2rem;
+    width: 100%;
+    height: 10vh;
+    background-color: #002041;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+}
+
+main{
+    margin: 0 auto;
+    max-height: 90vh;
+    aspect-ratio: 577/333;
+    background-image: url("../imgs/mapamundi.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
+    display: flex;
+    /* Esto centra horizontalmente. */
+    justify-content: center;
+    /* Esto centra verticalmente. */
+    align-items: center;
+    /* Le ponemos una altura minima del 100% de la altura del dispositivo. */
+}
+
+#puntuacion{
+    position: absolute;
+    left: 2%;
+    height: 60%;
+    width: 10%;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;          
+    align-items: center; 
+    justify-content: center;
+}
+
+nav>a{
+    background-color: white;
+    width: 7%;
+    height: 50%;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;          
+    align-items: center; 
+    justify-content: center;
+}
+
+a:hover{
+    background-color: rgb(215, 215, 215);
+}
+
+main>div{
+    height: 60%;
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #ffffffcc;
+    padding: 5% 5%;
+}
+
+table{
+    height: 100%;
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    border-collapse: separate; 
+    border-spacing: 0.5rem 1rem;
+}
+th{
+    height: 20%;
+}
+td,th{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+td:first-child{
+    width: 70%;
+}
+
+#top1{
+    background-color: #FFD700;
+}
+
+#top2{
+    background-color: #C0C0C0;
+}
+
+#top3{
+    background-color: #CD7F32;
+}
+
+main div{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-direction: column;
+}
+
+#titulo{
+    height: 20%;
+    text-align: center;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+input[type="text"]{
+    width: 40%;
+}
+
+form>p{
+    display: inline-block;
+    width: 40%;
+}
