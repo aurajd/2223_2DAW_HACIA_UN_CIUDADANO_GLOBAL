@@ -1,0 +1,36 @@
+body{
+    background-image: url("../tierra.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+main {
+    display: flex;              /* establish flex container */
+    flex-direction: column;     /* stack flex items vertically */
+    justify-content: center;    /* center items vertically, in this case */
+    align-items: center;        /* center items horizontally, in this case */
+    height: 100vh;
+    row-gap: 5%;
+}
+
+a {
+    width: 20%;
+    height: 10%;
+    font-size: 3rem;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    display: flex;          
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 5px 5px 10px black;
+}
+
+a:hover{
+    background-color: gray;
+}
