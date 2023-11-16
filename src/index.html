@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang=es>
+	<head>
+		<meta charset=utf-8 />
+		<meta name=viewport content='width=device-width, initial-scale=1' />
+		<meta name=author content='Manuel Nieto Benítez' />
+		<title>PROYECTO-F</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/mvc.css">
+		<link rel="stylesheet" href="../css/menu.css">
+		<link rel="stylesheet" href="../css/ranking.css">
+		<link rel="stylesheet" href="../css/formulario.css">
+	</head>
+	<body>
+		<div id="divvistaMenu">
+			<main>
+				<a>
+					<p>Iniciar</p>
+				</a>
+
+				<a>
+					<p>Ranking</p>
+				</a>
+			</main>
+		</div>
+		<div id="divvistaMapa">
+			<h2>MAPAMUNDI</h2>
+			<!--Meteré el Mockup-->
+			<button id="Boton_eu1">Botnes continentes 1</button>
+			<button id="Boton_eu2">Botones continentes 2</button>
+			<button id="Boton_eu3">Botones continentes 3</button>
+		</div>
+		<div id="divvistaRank">
+			<nav>
+				<div id="puntuacion">
+					<p>Puntuación: 0</p>
+				</div>
+				<a id="volverMenu">
+					Volver
+				</a>
+			</nav>
+			<main>
+				<div>
+					<table>
+						<tr><th colspan="2">Ranking</th></tr>
+						<tr>
+							<td id="top1">Pepito1</td>
+							<td>2000 puntos</td>
+						</tr>
+						<tr>
+							<td id="top2">Pepito2</td>
+							<td>1900 puntos</td>
+						</tr>
+						<tr>
+							<td id="top3">Pepito3</td>
+							<td>1800 puntos</td>
+						</tr>
+						<tr>
+							<td>Pepito4</td>
+							<td>1700 puntos</td>
+						</tr>
+						<tr>
+							<td>Pepito5</td>
+							<td>1600 puntos</td>
+						</tr>
+					</table>
+					Pulsa "Enter" para volver al menú.
+				</div>
+			</main>
+			<!-- Agrega este fragmento donde sea necesario -->
+			<!-- Agrega este fragmento donde sea necesario -->
+			<main>
+				<div>
+					<h1>Guardar puntuación:</h1>
+					<form>
+						<input type="text" id="nombre" placeholder="Introduce tu nombre">
+						<p id="usernameError" style="color: red;"></p>
+						<p id="puntosMensaje">200 Puntos</p>
+						<input type="submit" id="username" value="Enviar">
+						<a>Cancelar</a>
+					</form>
+				</div>
+
+			</main>
+		</div>
+		<div id="divvistaCont">
+			<h2>CONTINENTE SELECCIONADO</h2>
+			<!--Meteré el Mockup-->
+			<div id="preguntaContainer">
+				<!-- Aquí se mostrará la pregunta -->
+			</div>
+			<div id="opcionesContainer">
+				<!-- Aquí se mostrarán los botones de opción -->
+			</div>
+			Control + B para volver atrás
+		</div>
+		<div id="divvistaForm">
+
+		</div>
+		<script type=module src=js/servicios/controlador.js></script>
+	</body>
+</html>
