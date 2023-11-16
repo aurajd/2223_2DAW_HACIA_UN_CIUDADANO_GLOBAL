@@ -8,7 +8,7 @@
 <body>
     <main>
         <h1>Añadir problema</h1>
-        <form action="vista.php" method="POST">
+        <form action="vista.php" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <label for="titulo">Título:</label>
                 <input type="text" name="titulo">
