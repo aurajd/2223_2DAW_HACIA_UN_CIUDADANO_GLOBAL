@@ -1,0 +1,70 @@
+body{
+    /* Ponemos una imagen de fondo centrada que cubra la pantalla entera, centrada, que no se repita y fija (no hace scroll). */
+    background-image: url("../tierra.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Le quitamos el margin al body. */
+    margin: 0;
+}
+
+main{
+    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
+    display: flex;
+    /* Esto centra horizontalmente. */
+    justify-content: center;
+    /* Esto centra verticalmente. */
+    align-items: center;
+    /* Le ponemos una altura minima del 100% de la altura del dispositivo. */
+    min-height: 100vh;
+}
+
+/* Creamos un div dentro del main el cual estará centrado. */
+main div{
+    width: 80%;
+    /* Indicamos que la altura se adapta a su contenido,
+    usamos esto porque contendrá textarea los cuales tienen altura variable. */
+    height: fit-content;
+    /* Le ponemos margin superior de para que no quede pegado al borde de la página cuando aumente su tamaño. */
+    margin: 10px 0;
+    padding: 2% 5%;
+    /* Border-radius le pone borde redondeado, su valor siempre es en píxeles. */
+    border-radius: 20px;
+    /* Utilizamos un color con transparencia para el fondo del div, así se podrá ver la imagen de fondo. */
+    background-color: #002141a0;
+    border: 1px solid white;
+    /* Le ponemos una sombra a la caja el primer numero indica el desplazamiento horizontal, el segundo el vertical, 
+    el tercero el radio de difuminado */
+    box-shadow: 5px 5px 10px black;
+}
+
+h1{
+    font-size: 2rem;
+    /* Ponemos un titulo alineado al centro */
+    text-align: center;
+    color: white;
+    margin: 0;
+}
+
+table{
+    width: 80%;
+    margin: auto;
+    background-color: white;
+}
+th{
+    background-color: gray;
+}
+
+td{
+    width: 20%;
+}
+
+
+td img{
+    width: 100%;
+}
+
+
+
+

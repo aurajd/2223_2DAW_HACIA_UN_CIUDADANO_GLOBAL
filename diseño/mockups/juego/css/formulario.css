@@ -7,10 +7,6 @@ nav{
     width: 100%;
     height: 10vh;
     background-color: #002041;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
     position: relative;
 }
 
@@ -35,6 +31,7 @@ main{
 #puntuacion{
     position: absolute;
     left: 2%;
+    top:20%;
     height: 60%;
     width: 10%;
     color: black;
@@ -46,23 +43,37 @@ main{
     justify-content: center;
 }
 
-nav>a{
-    width: 7%;
+
+
+ul{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 30%;
+    margin: auto;
+    list-style-type: none;  
+    display: flex;          
+    flex-flow: row nowrap;
+    align-items: center ;
+    gap: 40px;
+}
+nav li{
     height: 50%;
+    flex-grow: 1;
+}
+
+nav a{
     text-decoration: none;
+    height: 100%;
     color: black;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    display: flex;          
-    align-items: center; 
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-input:hover[type="submit"],a:hover{
-    background-color: rgb(215, 215, 215);
-    cursor: pointer;
-}
 
 main>div{
     height: 60%;
@@ -71,23 +82,26 @@ main>div{
     border-radius: 20px;
     background-color: #ffffffcc;
     padding: 5% 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
+
+input:hover[type="submit"],a:hover{
+    background-color: rgb(215, 215, 215);
+    cursor: pointer;
+}
+
+
 
 
 h1{
     text-align: center;
+    height: 30%;
+    margin: 0;
 }
 
 form{
     width: 100%;
-    height: 70%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: space-around;
+    height: 70%;    
+    position: relative;
 }
 
 input[type="text"]{
@@ -97,6 +111,9 @@ input[type="text"]{
     border-radius: 15px;
     background-color: white;
     display: inline-block;
+    position: absolute;
+    top: 0%;
+    left: 0%;
 }
 
 form>p{
@@ -107,6 +124,9 @@ form>p{
     background-color: #09A8C9;
     border: 2px solid black;
     border-radius: 15px;
+    position: absolute;
+    top: 0%;
+    right: 0%;
     display: inline-flex;          
     align-items: center; 
     justify-content: center;
@@ -122,11 +142,17 @@ input[type="submit"], form>a{
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    
 }
-
+input[type="submit"]{
+    position: absolute;
+    bottom: 0%;
+    left: 15%;
+}
 form>a{
     display: inline-flex;          
     align-items: center; 
     justify-content: center;
+    position: absolute;
+    bottom: 0%;
+    right: 15%;
 }
