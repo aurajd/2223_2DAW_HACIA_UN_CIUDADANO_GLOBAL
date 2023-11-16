@@ -82,9 +82,9 @@ main {
     background-repeat: no-repeat;
     /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
     display: flex;
-    /* Esto centra horizontalmente. */
-    justify-content: center;
     /* Esto centra verticalmente. */
+    justify-content: center;
+    /* Esto centra horizontalmente. */
     align-items: center;
 }
 
@@ -169,7 +169,7 @@ form>a {
 
 input:hover[type="submit"],
 a:hover {
-    background-color: rgb(215, 215, 215);
+    background-color: #d7d7d7;
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
 }
