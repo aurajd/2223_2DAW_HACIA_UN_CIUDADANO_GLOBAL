@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url("../imgs/tierra.png");
     background-size: cover;
     background-position: center;
@@ -8,10 +8,14 @@ body{
 }
 
 main {
-    display: flex;              /* establish flex container */
-    flex-direction: column;     /* stack flex items vertically */
-    justify-content: center;    /* center items vertically, in this case */
-    align-items: center;        /* center items horizontally, in this case */
+    /* Usamos display flex para colocar las dos opciones centradas en una columna */
+    display: flex;
+    /* Esto indica que los items estarán colocados en columna */
+    flex-direction: column;
+    /* Esto que están justificados al centro */
+    justify-content: center;
+    /* Esto que están verticalmente centrados */
+    align-items: center;
     height: 100vh;
     row-gap: 5%;
 }
@@ -26,11 +30,12 @@ a {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 5px 10px black;
-    display: flex;          
-    align-items: center; 
+    /* Centramos el enlace dentro del borde usando display flex */
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
-a:hover{
+a:hover {
     background-color: gray;
 }
