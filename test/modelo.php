@@ -42,7 +42,7 @@ class Modelo{
             $ruta_temporal = $imagen["tmp_name"];
 
             // Construir la ruta de destino completa
-            $ruta_destino = $directorio_destino . $nombreImagen;
+            $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 
             // Mover el archivo a la nueva ubicación
             if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
