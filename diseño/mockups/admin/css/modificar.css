@@ -23,6 +23,7 @@ main{
 
 /* Creamos un div dentro del main el cual estará centrado. */
 main>div{
+    font-family: 'Roboto', sans-serif;
     width: 80%;
     /* Tiene una altura mínima del 80% de la pestaña del navegador */
     min-height: 80vh;
@@ -47,73 +48,76 @@ h1{
     text-align: center;
     color: white;
 }
-table{
+
+p, label{
+    /* Usamos display block para que el label se encuentre encima del input */
+    display: block;
+    /* Metemos más margin por encima del label, separando los distintos elementos del formulario, 
+    que por debajo, para separa el label del input */
+    margin: 20px 0 5px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+form{
+    width: 100%;
+}
+
+input[type="text"]{
     font-family: 'Roboto', sans-serif;
-    max-width: 80%;
-    margin: auto;
-    background-color: lightgray;
-    border-collapse: collapse;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
 }
 
-th,td{
-    border: 2px black solid;
+textarea{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 100px;  
+    padding: 0.5rem 1rem;
+    background-color: #efefef;
+    /* Permitimos que la textarea se pueda redimensionar verticalmente */
+    resize: vertical;
+    /* Usamos box-sizing border-box para que no se descuadre con el padding en rem */
+    box-sizing: border-box;
 }
 
-th{
-    background-color: gray;
-    padding: 10px 0;
+input[type="file"]{
+    color: white;
 }
 
-td{
+
+img{
     width: 20%;
 }
 
-/* Div dentro de la celda para poner un scroll si sobrepasa 200px */
-.scroll{
-    width: 100%;
-    max-height: 200px;
-    margin: 0;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    /* Si sobrepasa los 200 pixeles (el max-height) overflow auto hace que aparezca una barra de scroll */
-    overflow: auto;
-}
-
-td img{
-    width: 100%;
-    vertical-align: middle;
-}
-
-td ul{
-    list-style-type: none;
-    margin: 0;
+.opciones{
     padding: 0;
-    /* Usamos flex para centrar los enlaces los elementos de la lista */
+    list-style: none;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    column-gap: 10%;
 }
 
-td li{
-    min-width: 60%;
-}
 
-a{
+input[type="submit"],a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 20px;
     text-decoration: none;
     color: black;
-    padding: 10px 20px;
-    margin: 5px 0;
-    box-sizing: border-box;
     background-color: white;
     border: 2px solid black;
-    border-radius: 10px;
-    /* Usamos flex para centrar el texto del enlace */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 15px;
 }
 
+input:hover[type="submit"],
 a:hover {
     background-color: #b9b9b9;
+    /* Para que el submit muestre la manita para hacer click cuando haces hover */
+    cursor: pointer;
 }
