@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="../css/mvc.css">
 		<link rel="stylesheet" href="../css/menu.css">
 		<link rel="stylesheet" href="../css/ranking.css">
-		<link rel="stylesheet" href="../css/formulario.css">
+
 	</head>
 	<body>
 		<div id="divvistaMenu">
@@ -21,14 +21,17 @@
 				<a>
 					<p>Ranking</p>
 				</a>
+				<a>
+					<p>Formulario</p>
+				</a>
 			</main>
 		</div>
 		<div id="divvistaMapa">
 			<h2>MAPAMUNDI</h2>
 			<!--Meteré el Mockup-->
-			<button id="Boton_eu1">Botnes continentes 1</button>
+			<button id="Boton_eu1">Botones continentes 1</button>
 			<button id="Boton_eu2">Botones continentes 2</button>
-			<button id="Boton_eu3">Botones continentes 3</button>
+			<button id="Boton_eu3">Botones volver a rankings</button>
 		</div>
 		<div id="divvistaRank">
 			<nav>
@@ -67,21 +70,6 @@
 					Pulsa "Enter" para volver al menú.
 				</div>
 			</main>
-			<!-- Agrega este fragmento donde sea necesario -->
-			<!-- Agrega este fragmento donde sea necesario -->
-			<main>
-				<div>
-					<h1>Guardar puntuación:</h1>
-					<form>
-						<input type="text" id="nombre" placeholder="Introduce tu nombre">
-						<p id="usernameError" style="color: red;"></p>
-						<p id="puntosMensaje">200 Puntos</p>
-						<input type="submit" id="username" value="Enviar">
-						<a>Cancelar</a>
-					</form>
-				</div>
-
-			</main>
 		</div>
 		<div id="divvistaCont">
 			<h2>CONTINENTE SELECCIONADO</h2>
@@ -95,7 +83,20 @@
 			Control + B para volver atrás
 		</div>
 		<div id="divvistaForm">
-
+			<!-- Agrega este fragmento donde sea necesario -->
+			<!-- Agrega este fragmento donde sea necesario -->
+			<main>
+				<div>
+					<h1>Guardar puntuación:</h1>
+					<!-- Agrega este fragmento donde sea necesario -->
+					<form>
+						<input type="text" id="username" placeholder="Introduce tu nombre">
+						<p id="usernameError" style="color: red;"></p>
+						<p id="puntosMensaje">200 Puntos</p>
+						<button type="submit">Enviar</button>
+					</form>
+				</div>
+			</main>
 		</div>
 		<script type=module src=js/servicios/controlador.js></script>
 	</body>

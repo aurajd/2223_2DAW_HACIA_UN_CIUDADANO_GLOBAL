@@ -1,49 +1,41 @@
-import { Vista } from './vista.js';
+import { Vista } from './vista.js' 
 
+/**
+ * Clase que representa la vista del ranking en la aplicación.
+ * @extends Vista
+ */
 export class Vista_ranking extends Vista {
+    /**
+     * Construye una instancia de la clase Vista_ranking.
+     * @constructor
+     * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del ranking.
+     */
     constructor(controlador, base) {
-        super(controlador, base);
-        this.comprobacionesForm();
-        // Agregar un event listener para el evento de pulsación de tecla
-        document.addEventListener('keydown', this.irAtras.bind(this));
+        super(controlador, base) 
 
-        // Obtener referencia al enlace de Inicio
-        this.enlaceInicio = this.base.querySelector('#volverMenu'); // Reemplaza 'enlaceInicio' con el ID real de tu enlace
+        document.addEventListener('keydown', this.irAtras.bind(this)) 
 
-        // Asociar evento al enlace de Inicio
-        this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1));
-
-        // Obtener referencia al formulario
-        this.formulario = this.base.querySelector('form');
-
-        // Asociar evento al formulario para enviarFormulario en el evento submit
-        this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event));
+        this.enlaceInicio = this.base.querySelector('#volverMenu') 
+        this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1)) 
     }
 
-    // Función para manejar la pulsación de tecla
+    /**
+     * Función para manejar la pulsación de tecla.
+     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
+     */
     irAtras(event) {
-        // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
         if (event.key === 'Enter') {
-            // Cambiar a Vista1
-            this.controlador.verVista(Vista.VISTA1);
+            this.controlador.verVista(Vista.VISTA1) 
         }
     }
 
-    // Ejemplo de cómo podrías actualizar la puntuación en la interfaz de usuario
+    /**
+     * Actualiza la puntuación en la interfaz.
+     */
     actualizarPuntuacionEnInterfaz() {
-        const puntuacionActual = this.controlador.obtenerPuntuacionActual();
-        const puntuacionElemento = this.base.querySelector('#puntuacion p');
-        puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`;
-    }
-
-    // En tu método inicializarEventos de la Vista_formulario.js
-    comprobacionesForm() {
-        const inputUsername = this.base.querySelector('#username');
-        inputUsername.addEventListener('input', () => this.validarFormulario());
-    }
-
-    enviarFormulario(event) {
-        event.preventDefault(); // Evitar el envío predeterminado del formulario
-        this.controlador.manejarValidacionFormulario(); // Llamar a la función del controlador
+        const puntuacionActual = this.controlador.obtenerPuntuacionActual() 
+        const puntuacionElemento = this.base.querySelector('#puntuacion') 
+        puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}` 
     }
 }
