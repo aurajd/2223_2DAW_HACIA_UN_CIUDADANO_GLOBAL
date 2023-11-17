@@ -4,6 +4,66 @@ body {
     margin: 0;
 }
 
+#menu {
+    /* Usamos display flex para colocar las dos opciones centradas en una columna */
+    display: flex;
+    /* Esto indica que los items estarán colocados en columna */
+    flex-direction: column;
+    /* Esto que están justificados al centro */
+    justify-content: center;
+    /* Esto que están verticalmente centrados */
+    align-items: center;
+    height: 100vh;
+    row-gap: 5%;
+    background-color: #09A8C9;
+}
+
+#menu img{
+    width: 20%;
+}
+
+#menu div{
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+}
+
+#tituloLogo{
+    font-size: 3rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5%;
+}
+
+#opcionesMenu{
+    display: flex;
+    justify-content: center;
+    column-gap: 5%;
+}
+
+#menu a {
+    font-size: 3rem;
+    padding: 20px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+    /* Centramos el enlace dentro del borde usando display flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu a:hover {
+    background-color: gray;
+}
+
+
+
+
 nav {
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
@@ -69,7 +129,7 @@ nav a {
     align-items: center;
 }
 
-main {
+.mainJuego {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
     max-height: 90vh;
@@ -88,7 +148,7 @@ main {
     align-items: center;
 }
 
-main>div {
+.mainJuego>div {
     height: 60%;
     width: 60%;
     border: 2px solid black;
@@ -97,19 +157,52 @@ main>div {
     padding: 5% 5%;
 }
 
-h1 {
+#ranking{
+    height: 100%;
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0.5rem 1rem;
+}
+#ranking th{
+    height: 20%;
+}
+#ranking td,th{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#ranking td:first-child{
+    width: 70%;
+}
+
+#top1{
+    background-color: #FFD700!important;
+}
+
+#top2{
+    background-color: #C0C0C0!important;
+}
+
+#top3{
+    background-color: #CD7F32!important;
+}
+
+#divPuntuacion h1 {
     height: 30%;
     margin: 0;
     text-align: center;
 }
 
-form {
+#divPuntuacion form{
     width: 100%;
     height: 70%;
     position: relative;
 }
 
-input[type="text"] {
+#divPuntuacion input[type="text"] {
     width: 60%;
     height: 30%;
     font-size: 2rem;
@@ -122,7 +215,7 @@ input[type="text"] {
     left: 0%;
 }
 
-form>p {
+#divPuntuacion p {
     width: 35%;
     height: 30%;
     margin: 0;
@@ -139,8 +232,8 @@ form>p {
     justify-content: center;
 }
 
-input[type="submit"],
-form>a {
+#divPuntuacion input[type="submit"],
+#divPuntuacion a {
     width: 30%;
     height: 20%;
     font-size: 2rem;
@@ -151,14 +244,14 @@ form>a {
     border-radius: 10px;
 }
 
-input[type="submit"] {
+#divPuntuacion input[type="submit"] {
     font-family: 'Roboto', sans-serif;
     position: absolute;
     bottom: 0%;
     left: 15%;
 }
 
-form>a {
+#divPuntuacion a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -167,9 +260,9 @@ form>a {
     right: 15%;
 }
 
-input:hover[type="submit"],
-a:hover {
-    background-color: rgb(215, 215, 215);
+#divPuntuacion input:hover[type="submit"],
+#divPuntuacion a:hover {
+    background-color: #d7d7d7;
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
 }
