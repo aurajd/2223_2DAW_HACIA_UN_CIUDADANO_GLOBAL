@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+a{
+    cursor: pointer;
+}
+
 #menu {
     /* Usamos display flex para colocar las dos opciones centradas en una columna */
     display: flex;
@@ -136,7 +140,7 @@ nav a {
     /* El aspect-ratio de la imagen de fondo, el tablero de juego, para posteriormente poder colocar las marcas en el
     mapamundi con posicionamiento absoluto con porcentajes y que no se descuadre */
     aspect-ratio: 577/333;
-    background-image: url("../imgs/mapamundi.png");
+    background-image: url("../img/mapamundi.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -169,6 +173,7 @@ nav a {
     height: 20%;
 }
 #ranking td,th{
+    vertical-align: middle;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
@@ -193,7 +198,9 @@ nav a {
 #divPuntuacion h1 {
     height: 30%;
     margin: 0;
+    font-size: 2rem;
     text-align: center;
+    font-weight: bold;
 }
 
 #divPuntuacion form{
@@ -215,7 +222,7 @@ nav a {
     left: 0%;
 }
 
-#divPuntuacion p {
+#divPuntuacion #puntosMensaje {
     width: 35%;
     height: 30%;
     margin: 0;
@@ -265,4 +272,10 @@ nav a {
     background-color: #d7d7d7;
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
+}
+#usernameError{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:50% !important;
+    left:50% !important;
 }

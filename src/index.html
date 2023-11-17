@@ -13,14 +13,18 @@
 			<main id="menu">
 				<div id="tituloLogo">
 					<h1>WorldView</h1>
-					<img src="imgs/logo.png">
+					<img src="../img/logo.jpeg">
 				</div>
 				<div id="opcionesMenu">
-					<a href="">
-						Iniciar
+					<a>
+						<p>Iniciar</p>
 					</a>
-					<a href="ranking.html">
-						Ranking
+
+					<a>
+						<p>Ranking</p>
+					</a>
+					<a>
+						<p>Formulario</p>
 					</a>
 				</div>
 			</main>
@@ -45,10 +49,10 @@
 		</div>
 		<div id="divvistaRank">
 			<nav>
-				<p>Puntuación: 0</p>
+				<p id="puntuacion">Puntuación: 0</p>
 				<ul>
 					<li>
-						<a href="menu.html">
+						<a id="volverMenu">
 							Volver
 						</a>
 					</li>
@@ -84,21 +88,10 @@
 		</div>
 		<div id="divvistaForm">
 			<nav>
-				<p>Puntuación: 200</p>
 				<ul>
 					<li>
-						<a href="menu.html">
+						<a>
 							Inicio
-						</a>
-					</li>
-					<li>
-						<a href="">
-							Reiniciar
-						</a>
-					</li>
-					<li>
-						<a href="ranking.html">
-							Ranking
 						</a>
 					</li>
 				</ul>
@@ -106,11 +99,12 @@
 			<main class="mainJuego">
 				<div id="divPuntuacion">
 					<h1>Guardar puntuación:</h1>
-					<form action="ranking.html" method="post">
-						<input type="text" name="nombre" placeholder="Introduce tu nombre">
-						<p>200 Puntos</p>
+					<form>
+						<input type="text" id="username" placeholder="Introduce tu nombre">
+						<p id="usernameError" style="color: red;"></p>
+						<p id="puntosMensaje">0 Puntos</p>
 						<input type="submit" value="Enviar">
-						<a href="menu.html">Cancelar</a>
+						<a>Cancelar</a>
 					</form>
 				</div>
 			</main>
