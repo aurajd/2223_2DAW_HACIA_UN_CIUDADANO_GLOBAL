@@ -12,12 +12,20 @@ export class Vista_formulario extends Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del formulario.
      */
     constructor(controlador, base) {
-        super(controlador, base) 
+        super(controlador, base)
 
-        document.addEventListener('keydown', this.irAtras.bind(this)) 
+        document.addEventListener('keydown', this.irAtras.bind(this))
 
-        this.formulario = this.base.querySelector('form') 
-        this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event)) 
+        this.formulario = this.base.querySelector('form')
+        this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event))
+
+        // Agregar evento al enlace de "Inicio"
+        const enlaceInicio = this.base.querySelector('nav ul li a')
+        enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+
+        // Agregar evento al enlace de "Cancelar"
+        const enlaceCancelar = this.base.querySelector('form a')
+        enlaceCancelar.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
     }
 
     /**
@@ -36,7 +44,17 @@ export class Vista_formulario extends Vista {
      * @param {Event} event - Objeto que representa el evento de formulario.
      */
     enviarFormulario(event) {
-        event.preventDefault() 
-        this.controlador.manejarValidacionFormulario() 
+        event.preventDefault()
+        this.controlador.manejarValidacionFormulario()
     }
+
+    /**
+     * Actualiza la puntuación en la interfaz.
+     */
+    actualizarPuntuacionEnInterfaz() {
+        const puntuacionActual = this.controlador.obtenerPuntuacionActual()
+        const puntuacionElemento = this.base.querySelector('#puntosMensaje')
+        puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+    }
+
 }

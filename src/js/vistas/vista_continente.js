@@ -1,6 +1,5 @@
 import { Vista } from './vista.js'
-//import { Rest } from '../servicios/rest.js';
-
+import { Rest } from '../servicios/rest.js'
 
 /**
  * Clase que representa la vista de un continente en la aplicación.
@@ -14,16 +13,17 @@ export class Vista_continente extends Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
      */
     constructor(controlador, base) {
-        super(controlador, base, Vista.VISTA2) 
-        
+        super(controlador, base, Vista.VISTA2)
+
         // Agregar un event listener para el evento de pulsación de tecla
-        document.addEventListener('keydown', this.irAtras.bind(this)) 
+        document.addEventListener('keydown', this.irAtras.bind(this))
         // Pregunta para mostrar en la vista continente
-        this.mostrarPregunta('¿Cuál es la capital de este continente?') 
+        this.mostrarPregunta('¿Cuál es la capital de este continente?')
         // Opciones de respuesta
-        this.opcionesRespuesta = ['Opción 1', 'Opción 2', 'Opción 3'] 
+        this.opcionesRespuesta = ['Opción 1', 'Opción 2', 'Opción 3']
         // Crear botones para cada opción de respuesta
-        this.crearBotonesRespuesta() 
+        this.crearBotonesRespuesta()
+        this.actualizarPuntuacionEnInterfaz()
     }
 
     /**
@@ -34,7 +34,7 @@ export class Vista_continente extends Vista {
         // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
         if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
             // Cambiar a Vista2
-            this.controlador.verVista(Vista.VISTA2) 
+            this.controlador.verVista(Vista.VISTA2)
         }
     }
 
@@ -43,69 +43,59 @@ export class Vista_continente extends Vista {
      * @param {string} pregunta - Pregunta a mostrar.
      */
     mostrarPregunta(pregunta) {
-        const preguntaElemento = document.createElement('p') 
-        preguntaElemento.textContent = pregunta 
+        const preguntaElemento = document.createElement('p')
+        preguntaElemento.textContent = pregunta
 
-        // Reemplaza 'preguntaContainer' con el ID o la clase real de tu contenedor de preguntas
-        const preguntaContainer = this.base.querySelector('#preguntaContainer') 
-        preguntaContainer.appendChild(preguntaElemento) 
+        const preguntaContainer = this.base.querySelector('#preguntaContainer')
+        preguntaContainer.appendChild(preguntaElemento)
     }
 
     /**
      * Función para crear botones de opción de respuesta.
      */
     crearBotonesRespuesta() {
-        const opcionesContainer = this.base.querySelector('#opcionesContainer') 
+        const opcionesContainer = this.base.querySelector('#opcionesContainer')
 
         // Crear y agregar botones para cada opción de respuesta
         this.opcionesRespuesta.forEach((opcion, index) => {
-            const boton = document.createElement('button') 
-            boton.textContent = opcion 
+            const boton = document.createElement('button')
+            boton.textContent = opcion
             boton.addEventListener('click', () => this.responder(index + 1))  // Sumar 1 para evitar índices de opción 0
 
-            opcionesContainer.appendChild(boton) 
-        }) 
+            opcionesContainer.appendChild(boton)
+        })
     }
 
     /**
      * Función para manejar la respuesta del usuario.
      * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
      */
+
     responder(opcionSeleccionada) {
+        // Obtener la URL correcta para la solicitud GET
+        const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbmlldG9iZW5pdGV6Lmd1YWRhbHVwZUBhbHVtbmFkby5mdW5kYWNpb25sb3lvbGEubmV0IiwianRpIjoiZDQzMDE0ZTctZmY5OS00OTc2LWExYzYtYWY3NTE0MWQxNzM4IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3MDAyMDk1ODcsInVzZXJJZCI6ImQ0MzAxNGU3LWZmOTktNDk3Ni1hMWM2LWFmNzUxNDFkMTczOCIsInJvbGUiOiIifQ.aQyVYfeUFTx0wDjDVX3y5ahE1nNN7zULVhL0-DCjyKU' // Reemplaza con la URL correcta
+
+        // Realizar la petición GET para obtener información sobre continentes
+        Rest.getContinentInfo(url, data => {
+            console.log('Información de continentes:', data)
+            // Puedes realizar acciones adicionales en función de la respuesta de la API
+        })
+
+        // Resto del código de la función responder
         if (opcionSeleccionada === 1) {
-            console.log('Respuesta correcta') 
-            this.controlador.acertarPregunta() 
+            console.log('Respuesta correcta')
+            this.controlador.acertarPregunta()
+            this.actualizarPuntuacionEnInterfaz()
         } else {
-            console.log('Respuesta incorrecta') 
+            console.log('Respuesta incorrecta')
         }
     }
-/*
-    /**
-     * Función para manejar la respuesta del usuario.
-     * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
 
-    responder(opcionSeleccionada) {
-        const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas'; // Reemplaza con la URL correcta
-
-        // Realizar la petición GET
-        Rest.get(url)
-            .then(responseData => {
-                // Procesar la respuesta de la API
-                console.log(responseData);
-                // Puedes realizar acciones adicionales en función de la respuesta de la API
-            })
-            .catch(error => {
-                // Maneja errores en la petición
-                console.error(error);
-            });
-
-        if (opcionSeleccionada === 1) {
-            console.log('Respuesta correcta');
-            this.controlador.acertarPregunta();
-        } else {
-            console.log('Respuesta incorrecta');
+    actualizarPuntuacionEnInterfaz() {
+        const puntuacionElemento = this.base.querySelector('#puntuacion')
+        if (puntuacionElemento) {
+            const puntuacionActual = this.controlador.obtenerPuntuacionActual()
+            puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
         }
-    }*/
-
-
+    }
 }

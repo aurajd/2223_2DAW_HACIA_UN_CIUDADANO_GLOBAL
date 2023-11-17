@@ -6,11 +6,11 @@ export class Vista {
      * Símbolos que representan distintas vistas en la aplicación.
      * @type {Symbol}
      */
-    static VISTA1 = Symbol('Inicio');
-    static VISTA2 = Symbol('Mapa');
-    static VISTA3 = Symbol('Ranking');
-    static VISTA4 = Symbol('Continente');
-    static VISTA5 = Symbol('Formulario');
+    static VISTA1 = Symbol('Inicio')
+    static VISTA2 = Symbol('Mapa')
+    static VISTA3 = Symbol('Ranking')
+    static VISTA4 = Symbol('Continente')
+    static VISTA5 = Symbol('Formulario')
 
     /**
      * Constructor de la clase Vista.
@@ -18,8 +18,8 @@ export class Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista.
      */
     constructor(controlador, base) {
-        this.controlador = controlador;
-        this.base = base;
+        this.controlador = controlador
+        this.base = base
     }
 
     /**
@@ -28,9 +28,9 @@ export class Vista {
      */
     mostrar(ver) {
         if (ver) {
-            this.base.style.display = 'block';
+            this.base.style.display = 'block'
         } else {
-            this.base.style.display = 'none';
+            this.base.style.display = 'none'
         }
     }
 }

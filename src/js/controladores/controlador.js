@@ -26,7 +26,7 @@ class Controlador {
         const divvistaMapa = document.getElementById('divvistaMapa') 
         const divvistaCont = document.getElementById('divvistaCont') 
         const divvistaRank = document.getElementById('divvistaRank') 
-        const divvistaForm = document.getElementById('divvistaForm') 
+        const divvistaForm = document.getElementById('divvistaForm')
 
         // Crear instancias de las vistas
         this.vistas = new Map() 
@@ -34,7 +34,7 @@ class Controlador {
         this.vistas.set(Vista.VISTA2, new Vista_mapa(this, divvistaMapa)) 
         this.vistas.set(Vista.VISTA3, new Vista_ranking(this, divvistaRank)) 
         this.vistas.set(Vista.VISTA4, new Vista_continente(this, divvistaCont)) 
-        this.vistas.set(Vista.VISTA5, new Vista_formulario(this, divvistaForm)) 
+        this.vistas.set(Vista.VISTA5, new Vista_formulario(this, divvistaForm))
 
         this.verVista(Vista.VISTA1) 
     }
@@ -63,7 +63,8 @@ class Controlador {
         /** @const {number} puntosPorPregunta - Puntos otorgados por acertar una pregunta. */
         const puntosPorPregunta = 10 
         this.modelo.aumentarPuntuacion(puntosPorPregunta) 
-        this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz() 
+        this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz()
+        this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
     }
 
     /**
@@ -78,18 +79,18 @@ class Controlador {
      * Maneja la validación del formulario.
      */
     manejarValidacionFormulario() {
-        console.log('Iniciando manejarValidacionFormulario...') 
         /** @type {boolean} */
-        const esValido = this.validarFormulario() 
-        console.log('Terminando manejarValidacionFormulario.') 
+        const esValido = this.validarFormulario()
+
         if (esValido) {
             // Realizar acciones adicionales si el formulario es válido
-            alert("Formulario válido.") 
+            alert("Formulario válido.")
+            this.verVista(Vista.VISTA3)
         } else {
-            // Realizar acciones adicionales si el formulario no es válido
-            alert("Formulario no válido.") 
+            alert("Formulario no válido.")
         }
     }
+
 
     /**
      * Valida el formulario.
@@ -105,7 +106,7 @@ class Controlador {
         // Verificar si el nombre de usuario cumple con la expresión regular
         if (!usernameRegex.test(username)) {
             // Mostrar mensaje de error
-            document.getElementById("usernameError").innerHTML = "El nombre de usuario no es válido." 
+            document.getElementById("usernameError").innerHTML = "El nombre de usuario no es válido. No puede empezar por números o caracteres especiales."
             return false  // Evitar que el formulario se envíe
         } else {
             // Limpiar mensaje de error si es válido

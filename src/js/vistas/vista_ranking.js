@@ -30,12 +30,12 @@ export class Vista_ranking extends Vista {
         }
     }
 
-    /**
-     * Actualiza la puntuación en la interfaz.
-     */
-    actualizarPuntuacionEnInterfaz() {
-        const puntuacionActual = this.controlador.obtenerPuntuacionActual() 
-        const puntuacionElemento = this.base.querySelector('#puntuacion') 
-        puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}` 
-    }
+        /**
+         * Actualiza la puntuación en la interfaz.
+         */
+        actualizarPuntuacionEnInterfaz() {
+            const puntuacionActual = this.controlador.obtenerPuntuacionActual()
+            const puntuacionElemento = this.base.querySelector('#puntuacion')
+            puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+        }
 }
