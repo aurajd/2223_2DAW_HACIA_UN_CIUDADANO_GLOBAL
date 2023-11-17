@@ -4,11 +4,8 @@ body {
     margin: 0;
 }
 
-#bodyMenu {
-    background-color: #09A8C9;
-}
-
 #menu {
+    background-color: #09A8C9;
     /* Usamos display flex para colocar las dos opciones centradas en una columna */
     display: flex;
     /* Esto indica que los items estarán colocados en columna */
