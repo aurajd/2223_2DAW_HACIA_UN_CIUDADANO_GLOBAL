@@ -169,6 +169,7 @@ nav a {
     height: 20%;
 }
 #ranking td,th{
+    vertical-align: middle;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
