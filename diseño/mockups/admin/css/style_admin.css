@@ -23,6 +23,7 @@ main{
 
 /* Creamos un div dentro del main el cual estará centrado. */
 main>div{
+    font-family: 'Roboto', sans-serif;
     width: 80%;
     /* Tiene una altura mínima del 80% de la pestaña del navegador */
     min-height: 80vh;
@@ -47,6 +48,67 @@ h1{
     text-align: center;
     color: white;
 }
+
+.titulo, label{
+    /* Usamos display block para que el label se encuentre encima del input */
+    display: block;
+    /* Metemos más margin por encima del label, separando los distintos elementos del formulario, 
+    que por debajo, para separa el label del input */
+    margin: 20px 0 5px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+form{
+    width: 100%;
+}
+
+input[type="text"]{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
+}
+
+textarea{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 100px;  
+    padding: 0.5rem 1rem;
+    background-color: #efefef;
+    /* Permitimos que la textarea se pueda redimensionar verticalmente */
+    resize: vertical;
+    /* Usamos box-sizing border-box para que no se descuadre con el padding en rem */
+    box-sizing: border-box;
+}
+
+input[type="file"]{
+    color: white;
+}
+
+#anadirBoton {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px auto 0;
+    width: 10%;
+    height: 40px;
+    display: block;
+}
+
+#exito{
+    color:green;
+    text-align: center;
+    margin: 20px 0 0 ;
+}
+
+#error{
+    color:red;
+    text-align: center;
+    margin: 20px 0 0 ;
+}
+
+
 table{
     font-family: 'Roboto', sans-serif;
     max-width: 80%;
@@ -99,7 +161,7 @@ td li{
     min-width: 60%;
 }
 
-a{
+td a{
     text-decoration: none;
     color: black;
     padding: 10px 20px;
@@ -114,6 +176,47 @@ a{
     justify-content: center;
 }
 
-a:hover {
+td a:hover {
     background-color: #b9b9b9;
+}
+
+#imagenMostrar{
+    width: 20%;
+}
+
+.opciones{
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10%;
+}
+
+
+.opciones input[type="submit"],.opciones a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.opciones input:hover[type="submit"],
+.opciones a:hover {
+    background-color: #b9b9b9;
+    /* Para que el submit muestre la manita para hacer click cuando haces hover */
+    cursor: pointer;
+}
+
+.campos{
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
+    color: black;
 }
