@@ -4,7 +4,7 @@ body {
     margin: 0;
 }
 
-a{
+a {
     cursor: pointer;
 }
 
@@ -22,16 +22,16 @@ a{
     background-color: #09A8C9;
 }
 
-#menu img{
+#menu img {
     width: 20%;
 }
 
-#menu div{
+#menu div {
     font-family: 'Poppins', sans-serif;
     width: 100%;
 }
 
-#tituloLogo{
+#tituloLogo {
     font-size: 3rem;
     color: white;
     display: flex;
@@ -40,7 +40,7 @@ a{
     column-gap: 5%;
 }
 
-#opcionesMenu{
+#opcionesMenu {
     display: flex;
     justify-content: center;
     column-gap: 5%;
@@ -64,9 +64,6 @@ a{
 #menu a:hover {
     background-color: gray;
 }
-
-
-
 
 nav {
     font-size: 1rem;
@@ -161,7 +158,7 @@ nav a {
     padding: 5% 5%;
 }
 
-#ranking{
+#ranking {
     height: 100%;
     width: 100%;
     font-size: 1.5rem;
@@ -169,30 +166,33 @@ nav a {
     border-collapse: separate;
     border-spacing: 0.5rem 1rem;
 }
-#ranking th{
+
+#ranking th {
     height: 20%;
 }
-#ranking td,th{
+
+#ranking td,
+th {
     vertical-align: middle;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
 }
 
-#ranking td:first-child{
+#ranking td:first-child {
     width: 70%;
 }
 
-#top1{
-    background-color: #FFD700!important;
+#top1 {
+    background-color: #FFD700 !important;
 }
 
-#top2{
-    background-color: #C0C0C0!important;
+#top2 {
+    background-color: #C0C0C0 !important;
 }
 
-#top3{
-    background-color: #CD7F32!important;
+#top3 {
+    background-color: #CD7F32 !important;
 }
 
 #divPuntuacion h1 {
@@ -203,7 +203,7 @@ nav a {
     font-weight: bold;
 }
 
-#divPuntuacion form{
+#divPuntuacion form {
     width: 100%;
     height: 70%;
     position: relative;
@@ -273,9 +273,10 @@ nav a {
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
 }
-#usernameError{
+
+#usernameError {
     position: absolute;
-    transform: translate(-50%,-50%);
-    top:50% !important;
-    left:50% !important;
+    transform: translate(-50%, -50%);
+    top: 50% !important;
+    left: 50% !important;
 }
