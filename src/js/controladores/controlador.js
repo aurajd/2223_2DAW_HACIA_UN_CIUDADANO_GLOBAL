@@ -101,7 +101,7 @@ class Controlador {
         let username = document.getElementById("username").value 
         // Expresión regular para verificar que no comienza con números y tiene máximo 30 caracteres
         /** @type {RegExp} */
-        let usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{0,29}$/ 
+        let usernameRegex = /^[a-zA-Z][a-zA-Z\s0-9]{0,29}$/
         // Verificar si el nombre de usuario cumple con la expresión regular
         if (!usernameRegex.test(username)) {
             // Mostrar mensaje de error
@@ -113,7 +113,8 @@ class Controlador {
             return true  // Permitir que el formulario se envíe
         }
     }
+
 }
 
 /** Inicializa el Controlador cuando la ventana se carga completamente. */
-window.onload = () => { new Controlador() } 
+window.onload = () => { new Controlador() }

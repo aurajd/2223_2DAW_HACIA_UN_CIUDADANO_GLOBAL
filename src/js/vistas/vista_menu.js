@@ -48,4 +48,6 @@ export class Vista_menu extends Vista {
     pulsarEnlace3() {
         this.controlador.verVista(Vista.VISTA5)  // Cambiamos a Vista Formulario
     }
+
+
 }

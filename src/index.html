@@ -6,24 +6,23 @@
 		<meta name=author content='Manuel Nieto Benítez' />
 		<title>PROYECTO-F</title>
 		<link rel="stylesheet" href="../css/reset.css">
-		<link rel="stylesheet" href="../css/mvc.css">
-		<link rel="stylesheet" href="../css/menu.css">
-		<link rel="stylesheet" href="../css/ranking.css">
-
+		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
 		<div id="divvistaMenu">
-			<main>
-				<a>
-					<p>Iniciar</p>
-				</a>
-
-				<a>
-					<p>Ranking</p>
-				</a>
-				<a>
-					<p>Formulario</p>
-				</a>
+			<main id="menu">
+				<div id="tituloLogo">
+					<h1>WorldView</h1>
+					<img src="imgs/logo.png">
+				</div>
+				<div id="opcionesMenu">
+					<a href="">
+						Iniciar
+					</a>
+					<a href="ranking.html">
+						Ranking
+					</a>
+				</div>
 			</main>
 		</div>
 		<div id="divvistaMapa">
@@ -33,18 +32,31 @@
 			<button id="Boton_eu2">Botones continentes 2</button>
 			<button id="Boton_eu3">Botones volver a rankings</button>
 		</div>
+		<div id="divvistaCont">
+			<h2>CONTINENTE SELECCIONADO</h2>
+			<!--Meteré el Mockup-->
+			<div id="preguntaContainer">
+				<!-- Aquí se mostrará la pregunta -->
+			</div>
+			<div id="opcionesContainer">
+				<!-- Aquí se mostrarán los botones de opción -->
+			</div>
+			Control + B para volver atrás
+		</div>
 		<div id="divvistaRank">
 			<nav>
-				<div id="puntuacion">
-					<p>Puntuación: 0</p>
-				</div>
-				<a id="volverMenu">
-					Volver
-				</a>
+				<p>Puntuación: 0</p>
+				<ul>
+					<li>
+						<a href="menu.html">
+							Volver
+						</a>
+					</li>
+				</ul>
 			</nav>
-			<main>
+			<main class="mainJuego">
 				<div>
-					<table>
+					<table id="ranking">
 						<tr><th colspan="2">Ranking</th></tr>
 						<tr>
 							<td id="top1">Pepito1</td>
@@ -67,37 +79,42 @@
 							<td>1600 puntos</td>
 						</tr>
 					</table>
-					Pulsa "Enter" para volver al menú.
 				</div>
 			</main>
 		</div>
-		<div id="divvistaCont">
-			<h2>CONTINENTE SELECCIONADO</h2>
-			<!--Meteré el Mockup-->
-			<div id="preguntaContainer">
-				<!-- Aquí se mostrará la pregunta -->
-			</div>
-			<div id="opcionesContainer">
-				<!-- Aquí se mostrarán los botones de opción -->
-			</div>
-			Control + B para volver atrás
-		</div>
 		<div id="divvistaForm">
-			<!-- Agrega este fragmento donde sea necesario -->
-			<!-- Agrega este fragmento donde sea necesario -->
-			<main>
-				<div>
+			<nav>
+				<p>Puntuación: 200</p>
+				<ul>
+					<li>
+						<a href="menu.html">
+							Inicio
+						</a>
+					</li>
+					<li>
+						<a href="">
+							Reiniciar
+						</a>
+					</li>
+					<li>
+						<a href="ranking.html">
+							Ranking
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div id="divPuntuacion">
 					<h1>Guardar puntuación:</h1>
-					<!-- Agrega este fragmento donde sea necesario -->
-					<form>
-						<input type="text" id="username" placeholder="Introduce tu nombre">
-						<p id="usernameError" style="color: red;"></p>
-						<p id="puntosMensaje">200 Puntos</p>
-						<button type="submit">Enviar</button>
+					<form action="ranking.html" method="post">
+						<input type="text" name="nombre" placeholder="Introduce tu nombre">
+						<p>200 Puntos</p>
+						<input type="submit" value="Enviar">
+						<a href="menu.html">Cancelar</a>
 					</form>
 				</div>
 			</main>
 		</div>
-		<script type=module src=js/servicios/controlador.js></script>
+		<script type=module src=js/controladores/controlador.js></script>
 	</body>
 </html>

@@ -1,4 +1,6 @@
-import { Vista } from './vista.js' 
+import { Vista } from './vista.js'
+//import { Rest } from '../servicios/rest.js';
+
 
 /**
  * Clase que representa la vista de un continente en la aplicación.
@@ -77,4 +79,33 @@ export class Vista_continente extends Vista {
             console.log('Respuesta incorrecta') 
         }
     }
+/*
+    /**
+     * Función para manejar la respuesta del usuario.
+     * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
+
+    responder(opcionSeleccionada) {
+        const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas'; // Reemplaza con la URL correcta
+
+        // Realizar la petición GET
+        Rest.get(url)
+            .then(responseData => {
+                // Procesar la respuesta de la API
+                console.log(responseData);
+                // Puedes realizar acciones adicionales en función de la respuesta de la API
+            })
+            .catch(error => {
+                // Maneja errores en la petición
+                console.error(error);
+            });
+
+        if (opcionSeleccionada === 1) {
+            console.log('Respuesta correcta');
+            this.controlador.acertarPregunta();
+        } else {
+            console.log('Respuesta incorrecta');
+        }
+    }*/
+
+
 }
