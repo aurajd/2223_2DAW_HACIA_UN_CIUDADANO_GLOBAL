@@ -5,12 +5,7 @@ body {
 }
 
 #bodyMenu {
-    background-image: url("../imgs/tierra.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
+    background-color: #09A8C9;
 }
 
 #menu {
@@ -26,11 +21,33 @@ body {
     row-gap: 5%;
 }
 
-#menu a {
-    font-family: 'Poppins', sans-serif;
+#menu img{
     width: 20%;
-    height: 10%;
+}
+
+#menu div{
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+}
+
+#tituloLogo{
     font-size: 3rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5%;
+}
+
+#opcionesMenu{
+    display: flex;
+    justify-content: center;
+    column-gap: 5%;
+}
+
+#menu a {
+    font-size: 3rem;
+    padding: 20px;
     text-decoration: none;
     color: black;
     background-color: white;
