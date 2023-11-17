@@ -136,7 +136,7 @@ nav a {
     /* El aspect-ratio de la imagen de fondo, el tablero de juego, para posteriormente poder colocar las marcas en el
     mapamundi con posicionamiento absoluto con porcentajes y que no se descuadre */
     aspect-ratio: 577/333;
-    background-image: url("../imgs/mapamundi.png");
+    background-image: url("../img/mapamundi.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
