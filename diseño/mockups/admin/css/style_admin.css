@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+
+body{
+    background-image: url("../img/tierra.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+main{
+    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
+    display: flex;
+    /* Esto centra horizontalmente. */
+    justify-content: center;
+    /* Esto centra verticalmente. */
+    align-items: center;
+    /* Le ponemos una altura minima del 100% de la altura del dispositivo. 
+    Para permitir que pueda aumentar su altura si lo necesita*/
+    min-height: 100vh;
+}
+
+/* Creamos un div dentro del main el cual estará centrado. */
+main>div{
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
+    /* Tiene una altura mínima del 80% de la pestaña del navegador */
+    min-height: 80vh;
+    margin: 10px 0;
+    padding: 2% 5%;
+    border-radius: 20px;
+    /* Utilizamos un color con transparencia para el fondo del div, así se podrá ver la imagen de fondo. */
+    background-color: #002141a0;
+    border: 1px solid white;
+    /* Le ponemos una sombra a la caja el primer numero indica el desplazamiento horizontal, el segundo el vertical, 
+    el tercero el radio de difuminado */
+    box-shadow: 5px 5px 10px black;
+    display: flex;
+    flex-direction: column;
+    /* Esto mete espacio entre items si no ocupan el 100% del espacio */
+    justify-content: space-between;
+}
+
+h1{
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+}
+
+.titulo, label{
+    /* Usamos display block para que el label se encuentre encima del input */
+    display: block;
+    /* Metemos más margin por encima del label, separando los distintos elementos del formulario, 
+    que por debajo, para separa el label del input */
+    margin: 20px 0 5px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+form{
+    width: 100%;
+}
+
+input[type="text"]{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
+}
+
+textarea{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 100px;  
+    padding: 0.5rem 1rem;
+    background-color: #efefef;
+    /* Permitimos que la textarea se pueda redimensionar verticalmente */
+    resize: vertical;
+    /* Usamos box-sizing border-box para que no se descuadre con el padding en rem */
+    box-sizing: border-box;
+}
+
+input[type="file"]{
+    color: white;
+}
+
+#anadirBoton {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px auto 0;
+    width: 10%;
+    height: 40px;
+    display: block;
+}
+
+#exito{
+    color:green;
+    text-align: center;
+    margin: 20px 0 0 ;
+}
+
+#error{
+    color:red;
+    text-align: center;
+    margin: 20px 0 0 ;
+}
+
+
+table{
+    font-family: 'Roboto', sans-serif;
+    max-width: 80%;
+    margin: auto;
+    background-color: lightgray;
+    border-collapse: collapse;
+}
+
+th,td{
+    border: 2px black solid;
+}
+
+th{
+    background-color: gray;
+    padding: 10px 0;
+}
+
+td{
+    width: 20%;
+}
+
+/* Div dentro de la celda para poner un scroll si sobrepasa 200px */
+.scroll{
+    width: 100%;
+    max-height: 200px;
+    margin: 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    /* Si sobrepasa los 200 pixeles (el max-height) overflow auto hace que aparezca una barra de scroll */
+    overflow: auto;
+}
+
+td img{
+    width: 100%;
+    vertical-align: middle;
+}
+
+td ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /* Usamos flex para centrar los enlaces los elementos de la lista */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+td li{
+    min-width: 60%;
+}
+
+td a{
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    /* Usamos flex para centrar el texto del enlace */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+td a:hover {
+    background-color: #b9b9b9;
+}
+
+#imagenMostrar{
+    width: 20%;
+}
+
+.opciones{
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10%;
+}
+
+
+.opciones input[type="submit"],.opciones a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.opciones input:hover[type="submit"],
+.opciones a:hover {
+    background-color: #b9b9b9;
+    /* Para que el submit muestre la manita para hacer click cuando haces hover */
+    cursor: pointer;
+}
+
+.campos{
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
+    color: black;
+}
