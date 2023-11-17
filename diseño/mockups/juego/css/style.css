@@ -132,7 +132,7 @@ nav a {
     align-items: center;
 }
 
-#mainJuego {
+.mainJuego {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
     max-height: 90vh;
@@ -151,7 +151,7 @@ nav a {
     align-items: center;
 }
 
-#mainJuego>div {
+.mainJuego>div {
     height: 60%;
     width: 60%;
     border: 2px solid black;
