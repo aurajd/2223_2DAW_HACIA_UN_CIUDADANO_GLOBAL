@@ -55,7 +55,7 @@ class Modelo{
         $this->conexion->close();
     }
 
-    function borrar_situacion($id){
+    function borrar_situacion($id, $img){
         $sql = "DELETE FROM problema
         WHERE idProblema = $id;";
 
@@ -65,15 +65,26 @@ class Modelo{
         WHERE idSituacion = $id;";
 
         $this->conexion->query($sql);
-        //Falta borrar imágen del servidor
-
         $this->conexion->close();
+
+        unlink(__DIR__."/../../img/".$img);
     }
 
     function listar(){
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
         FROM situacion s
         INNER JOIN problema p ON s.idSituacion = p.idProblema;";
+
+        $resultado = $this->conexion->query($sql);
+        $this->conexion->close();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function listar_borrar($id){
+        $sql = "SELECT s.titulo, s.informacion, s.imagen, p.reflexion
+        FROM situacion s
+        INNER JOIN problema p ON s.idSituacion = p.idProblema
+        WHERE s.idSituacion = $id;";
 
         $resultado = $this->conexion->query($sql);
         $this->conexion->close();

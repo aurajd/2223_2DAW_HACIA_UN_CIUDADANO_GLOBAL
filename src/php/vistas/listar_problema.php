@@ -42,7 +42,7 @@
                                 <td><img src='../../img/" . $fila['imagen'] . "'></td>
                                 <td>
                                     <ul>
-                                        <li><a href='#'>Borrar</a></li>
+                                        <li><a href='info_borrar_problema.php?id={$fila['idSituacion']}'>Borrar</a></li>
                                         <li><a href='#'>Modificar</a></li>
                                     </ul>
                                 </td>
