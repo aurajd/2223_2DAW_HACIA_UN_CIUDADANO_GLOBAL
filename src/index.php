@@ -1,2 +1,2 @@
 <?php
-header("Location:anadir_problema.php");
+header("Location:php/vistas"); 
