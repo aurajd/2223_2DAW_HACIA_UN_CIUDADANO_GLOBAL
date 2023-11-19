@@ -61,9 +61,6 @@ body {
     background-color: gray;
 }
 
-
-
-
 nav {
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
@@ -165,9 +162,11 @@ nav a {
     border-collapse: separate; 
     border-spacing: 0.5rem 1rem;
 }
+
 #ranking th{
     height: 20%;
 }
+
 #ranking td,th{
     vertical-align: middle;
     background-color: white;
