@@ -31,18 +31,6 @@ class Controlador{
     }
 
     /**
-     * Método para borrar una situación o problema por su ID.
-     * @param int $id ID de la situación a borrar.
-     */
-    function borrar($id){
-        // Verifica que el ID no esté vacío antes de intentar borrar
-        if (!empty($id)){
-            // Llama al método del modelo para borrar la situación
-            $this->modelo->borrar_situacion($id);
-        }
-    }
-
-    /**
      * Método para modificar una situación o problema existente.
      * @param int $id ID de la situación a modificar.
      * @param string $titulo Nuevo título de la situación.
@@ -53,8 +41,6 @@ class Controlador{
     function modificar($id, $titulo, $informacion, $reflexion, $imagen){
         // Verifica que los datos necesarios no estén vacíos antes de modificar
         if(!empty($titulo) && !empty($informacion) && !empty($reflexion) && !empty($id)){
-            // Realiza la validación de la imagen
-            $this->validarImagen($imagen);
 
             // Llama al método del modelo para modificar la situación
             $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen);
