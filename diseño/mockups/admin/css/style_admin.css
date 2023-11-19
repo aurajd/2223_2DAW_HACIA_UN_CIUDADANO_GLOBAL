@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
 body{
-    background-image: url("../img/tierra.png");
+    /*background-image: url("../img/tierra.png");*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -111,10 +111,15 @@ input[type="file"]{
 
 table{
     font-family: 'Roboto', sans-serif;
-    max-width: 80%;
+    width: 80%;
     margin: auto;
     background-color: lightgray;
     border-collapse: collapse;
+    table-layout: fixed
+}
+
+tr{
+    width: 100%;
 }
 
 th,td{
@@ -138,7 +143,9 @@ td{
     padding: 10px 20px;
     box-sizing: border-box;
     /* Si sobrepasa los 200 pixeles (el max-height) overflow auto hace que aparezca una barra de scroll */
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 td img{
