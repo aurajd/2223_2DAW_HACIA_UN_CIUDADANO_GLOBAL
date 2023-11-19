@@ -54,7 +54,7 @@ class Controlador{
      */
     function borrar_fila($id, $img){
         // Verifica que el ID y la información de la imagen no estén vacíos antes de borrar
-        if (!empty($id) && !empty($img)) {
+        if (!empty($id)) {
             // Llama al método del modelo para borrar la situación
             $this->modelo->borrar_situacion($id, $img);
         }
