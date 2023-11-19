@@ -29,4 +29,10 @@ class Controlador{
         }
     }
 
+    function borrar_fila($id, $img){
+        if (!empty($id) && !empty($img)) {
+            $this->modelo->borrar_situacion($id, $img);
+        }
+    }
+    
 }

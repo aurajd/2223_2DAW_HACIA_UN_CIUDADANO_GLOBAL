@@ -26,7 +26,7 @@
                     <img src='../../img/{$fila[0]['imagen']}' id='imagenMostrar'>
                     <div class='opciones'>
                         <a href='script_borrar_problema.php?id={$_GET['id']}&img={$fila[0]['imagen']}'>Aceptar</a>
-                        <a href='listar_problemas.php'>Cancelar</a>
+                        <a href='listar_problema.php'>Cancelar</a>
                     </div>";
             ?>
         </div>
