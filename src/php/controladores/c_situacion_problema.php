@@ -23,4 +23,10 @@ class Controlador{
         }
     }
 
+    function modificar($id, $titulo, $informacion, $reflexion, $imagen){
+        if(!empty($titulo) && !empty($informacion) && !empty($reflexion) && !empty($id)){
+            $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen);
+        }
+    }
+
 }
