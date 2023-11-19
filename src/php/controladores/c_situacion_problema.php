@@ -24,10 +24,7 @@ class Controlador{
      */
     function insertar($titulo, $informacion, $reflexion, $imagen){
         // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if (!empty($titulo) && !empty($informacion) && !empty($reflexion)) {
-            // Realiza la validación de la imagen
-            $this->validarImagen($imagen);
-            
+        if (!empty($titulo) && !empty($informacion) && !empty($reflexion)) {            
             // Llama al método del modelo para insertar la situación
             $this->modelo->insertar_situacion($titulo, $informacion, $reflexion, $imagen);
         }
@@ -74,27 +71,6 @@ class Controlador{
         if (!empty($id) && !empty($img)) {
             // Llama al método del modelo para borrar la situación
             $this->modelo->borrar_situacion($id, $img);
-        }
-    }
-
-    /**
-     * Método para validar la información de la imagen.
-     * @param array $imagen Información de la imagen asociada a la situación.
-     */
-    private function validarImagen($imagen){
-        // Verifica si se proporcionó información de la imagen
-        if (!empty($imagen)) {
-            // Verifica si es un array y si contiene la información necesaria
-            if (!is_array($imagen) || !isset($imagen['name']) || !isset($imagen['tmp_name'])) {
-                throw new Exception("La información de la imagen no es válida.");
-            }
-
-            // Puedes agregar más validaciones según tus requisitos, por ejemplo, tipo de archivo, tamaño, etc.
-            // Ejemplo básico: Verifica si es una imagen JPEG o PNG
-            $allowedTypes = ['image/jpeg', 'image/png'];
-            if (!in_array($imagen['type'], $allowedTypes)) {
-                throw new Exception("Tipo de archivo de imagen no permitido.");
-            }
         }
     }
 }
