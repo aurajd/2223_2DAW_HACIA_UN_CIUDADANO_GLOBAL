@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista problemas</title>
+    <link rel="stylesheet" href="../css/style_admin.css">
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Listar problema</h1>
+            <table>
+                <tr>
+                    <th>Título</th>
+                    <th>Información</th>
+                    <th>Reflexión</th>
+                    <th>Imagen</th>
+                    <th>Opciones</th>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- Div dentro de la celda para poner un scroll si sobrepasa 200px -->
+                        <div class="scroll">
+                            Título problema 1
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td><img src="../img/tierra.png"></td>
+                    <td>
+                        <ul>
+                            <li><a href="">Borrar</a></li>
+                            <li><a href="modificar.html">Modificar</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scroll">
+                            Título problema 2
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero eum asperiores, et nesciunt atque deserunt pariatur assumenda incidunt provident blanditiis, nisi qui doloremque! Magni autem eaque sed, rerum atque beatae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem excepturi ut vel, consequuntur consequatur quos at minus fuga. Soluta aut aliquid amet sed consequuntur cupiditate, consectetur delectus libero quasi voluptatem!
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero eum asperiores, et nesciunt atque deserunt pariatur assumenda incidunt provident blanditiis, nisi qui doloremque! Magni autem eaque sed, rerum atque beatae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem excepturi ut vel, consequuntur consequatur quos at minus fuga. Soluta aut aliquid amet sed consequuntur cupiditate, consectetur delectus libero quasi voluptatem!
+                        </div>
+                    </td>
+                    <td><img src="../img/imgejemplo1.jpeg"></td>
+                    <td>
+                        <ul>
+                            <li><a href="">Borrar</a></li>
+                            <li><a href="">Modificar</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scroll">
+                            Título problema 3
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td><img src="../img/imgejemplo2.jpg"></td>
+                    <td>
+                        <ul>
+                            <li><a href="">Borrar</a></li>
+                            <li><a href="">Modificar</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scroll">
+                            Título problema 4
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td>
+                        <div class="scroll">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li><a href="">Borrar</a></li>
+                            <li><a href="">Modificar</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
+    
