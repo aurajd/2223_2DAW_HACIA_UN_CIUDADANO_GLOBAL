@@ -35,7 +35,7 @@
                         
                         <div class='opciones'>
                             <input type='submit' value='Aceptar' name='aceptar'>
-                            <a href='listar_problemas.php'>Cancelar</a>
+                            <a href='listar_problema.php'>Cancelar</a>
                         </div>
                     </form>";
 
