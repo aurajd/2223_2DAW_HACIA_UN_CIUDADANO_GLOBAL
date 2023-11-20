@@ -1,22 +1,15 @@
 <?php
-
+require_once __DIR__.'/conexion.php';
 /**
  * Clase Modelo: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
  */
-class Modelo{
-
-    /** @var mysqli|null Conexión a la base de datos */
-    public $conexion = null;
-
-    /** @var string|null Nombre de la imagen (aparentemente no se utiliza en el código proporcionado) */
-    public $nombreImagen = null;
+class problemaModel extends Conexion{
 
     /**
      * Constructor de la clase que establece la conexión a la base de datos.
      */
     public function __construct() {
-        require_once __DIR__.'/../config/configdb.php';
-        $this->conexion = new mysqli($servidorbd, $usuario, $contraseña, $basedatos);
+        parent::__construct();
     }
 
     /**
@@ -46,7 +39,7 @@ class Modelo{
             $this->conexion->query($sql);
 
             // Ruta de destino para mover el archivo
-            $directorio_destino = __DIR__.'/../../img';
+            $directorio_destino = __DIR__.'/../img';
             $ruta_temporal = $imagen["tmp_name"];
             $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 

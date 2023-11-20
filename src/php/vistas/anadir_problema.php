@@ -10,7 +10,7 @@
     <main>
         <div>
             <h1>Añadir problema</h1>
-            <form method="post" enctype="multipart/form-data">
+            <form action="index.php?controller=problema&action=insertar_situacion" method="post" enctype="multipart/form-data">
                     <label for="titulo">Título:</label>
                     <input type="text" name="titulo">
                     <label for="informacion">Informacion:</label>
@@ -23,12 +23,5 @@
             </form>
         </div>
     </main>
-    <?php
-        if (!empty($_POST['titulo']) && !empty($_POST['informacion']) && !empty($_POST['reflexion'])) {
-            require_once __DIR__.'/../controladores/c_situacion_problema.php';
-            $controlador = new Controlador();
-            $controlador->insertar($_POST['titulo'], $_POST['informacion'], $_POST['reflexion'], $_FILES['imagen']);
-        }
-    ?>
 </body>
 </html>
