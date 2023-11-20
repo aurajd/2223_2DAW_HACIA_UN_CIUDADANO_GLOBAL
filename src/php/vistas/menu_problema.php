@@ -11,7 +11,7 @@
             <h1>OPCIONES PROBLEMA</h1>
             <div class="botones">
                 <a class="boton" href="index.php?controller=problema&action=listar">Listar</a>
-                <a class="boton">Añadir</a>
+                <a class="boton" href="index.php?controller=problema&action=mostrar_anadir">Añadir</a>
             </div>
         </div>
     </body>

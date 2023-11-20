@@ -13,8 +13,19 @@
             if(count($dataToView["data"])>0){
             ?>
         <div>
-        
             <h1>Listar problema</h1>
+            <?php
+            if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==true){
+                ?>
+                <p id="exito">Problema modificado con éxito.</p>
+                <?php
+            }
+            if(isset($_GET["respuesta_borrado"])&&$_GET["respuesta_borrado"]==true){
+                ?>
+                <p id="exito">Problema eliminado con éxito.</p>
+                <?php
+            }
+            ?>
             <table>
                 <tr>
                     <th>Título</th>
@@ -23,6 +34,7 @@
                     <th>Imagen</th>
                     <th>Opciones</th>
                 </tr>
+                <?php
                     foreach ($dataToView["data"] as $fila){
                         ?>
                         <tr>
@@ -41,33 +53,36 @@
                                     <?php echo $fila['reflexion']; ?>
                                 </div>
                             </td>
-                            <?php 
-                                if(!is_null($fila['imagen'])){
+                            <td>
+                                <?php 
+                                    if(!is_null($fila['imagen'])){
                                     ?>
-                                    <td>
                                         <img src='img/<?php echo $fila['imagen']; ?>'>
-                                    </td>
-                                <?php
-                                }
-                                ?>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
                             <td>
                                 <ul>
-                                    <li><a href='borrar_problema.php?id={$fila['idSituacion']}'>Borrar</a></li>
-                                    <li><a href='modificar_problema.php?id={$fila['idSituacion']}'>Modificar</a></li>
+                                    <li><a href='index.php?controller=problema&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'>Borrar</a></li>
+                                    <li><a href='index.php?controller=problema&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'>Modificar</a></li>
                                 </ul>
                             </td>
                         </tr>
+                        <?php
+                        }
+                        ?>
             </table>
         </div>
         <?php
-            }
-            else{
-                ?>
-                <div class="no_lista">
-                    <h1 >No hay ningún problema en la base de datos.</h1>
+        }
+        else{
+            ?>
+            <div class="no_lista">
+                <h1 >No hay ningún problema en la base de datos.</h1>
             </div>
-            <?php
-            }
+        <?php
+        }
         ?>
     </main>
 </body>

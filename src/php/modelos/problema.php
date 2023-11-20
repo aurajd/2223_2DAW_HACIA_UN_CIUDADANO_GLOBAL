@@ -21,34 +21,37 @@ class problemaModel extends Conexion{
      * @param array|null $imagen Datos de la imagen (si se proporciona).
      */
     function insertar_situacion($titulo, $info, $reflexion, $imagen){
+
+        if(file_exists($imagen["tmp_name"])){
+            $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+            $nombreImagen = uniqid().".".$ext;
+            $imagenSQL = "'".$nombreImagen."'";
+        } else{
+            $imagenSQL = "NULL";
+        }
+
         // Consulta SQL para insertar en la tabla 'situacion'
-        $sql = "INSERT INTO situacion(titulo, informacion) VALUES ('$titulo', '$info');";
+        $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('$titulo', '$info',$imagenSQL);";
+
         $this->conexion->query($sql);
 
         // Recogemos la idSituacion de la inserción realizada
         $id = $this->conexion->insert_id;
-
+        
         // Consulta SQL para insertar en la tabla 'problema'
         $sql = "INSERT INTO problema(idProblema, reflexion) VALUES ('$id','$reflexion');";
         $this->conexion->query($sql);
 
         // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
-        if (isset($imagen)) {
-            $nombreImagen = $imagen['name'];
-            $sql = "UPDATE situacion SET imagen = '$nombreImagen' WHERE idSituacion = $id;";
-            $this->conexion->query($sql);
-
+        if (file_exists($imagen["tmp_name"])) {
             // Ruta de destino para mover el archivo
-            $directorio_destino = __DIR__.'/../img';
-            $ruta_temporal = $imagen["tmp_name"];
+            $directorio_destino = __DIR__."/../../img";
+            $ruta_temporal = $imagen["tmp_name"];   
             $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 
             // Mover el archivo a la nueva ubicación
             move_uploaded_file($ruta_temporal, $ruta_destino);
         }
-
-        // Cerrar la conexión a la base de datos
-        $this->conexion->close();
     }
 
     /**
@@ -57,20 +60,19 @@ class problemaModel extends Conexion{
      * @param int $id ID de la situación a borrar.
      * @param string $img Nombre de la imagen asociada.
      */
-    function borrar_situacion($id, $img){
-        // Consulta SQL para borrar de la tabla 'problema'
-        $sql = "DELETE FROM problema WHERE idProblema = $id;";
-        $this->conexion->query($sql);
+    function borrar_situacion($id){
+        //Obtiene el valor de la imagen
+        $sql = "SELECT imagen FROM situacion WHERE idSituacion = ".$id.";";
+        $resultado = $this->conexion->query($sql);
+        $img = $resultado->fetch_assoc();
 
-        // Consulta SQL para borrar de la tabla 'situacion'
+        // Consulta SQL para borrar un problema, lo eliminamos de la tabla situación y se borra en cascada
         $sql = "DELETE FROM situacion WHERE idSituacion = $id;";
         $this->conexion->query($sql);
 
-        // Cerrar la conexión a la base de datos
-        $this->conexion->close();
-
         // Borrar la imagen del servidor
-        unlink(__DIR__."/../../img/".$img);
+        if(!is_null($img["imagen"]))
+            unlink(__DIR__."/../../img/".$img["imagen"]);
     }
 
     /**
@@ -94,13 +96,13 @@ class problemaModel extends Conexion{
      * @return array Arreglo asociativo con los detalles de la situación y su problema.
      */
     function listar_fila($id){
-        $sql = "SELECT s.titulo, s.informacion, s.imagen, p.reflexion
+        $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
                 FROM situacion s
                 INNER JOIN problema p ON s.idSituacion = p.idProblema
                 WHERE s.idSituacion = $id;";
         $resultado = $this->conexion->query($sql);
         $this->conexion->close();
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        return $resultado->fetch_assoc();
     }
 
     /**
@@ -121,18 +123,19 @@ class problemaModel extends Conexion{
         $sql = "UPDATE problema SET reflexion = '$reflexion' WHERE idProblema = $id;";
         $this->conexion->query($sql);
 
-        if (!empty($imagen['name'])) {
+        if (file_exists($imagen["tmp_name"])) {
             // Borramos imagen del fichero
             $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = $id;";
             $resultado = $this->conexion->query($sql);
             $fila = $resultado->fetch_assoc();
 
-            if (!empty($fila['imagen']) && file_exists(__DIR__."/../../img/".$fila['imagen'])) {
+            if (!is_null($fila['imagen']) && file_exists(__DIR__."/../../img/".$fila['imagen'])) {
                 unlink(__DIR__."/../../img/".$fila['imagen']);
             }
 
             // Metemos el nombre de la imagen en una variable
-            $nombreImagen = $imagen['name'];
+            $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+            $nombreImagen = uniqid().".".$ext;
 
             // Actualizamos el nombre en la BBDD
             $sql = "UPDATE situacion SET imagen = '$nombreImagen' WHERE idSituacion = $id;";

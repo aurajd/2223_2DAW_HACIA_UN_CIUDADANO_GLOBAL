@@ -20,12 +20,14 @@ class problemaController{
         $this->view = "menu_problema";
     }
 
+    function mostrar_anadir(){
+        $this->view = "anadir_problema";
+    }
+
     function listar(){
         $this->view = "listar_problema";
         return $this->modelo->listar();
     }
-
-    
 
     /**
      * Método para insertar una nueva situación o problema.
@@ -34,12 +36,25 @@ class problemaController{
      * @param string $reflexion Reflexión sobre la situación.
      * @param array $imagen Información de la imagen asociada a la situación.
      */
-    function insertar($titulo, $informacion, $reflexion, $imagen){
+    function insertar(){
+        $titulo = $_POST['titulo'];
+        $informacion = $_POST['informacion']; 
+        $reflexion = $_POST['reflexion'];
+        $imagen = $_FILES['imagen'];
         // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo,$informacion,$reflexion)) {            
+        if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
             // Llama al método del modelo para insertar la situación
             $this->modelo->insertar_situacion($titulo, $informacion, $reflexion, $imagen);
+            $_GET["respuesta"] = true;
+        } else{
+            $_GET["respuesta"] = false;
         }
+        $this->view = "anadir_problema";
+    }
+
+    function mostrar_modificar(){
+        $this->view = "modificar_problema";
+        return $this->modelo->listar_fila($_GET["id"]);
     }
 
     /**
@@ -50,13 +65,28 @@ class problemaController{
      * @param string $reflexion Nueva reflexión sobre la situación.
      * @param array $imagen Nueva información de la imagen asociada a la situación.
      */
-    function modificar($id, $titulo, $informacion, $reflexion, $imagen){
+    function modificar(){
         // Verifica que los datos necesarios no estén vacíos antes de modificar
-        if($this->validar($titulo,$informacion,$reflexion) && !empty($id)){
-
-            // Llama al método del modelo para modificar la situación
-            $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen);
+        $id = $_GET['id'];
+        $titulo = $_POST['titulo'];
+        $informacion = $_POST['informacion']; 
+        $reflexion = $_POST['reflexion'];
+        $imagen = $_FILES['imagen'];
+        // Verifica que los datos necesarios no estén vacíos antes de insertar
+        if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
+            // Llama al método del modelo para insertar la situación
+            $this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen);
+            $_GET["respuesta_modificacion"] = true;
+            return $this->listar();
+        } else{
+            $_GET["respuesta_modificacion"] = false;
+            return $this->mostrar_modificar();
         }
+    }
+
+    function confirmar_borrado(){
+        $this->view = "borrar_problema";
+        return $this->modelo->listar_fila($_GET["id"]);
     }
 
     /**
@@ -64,21 +94,32 @@ class problemaController{
      * @param int $id ID de la situación a borrar.
      * @param array $img Nombre de la imagen asociada.
      */
-    function borrar_fila($id, $img){
+    function borrar_fila(){
+        $id = $_GET["id"];
         // Verifica que el ID no esté vacío antes de borrar
         if (!empty($id)) {
             // Llama al método del modelo para borrar la situación
-            $this->modelo->borrar_situacion($id, $img);
+            $this->modelo->borrar_situacion($id);
         }
+        $_GET["respuesta_borrado"] = true;
+        return $this->listar();
     }
 
     function validar($titulo,$informacion,$reflexion){
         if(!empty($titulo) && !empty($informacion) && !empty($reflexion))
             return true;
+        $_GET["error"] = "Debes rellenar todos los campos.";
         return false;
     }
 
     function validarImagen($img){
-        
+        if(!file_exists($img['tmp_name']) || is_array(getimagesize($img['tmp_name']))){
+            return true;
+        } else {
+            $_GET["error"] = "La imagen no es válida";
+            return false;
+        }
     }
+
+    
 }
