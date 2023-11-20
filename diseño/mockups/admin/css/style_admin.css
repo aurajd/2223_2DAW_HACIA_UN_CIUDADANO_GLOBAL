@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
 body{
-    /*background-image: url("../img/tierra.png");*/
+    background-image: url("../img/tierra.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     margin: 0;
+}
+
+nav{
+    height: 10vh;
+    background-color: #002041;
 }
 
 main{
@@ -18,7 +23,7 @@ main{
     align-items: center;
     /* Le ponemos una altura minima del 100% de la altura del dispositivo. 
     Para permitir que pueda aumentar su altura si lo necesita*/
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 /* Creamos un div dentro del main el cual estará centrado. */
@@ -26,7 +31,7 @@ main>div{
     font-family: 'Roboto', sans-serif;
     width: 80%;
     /* Tiene una altura mínima del 80% de la pestaña del navegador */
-    min-height: 80vh;
+    min-height: 75vh;
     margin: 10px 0;
     padding: 2% 5%;
     border-radius: 20px;
@@ -40,6 +45,11 @@ main>div{
     flex-direction: column;
     /* Esto mete espacio entre items si no ocupan el 100% del espacio */
     justify-content: space-between;
+}
+
+.no_lista{
+    justify-content: center;
+    color: red;
 }
 
 h1{
@@ -107,7 +117,6 @@ input[type="file"]{
     text-align: center;
     margin: 20px 0 0 ;
 }
-
 
 table{
     font-family: 'Roboto', sans-serif;
@@ -232,7 +241,6 @@ td a:hover {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 15px;
     height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
     display: flex;
     flex-direction: column;
@@ -252,6 +260,7 @@ td a:hover {
 }
 
 .boton {
+    font-family: 'Poppins', sans-serif;
     margin: 10px;
     padding: 35px 75px; /* Ajuste del tamaño del botón */
     background-color: #4caf50;
@@ -260,4 +269,30 @@ td a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 2em; /* Ajuste del tamaño de la fuente */
+    min-width: 15%;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
