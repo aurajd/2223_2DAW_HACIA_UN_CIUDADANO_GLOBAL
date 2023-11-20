@@ -227,3 +227,37 @@ td a:hover {
     width: 30%;
     color: black;
 }
+
+.menu {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menu h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.boton {
+    margin: 10px;
+    padding: 35px 75px; /* Ajuste del tamaño del botón */
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 2em; /* Ajuste del tamaño de la fuente */
+}
