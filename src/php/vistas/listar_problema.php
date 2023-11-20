@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="css/style_admin.css">
 </head>
 <body>
-    <nav><a href="index.php?controller=problema&action=menu">Volver</a></nav>
+    <nav class="navbar">
+        <h1>Listar problema</h1>
+        <a class="back-link" href="index.php?controller=problema&action=menu">Volver</a>
+    </nav>
     <main>
         <?php
             if(count($dataToView["data"])>0){
             ?>
         <div>
-            <h1>Listar problema</h1>
             <?php
             if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==true){
                 ?>

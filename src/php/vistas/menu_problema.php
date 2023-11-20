@@ -6,9 +6,12 @@
         <link rel="stylesheet" href="css/style_admin.css">
     </head>
     <body>
+        <nav class="navbar">
+            <h1>Opciones problema</h1>
+            <a class="back-link" href="index.php?controller=problema&action=menu">Volver</a>
+        </nav>
         <div class="menu">
             <!-- Aquí irá el nombre del continente mas adelante por eso es php el archivo -->
-            <h1>OPCIONES PROBLEMA</h1>
             <div class="botones">
                 <a class="boton" href="index.php?controller=problema&action=listar">Listar</a>
                 <a class="boton" href="index.php?controller=problema&action=mostrar_anadir">Añadir</a>

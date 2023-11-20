@@ -241,7 +241,7 @@ td a:hover {
     background-color: #333;
     color: #fff;
     text-align: center;
-    height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+    height: 90vh; /* Ocupa el 100% de la altura de la pantalla */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -270,4 +270,30 @@ td a:hover {
     cursor: pointer;
     font-size: 2em; /* Ajuste del tamaño de la fuente */
     min-width: 15%;
+}
+
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }

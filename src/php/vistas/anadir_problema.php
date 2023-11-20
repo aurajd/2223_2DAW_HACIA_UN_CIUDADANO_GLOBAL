@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="css/style_admin.css">
 </head>
 <body>
-    <nav><a href="index.php?controller=problema&action=menu">Volver</a></nav>
+    <nav class="navbar">
+        <h1>Añadir problema</h1>
+        <a class="back-link" href="index.php?controller=problema&action=menu">Volver</a>
+    </nav>
     <main>
         <div>
-            <h1>Añadir problema</h1>
             <?php
                 if(isset($_GET["respuesta"])){
                     if($_GET["respuesta"]==true){

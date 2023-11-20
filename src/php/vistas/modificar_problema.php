@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style_admin.css">
 </head>
 <body>
-    <nav><a href="index.php?controller=problema&action=menu">Volver</a></nav>
     <main>
         <div>
             <h1>Modificar problema</h1>
