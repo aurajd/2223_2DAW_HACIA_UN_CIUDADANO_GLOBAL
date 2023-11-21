@@ -252,11 +252,22 @@ td a:hover {
     font-size: 1.5em;
 }
 
+.container {
+    /* Añadimos un contenedor para centrar la caja de botones */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente */
+}
+
 .botones {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
+    background-color: #444;
+    width: 500px;
+    border-radius: 22px;   
+    padding: 25px;
 }
 
 .boton {
@@ -273,7 +284,7 @@ td a:hover {
 }
 
 .navbar {
-    background-color: #333;
+    background-color: #444;
     color: #fff;
     padding: 15px;
     display: flex;
@@ -296,3 +307,4 @@ td a:hover {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
 }
+
