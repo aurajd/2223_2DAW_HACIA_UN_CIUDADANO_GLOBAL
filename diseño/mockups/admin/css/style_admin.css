@@ -331,3 +331,7 @@ h2{
     border: none; 
     text-align: center;
 }
+
+ .columna-correcto {
+    width: 20%;
+}
