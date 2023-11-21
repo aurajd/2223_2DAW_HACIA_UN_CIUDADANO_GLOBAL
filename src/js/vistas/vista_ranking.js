@@ -35,7 +35,7 @@ export class VistaRanking extends Vista {
          */
   actualizarPuntuacionEnInterfaz () {
     const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('#puntuacion')
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
   }
 }

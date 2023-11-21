@@ -53,7 +53,7 @@ export class VistaFormulario extends Vista {
      */
   actualizarPuntuacionEnInterfaz () {
     const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('#puntosMensaje')
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
   }
 }
