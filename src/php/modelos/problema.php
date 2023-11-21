@@ -5,6 +5,8 @@ require_once __DIR__.'/conexion.php';
  */
 class problemaModel extends Conexion{
 
+    public $error;
+
     /**
      * Constructor de la clase que establece la conexión a la base de datos.
      */
@@ -30,28 +32,51 @@ class problemaModel extends Conexion{
             $imagenSQL = "NULL";
         }
 
-        // Consulta SQL para insertar en la tabla 'situacion'
-        $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('$titulo', '$info',$imagenSQL);";
+        try {
+            $sql = "SET autocommit = 0;";
+            $this->conexion->query($sql);
 
-        $this->conexion->query($sql);
+            $sql = "START TRANSACTION;";
+            $this->conexion->query($sql);
 
-        // Recogemos la idSituacion de la inserción realizada
-        $id = $this->conexion->insert_id;
-        
-        // Consulta SQL para insertar en la tabla 'problema'
-        $sql = "INSERT INTO problema(idProblema, reflexion) VALUES ('$id','$reflexion');";
-        $this->conexion->query($sql);
+            // Consulta SQL para insertar en la tabla 'situacion'
+            $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('$titulo', '$info',$imagenSQL);";
 
-        // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
-        if (file_exists($imagen["tmp_name"])) {
-            // Ruta de destino para mover el archivo
-            $directorio_destino = __DIR__."/../../img";
-            $ruta_temporal = $imagen["tmp_name"];   
-            $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
+            $this->conexion->query($sql);
 
-            // Mover el archivo a la nueva ubicación
-            move_uploaded_file($ruta_temporal, $ruta_destino);
+            // Recogemos la idSituacion de la inserción realizada
+            $id = $this->conexion->insert_id;
+            
+            // Consulta SQL para insertar en la tabla 'problema'
+            $sql = "INSERT INTO problema(idProblema, reflexion) VALUES ('$id','$reflexion');";
+            $this->conexion->query($sql);
+
+            // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
+            if (file_exists($imagen["tmp_name"])) {
+                // Ruta de destino para mover el archivo
+                $directorio_destino = __DIR__."/../../img";
+                $ruta_temporal = $imagen["tmp_name"];   
+                $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
+
+                // Mover el archivo a la nueva ubicación
+                move_uploaded_file($ruta_temporal, $ruta_destino);
+            }
+
+        } catch (mysqli_sql_exception $e) {
+            if($e->getCode()==1406){
+                $this->error = "Uno de los campos excede el límite de carácteres.";
+            }else{
+                $this->error = "Error inesperado contacte con el administrador.";
+            }
+            $sql = "ROLLBACK;";
+            $this->conexion->query($sql);
+            return false;
         }
+
+        $sql = "COMMIT;";
+        $this->conexion->query($sql);
+        return true;
+        
     }
 
     /**
@@ -115,41 +140,62 @@ class problemaModel extends Conexion{
      * @param array $imagen Datos de la nueva imagen (si se proporciona).
      */
     function modificar_fila($id, $titulo, $informacion, $reflexion, $imagen){
-        // Modificamos los datos de la tabla 'situacion'
-        $sql = "UPDATE situacion SET titulo = '$titulo', informacion = '$informacion' WHERE idSituacion = $id;";
-        $this->conexion->query($sql);
-
-        // Modificamos los datos de la tabla 'problema'
-        $sql = "UPDATE problema SET reflexion = '$reflexion' WHERE idProblema = $id;";
-        $this->conexion->query($sql);
-
-        if (file_exists($imagen["tmp_name"])) {
-            // Borramos imagen del fichero
-            $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = $id;";
-            $resultado = $this->conexion->query($sql);
-            $fila = $resultado->fetch_assoc();
-
-            if (!is_null($fila['imagen']) && file_exists(__DIR__."/../../img/".$fila['imagen'])) {
-                unlink(__DIR__."/../../img/".$fila['imagen']);
-            }
-
-            // Metemos el nombre de la imagen en una variable
-            $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
-            $nombreImagen = uniqid().".".$ext;
-
-            // Actualizamos el nombre en la BBDD
-            $sql = "UPDATE situacion SET imagen = '$nombreImagen' WHERE idSituacion = $id;";
+        try {
+            $sql = "SET autocommit = 0;";
             $this->conexion->query($sql);
-            
-            // Ruta de destino para mover el archivo
-            $directorio_destino = __DIR__.'/../../img';
-            $ruta_temporal = $imagen["tmp_name"];
 
-            // Ruta de destino completa
-            $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
+            $sql = "START TRANSACTION;";
+            $this->conexion->query($sql);
 
-            move_uploaded_file($ruta_temporal, $ruta_destino);
+            // Modificamos los datos de la tabla 'situacion'
+            $sql = "UPDATE situacion SET titulo = '$titulo', informacion = '$informacion' WHERE idSituacion = $id;";
+            $this->conexion->query($sql);
+
+            // Modificamos los datos de la tabla 'problema'
+            $sql = "UPDATE problema SET reflexion = '$reflexion' WHERE idProblema = $id;";
+            $this->conexion->query($sql);
+
+            if (file_exists($imagen["tmp_name"])) {
+                // Borramos imagen del fichero
+                $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = $id;";
+                $resultado = $this->conexion->query($sql);
+                $fila = $resultado->fetch_assoc();
+
+                if (!is_null($fila['imagen']) && file_exists(__DIR__."/../../img/".$fila['imagen'])) {
+                    unlink(__DIR__."/../../img/".$fila['imagen']);
+                }
+
+                // Metemos el nombre de la imagen en una variable
+                $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+                $nombreImagen = uniqid().".".$ext;
+
+                // Actualizamos el nombre en la BBDD
+                $sql = "UPDATE situacion SET imagen = '$nombreImagen' WHERE idSituacion = $id;";
+                $this->conexion->query($sql);
+                
+                // Ruta de destino para mover el archivo
+                $directorio_destino = __DIR__.'/../../img';
+                $ruta_temporal = $imagen["tmp_name"];
+
+                // Ruta de destino completa
+                $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
+
+                move_uploaded_file($ruta_temporal, $ruta_destino);
+            }
+        }catch (mysqli_sql_exception $e) {
+            if($e->getCode()==1406){
+                $this->error = "Uno de los campos excede el límite de carácteres.";
+            }else{
+                $this->error = "Error inesperado contacte con el administrador.";
+            }
+            $sql = "ROLLBACK;";
+            $this->conexion->query($sql);
+            return false;
         }
+
+        $sql = "COMMIT;";
+        $this->conexion->query($sql);
+        return true;
     }
 
 }

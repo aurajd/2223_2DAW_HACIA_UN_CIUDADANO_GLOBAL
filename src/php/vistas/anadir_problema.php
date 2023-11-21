@@ -14,6 +14,15 @@
     <main>
         <div>
             <?php
+                $titulo = $informacion = $reflexion = $imagen = '';
+                if(isset($_POST["titulo"]) &  isset($_GET["respuesta"])) 
+                    if ($_GET["respuesta"] == false) $titulo = $_POST["titulo"];
+                if(isset($_POST["informacion"]) & isset($_GET["respuesta"])) 
+                    if ($_GET["respuesta"] == false) $informacion = $_POST["informacion"];
+                if(isset($_POST["reflexion"]) & isset($_GET["respuesta"]))
+                    if ($_GET["respuesta"] == false) $reflexion = $_POST["reflexion"];
+
+
                 if(isset($_GET["respuesta"])){
                     if($_GET["respuesta"]==true){
                         ?>
@@ -22,6 +31,7 @@
                     }else{
                         ?>
                         <p id="error">
+                            
                             <?php echo $_GET["error"] ?>
                         </p>
                         <?php
@@ -30,11 +40,11 @@
             ?>
             <form action="index.php?controller=problema&action=insertar" method="post" enctype="multipart/form-data">
                     <label for="titulo">Título:</label>
-                    <input type="text" name="titulo">
+                    <input type="text" name="titulo" value='<?php echo $titulo; ?>'>
                     <label for="informacion">Informacion:</label>
-                    <textarea name="informacion"></textarea>
+                    <textarea name="informacion"><?php echo $informacion; ?></textarea>
                     <label for="reflexion">Reflexión:</label>
-                    <textarea name="reflexion"></textarea>
+                    <textarea name="reflexion"><?php echo $reflexion; ?></textarea>
                     <label for="imagen">Imagen (opcional):</label>
                     <input type="file" name="imagen">
                     <input type="submit" value="Enviar" id="anadirBoton">

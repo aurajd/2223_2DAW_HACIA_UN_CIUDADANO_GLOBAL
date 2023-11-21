@@ -44,8 +44,13 @@ class problemaController{
         // Verifica que los datos necesarios no estén vacíos antes de insertar
         if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
             // Llama al método del modelo para insertar la situación
-            $this->modelo->insertar_situacion($titulo, $informacion, $reflexion, $imagen);
-            $_GET["respuesta"] = true;
+            if($this->modelo->insertar_situacion($titulo, $informacion, $reflexion, $imagen)){
+                $_GET["respuesta"] = true;
+            }
+            else{
+                $_GET["respuesta"] = false;
+                $_GET["error"] = $this->modelo->error;
+            }
         } else{
             $_GET["respuesta"] = false;
         }
@@ -75,13 +80,14 @@ class problemaController{
         // Verifica que los datos necesarios no estén vacíos antes de insertar
         if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
             // Llama al método del modelo para insertar la situación
-            $this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen);
-            $_GET["respuesta_modificacion"] = true;
-            return $this->listar();
-        } else{
-            $_GET["respuesta_modificacion"] = false;
-            return $this->mostrar_modificar();
+            if($this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen)){
+                $_GET["respuesta_modificacion"] = true;
+                return $this->listar();
+            }
+            $_GET["error"] = $this->modelo->error;
         }
+        $_GET["respuesta_modificacion"] = false;
+        return $this->mostrar_modificar();
     }
 
     function confirmar_borrado(){

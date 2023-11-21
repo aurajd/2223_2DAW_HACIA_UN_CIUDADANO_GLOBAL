@@ -1,3 +1,4 @@
 src/js/node_modules
 src/js/.*
 src/js/*.json
+src/php/config/configdb.php
