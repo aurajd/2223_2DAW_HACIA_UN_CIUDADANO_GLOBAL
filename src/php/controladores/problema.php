@@ -8,25 +8,52 @@ require_once __DIR__.'/../modelos/problema.php';
 class problemaController{
 
     // Propiedades de la clase
+    public $titulo;
+    public $controladorVolver;
+    public $accionVolver;
     public $modelo;
     public $view;
 
     // Constructor de la clase que inicializa el modelo
     public function __construct() {
         $this->modelo = new problemaModel();
+        $this->titulo = '';
+        $this->controladorVolver = "";
+        $this->accionVolver = "";
     }
 
     function menu(){
         $this->view = "menu_problema";
+        $this->titulo = "Menú problemas";
+        $this->controladorVolver = "situacion";
+        $this->accionVolver = "menu";
     }
 
     function mostrar_anadir(){
         $this->view = "anadir_problema";
+        $this->titulo = "Añadir problemas";
+        $this->controladorVolver = "problema";
+        $this->accionVolver = "menu";
     }
 
     function listar(){
         $this->view = "listar_problema";
+        $this->titulo = "Listar problemas";
+        $this->controladorVolver = "problema";
+        $this->accionVolver = "menu";
         return $this->modelo->listar();
+    }
+
+    function mostrar_modificar(){
+        $this->view = "modificar_problema";
+        $this->titulo = "Modificar problema";
+        return $this->modelo->listar_fila($_GET["id"]);
+    }
+
+    function confirmar_borrado(){
+        $this->view = "borrar_problema";
+        $this->titulo = "Borrar problema";
+        return $this->modelo->listar_fila($_GET["id"]);
     }
 
     /**
@@ -42,9 +69,10 @@ class problemaController{
         $reflexion = $_POST['reflexion'];
         $imagen = $_FILES['imagen'];
         // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
+        if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            
             // Llama al método del modelo para insertar la situación
-            if($this->modelo->insertar_situacion($titulo, $informacion, $reflexion, $imagen)){
+            $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen);
+            if($resultado){
                 $_GET["respuesta"] = true;
             }
             else{
@@ -54,13 +82,11 @@ class problemaController{
         } else{
             $_GET["respuesta"] = false;
         }
-        $this->view = "anadir_problema";
+        $this->mostrar_anadir();
     }
 
-    function mostrar_modificar(){
-        $this->view = "modificar_problema";
-        return $this->modelo->listar_fila($_GET["id"]);
-    }
+    
+
 
     /**
      * Método para modificar una situación o problema existente.
@@ -78,9 +104,10 @@ class problemaController{
         $reflexion = $_POST['reflexion'];
         $imagen = $_FILES['imagen'];
         // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo,$informacion,$reflexion) && $this->validarImagen($imagen)) {            
+        if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            
             // Llama al método del modelo para insertar la situación
-            if($this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen)){
+            $resultado = $this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen);
+            if($resultado){
                 $_GET["respuesta_modificacion"] = true;
                 return $this->listar();
             }
@@ -88,11 +115,6 @@ class problemaController{
         }
         $_GET["respuesta_modificacion"] = false;
         return $this->mostrar_modificar();
-    }
-
-    function confirmar_borrado(){
-        $this->view = "borrar_problema";
-        return $this->modelo->listar_fila($_GET["id"]);
     }
 
     /**
@@ -111,21 +133,21 @@ class problemaController{
         return $this->listar();
     }
 
-    function validar($titulo,$informacion,$reflexion){
-        if(!empty($titulo) && !empty($informacion) && !empty($reflexion))
-            return true;
-        $_GET["error"] = "Debes rellenar todos los campos.";
-        return false;
-    }
-
-    function validarImagen($img){
-        if(!file_exists($img['tmp_name']) || is_array(getimagesize($img['tmp_name']))){
-            return true;
-        } else {
-            $_GET["error"] = "La imagen no es válida";
+    function validar($titulo,$informacion,$reflexion, $imagen){
+        if(empty($titulo) || empty($informacion) || empty($reflexion)){
+            $_GET["error"] = "Debes rellenar todos los campos.";
             return false;
         }
+        
+        //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
+        if(file_exists($imagen['tmp_name']))
+            // Utilizamos la funcion getimagesize que si se usa en una imagen
+            // devuelve un array con la información del tamaño de la imagen, si no devuelve un array no es una imagen
+            if (!is_array(getimagesize($imagen['tmp_name']))){
+                $_GET["error"] = "La imagen no es válida";
+                return false;
+            }    
+        return true;
     }
-
     
 }
