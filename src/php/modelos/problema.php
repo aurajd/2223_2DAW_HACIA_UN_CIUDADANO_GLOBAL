@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/conexion.php';
 /**
- * Clase Modelo: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
+ * Clase problemaModel: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
  */
 class problemaModel extends Conexion{
 
@@ -110,7 +110,6 @@ class problemaModel extends Conexion{
                 FROM situacion s
                 INNER JOIN problema p ON s.idSituacion = p.idProblema;";
         $resultado = $this->conexion->query($sql);
-        $this->conexion->close();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
     

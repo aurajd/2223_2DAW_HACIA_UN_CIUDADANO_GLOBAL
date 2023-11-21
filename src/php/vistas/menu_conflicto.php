@@ -7,14 +7,13 @@
     </head>
     <body>
         <nav class="navbar">
-            <h1>Opciones problema</h1>
+            <h1>Menú conflictos</h1>
             <a class="back-link" href="index.php?controller=situacion&action=menu">Ir Atrás</a>
         </nav>
         <div class="menu">
-            <!-- Aquí irá el nombre del continente mas adelante por eso es php el archivo -->
             <div class="botones">
-                <a class="boton" href="index.php?controller=problema&action=listar">Listar</a>
-                <a class="boton" href="index.php?controller=problema&action=mostrar_anadir">Añadir</a>
+                <a class="boton" href="index.php?controller=conflicto&action=listar">Listar</a>
+                <a class="boton">Añadir</a>
             </div>
         </div>
     </body>
