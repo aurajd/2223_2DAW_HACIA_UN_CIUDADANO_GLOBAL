@@ -110,12 +110,16 @@ input[type="file"]{
     color:green;
     text-align: center;
     margin: 20px 0 0 ;
+    background-color: rgba(239, 237, 237, 0.693);
+    font-weight: bold;
 }
 
 #error{
     color:red;
     text-align: center;
     margin: 20px 0 0 ;
+    background-color: rgba(239, 237, 237, 0.858);
+    font-weight: bold;
 }
 
 table{
