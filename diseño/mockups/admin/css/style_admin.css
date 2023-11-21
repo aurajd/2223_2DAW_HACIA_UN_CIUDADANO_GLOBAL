@@ -280,7 +280,7 @@ td a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 2em; /* Ajuste del tamaño de la fuente */
-    min-width: 15%;
+    min-width: 40%;
 }
 
 .navbar {
