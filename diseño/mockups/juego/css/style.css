@@ -266,3 +266,13 @@ nav a {
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
 }
+
+.imagen-fija {
+    position: fixed;
+    top: 10%; /* Ajusta la distancia desde la parte superior */
+    left: 15%; /* Ajusta la distancia desde la izquierda */
+    width: 5vw; /* 5% del ancho de la ventana */
+    height: 25vh; /* 5% de la altura de la ventana */
+    max-width: 100%; /* La imagen no superará el ancho del viewport */
+    max-height: 100%; /* La imagen no superará la altura del viewport */
+}
