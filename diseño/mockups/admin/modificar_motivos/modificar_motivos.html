@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar motivos</title>
+    <link rel="stylesheet" href="../css/style_admin.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Menú administrador: motivos</h1>
+        <a class="back-link">Ir Atrás</a>
+    </div>
+    <main>
+        <div>
+            <h1>Modificar motivos</h1>
+            <form action="anadir_conflicto_exito.html" method="post">
+                    <label for="titulo">Título:</label>
+                    <input type="text" name="titulo" placeholder="Introducir título">
+                    <label for="informacion">Información:</label>
+                    <textarea name="informacion" placeholder="Escribe aquí"></textarea>
+                    <label for="fecha">Fecha de inicio del conflicto:</label>
+                    <input type="date" name="fecha"></input>
+                    <label for="imagen">Imagen (opcional):</label>
+                    <input type="file" name="imagen">   
+                    <input type="submit" value="Enviar" id="anadirBoton"> 
+            </form>
+        </div>
+    </main>
+</body>
+</html>
