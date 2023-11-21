@@ -24,4 +24,8 @@ class conflictoController{
         $this->view = "listar_conflicto";
         return $this->modelo->listar();
     }
+
+    function mostrar_anadir(){
+        $this->view = "anadir_conflicto";
+    }
 }
