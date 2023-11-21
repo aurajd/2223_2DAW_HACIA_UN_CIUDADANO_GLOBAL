@@ -7,7 +7,7 @@ require_once __DIR__.'/php/config/configdb.php';
 if(!isset($_GET["controller"])) $_GET["controller"] = constant("DEFAULT_CONTROLLER");
 if(!isset($_GET["action"])) $_GET["action"] = constant("DEFAULT_ACTION");
 
-$controller_path = 'controller/'.$_GET["controller"].'.php';
+$controller_path = 'controladores/'.$_GET["controller"].'.php';
 
 /* Check if controller exists */
 if(!file_exists($controller_path)) $controller_path = __DIR__.'/php/controladores/'.constant("DEFAULT_CONTROLLER").'.php';
