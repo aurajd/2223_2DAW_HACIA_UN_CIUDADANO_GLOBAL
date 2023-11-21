@@ -18,14 +18,20 @@
         ?>
         <form action="index.php?controller=problema&action=insertar" method="post" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
-                <input type="text" name="titulo" placeholder="Introducir título">
+                <input type="text" name="titulo" id="titulo" placeholder="Introducir título">
+
                 <label for="informacion">Informacion:</label>
-                <textarea name="informacion" placeholder="Escribe aquí"></textarea>
+                <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
+
                 <label for="reflexion">Reflexión:</label>
-                <textarea name="reflexion" placeholder="Escribe aquí"></textarea>
+                <textarea name="reflexion" id="reflexion" placeholder="Escribe aquí"></textarea>
+
                 <label for="imagen">Imagen (opcional):</label>
-                <input type="file" name="imagen">
-                <input type="submit" value="Enviar" id="anadirBoton">
+                <input type="file" id="imagen" name="imagen">
+
+                <div class='opciones'>
+                    <input type='submit' value='Enviar' name='enviar'>
+                </div>
         </form>
     </div>
 </main>   

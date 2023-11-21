@@ -43,6 +43,18 @@ class conflictoController{
         $this->controladorVolver = "conflicto";
         $this->accionVolver = "menu";
     }
+    
+    function mostrar_modificar(){
+        $this->view = "modificar_conflicto";
+        $this->titulo = "Modificar conflicto";
+        return $this->modelo->listar_conflicto_motivo($_GET["id"]);
+    }
+
+    function confirmar_borrado(){
+        $this->view = "borrar_conflicto";
+        $this->titulo = "Borrar conflicto";
+        return $this->modelo->listar_fila($_GET["id"]);
+    }
 
     function insertar(){
         $titulo = $_POST['titulo'];
@@ -67,6 +79,27 @@ class conflictoController{
         return $this->mostrar_anadir();
     }
 
+    function modificar(){
+        $id = $_GET['id'];
+        $titulo = $_POST['titulo'];
+        $informacion = $_POST['informacion']; 
+        $fecha = $_POST['fecha'];
+        $imagen = $_FILES['imagen'];
+        $motivoCorrecto = isset($_POST['motivoCorrecto']) ? $_POST['motivoCorrecto'] : null;
+        $motivos = $_POST['motivos'];
+        if ($this->validar($titulo,$informacion,$fecha,$imagen,$motivoCorrecto,$motivos)) {            
+            // Llama al método del modelo para insertar el conflicto y sus motivos
+            $resultado = $this->modelo->modificar_conflicto($id,$titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos);
+            if ($resultado) {
+                $_GET["respuesta_modificacion"] = true;
+                return $this->listar();
+            }
+            $_GET["error"] = $this->modelo->error;
+        }
+        $_GET["respuesta_modificacion"] = false;
+        return $this->mostrar_modificar();
+    }
+    
     function validar($titulo,$informacion,$fecha,$imagen,$motivoCorrecto,$motivos){
         if (!$this->validarConflicto($titulo, $informacion, $fecha, $imagen))
             return false;
@@ -110,7 +143,6 @@ class conflictoController{
         }
         return true;
     }
-
     
     function validarFecha($fecha, $formato = 'Y-m-d') {
         // Utilizamos la clase DateTime de PHP para intentar crear un objeto de fecha a partir de la cadena de 
@@ -124,4 +156,14 @@ class conflictoController{
         return $dateTime && $dateTime->format($formato) === $fecha;
     }
     
+    function borrar_fila(){
+        $id = $_GET["id"];
+        // Verifica que el ID no esté vacío antes de borrar
+        if (!empty($id)) {
+            // Llama al método del modelo para borrar el conflicto
+            $this->modelo->borrar_conflicto($id);
+        }
+        $_GET["respuesta_borrado"] = true;
+        return $this->listar();
+    }
 }

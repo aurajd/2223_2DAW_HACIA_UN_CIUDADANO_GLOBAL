@@ -40,7 +40,7 @@ class problemaModel extends Conexion{
             $this->conexion->query($sql);
 
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('$titulo', '$info',$imagenSQL);";
+            $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('".$titulo."', '".$info."',".$imagenSQL.");";
 
             $this->conexion->query($sql);
 
@@ -92,7 +92,7 @@ class problemaModel extends Conexion{
         $img = $resultado->fetch_assoc();
 
         // Consulta SQL para borrar un problema, lo eliminamos de la tabla situación y se borra en cascada
-        $sql = "DELETE FROM situacion WHERE idSituacion = $id;";
+        $sql = "DELETE FROM situacion WHERE idSituacion = ".$id.";";
         $this->conexion->query($sql);
 
         // Borrar la imagen del servidor
@@ -123,9 +123,8 @@ class problemaModel extends Conexion{
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
                 FROM situacion s
                 INNER JOIN problema p ON s.idSituacion = p.idProblema
-                WHERE s.idSituacion = $id;";
+                WHERE s.idSituacion = ".$id.";";
         $resultado = $this->conexion->query($sql);
-        $this->conexion->close();
         return $resultado->fetch_assoc();
     }
 
@@ -147,16 +146,16 @@ class problemaModel extends Conexion{
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'situacion'
-            $sql = "UPDATE situacion SET titulo = '$titulo', informacion = '$informacion' WHERE idSituacion = $id;";
+            $sql = "UPDATE situacion SET titulo = '".$titulo."', informacion = '".$informacion."' WHERE idSituacion = ".$id.";";
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'problema'
-            $sql = "UPDATE problema SET reflexion = '$reflexion' WHERE idProblema = $id;";
+            $sql = "UPDATE problema SET reflexion = '".$reflexion."' WHERE idProblema = ".$id.";";
             $this->conexion->query($sql);
 
             if (file_exists($imagen["tmp_name"])) {
                 // Borramos imagen del fichero
-                $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = $id;";
+                $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = ".$id.";";
                 $resultado = $this->conexion->query($sql);
                 $fila = $resultado->fetch_assoc();
 
@@ -169,7 +168,7 @@ class problemaModel extends Conexion{
                 $nombreImagen = uniqid().".".$ext;
 
                 // Actualizamos el nombre en la BBDD
-                $sql = "UPDATE situacion SET imagen = '$nombreImagen' WHERE idSituacion = $id;";
+                $sql = "UPDATE situacion SET imagen = '".$nombreImagen."' WHERE idSituacion = ".$id.";";
                 $this->conexion->query($sql);
                 
                 // Ruta de destino para mover el archivo
