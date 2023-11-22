@@ -1,13 +1,13 @@
 CREATE TABLE situacion (
     idSituacion smallint unsigned AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(50) NOT NULL,
-    informacion VARCHAR(400) NOT NULL,
+    informacion VARCHAR(2000) NOT NULL,
     imagen CHAR(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 CREATE TABLE problema (
     idProblema smallint unsigned PRIMARY KEY,
-    reflexion VARCHAR(400) NOT NULL,
+    reflexion VARCHAR(2000) NOT NULL,
     CONSTRAINT fk_problema_situacion FOREIGN KEY (idProblema) REFERENCES situacion (idSituacion) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -21,7 +21,7 @@ CREATE TABLE conflicto(
 CREATE TABLE motivo(
     idConflicto smallint unsigned,
     numMotivo tinyint,
-    textoMotivo VARCHAR(400) NOT NULL,
+    textoMotivo VARCHAR(2000) NOT NULL,
     PRIMARY KEY(idConflicto, numMotivo),
     CONSTRAINT fk_motivo_conflicto FOREIGN KEY (idConflicto) REFERENCES situacion (idSituacion) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

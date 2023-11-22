@@ -48,7 +48,7 @@
                                 <ul>
                                     <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'>Borrar</a></li>
                                     <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'>Modificar</a></li>
-                                    <li><a href='index.php?controller=conflicto&action=listar_motivo&id=<?php echo $fila['idSituacion'] ?>'>Listar motivos</a></li>
+                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>'>Listar motivos</a></li>
                                 </ul>
                             </td>
                         </tr>

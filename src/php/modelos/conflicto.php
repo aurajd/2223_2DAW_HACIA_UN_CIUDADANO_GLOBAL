@@ -32,7 +32,7 @@ class conflictoModel extends Conexion{
     }
 
     function listar_conflicto_motivo($id){
-        $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, c.fechaInicio
+        $sql = "SELECT c.idConflicto, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
                 FROM situacion s
                 INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
                 WHERE s.idSituacion = ".$id.";";
@@ -51,6 +51,7 @@ class conflictoModel extends Conexion{
         );
         return $conflictoMotivos;
     }
+
     function insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos){
       
         if(file_exists($imagen["tmp_name"])){
@@ -69,18 +70,23 @@ class conflictoModel extends Conexion{
             $this->conexion->query($sql);
 
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('".$titulo."', '".$informacion."',".$imagenSQL.");";
+            $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
+            VALUES ('".$this->conexion->real_escape_string($titulo)."', 
+            '".$this->conexion->real_escape_string($informacion)."',
+            ".$imagenSQL.");";
 
             $this->conexion->query($sql);
 
             // Recogemos la idSituacion de la inserción realizada
             $id = $this->conexion->insert_id;
             // Consulta SQL para insertar en la tabla 'conflicto'
-            $sql = "INSERT INTO conflicto(idConflicto, fechaInicio) VALUES (".$id.",'".$fecha."');";
+            $sql = "INSERT INTO conflicto(idConflicto, fechaInicio) 
+            VALUES (".$id.",'".$fecha."');";
             $this->conexion->query($sql);
 
             foreach($motivos as $indice => $motivo){
-                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) VALUES ('$id','$indice','".$motivo."');";
+                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
+                VALUES ('$id','$indice','".$this->conexion->real_escape_string($motivo)."');";
                 $this->conexion->query($sql);
                 if($indice==$motivoCorrecto){
                     $sql = "UPDATE conflicto SET numMotivo = ".$indice." where idConflicto = ".$id.";";
@@ -126,7 +132,10 @@ class conflictoModel extends Conexion{
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'situacion'
-            $sql = "UPDATE situacion SET titulo = '".$titulo."', informacion = '".$informacion."' WHERE idSituacion = ".$id.";";
+            $sql = "UPDATE situacion 
+            SET titulo = '".$this->conexion->real_escape_string($titulo)."', 
+            informacion = '".$this->conexion->real_escape_string($informacion)."' 
+            WHERE idSituacion = ".$id.";";
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'conflicto'
@@ -139,7 +148,8 @@ class conflictoModel extends Conexion{
 
             //Y metemos los nuevos motivos modificados
             foreach($motivos as $indice => $motivo){
-                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) VALUES ('$id','$indice','".$motivo."');";
+                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
+                VALUES ('$id','$indice','".$this->conexion->real_escape_string($motivo)."');";
                 $this->conexion->query($sql);
                 if($indice==$motivoCorrecto){
                     $sql = "UPDATE conflicto SET numMotivo = ".$indice." where idConflicto = ".$id.";";

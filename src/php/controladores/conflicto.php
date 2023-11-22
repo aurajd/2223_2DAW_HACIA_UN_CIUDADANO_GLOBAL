@@ -37,6 +37,14 @@ class conflictoController{
         return $this->modelo->listar();
     }
 
+    function listar_motivos(){
+        $this->view = "listar_motivos";
+        $this->titulo = "Listar motivos";
+        $this->controladorVolver = "conflicto";
+        $this->accionVolver = "listar";
+        return $this->modelo->listar_conflicto_motivo($_GET["id"]);
+    }
+
     function mostrar_anadir(){
         $this->view = "anadir_conflicto";
         $this->titulo = "Añadir conflictos";
@@ -118,6 +126,11 @@ class conflictoController{
             $_GET["error"] = "La fecha introducida no es válida.";
             return false;
         }
+
+        if(!$this->validarFechaMenorActual($fecha)){
+            $_GET["error"] = "La fecha introducida debe ser anterior o igual a la fecha actual.";
+            return false;
+        }
         
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
         if(file_exists($imagen['tmp_name']))
@@ -135,8 +148,8 @@ class conflictoController{
             $_GET["error"] = "Debes seleccionar un motivo como válido.";
             return false;
         }
-        if(count($motivos)<2){
-            $_GET["error"] = "Debes introducir al menos dos motivos.";
+        if(count($motivos)<3){
+            $_GET["error"] = "Debes introducir al menos tres motivos.";
             return false;
         }
         foreach ($motivos as $motivo) {
@@ -160,6 +173,19 @@ class conflictoController{
         return $dateTime && $dateTime->format($formato) === $fecha;
     }
     
+    function validarFechaMenorActual($fecha){
+        // Tomamos la fecha actual en un string formato año-mes-dia (igual que el input de fecha), 
+        // si no se introduce un segundo parámetro en la funcion date toma la fecha actual.
+        $fechaActual = date("Y-m-d"); 
+
+        // Los strings con fechas en formato año-mes-dia son comparables, si la actual es mayor o igual que la introducida es válida,
+        // si es menor no. 
+        if ($fechaActual >= $fecha) 
+            return true;
+        return false;
+        
+    }
+
     function borrar_fila(){
         $id = $_GET["id"];
         // Verifica que el ID no esté vacío antes de borrar

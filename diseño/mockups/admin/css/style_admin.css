@@ -110,12 +110,16 @@ input[type="file"]{
     color:green;
     text-align: center;
     margin: 20px 0 0 ;
+    background-color: rgba(239, 237, 237, 0.693);
+    font-weight: bold;
 }
 
 #error{
     color:red;
     text-align: center;
     margin: 20px 0 0 ;
+    background-color: rgba(239, 237, 237, 0.858);
+    font-weight: bold;
 }
 
 table{
@@ -252,22 +256,11 @@ td a:hover {
     font-size: 1.5em;
 }
 
-.container {
-    /* Añadimos un contenedor para centrar la caja de botones */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centra verticalmente */
-}
-
 .botones {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
-    background-color: #444;
-    width: 500px;
-    border-radius: 22px;   
-    padding: 25px;
+    margin-top: 20px;
 }
 
 .boton {
@@ -284,7 +277,7 @@ td a:hover {
 }
 
 .navbar {
-    background-color: #444;
+    background-color: #333;
     color: #fff;
     padding: 15px;
     display: flex;
@@ -307,7 +300,6 @@ td a:hover {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
 }
-
 
 h2{
     color: white;
@@ -338,4 +330,8 @@ h2{
     background-color: rgba(239, 237, 237, 0.5);
     border: none; 
     text-align: center;
+}
+
+ .columna-correcto {
+    width: 20%;
 }

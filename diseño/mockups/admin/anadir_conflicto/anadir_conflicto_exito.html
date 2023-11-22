@@ -7,21 +7,25 @@
     <link rel="stylesheet" href="../css/style_admin.css">
 </head>
 <body>
+    <div class="navbar">
+        <h1>Añadir conflictos</h1>
+        <a class="back-link">Ir Atrás</a>
+    </div>
     <main>
         <div>
-            <h1>Añadir conflictos</h1>
+            <p id="exito">Problema añadido con éxito.</p>
             <form action="anadir_conflicto_error.html" method="post">
                     <label for="titulo">Título:</label>
                     <input type="text" name="titulo" placeholder="Introducir título">
                     <label for="informacion">Información:</label>
                     <textarea name="informacion" placeholder="Escribe aquí"></textarea>
-                    <label for="reflexion">Datos del incio del conflicto:</label>
-                    <textarea name="reflexion" placeholder="Escribe aquí"></textarea>
+                    <label for="fecha">Fecha de inicio del conflicto:</label>
+                    <input type="date" name="fecha"></input>
                     <label for="imagen">Imagen (opcional):</label>
                     <input type="file" name="imagen">
                     <div class="motivos">
-                        <h2>Añadir motivos</h2>
-                        <label for="motivos">Información:</label>
+                        <h2>Añadir motivo:</h2>
+                        <label for="motivos">Motivo 1:</label>
                         <textarea name="motivos" placeholder="Escribe aquí"></textarea>      
                         <label>
                             <input type="radio" id="motivo1" name="motivo" value="motivo1">
@@ -34,7 +38,6 @@
                     </div>
                     <input type="submit" value="Enviar" id="anadirBoton"> 
             </form>
-            <p id="exito">Problema añadido con éxito.</p>
         </div>
     </main>
 </body>

@@ -9,7 +9,7 @@
             <?php
             }
         ?>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"] ?>'>
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idConflicto"] ?>'>
             <label for='titulo'>Título:</label>
             <input type='text' id="titulo" name='titulo' value='<?php echo $dataToView["data"]["conflicto"]["titulo"] ?>'>
             
@@ -37,7 +37,7 @@
                     <label for="motivo1">Información:</label>
                     <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo $motivo["numMotivo"]?></textarea>      
                     <label>
-                        <input type="radio" name="motivoCorrecto" value="<?php echo $motivo["numMotivo"]?>">
+                        <input type="radio" name="motivoCorrecto" value="<?php echo $motivo["numMotivo"];?>" <?php if ($motivo["numMotivo"] == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
                         Es correcto
                     </label>
                 </div>

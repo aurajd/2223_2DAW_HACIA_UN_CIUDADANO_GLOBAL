@@ -33,14 +33,15 @@ class problemaModel extends Conexion{
         }
 
         try {
-            $sql = "SET autocommit = 0;";
-            $this->conexion->query($sql);
+            $this->conexion->autocommit(false);
 
-            $sql = "START TRANSACTION;";
-            $this->conexion->query($sql);
+            $this->conexion->begin_transaction();
 
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) VALUES ('".$titulo."', '".$info."',".$imagenSQL.");";
+            $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
+            VALUES ('".$this->conexion->real_escape_string($titulo)."', 
+            '".$this->conexion->real_escape_string($info)."',
+            ".$imagenSQL.");";
 
             $this->conexion->query($sql);
 
@@ -48,7 +49,8 @@ class problemaModel extends Conexion{
             $id = $this->conexion->insert_id;
             
             // Consulta SQL para insertar en la tabla 'problema'
-            $sql = "INSERT INTO problema(idProblema, reflexion) VALUES ('$id','$reflexion');";
+            $sql = "INSERT INTO problema(idProblema, reflexion) 
+            VALUES (".$id.",'".$this->conexion->real_escape_string($reflexion)."');";
             $this->conexion->query($sql);
 
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
@@ -66,15 +68,13 @@ class problemaModel extends Conexion{
             if($e->getCode()==1406){
                 $this->error = "Uno de los campos excede el límite de carácteres.";
             }else{
-                $this->error = "Error inesperado contacte con el administrador.";
+                $this->error = "Error inesperado, contacta con el administrador.";
             }
-            $sql = "ROLLBACK;";
-            $this->conexion->query($sql);
+            $this->conexion->rollback();
             return false;
         }
 
-        $sql = "COMMIT;";
-        $this->conexion->query($sql);
+        $this->conexion->commit();
         return true;
         
     }
@@ -146,11 +146,16 @@ class problemaModel extends Conexion{
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'situacion'
-            $sql = "UPDATE situacion SET titulo = '".$titulo."', informacion = '".$informacion."' WHERE idSituacion = ".$id.";";
+            $sql = "UPDATE situacion 
+            SET titulo = '".$this->conexion->real_escape_string($titulo)."', 
+            informacion = '".$this->conexion->real_escape_string($informacion)."' 
+            WHERE idSituacion = ".$id.";";
             $this->conexion->query($sql);
 
             // Modificamos los datos de la tabla 'problema'
-            $sql = "UPDATE problema SET reflexion = '".$reflexion."' WHERE idProblema = ".$id.";";
+            $sql = "UPDATE problema 
+            SET reflexion = '".$this->conexion->real_escape_string($reflexion)."' 
+            WHERE idProblema = ".$id.";";
             $this->conexion->query($sql);
 
             if (file_exists($imagen["tmp_name"])) {
