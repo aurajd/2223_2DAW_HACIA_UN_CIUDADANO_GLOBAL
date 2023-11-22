@@ -70,6 +70,7 @@ class conflictoModel extends Conexion{
             $this->conexion->query($sql);
 
             // Consulta SQL para insertar en la tabla 'situacion'
+            //real_escape_string escapa los carácteres especiales.
             $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
             VALUES ('".$this->conexion->real_escape_string($titulo)."', 
             '".$this->conexion->real_escape_string($informacion)."',
