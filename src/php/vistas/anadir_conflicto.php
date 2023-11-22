@@ -1,16 +1,10 @@
 <main>   
     <div>
-        <?php
-            if(isset($_GET["respuesta"])){
-                if($_GET["respuesta"]==true){ ?>
-                    <p id="exito">Conflicto añadido con éxito.</p>
-                <?php } else{ ?>
-                    <p id="error">
-                        <?php echo $_GET["error"] ?>
-                    </p>
-                <?php }
-            }
-        ?>
+        <?php if(isset($_GET["msg"])){ ?>
+            <p id="<?php echo $_GET["tipomsg"] ?>">
+                <?php echo $_GET["msg"] ?>
+            </p>
+        <?php } ?>
         <form action="index.php?controller=conflicto&action=insertar" method="post" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Introducir título">

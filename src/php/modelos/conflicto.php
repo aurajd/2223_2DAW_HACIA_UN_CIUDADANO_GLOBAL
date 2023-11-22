@@ -22,27 +22,29 @@ class conflictoModel extends Conexion{
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    function listar_fila($id){
-        $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, c.fechaInicio
-                FROM situacion s
-                INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
-                WHERE s.idSituacion = ".$id.";";
-        $resultado = $this->conexion->query($sql);
+    function listar_conflicto($id){
+        $sql = "SELECT s.idSituacion, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
+        FROM situacion s
+        INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
+        WHERE s.idSituacion = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
     }
 
     function listar_conflicto_motivo($id){
-        $sql = "SELECT c.idConflicto, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
-                FROM situacion s
-                INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
-                WHERE s.idSituacion = ".$id.";";
-        $resultado = $this->conexion->query($sql);
-        $conflicto = $resultado->fetch_assoc();
+        $conflicto = $this->listar_conflicto($id);
 
         $sql = "SELECT numMotivo, textoMotivo
-                FROM motivo  
-                WHERE idConflicto = ".$id.";";
-        $resultado = $this->conexion->query($sql);
+        FROM motivo  
+        WHERE idConflicto = ?;";
+                
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $arrayMotivos = $resultado->fetch_all(MYSQLI_ASSOC);
 
         $conflictoMotivos = array(
@@ -57,9 +59,8 @@ class conflictoModel extends Conexion{
         if(file_exists($imagen["tmp_name"])){
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
             $nombreImagen = uniqid().".".$ext;
-            $imagenSQL = "'".$nombreImagen."'";
         } else{
-            $imagenSQL = "NULL";
+            $nombreImagen = null;
         }
 
         try {
@@ -70,26 +71,33 @@ class conflictoModel extends Conexion{
             // Consulta SQL para insertar en la tabla 'situacion'
             //real_escape_string escapa los carácteres especiales.
             $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
-            VALUES ('".$this->conexion->real_escape_string($titulo)."', 
-            '".$this->conexion->real_escape_string($informacion)."',
-            ".$imagenSQL.");";
+            VALUES (?,?,?);";
 
-            $this->conexion->query($sql);
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param("sss",$titulo,$informacion,$nombreImagen);
+            $stmt->execute();
 
             // Recogemos la idSituacion de la inserción realizada
-            $id = $this->conexion->insert_id;
+            $id = $stmt->insert_id;
             // Consulta SQL para insertar en la tabla 'conflicto'
             $sql = "INSERT INTO conflicto(idConflicto, fechaInicio) 
-            VALUES (".$id.",'".$fecha."');";
-            $this->conexion->query($sql);
+            VALUES (?,?);";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('is',$id,$fecha);
+            $stmt->execute();
+
+            $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
+            VALUES (?,?,?);";
+            $stmt = $this->conexion->prepare($sql);
 
             foreach($motivos as $indice => $motivo){
-                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
-                VALUES ('$id','$indice','".$this->conexion->real_escape_string($motivo)."');";
-                $this->conexion->query($sql);
+                $stmt->bind_param('iis',$id,$indice,$motivo);
+                $stmt->execute();
                 if($indice==$motivoCorrecto){
-                    $sql = "UPDATE conflicto SET numMotivo = ".$indice." where idConflicto = ".$id.";";
-                    $this->conexion->query($sql);
+                    $sql = "UPDATE conflicto SET numMotivo = ? where idConflicto = ?;";
+                    $actualizacion = $this->conexion->prepare($sql);
+                    $actualizacion->bind_param('ii',$motivoCorrecto,$id);
+                    $actualizacion->execute();
                 }
             }
 
@@ -128,39 +136,54 @@ class conflictoModel extends Conexion{
 
             // Modificamos los datos de la tabla 'situacion'
             $sql = "UPDATE situacion 
-            SET titulo = '".$this->conexion->real_escape_string($titulo)."', 
-            informacion = '".$this->conexion->real_escape_string($informacion)."' 
-            WHERE idSituacion = ".$id.";";
-            $this->conexion->query($sql);
+            SET titulo = ?, informacion = ? 
+            WHERE idSituacion = ?;";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('ssi',$titulo,$informacion,$id);
+            $stmt->execute();
+
 
             // Modificamos los datos de la tabla 'conflicto'
-            $sql = "UPDATE conflicto SET numMotivo = NULL, fechaInicio = '".$fecha."' WHERE idConflicto = ".$id.";";
-            $this->conexion->query($sql);
+            $sql = "UPDATE conflicto SET numMotivo = NULL, fechaInicio = ? WHERE idConflicto = ?;";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('si',$fecha,$id);
+            $stmt->execute();
 
             //Eliminamos todos los motivos asociados a la fila
-            $sql = "DELETE FROM motivo WHERE idConflicto = ".$id.";";
-            $this->conexion->query($sql);
+            $sql = "DELETE FROM motivo WHERE idConflicto = ?;";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('i',$id);
+            $stmt->execute();
 
+            $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
+            VALUES (?,?,?);";
+            $stmt = $this->conexion->prepare($sql);
             //Y metemos los nuevos motivos modificados
             foreach($motivos as $indice => $motivo){
-                $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
-                VALUES ('$id','$indice','".$this->conexion->real_escape_string($motivo)."');";
-                $this->conexion->query($sql);
+                $stmt->bind_param('iis',$id,$indice,$motivo);
+                $stmt->execute();
                 if($indice==$motivoCorrecto){
-                    $sql = "UPDATE conflicto SET numMotivo = ".$indice." where idConflicto = ".$id.";";
-                    $this->conexion->query($sql);
+                    $sql = "UPDATE conflicto SET numMotivo = ? where idConflicto = ?;";
+                    $actualizacion = $this->conexion->prepare($sql);
+                    $actualizacion->bind_param('ii',$motivoCorrecto,$id);
+                    $actualizacion->execute();
                 }
             }
 
 
             if (file_exists($imagen["tmp_name"])) {
                 // Borramos imagen del fichero
-                $sql = "SELECT s.imagen FROM situacion s WHERE s.idSituacion = ".$id.";";
-                $resultado = $this->conexion->query($sql);
-                $fila = $resultado->fetch_assoc();
+                $sql = "SELECT imagen FROM situacion WHERE idSituacion = ?;";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bind_param('i',$id);
+                $stmt->execute();
+                $stmt->bind_result($imagenBorrar);
+                $stmt->fetch();
+                $stmt->free_result();
 
-                if (!is_null($fila['imagen']) && file_exists(__DIR__."/../../img/".$fila['imagen'])) {
-                    unlink(__DIR__."/../../img/".$fila['imagen']);
+
+                if (!is_null($imagenBorrar) && file_exists(__DIR__."/../../img/".$imagenBorrar)) {
+                    unlink(__DIR__."/../../img/".$imagenBorrar);
                 }
 
                 // Metemos el nombre de la imagen en una variable
@@ -168,8 +191,11 @@ class conflictoModel extends Conexion{
                 $nombreImagen = uniqid().".".$ext;
 
                 // Actualizamos el nombre en la BBDD
-                $sql = "UPDATE situacion SET imagen = '".$nombreImagen."' WHERE idSituacion = ".$id.";";
-                $this->conexion->query($sql);
+                $sql = "UPDATE situacion SET imagen = ? WHERE idSituacion = ?;";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bind_param('si',$nombreImagen,$id);
+                $stmt->execute();
+
                 
                 // Ruta de destino para mover el archivo
                 $directorio_destino = __DIR__.'/../../img';
@@ -189,7 +215,7 @@ class conflictoModel extends Conexion{
             $this->conexion->rollback();
             return false;
         }
-        
+
         $this->conexion->commit();
         return true;
     }
@@ -207,5 +233,23 @@ class conflictoModel extends Conexion{
         // Borrar la imagen del servidor
         if(!is_null($img["imagen"]))
             unlink(__DIR__."/../../img/".$img["imagen"]);
+    }
+
+    function comprobarExisteConflicto($id){
+        $sql = "SELECT idSituacion
+        FROM situacion 
+        INNER JOIN conflicto
+        on idSituacion = idConflicto
+        WHERE idSituacion = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        
+        // Almacenamos el resultado para determinar el número de filas devueltas
+        $stmt->store_result();
+        //si el numero de filas devueltas por esta consulta es mayor a 0 existe un conflicto con esta id y devuelve true,
+        // si no, devuelve false
+        return $stmt->num_rows()>0 ? true : false;
     }
 }

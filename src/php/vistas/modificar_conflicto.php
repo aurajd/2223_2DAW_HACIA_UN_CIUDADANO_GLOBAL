@@ -1,15 +1,9 @@
 <main>
     <div>
-        <?php
-        if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==false){
-            ?>
-            <p id="error">
-                <?php echo $_GET["error"] ?>
-            </p>
-            <?php
-            }
-        ?>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idConflicto"] ?>'>
+        <?php if(isset($_GET["msg"])){ ?>
+            <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
+        <?php } ?>
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"] ?>'>
             <label for='titulo'>Título:</label>
             <input type='text' id="titulo" name='titulo' value='<?php echo $dataToView["data"]["conflicto"]["titulo"] ?>'>
             
@@ -35,7 +29,7 @@
                 <div class="motivos">
                     <h2>Motivo <?php echo $motivo["numMotivo"]?></h2>
                     <label for="motivo1">Información:</label>
-                    <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo $motivo["numMotivo"]?></textarea>      
+                    <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo $motivo["textoMotivo"]?></textarea>      
                     <label>
                         <input type="radio" name="motivoCorrecto" value="<?php echo $motivo["numMotivo"];?>" <?php if ($motivo["numMotivo"] == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
                         Es correcto

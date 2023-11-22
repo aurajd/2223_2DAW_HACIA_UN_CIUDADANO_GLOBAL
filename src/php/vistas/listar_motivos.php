@@ -1,10 +1,10 @@
 <main>
     <div>
-        <h1><?php echo $dataToView["data"]["conflicto"]["titulo"] ?></h1>
+        <h1><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"]) ?></h1>
         <table>
             <tr>
                 <th class="columna-correcto">CORRECTO</th>
-                <th>TEXTO SOLUCIÓN</th>
+                <th>TEXTO MOTIVO</th>
             </tr>
             <?php foreach ($dataToView["data"]["motivos"] as $motivo) { ?>
                 <tr>
@@ -18,7 +18,7 @@
                     </td>
                     <td>
                         <div class='scroll'>
-                            <?php echo $motivo["textoMotivo"] ?>
+                            <?php echo htmlspecialchars($motivo["textoMotivo"]) ?>
                         </div>
                     </td>
                 </tr>

@@ -38,11 +38,19 @@ class conflictoController{
     }
 
     function listar_motivos(){
+        $id = $_GET['id'] ?? '';
+        // Si la id que recibe no coincide con ningún conflicto (por ejemplo url modificada) 
+        // devuelve a la lista de conflictos y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $this->view = "listar_motivos";
         $this->titulo = "Listar motivos";
         $this->controladorVolver = "conflicto";
         $this->accionVolver = "listar";
-        return $this->modelo->listar_conflicto_motivo($_GET["id"]);
+        return $this->modelo->listar_conflicto_motivo($id);
     }
 
     function mostrar_anadir(){
@@ -53,15 +61,31 @@ class conflictoController{
     }
     
     function mostrar_modificar(){
+        $id = $_GET['id'] ?? '';
+        // Si la id que recibe no coincide con ningún conflicto (por ejemplo url modificada) 
+        // devuelve a la lista de conflictos y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $this->view = "modificar_conflicto";
         $this->titulo = "Modificar conflicto";
-        return $this->modelo->listar_conflicto_motivo($_GET["id"]);
+        return $this->modelo->listar_conflicto_motivo($id);
     }
 
     function confirmar_borrado(){
+        $id = $_GET['id'] ?? '';
+        // Si la id que recibe no coincide con ningún conflicto (por ejemplo url modificada) 
+        // devuelve a la lista de conflictos y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $this->view = "borrar_conflicto";
         $this->titulo = "Borrar conflicto";
-        return $this->modelo->listar_fila($_GET["id"]);
+        return $this->modelo->listar_conflicto($id);
     }
 
     function insertar(){
@@ -75,20 +99,28 @@ class conflictoController{
             // Llama al método del modelo para insertar el conflicto y sus motivos
             $resultado = $this->modelo->insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos);
             if ($resultado) {
-                $_GET["respuesta"] = true;
+                $_GET["tipomsg"] = "exito";
+                $_GET["msg"] = "Conflicto añadido con éxito.";
             }
             else{
-                $_GET["respuesta"] = false;
-                $_GET["error"] = $this->modelo->error;
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = $this->modelo->error;
             }
         } else{
-            $_GET["respuesta"] = false;
+            $_GET["tipomsg"] = "error";
         }
         return $this->mostrar_anadir();
     }
 
     function modificar(){
-        $id = $_GET['id'];
+        $id = $_GET['id'] ?? '';
+        // Si la id que recibe no coincide con ningún conflicto (por ejemplo url modificada) 
+        // devuelve a la lista de conflictos y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto que deseas modificar.";
+            return $this->listar();
+        }
         $titulo = $_POST['titulo'];
         $informacion = $_POST['informacion']; 
         $fecha = $_POST['fecha'];
@@ -99,15 +131,30 @@ class conflictoController{
             // Llama al método del modelo para insertar el conflicto y sus motivos
             $resultado = $this->modelo->modificar_conflicto($id,$titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos);
             if ($resultado) {
-                $_GET["respuesta_modificacion"] = true;
+                $_GET["tipomsg"] = "exito";
+                $_GET["msg"] = "Conflicto modificado con éxito.";
                 return $this->listar();
             }
-            $_GET["error"] = $this->modelo->error;
+            $_GET["tipomsg"] = "error";
         }
-        $_GET["respuesta_modificacion"] = false;
+        $_GET["tipomsg"] = "error";
         return $this->mostrar_modificar();
     }
     
+    function borrar_fila(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto que deseas eliminar.";
+            return $this->listar();
+        }
+        // Llama al método del modelo para borrar el conflicto
+        $this->modelo->borrar_conflicto($id);
+        $_GET["tipomsg"] = "exito";
+        $_GET["msg"] = "Conflicto eliminado con éxito.";
+        return $this->listar();
+    }
+
     function validar($titulo,$informacion,$fecha,$imagen,$motivoCorrecto,$motivos){
         if (!$this->validarConflicto($titulo, $informacion, $fecha, $imagen))
             return false;
@@ -118,17 +165,17 @@ class conflictoController{
 
     function validarConflicto($titulo, $informacion, $fecha, $imagen){
         if(empty($titulo) || empty($informacion) || empty($fecha)){
-            $_GET["error"] = "Debes rellenar todos los campos.";
+            $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
         }
 
         if(!$this->validarFecha($fecha)){
-            $_GET["error"] = "La fecha introducida no es válida.";
+            $_GET["msg"] = "La fecha introducida no es válida.";
             return false;
         }
 
         if(!$this->validarFechaMenorActual($fecha)){
-            $_GET["error"] = "La fecha introducida debe ser anterior o igual a la fecha actual.";
+            $_GET["msg"] = "La fecha introducida debe ser anterior o igual a la fecha actual.";
             return false;
         }
         
@@ -137,7 +184,7 @@ class conflictoController{
             // Utilizamos la funcion getimagesize que si se usa en una imagen
             // devuelve un array con la información del tamaño de la imagen, si no devuelve un array no es una imagen
             if (!is_array(getimagesize($imagen['tmp_name']))){
-                $_GET["error"] = "La imagen no es válida";
+                $_GET["msg"] = "La imagen no es válida";
                 return false;
             }    
         return true;
@@ -145,16 +192,26 @@ class conflictoController{
 
     function validarMotivos($motivoCorrecto,$motivos){
         if(is_null($motivoCorrecto)){
-            $_GET["error"] = "Debes seleccionar un motivo como válido.";
+            $_GET["msg"] = "Debes seleccionar un motivo como válido.";
+            return false;
+        }
+        if(count($motivos)<$motivoCorrecto || $motivoCorrecto<1){
+            $_GET["msg"] = "El valor del motivo seleccionado como correcto no coincide con ningún motivo.";
             return false;
         }
         if(count($motivos)<3){
-            $_GET["error"] = "Debes introducir al menos tres motivos.";
+            $_GET["msg"] = "Debes introducir al menos tres motivos.";
             return false;
         }
-        foreach ($motivos as $motivo) {
+        // Comprobamos que no se haya modificado el valor del indice del motivo
+        $indiceMotivo = 1;
+        foreach ($motivos as $indice => $motivo) {
+            if($indice!=$indiceMotivo++){
+                $_GET["msg"] = "Se ha modificado el valor del índice de un motivo.";
+                return false;
+            }
             if(empty($motivo)){
-                $_GET["error"] = "Debes rellenar todos los motivos.";
+                $_GET["msg"] = "Debes rellenar todos los motivos.";
                 return false;
             }
         }
@@ -186,14 +243,4 @@ class conflictoController{
         
     }
 
-    function borrar_fila(){
-        $id = $_GET["id"];
-        // Verifica que el ID no esté vacío antes de borrar
-        if (!empty($id)) {
-            // Llama al método del modelo para borrar el conflicto
-            $this->modelo->borrar_conflicto($id);
-        }
-        $_GET["respuesta_borrado"] = true;
-        return $this->listar();
-    }
 }

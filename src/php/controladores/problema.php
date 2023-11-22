@@ -73,14 +73,15 @@ class problemaController{
             // Llama al método del modelo para insertar la situación
             $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen);
             if($resultado){
-                $_GET["respuesta"] = true;
+                $_GET["tipomsg"] = "exito";
+                $_GET["msg"] = "Problema añadido con éxito.";
             }
             else{
-                $_GET["respuesta"] = false;
-                $_GET["error"] = $this->modelo->error;
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = $this->modelo->error;
             }
         } else{
-            $_GET["respuesta"] = false;
+            $_GET["tipomsg"] = "error";
         }
         $this->mostrar_anadir();
     }
@@ -108,12 +109,14 @@ class problemaController{
             // Llama al método del modelo para insertar la situación
             $resultado = $this->modelo->modificar_fila($id,$titulo, $informacion, $reflexion, $imagen);
             if($resultado){
-                $_GET["respuesta_modificacion"] = true;
+                $_GET["tipomsg"] = "exito";
+                $_GET["msg"] = "Problema modificado con éxito.";
                 return $this->listar();
             }
-            $_GET["error"] = $this->modelo->error;
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = $this->modelo->error;
         }
-        $_GET["respuesta_modificacion"] = false;
+        $_GET["tipomsg"] = "error";
         return $this->mostrar_modificar();
     }
 
@@ -129,24 +132,31 @@ class problemaController{
             // Llama al método del modelo para borrar la situación
             $this->modelo->borrar_situacion($id);
         }
-        $_GET["respuesta_borrado"] = true;
+        $_GET["tipomsg"] = "exito";
+        $_GET["msg"] = "Problema eliminado con éxito.";
         return $this->listar();
     }
 
     function validar($titulo,$informacion,$reflexion, $imagen){
         if(empty($titulo) || empty($informacion) || empty($reflexion)){
-            $_GET["error"] = "Debes rellenar todos los campos.";
+            $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
         }
         
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
-        if(file_exists($imagen['tmp_name']))
+        if(file_exists($imagen['tmp_name'])){
+            //Si pesa más de 10 megabytes da error
+            if ($imagen['size']>> 10485760){
+                $_GET["msg"] = "La imagen no es válida";
+                return false;
+            }  
             // Utilizamos la funcion getimagesize que si se usa en una imagen
             // devuelve un array con la información del tamaño de la imagen, si no devuelve un array no es una imagen
             if (!is_array(getimagesize($imagen['tmp_name']))){
-                $_GET["error"] = "La imagen no es válida";
+                $_GET["msg"] = "La imagen no es válida";
                 return false;
             }    
+        }
         return true;
     }
     

@@ -1,11 +1,10 @@
 <main>
     <?php if(count($dataToView["data"])>0){ ?>
         <div>
-            <?php if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==true){ ?>
-                <p id="exito">Problema modificado con éxito.</p>
-            <?php }
-            if(isset($_GET["respuesta_borrado"])&&$_GET["respuesta_borrado"]==true){ ?>
-                <p id="exito">Problema eliminado con éxito.</p>
+            <?php if(isset($_GET["msg"])){ ?>
+                <p id="<?php echo $_GET["tipomsg"] ?>">
+                    <?php echo $_GET["msg"] ?>
+                </p>
             <?php } ?>
             <table>
                 <tr>

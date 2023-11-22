@@ -1,12 +1,8 @@
 <main>
     <?php if(count($dataToView["data"])>0){ ?>
         <div>
-            <?php if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==true){ ?>
-                <p id="exito">Conflicto modificado con éxito.</p>
-            <?php }
-            if(isset($_GET["respuesta_borrado"])&&$_GET["respuesta_borrado"]==true){
-            ?>
-                <p id="exito">Conflicto eliminado con éxito.</p>
+            <?php if(isset($_GET["msg"])){ ?>
+                <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
             <?php } ?>
             <table>
                 <tr>
@@ -22,12 +18,12 @@
                         <tr>
                             <td>
                                 <div class='scroll'>
-                                    <?php echo $fila['titulo']; ?>
+                                    <?php echo htmlspecialchars($fila['titulo']); ?>
                                 </div>
                             </td>
                             <td>
                                 <div class='scroll'>
-                                    <?php echo $fila['informacion']; ?>
+                                    <?php echo htmlspecialchars($fila['informacion']); ?>
                                 </div>
                             </td>
                             <td>

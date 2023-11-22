@@ -1,14 +1,10 @@
 <main>
     <div>
-        <?php
-        if(isset($_GET["respuesta_modificacion"])&&$_GET["respuesta_modificacion"]==false){
-            ?>
-            <p id="error">
-                <?php echo $_GET["error"] ?>
+        <?php if(isset($_GET["msg"])){ ?>
+            <p id="<?php echo $_GET["tipomsg"] ?>">
+                <?php echo $_GET["msg"] ?>
             </p>
-            <?php
-            }
-        ?>
+        <?php } ?>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"] ?>'>
             <label for='titulo'>Título:</label>
             <input type='text' name='titulo' value='<?php echo $dataToView["data"]["titulo"] ?>'>
