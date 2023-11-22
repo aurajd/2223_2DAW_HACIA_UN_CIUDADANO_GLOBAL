@@ -222,17 +222,23 @@ class conflictoModel extends Conexion{
 
     function borrar_conflicto($id){
         //Obtiene el valor de la imagen
-        $sql = "SELECT imagen FROM situacion WHERE idSituacion = ".$id.";";
-        $resultado = $this->conexion->query($sql);
-        $img = $resultado->fetch_assoc();
+        $sql = "SELECT imagen FROM situacion WHERE idSituacion = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $stmt->bind_result($img);
+        $stmt->fetch();
+        $stmt->free_result();
 
         // Consulta SQL para borrar un problema, lo eliminamos de la tabla situación y se borra en cascada
-        $sql = "DELETE FROM situacion WHERE idSituacion = $id;";
-        $this->conexion->query($sql);
+        $sql = "DELETE FROM situacion WHERE idSituacion = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
 
         // Borrar la imagen del servidor
-        if(!is_null($img["imagen"]))
-            unlink(__DIR__."/../../img/".$img["imagen"]);
+        if(!is_null($img))
+            unlink(__DIR__."/../../img/".$img);
     }
 
     function comprobarExisteConflicto($id){
