@@ -63,11 +63,9 @@ class conflictoModel extends Conexion{
         }
 
         try {
-            $sql = "SET autocommit = 0;";
-            $this->conexion->query($sql);
+            $this->conexion->autocommit(false);
 
-            $sql = "START TRANSACTION;";
-            $this->conexion->query($sql);
+            $this->conexion->begin_transaction();
 
             // Consulta SQL para insertar en la tabla 'situacion'
             //real_escape_string escapa los carácteres especiales.
@@ -112,13 +110,11 @@ class conflictoModel extends Conexion{
             }else{
                 $this->error = "Error inesperado contacte con el administrador.";
             }
-            $sql = "ROLLBACK;";
-            $this->conexion->query($sql);
+            $this->conexion->rollback();
             return false;
         }
 
-        $sql = "COMMIT;";
-        $this->conexion->query($sql);
+        $this->conexion->commit();
         return true;
         
     }
@@ -126,11 +122,9 @@ class conflictoModel extends Conexion{
     function modificar_conflicto($id,$titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos){
         
         try {
-            $sql = "SET autocommit = 0;";
-            $this->conexion->query($sql);
+            $this->conexion->autocommit(false);
 
-            $sql = "START TRANSACTION;";
-            $this->conexion->query($sql);
+            $this->conexion->begin_transaction();
 
             // Modificamos los datos de la tabla 'situacion'
             $sql = "UPDATE situacion 
@@ -192,13 +186,11 @@ class conflictoModel extends Conexion{
             }else{
                 $this->error = "Error inesperado contacte con el administrador.";
             }
-            $sql = "ROLLBACK;";
-            $this->conexion->query($sql);
+            $this->conexion->rollback();
             return false;
         }
-
-        $sql = "COMMIT;";
-        $this->conexion->query($sql);
+        
+        $this->conexion->commit();
         return true;
     }
 

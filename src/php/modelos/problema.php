@@ -139,11 +139,9 @@ class problemaModel extends Conexion{
      */
     function modificar_fila($id, $titulo, $informacion, $reflexion, $imagen){
         try {
-            $sql = "SET autocommit = 0;";
-            $this->conexion->query($sql);
+            $this->conexion->autocommit(false);
 
-            $sql = "START TRANSACTION;";
-            $this->conexion->query($sql);
+            $this->conexion->begin_transaction();
 
             // Modificamos los datos de la tabla 'situacion'
             $sql = "UPDATE situacion 
@@ -191,13 +189,11 @@ class problemaModel extends Conexion{
             }else{
                 $this->error = "Error inesperado contacte con el administrador.";
             }
-            $sql = "ROLLBACK;";
-            $this->conexion->query($sql);
+            $this->conexion->rollback();
             return false;
         }
 
-        $sql = "COMMIT;";
-        $this->conexion->query($sql);
+        $this->conexion->commit();
         return true;
     }
 
