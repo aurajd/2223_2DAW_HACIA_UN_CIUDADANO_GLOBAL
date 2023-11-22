@@ -276,3 +276,29 @@ nav a {
     max-width: 100%; /* La imagen no superará el ancho del viewport */
     max-height: 100%; /* La imagen no superará la altura del viewport */
 }
+
+.problemas {
+    background-color: #CD7F32;
+    padding: 2.5%;
+    margin: 0.5%;
+    border-radius: 5px;
+}
+
+#divProblemas {
+    background-color: #C0C0C0;
+    padding: 5%;
+    border-radius: 15px;
+}
+
+.encabezados {
+    background-color: #09A8C9;
+    padding: 5%;
+    margin-bottom: 3%;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#imagenInfo {
+    width: 25%;
+    height: 25%;
+}
