@@ -180,13 +180,18 @@ class conflictoController{
         }
         
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
-        if(file_exists($imagen['tmp_name']))
+        if(file_exists($imagen['tmp_name'])){
+            if ($imagen['size']> 10485760){
+                $_GET["msg"] = "La imagen no es válida";
+                return false;
+            }  
             // Utilizamos la funcion getimagesize que si se usa en una imagen
             // devuelve un array con la información del tamaño de la imagen, si no devuelve un array no es una imagen
             if (!is_array(getimagesize($imagen['tmp_name']))){
                 $_GET["msg"] = "La imagen no es válida";
                 return false;
             }    
+        }
         return true;
     }
 

@@ -45,15 +45,27 @@ class problemaController{
     }
 
     function mostrar_modificar(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $this->view = "modificar_problema";
         $this->titulo = "Modificar problema";
-        return $this->modelo->listar_fila($_GET["id"]);
+        return $this->modelo->listar_fila($id);
     }
 
     function confirmar_borrado(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $this->view = "borrar_problema";
         $this->titulo = "Borrar problema";
-        return $this->modelo->listar_fila($_GET["id"]);
+        return $this->modelo->listar_fila($id);
     }
 
     /**
@@ -98,8 +110,12 @@ class problemaController{
      * @param array $imagen Nueva información de la imagen asociada a la situación.
      */
     function modificar(){
-        // Verifica que los datos necesarios no estén vacíos antes de modificar
-        $id = $_GET['id'];
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
         $titulo = $_POST['titulo'];
         $informacion = $_POST['informacion']; 
         $reflexion = $_POST['reflexion'];
@@ -126,12 +142,13 @@ class problemaController{
      * @param array $img Nombre de la imagen asociada.
      */
     function borrar_fila(){
-        $id = $_GET["id"];
-        // Verifica que el ID no esté vacío antes de borrar
-        if (!empty($id)) {
-            // Llama al método del modelo para borrar la situación
-            $this->modelo->borrar_situacion($id);
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
         }
+        $this->modelo->borrar_situacion($id);
         $_GET["tipomsg"] = "exito";
         $_GET["msg"] = "Problema eliminado con éxito.";
         return $this->listar();
@@ -146,7 +163,7 @@ class problemaController{
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
         if(file_exists($imagen['tmp_name'])){
             //Si pesa más de 10 megabytes da error
-            if ($imagen['size']>> 10485760){
+            if ($imagen['size']> 10485760){
                 $_GET["msg"] = "La imagen no es válida";
                 return false;
             }  

@@ -197,4 +197,21 @@ class problemaModel extends Conexion{
         return true;
     }
 
+    function comprobarExisteProblema($id){
+        $sql = "SELECT idSituacion
+        FROM situacion 
+        INNER JOIN problema
+        on idSituacion = idProblema
+        WHERE idSituacion = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        
+        // Almacenamos el resultado para determinar el número de filas devueltas
+        $stmt->store_result();
+        //si el numero de filas devueltas por esta consulta es mayor a 0 existe un conflicto con esta id y devuelve true,
+        // si no, devuelve false
+        return $stmt->num_rows()>0 ? true : false;
+    }
 }
