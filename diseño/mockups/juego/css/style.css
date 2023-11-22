@@ -311,3 +311,10 @@ nav a {
 /*#botonAceptar {
     
 }*/
+
+#puntuacionRef{
+    width: 35%;
+    height: 30%;
+    left: 15%;
+    top: 75%;
+}
