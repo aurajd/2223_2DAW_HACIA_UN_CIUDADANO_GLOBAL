@@ -135,6 +135,10 @@ class conflictoController{
             $_GET["error"] = "Debes seleccionar un motivo como válido.";
             return false;
         }
+        if(count($motivos)<2){
+            $_GET["error"] = "Debes introducir al menos dos motivos.";
+            return false;
+        }
         foreach ($motivos as $motivo) {
             if(empty($motivo)){
                 $_GET["error"] = "Debes rellenar todos los motivos.";
