@@ -11,6 +11,8 @@ export class Vista {
   static VISTA3 = Symbol('Ranking')
   static VISTA4 = Symbol('Continente')
   static VISTA5 = Symbol('Formulario')
+  static VISTA6 = Symbol('Pregunta')
+  static VISTA7 = Symbol('Reflexion')
 
   /**
      * Constructor de la clase Vista.

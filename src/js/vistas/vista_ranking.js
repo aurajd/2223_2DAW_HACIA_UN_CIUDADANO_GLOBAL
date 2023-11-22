@@ -16,7 +16,7 @@ export class VistaRanking extends Vista {
 
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    this.enlaceInicio = this.base.querySelector('#volverMenu')
+    this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
   }
 

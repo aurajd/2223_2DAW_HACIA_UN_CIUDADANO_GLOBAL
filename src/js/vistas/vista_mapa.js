@@ -16,19 +16,17 @@ export class VistaMapa extends Vista {
 
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
-    this.boton1 = this.base.querySelector('#Boton_eu1')
+    this.boton1 = this.base.querySelector('#boton_eu1')
     /** @type {HTMLElement} */
-    this.boton2 = this.base.querySelector('#Boton_eu2')
+    this.boton2 = this.base.querySelector('#boton_eu2')
     /** @type {HTMLElement} */
-    this.boton3 = this.base.querySelector('#Boton_eu3')
+    this.boton3 = this.base.querySelector('#boton_eu3')
     /** @type {HTMLElement} */
-    this.boton4 = this.base.querySelector('#Boton_eu4')
+    this.boton4 = this.base.querySelector('#boton_eu4')
     /** @type {HTMLElement} */
-    this.boton5 = this.base.querySelector('#Boton_eu5')
+    this.boton5 = this.base.querySelector('#boton_eu5')
     /** @type {HTMLElement} */
-    this.boton6 = this.base.querySelector('#Boton_eu6')
-    /** @type {HTMLElement} */
-    this.boton7 = this.base.querySelector('#Boton_eu7')
+    this.boton6 = this.base.querySelector('#boton_eu6')
 
     // Crear cuadros de texto
     /** @type {HTMLElement} */
@@ -63,21 +61,20 @@ export class VistaMapa extends Vista {
 
     this.boton3.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto3))
     this.boton3.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto3))
-    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA3)) // Cambiamos a Vista Continente para el segundo botón
+    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA3)) // Cambiamos a Vista Continente para el terccer botón
     
     this.boton4.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto4))
     this.boton4.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto4))
-    this.boton4.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el segundo botón
+    this.boton4.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el cuarto botón
     
     this.boton5.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto5))
     this.boton5.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto5))
-    this.boton5.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el segundo botón
+    this.boton5.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el quinto botón
 
     this.boton6.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto6))
     this.boton6.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto6))
-    this.boton6.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el segundo botón
+    this.boton6.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el sexto botón
 
-    this.boton7.addEventListener('click', () => this.pulsarBoton(Vista.VISTA3)) // Cambiamos a Vista Continente para el segundo botón
   }
 
   /**
