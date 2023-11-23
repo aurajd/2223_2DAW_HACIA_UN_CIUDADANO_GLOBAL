@@ -15,9 +15,7 @@ let botonAniadir = document.getElementById("boton1");
 let botonBorrar = document.getElementById("boton2");
 let contenedorDuplicados = document.getElementById("contenedorDuplicados");
 let divOriginal = document.getElementById("duplicadoOriginal");
-
-// Contador para generar IDs únicos
-let contadorDuplicados = 0;
+let botonEnviar = document.getElementById("enviar")
 
 // Asignar eventos blur a los campos de entrada
 titulo.addEventListener("blur", validarTitulo);
@@ -25,11 +23,91 @@ informacion.addEventListener("blur", validarInformacion);
 fecha.addEventListener("blur", validarFecha);
 imagen.addEventListener("change", validarTamanioImagen);
 botonAniadir.addEventListener("click", duplicarDiv);
-// botonBorrar.addEventListener("click", borrarDiv);
+botonBorrar.addEventListener("click", borrarDuplicado);
+botonEnviar.addEventListener("click", validarFormulario);
+
+function validarFormulario() {
+    // Realizar todas las validaciones
+    let tituloValido = validarTitulo();
+    let informacionValida = validarInformacion();
+    let fechaValida = validarFecha();
+    let imagenValida = validarTamanioImagen();
+    let radiosValidos = validarRadios();
+    let textareasValidos = validarTextarea(); // Nueva validación para textarea
+
+    console.log("tituloValido:", tituloValido);
+    console.log("informacionValida:", informacionValida);
+    console.log("fechaValida:", fechaValida);
+    console.log("imagenValida:", imagenValida);
+    console.log("radiosValidos:", radiosValidos);
+    console.log("textareasValidos:", textareasValidos);
+
+    // Verificar si todos los campos son válidos
+    if (tituloValido && informacionValida && fechaValida && imagenValida && radiosValidos && textareasValidos) {
+        // Aquí puedes enviar el formulario o realizar otras acciones
+        document.getElementById("form").submit();
+    } else {
+        // Mostrar un mensaje de error o realizar otras acciones
+        alert("Completa todos los campos correctamente antes de enviar el formulario.");
+        return false;
+    }
+}
+
+function validarTextarea() {
+    let textareas = document.querySelectorAll('textarea');
+    let textareasValidos = true;
+
+    textareas.forEach(textarea => {
+        // Obtener el valor del textarea y aplicar la expresión regular
+        let motivoValido = validar(regexMotivo, textarea);
+
+        // Actualizar la variable textareasValidos basada en la validez del motivo
+        if (motivoValido == false)
+            textareasValidos = false
+    });
+
+    return textareasValidos;
+}
+
+function validarRadios() {
+    // Obtener todos los elementos de tipo radio con name="motivoCorrecto"
+    let radios = document.querySelectorAll('input[name="motivoCorrecto"]');
+
+    // Variable para almacenar si al menos uno está seleccionado
+    let algunSeleccionado = false;
+
+    // Iterar sobre los elementos de radio
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            algunSeleccionado = true;
+            break;  // Si al menos uno está seleccionado, salir del bucle
+        }
+    }
+
+    // Verificar si al menos uno está seleccionado
+    if (algunSeleccionado) {
+        return true;
+    } else {
+        // Mostrar un mensaje de error o realizar otras acciones
+        alert("Selecciona al menos una opción antes de enviar el formulario.");
+        return false;
+    }
+}
+
+// Contador para generar IDs únicos
+let contadorDuplicados = 0;
+
+function borrarDuplicado(){
+    if (contadorDuplicados > 0) {
+        contenedorDuplicados.removeChild(contenedorDuplicados.firstElementChild);
+        contadorDuplicados--;
+    }
+}
 
 function duplicarDiv() {
     // Clonar el nodo del div original (incluyendo todos los elementos dentro)
     let nuevoDiv = divOriginal.cloneNode(true);
+    
 
     // Generar un ID único para el nuevo div clonado
     let nuevoID = "duplicado" + contadorDuplicados;
@@ -40,15 +118,20 @@ function duplicarDiv() {
 
     // Agregar el nuevo div clonado al contenedor de duplicados
     contenedorDuplicados.appendChild(nuevoDiv);
+
+    nuevoDiv.getElementsByTagName("textarea")[0].id = "motivo"+(contadorDuplicados+3);
+    nuevoDiv.getElementsByTagName("textarea")[0].class = "textarea";
+    nuevoDiv.getElementsByTagName("textarea")[0].name = "motivos[" + (contadorDuplicados+3) + "]";
+    nuevoDiv.getElementsByTagName("h2")[0].textContent = "Motivo "+(contadorDuplicados+3)
+
 }
 
-
 function validarTitulo() {
-    validar(regexTitulo, titulo);
+    return validar(regexTitulo, titulo);
 }
 
 function validarInformacion() {
-    validar(regexInformacion, informacion);
+    return validar(regexInformacion, informacion);
 }
 
 function validar(regex, element) {
@@ -56,10 +139,12 @@ function validar(regex, element) {
         // La entrada es válida, aplicar estilo verde
         element.classList.remove("box_shadow_red");
         element.classList.add("box_shadow_green");
+        return true;
     } else {
         // La entrada no es válida, aplicar estilo rojo
         element.classList.remove("box_shadow_green");
         element.classList.add("box_shadow_red");
+        return false;
     }
 }
 
@@ -74,10 +159,12 @@ function validarFecha() {
         // La fecha introducida es válida y es igual o anterior a la fecha actual
         fecha.classList.remove("box_shadow_red");
         fecha.classList.add("box_shadow_green");
+        return true;
     } else {
         // La fecha introducida no es válida o es posterior a la fecha actual
         fecha.classList.remove("box_shadow_green");
         fecha.classList.add("box_shadow_red");
+        return false;
     }
 }
 
@@ -104,17 +191,16 @@ function validarTamanioImagen() {
         // Convertir el tamaño a megabytes (1 megabyte = 1024 * 1024 bytes)
         let tamanoEnMB = tamanoEnBytes / (1024 * 1024);
 
-        // Verificar si el tamaño del archivo es menor o igual a 5 MB
-        if (tamanoEnMB <= 3) {
-            imagen.classList.remove("box_shadow_red");
-            imagen.classList.add("box_shadow_green");
+        // Verificar si el tamaño del archivo es menor o igual a 3 MB
+        if (tamanoEnMB > 3) {
+            alert("La imagen debe pesar menos de 3 MB")
+            return false;
         } else {
-            imagen.classList.remove("box_shadow_green");
-            imagen.classList.add("box_shadow_red");
+            return true;
         }
-    } else {
-        imagen.classList.remove("box_shadow_green");
-        imagen.classList.add("box_shadow_red");
     }
+
+    // No se seleccionó ningún archivo, considerar la validación como "válida"
+    return true;
 }
 
