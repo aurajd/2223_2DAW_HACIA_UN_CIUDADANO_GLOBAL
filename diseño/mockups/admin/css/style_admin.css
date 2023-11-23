@@ -337,7 +337,7 @@ h2{
 }
 
 /* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width:1025px) {
     body {
         background-attachment: scroll; /* Cambia la fijación de fondo para permitir el desplazamiento */
     }
@@ -352,12 +352,9 @@ h2{
         padding: 2% 3%; /* Ajusto el relleno para tablets */
     }
 
-    h1 {
-        font-size: 1.5rem; /* Reduzco el tamaño de la fuente para tablets */
-    }
-
     input[type="text"] {
         width: 100%; /* Ajusta el ancho del input para ocupar toda la pantalla */
+        box-sizing: border-box;
     }
 
     textarea {
@@ -370,7 +367,6 @@ h2{
 
     th, td {
         padding: 10px; /* Ajusta el espaciado interno de las celdas en tablets */
-        font-size: 12px; /* Reduzco el tamaño del texto en tablets */
     }
 
     .opciones input[type="submit"],
@@ -383,6 +379,7 @@ h2{
         padding: 20px 50px; /* Ajuste del tamaño del botón para tablets */
         font-size: 1.5em; /* Ajuste del tamaño de la fuente para tablets */
         min-width: 70%; /* Ajuste del ancho mínimo del botón para tablets */
+        /* Este carácter invisible puede causar problemas:   */
     }
+    
 }
-
