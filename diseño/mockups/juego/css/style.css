@@ -318,3 +318,54 @@ nav a {
     left: 15%;
     top: 75%;
 }
+
+/* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
+@media only screen and (max-width: 1024px) {
+    #menu img {
+        width: 40%; /* Ajusta el ancho de la imagen en tablets */
+    }
+
+    #tituloLogo {
+        font-size: 2rem; /* Ajusta el tamaño del título en tablets */
+    }
+
+    #menu a {
+        font-size: 2rem; /* Ajusta el tamaño de los enlaces en tablets */
+    }
+
+    nav {
+        font-size: 0.8rem; /* Ajusta el tamaño de la fuente en la barra de navegación en tablets */
+    }
+
+    .mainJuego>div {
+        height: 70%; /* Ajusta la altura del contenedor principal en tablets */
+        width: 80%; /* Ajusta el ancho del contenedor principal en tablets */
+    }
+
+    #ranking th {
+        height: 15%; /* Ajusta la altura de las celdas del encabezado de la tabla en tablets */
+    }
+
+    #ranking td, #ranking th {
+        font-size: 1rem; /* Ajusta el tamaño de la fuente en las celdas de la tabla en tablets */
+    }
+
+    #divPuntuacion h1 {
+        font-size: 1.5rem; /* Ajusta el tamaño del título en tablets */
+    }
+
+    #divPuntuacion input[type="text"] {
+        width: 80%; /* Ajusta el ancho del campo de texto en tablets */
+    }
+
+    #divPuntuacion p, #divPuntuacion input[type="submit"], #divPuntuacion a {
+        width: 40%; /* Ajusta el ancho de los elementos en tablets */
+        height: 15%; /* Ajusta la altura de los elementos en tablets */
+        font-size: 1rem; /* Ajusta el tamaño de la fuente de los elementos en tablets */
+    }
+
+    .imagen-fija {
+        width: 10vw; /* Ajusta el tamaño de la imagen fija en tablets */
+        height: 15vh; /* Ajusta el tamaño de la imagen fija en tablets */
+    }
+}

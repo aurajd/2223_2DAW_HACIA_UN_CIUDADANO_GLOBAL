@@ -335,3 +335,16 @@ h2{
  .columna-correcto {
     width: 20%;
 }
+
+/* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
+@media only screen and (max-width: 1024px) {
+    main>div {
+        width: 90%; /* Ajusta el ancho para pantallas más pequeñas */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Ajusta el ancho del input para ocupar toda la pantalla */
+    }
+
+    /* Agrega más reglas de estilo específicas para tablets según sea necesario */
+}
