@@ -73,9 +73,9 @@ class problemaController{
      * @param array $imagen Información de la imagen asociada a la situación.
      */
     function insertar(){
-        $titulo = $_POST['titulo'];
-        $informacion = $_POST['informacion']; 
-        $reflexion = $_POST['reflexion'];
+        $titulo = trim($_POST['titulo']);
+        $informacion = trim($_POST['informacion']); 
+        $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
         // Verifica que los datos necesarios no estén vacíos antes de insertar
         if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            
@@ -113,9 +113,9 @@ class problemaController{
             $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->listar();
         }
-        $titulo = $_POST['titulo'];
-        $informacion = $_POST['informacion']; 
-        $reflexion = $_POST['reflexion'];
+        $titulo = trim($_POST['titulo']);
+        $informacion = trim($_POST['informacion']); 
+        $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
         // Verifica que los datos necesarios no estén vacíos antes de insertar
         if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            

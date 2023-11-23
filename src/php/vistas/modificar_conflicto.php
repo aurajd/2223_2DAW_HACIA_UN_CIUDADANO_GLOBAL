@@ -25,17 +25,39 @@
             <input type='file' id="imagen" name='imagen'>
 
             <p class='titulo'>Modificar motivos:</p>
-            <?php foreach ($dataToView["data"]["motivos"] as $motivo) { ?>
+            
+            <?php for ($i=0;$i<3;$i++) { 
+                $numMotivo = $dataToView["data"]["motivos"][$i]["numMotivo"];
+                $motivo = $dataToView["data"]["motivos"][$i]["textoMotivo"]
+                ?>
                 <div class="motivos">
-                    <h2>Motivo <?php echo $motivo["numMotivo"]?></h2>
-                    <label for="motivo1">Información:</label>
-                    <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($motivo["textoMotivo"],ENT_QUOTES)?></textarea>      
+                    <h2>Motivo <?php echo $numMotivo?></h2>
+                    <label for="motivo<?php echo $numMotivo?>">Información:</label>
+                    <textarea name="motivos[<?php echo $numMotivo?>]" id="motivo<?php echo $numMotivo?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($motivo,ENT_QUOTES)?></textarea>      
                     <label>
-                        <input type="radio" name="motivoCorrecto" value="<?php echo $motivo["numMotivo"];?>" <?php if ($motivo["numMotivo"] == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
+                        <input type="radio" name="motivoCorrecto" value="<?php echo $numMotivo;?>" <?php if ($numMotivo == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
                         Es correcto
                     </label>
                 </div>
             <?php } ?>
+            
+            <?php
+            // Empieza un for desde la posicion tres
+            for($offset=3; $offset < count($dataToView["data"]["motivos"]); $offset++) {
+                $numMotivo = $dataToView["data"]["motivos"][$i]["numMotivo"];
+                $motivo = $dataToView["data"]["motivos"][$i]["textoMotivo"]
+                ?>
+                <div class="motivos">
+                    <h2>Motivo <?php echo $numMotivo?></h2>
+                    <label for="motivo<?php echo $numMotivo?>">Información:</label>
+                    <textarea name="motivos[<?php echo $numMotivo?>]" id="motivo<?php echo $numMotivo?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($motivo,ENT_QUOTES)?></textarea>      
+                    <label>
+                        <input type="radio" name="motivoCorrecto" value="<?php echo $numMotivo;?>" <?php if ($numMotivo == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
+                        Es correcto
+                    </label>
+                </div>
+            <?php } ?>
+
 
             <div class='opciones'>
                 <input type='submit' value='Aceptar' name='aceptar'>
