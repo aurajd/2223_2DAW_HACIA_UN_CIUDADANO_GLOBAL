@@ -19,7 +19,10 @@ class conflictoModel extends Conexion{
                 FROM situacion s
                 INNER JOIN conflicto c ON s.idSituacion = c.idConflicto;";
         $resultado = $this->conexion->query($sql);
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        $lista = $resultado->fetch_all(MYSQLI_ASSOC);
+        $resultado->close();
+        $this->conexion->close();
+        return $lista;
     }
 
     function listar_conflicto($id){
@@ -31,7 +34,10 @@ class conflictoModel extends Conexion{
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc();
+        $stmt->close();
+        $conflicto = $resultado->fetch_assoc();
+        $resultado->close();
+        return $conflicto;
     }
 
     function listar_conflicto_motivo($id){
@@ -45,8 +51,10 @@ class conflictoModel extends Conexion{
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $resultado = $stmt->get_result();
+        $stmt->close();
         $arrayMotivos = $resultado->fetch_all(MYSQLI_ASSOC);
-
+        $resultado->close();
+        $this->conexion->close();
         $conflictoMotivos = array(
             "conflicto" => $conflicto,
             "motivos" => $arrayMotivos
@@ -113,13 +121,11 @@ class conflictoModel extends Conexion{
             }
 
         } catch (mysqli_sql_exception $e) {
-            if($e->getCode()==1406){
-                $this->error = "Uno de los campos excede el límite de carácteres.";
-            }else{
-                $this->error = "Error inesperado contacte con el administrador.";
-            }
             $this->conexion->rollback();
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
             return false;
+        } finally {
+            $stmt->close();
         }
 
         $this->conexion->commit();
@@ -207,13 +213,11 @@ class conflictoModel extends Conexion{
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
         }catch (mysqli_sql_exception $e) {
-            if($e->getCode()==1406){
-                $this->error = "Uno de los campos excede el límite de carácteres.";
-            }else{
-                $this->error = "Error inesperado contacte con el administrador.";
-            }
             $this->conexion->rollback();
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
             return false;
+        }finally {
+            $stmt->close();
         }
 
         $this->conexion->commit();
@@ -236,6 +240,8 @@ class conflictoModel extends Conexion{
         $stmt->bind_param('i',$id);
         $stmt->execute();
 
+        $stmt->close();
+
         // Borrar la imagen del servidor
         if(!is_null($img))
             unlink(__DIR__."/../../img/".$img);
@@ -256,6 +262,8 @@ class conflictoModel extends Conexion{
         $stmt->store_result();
         //si el numero de filas devueltas por esta consulta es mayor a 0 existe un conflicto con esta id y devuelve true,
         // si no, devuelve false
-        return $stmt->num_rows()>0 ? true : false;
+        $existe = $stmt->num_rows()>0 ? true : false;
+        $stmt->close();
+        return $existe;
     }
 }

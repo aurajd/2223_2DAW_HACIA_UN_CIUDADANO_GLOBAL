@@ -20,18 +20,19 @@ if(isset($_GET["action"])) {
 
 $rutaControlador = __DIR__.'/php/controladores/'.$nombreControlador.'.php';
 
+/* Comprueba que el controlador enviado por url existe y si no utiliza el controlador por defecto */
+if(!file_exists($rutaControlador)) $rutaControlador = __DIR__.'/php/controladores/'.constant("DEFAULT_CONTROLLER").'.php';
+
 // Carga el controlador
 require_once $rutaControlador;
 $nombreClaseControlador = $nombreControlador.'Controller';
 $controlador = new $nombreClaseControlador();
 
-/* Check if method is defined */
-
+// Si el método existe lo llama y guarda lo que devuelve en una variable
 $dataToView["data"] = array();
 if(method_exists($controlador,$nombreMetodo)) $dataToView["data"] = $controlador->{$nombreMetodo}();
 
-
-/* Load views */
+/* Carga las vistas */
 require_once __DIR__.'/php/vistas/template/header.php';
 require_once __DIR__.'/php/vistas/'.$controlador->view.'.php';
 require_once __DIR__.'/php/vistas/template/footer.php';

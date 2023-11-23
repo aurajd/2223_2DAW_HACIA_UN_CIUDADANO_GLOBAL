@@ -66,14 +66,12 @@ class problemaModel extends Conexion{
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
 
-        } catch (mysqli_sql_exception $e) {
-            if($e->getCode()==1406){
-                $this->error = "Uno de los campos excede el límite de carácteres.";
-            }else{
-                $this->error = "Error inesperado, contacta con el administrador.";
-            }
+        }catch (mysqli_sql_exception $e) {
             $this->conexion->rollback();
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
             return false;
+        }finally {
+            $stmt->close();
         }
 
         $this->conexion->commit();
@@ -102,6 +100,7 @@ class problemaModel extends Conexion{
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param('i',$id);
         $stmt->execute();
+        $stmt->close();
 
         // Borrar la imagen del servidor
         if(!is_null($img))
@@ -118,7 +117,10 @@ class problemaModel extends Conexion{
                 FROM situacion s
                 INNER JOIN problema p ON s.idSituacion = p.idProblema;";
         $resultado = $this->conexion->query($sql);
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        $this->conexion->close();
+        $lista = $resultado->fetch_all(MYSQLI_ASSOC);
+        $resultado->close();
+        return $lista;
     }
     
     /**
@@ -136,7 +138,10 @@ class problemaModel extends Conexion{
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc();
+        $stmt->close();
+        $problema = $resultado->fetch_assoc();
+        $resultado->close();
+        return $problema;
     }
 
     /**
@@ -207,13 +212,11 @@ class problemaModel extends Conexion{
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
         }catch (mysqli_sql_exception $e) {
-            if($e->getCode()==1406){
-                $this->error = "Uno de los campos excede el límite de carácteres.";
-            }else{
-                $this->error = $e->getMessage();
-            }
             $this->conexion->rollback();
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
             return false;
+        }finally {
+            $stmt->close();
         }
 
         $this->conexion->commit();
@@ -235,6 +238,8 @@ class problemaModel extends Conexion{
         $stmt->store_result();
         //si el numero de filas devueltas por esta consulta es mayor a 0 existe un conflicto con esta id y devuelve true,
         // si no, devuelve false
-        return $stmt->num_rows()>0 ? true : false;
+        $existe = $stmt->num_rows()>0 ? true : false;
+        $stmt->close();
+        return $existe;
     }
 }

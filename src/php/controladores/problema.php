@@ -17,30 +17,22 @@ class problemaController{
     // Constructor de la clase que inicializa el modelo
     public function __construct() {
         $this->modelo = new problemaModel();
-        $this->titulo = '';
-        $this->controladorVolver = "";
-        $this->accionVolver = "";
-    }
-
-    function menu(){
-        $this->view = "menu_problema";
-        $this->titulo = "Menú problemas";
+        $this->titulo = 'Menú problemas';
+        $this->view="menu_problema";
         $this->controladorVolver = "situacion";
-        $this->accionVolver = "menu";
+        $this->accionVolver = "";
     }
 
     function mostrar_anadir(){
         $this->view = "anadir_problema";
         $this->titulo = "Añadir problemas";
         $this->controladorVolver = "problema";
-        $this->accionVolver = "menu";
     }
 
     function listar(){
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
         $this->controladorVolver = "problema";
-        $this->accionVolver = "menu";
         return $this->modelo->listar();
     }
 
@@ -48,11 +40,13 @@ class problemaController{
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->listar();
         }
         $this->view = "modificar_problema";
         $this->titulo = "Modificar problema";
+        $this->controladorVolver = "problema";
+        $this->accionVolver = "listar";
         return $this->modelo->listar_fila($id);
     }
 
@@ -60,11 +54,14 @@ class problemaController{
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->listar();
         }
         $this->view = "borrar_problema";
         $this->titulo = "Borrar problema";
+        
+        $this->controladorVolver = "problema";
+        $this->accionVolver = "listar";
         return $this->modelo->listar_fila($id);
     }
 
@@ -113,7 +110,7 @@ class problemaController{
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->listar();
         }
         $titulo = $_POST['titulo'];
@@ -145,7 +142,7 @@ class problemaController{
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->listar();
         }
         $this->modelo->borrar_situacion($id);
@@ -159,12 +156,28 @@ class problemaController{
             $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
         }
+
+        if (preg_match('/[\^£$%&*()}{@#~><>|=_+¬-]/', $titulo))
+        {
+            $_GET["msg"] = "El título no puede contener carácteres especiales.";
+            return false;
+        }
+
+        if(is_numeric(substr($titulo, 0, 1))){
+            $_GET["msg"] = "El título no puede comenzar por un número.";
+            return false;
+        }
+
+        if(strlen($titulo)>50 || strlen($informacion)>2000 || strlen($informacion)>2000){
+            $_GET["msg"] = "Uno de los campos excede el límite de carácteres.";
+            return false;
+        }
         
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
         if(file_exists($imagen['tmp_name'])){
             //Si pesa más de 10 megabytes da error
-            if ($imagen['size']> 10485760){
-                $_GET["msg"] = "La imagen no es válida";
+            if ($imagen['size']> 3000000){
+                $_GET["msg"] = "La imagen pesa demasiado.";
                 return false;
             }  
             // Utilizamos la funcion getimagesize que si se usa en una imagen

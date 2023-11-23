@@ -17,14 +17,8 @@ class situacionController{
     // Constructor de la clase que inicializa el modelo
     public function __construct() {
         $this->modelo = new situacionModel();
-        $this->titulo = '';
-        $this->controladorVolver = "";
-        $this->accionVolver = "";
-    }
-
-    function menu(){
-        $this->view = "menu_situacion";
         $this->titulo = 'Menú situaciones';
+        $this->view = "menu_situacion";
     }
 
     

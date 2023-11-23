@@ -17,23 +17,16 @@ class conflictoController{
     // Constructor de la clase que inicializa el modelo
     public function __construct() {
         $this->modelo = new conflictoModel();
-        $this->titulo = '';
-        $this->controladorVolver = "";
-        $this->accionVolver = "";
-    }
-
-    function menu(){
         $this->view = "menu_conflicto";
         $this->titulo = "Menú conflictos";
         $this->controladorVolver = "situacion";
-        $this->accionVolver = "menu";
+        $this->accionVolver = "";
     }
 
     function listar(){
         $this->view = "listar_conflicto";
         $this->titulo = "Listar conflictos";
         $this->controladorVolver = "conflicto";
-        $this->accionVolver = "menu";
         return $this->modelo->listar();
     }
 
@@ -57,7 +50,6 @@ class conflictoController{
         $this->view = "anadir_conflicto";
         $this->titulo = "Añadir conflictos";
         $this->controladorVolver = "conflicto";
-        $this->accionVolver = "menu";
     }
     
     function mostrar_modificar(){
@@ -71,6 +63,8 @@ class conflictoController{
         }
         $this->view = "modificar_conflicto";
         $this->titulo = "Modificar conflicto";
+        $this->controladorVolver = "conflicto";
+        $this->accionVolver = "listar";
         return $this->modelo->listar_conflicto_motivo($id);
     }
 
@@ -85,6 +79,8 @@ class conflictoController{
         }
         $this->view = "borrar_conflicto";
         $this->titulo = "Borrar conflicto";
+        $this->controladorVolver = "conflicto";
+        $this->accionVolver ="listar";
         return $this->modelo->listar_conflicto($id);
     }
 
@@ -169,6 +165,22 @@ class conflictoController{
             return false;
         }
 
+        if (preg_match('/[\^£$%&*()}{@#~><>|=_+¬-]/', $titulo))
+        {
+            $_GET["msg"] = "El título no puede contener carácteres especiales.";
+            return false;
+        }
+
+        if(is_numeric(substr($titulo, 0, 1))){
+            $_GET["msg"] = "El título no puede comenzar por un número.";
+            return false;
+        }
+
+        if(strlen($titulo)>50 || strlen($informacion)>2000){
+            $_GET["msg"] = "Uno de los campos excede el límite de carácteres.";
+            return false;
+        }
+
         if(!$this->validarFecha($fecha)){
             $_GET["msg"] = "La fecha introducida no es válida.";
             return false;
@@ -206,6 +218,10 @@ class conflictoController{
         }
         if(count($motivos)<3){
             $_GET["msg"] = "Debes introducir al menos tres motivos.";
+            return false;
+        }
+        if(strlen($motivos)>2000){
+            $_GET["msg"] = "Uno de los motivos excede el límite de carácteres..";
             return false;
         }
         // Comprobamos que no se haya modificado el valor del indice del motivo

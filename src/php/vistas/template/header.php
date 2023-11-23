@@ -8,8 +8,8 @@
 </head>
 <body>
     <nav class="navbar">
-        <h1><?php echo $controller->titulo ?></h1>
-        <?php if(!empty($controller->controladorVolver)){ ?>
-            <a class="back-link" href="index.php?controller=<?php echo $controller->controladorVolver ?>&action=<?php echo $controller->accionVolver ?>">Ir atrás</a>
+        <h1><?php echo $controlador->titulo ?></h1>
+        <?php if(!empty($controlador->controladorVolver)){ ?>
+            <a class="back-link" href="index.php?controller=<?php echo $controlador->controladorVolver ?><?php if (!empty($controlador->accionVolver)){echo "&action=".$controlador->accionVolver;} ?>">Ir atrás</a>
         <?php }?>
     </nav>
