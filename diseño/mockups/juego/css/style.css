@@ -5,7 +5,6 @@ body {
 }
 
 #menu {
-    background-color: #09A8C9;
     /* Usamos display flex para colocar las dos opciones centradas en una columna */
     display: flex;
     /* Esto indica que los items estarán colocados en columna */
@@ -16,6 +15,18 @@ body {
     align-items: center;
     height: 100vh;
     row-gap: 5%;
+}
+
+/* Fondo de color */
+.fondo-color {
+    background-color: #09A8C9;
+}
+
+/* Fondo de imagen PNG con transparencia */
+.fondo-imagen {
+    background-image: url('../img/fo.png'); /* Ruta de la imagen PNG */
+    background-repeat: no-repeat; 
+    background-position: -700px -300px;
 }
 
 #menu img{
@@ -320,13 +331,13 @@ nav a {
 }
 
 /* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
     #menu img {
         width: 40%; /* Ajusta el ancho de la imagen en tablets */
     }
 
     #tituloLogo {
-        font-size: 2rem; /* Ajusta el tamaño del título en tablets */
+        font-size: 7rem; /* Ajusta el tamaño del título en tablets */
     }
 
     #menu a {
