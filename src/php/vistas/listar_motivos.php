@@ -18,7 +18,7 @@
                     </td>
                     <td>
                         <div class='scroll'>
-                            <?php echo htmlspecialchars($motivo["textoMotivo"]) ?>
+                            <?php echo htmlspecialchars($motivo["textoMotivo"],ENT_QUOTES) ?>
                         </div>
                     </td>
                 </tr>

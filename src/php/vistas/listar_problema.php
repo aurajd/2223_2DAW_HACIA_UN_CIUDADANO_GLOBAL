@@ -18,17 +18,17 @@
                     <tr>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['titulo']); ?>
+                                <?php echo htmlspecialchars($fila['titulo'],ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['informacion']); ?>
+                                <?php echo htmlspecialchars($fila['informacion'],ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['reflexion']); ?>
+                                <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>

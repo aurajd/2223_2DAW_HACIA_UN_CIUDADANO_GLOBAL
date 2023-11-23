@@ -22,7 +22,7 @@ class problemaModel extends Conexion{
      * @param string $reflexion Reflexión asociada al problema.
      * @param array|null $imagen Datos de la imagen (si se proporciona).
      */
-    function insertar_problema($titulo, $info, $reflexion, $imagen){
+    function insertar_problema($titulo, $informacion, $reflexion, $imagen){
 
         if(file_exists($imagen["tmp_name"])){
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);

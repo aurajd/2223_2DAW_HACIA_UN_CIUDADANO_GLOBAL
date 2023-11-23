@@ -2,10 +2,10 @@
     <div>
         <div>
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value='<?php echo $dataToView["data"]["titulo"] ?>' readonly>
+            <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>' readonly>
 
             <label for="informacion">Informacion:</label>
-            <textarea id="informacion" readonly><?php echo $dataToView["data"]["informacion"] ?></textarea>
+            <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
 
             <label for="fecha">Fecha de inicio:</label>
             <input type="date" id="fecha" value="<?php echo $dataToView["data"]["fechaInicio"] ?>"readonly>

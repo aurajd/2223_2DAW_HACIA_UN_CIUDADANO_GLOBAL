@@ -5,10 +5,10 @@
         <?php } ?>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"] ?>'>
             <label for='titulo'>Título:</label>
-            <input type='text' id="titulo" name='titulo' value='<?php echo $dataToView["data"]["conflicto"]["titulo"] ?>'>
+            <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>'>
             
             <label for='informacion'>Información:</label>
-            <textarea id="informacion" name='informacion'><?php echo $dataToView["data"]["conflicto"]["informacion"] ?></textarea>
+            <textarea id="informacion" name='informacion'><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
             
             <label for='reflexion'>Fecha de inicio:</label>
             <input type="date" id="fecha" name="fecha" value='<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>'>
@@ -29,7 +29,7 @@
                 <div class="motivos">
                     <h2>Motivo <?php echo $motivo["numMotivo"]?></h2>
                     <label for="motivo1">Información:</label>
-                    <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo $motivo["textoMotivo"]?></textarea>      
+                    <textarea name="motivos[<?php echo $motivo["numMotivo"]?>]" id="motivo<?php echo $motivo["numMotivo"]?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($motivo["textoMotivo"],ENT_QUOTES)?></textarea>      
                     <label>
                         <input type="radio" name="motivoCorrecto" value="<?php echo $motivo["numMotivo"];?>" <?php if ($motivo["numMotivo"] == $dataToView["data"]["conflicto"]["numMotivo"]) {echo ' checked ';}?>>
                         Es correcto

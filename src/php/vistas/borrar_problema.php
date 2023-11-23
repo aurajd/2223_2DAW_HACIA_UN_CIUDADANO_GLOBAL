@@ -1,13 +1,13 @@
 <main>
     <div>
         <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" value='<?php echo $dataToView["data"]["titulo"] ?>' readonly>
+        <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>' readonly>
 
         <label for="informacion">Informacion:</label>
-        <textarea id="informacion" readonly><?php echo $dataToView["data"]["informacion"] ?></textarea>
+        <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
 
         <label for="reflexion">Reflexión:</label>
-        <textarea id="reflexion" readonly><?php echo $dataToView["data"]["reflexion"] ?></textarea>
+        <textarea id="reflexion" readonly><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
         
         <?php if(!is_null($dataToView["data"]["imagen"])){ ?>
             <p class='titulo'>Imagen:</p>

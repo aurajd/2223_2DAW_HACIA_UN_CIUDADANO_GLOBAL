@@ -7,13 +7,13 @@
         <?php } ?>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"] ?>'>
             <label for='titulo'>Título:</label>
-            <input type='text' name='titulo' value='<?php echo $dataToView["data"]["titulo"] ?>'>
+            <input type='text' name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>'>
             
             <label for='informacion'>Información:</label>
-            <textarea name='informacion'><?php echo $dataToView["data"]["informacion"] ?></textarea>
+            <textarea name='informacion'><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
             
             <label for='reflexion'>Reflexión:</label>
-            <textarea name='reflexion'><?php echo $dataToView["data"]["reflexion"] ?></textarea>
+            <textarea name='reflexion'><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
             
             <?php
                 if(!is_null($dataToView["data"]["imagen"])){
