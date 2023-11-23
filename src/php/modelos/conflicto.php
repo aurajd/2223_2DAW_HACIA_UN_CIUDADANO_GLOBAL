@@ -89,9 +89,9 @@ class conflictoModel extends Conexion{
             $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
             VALUES (?,?,?);";
             $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('iis',$id,$indice,$motivo);
 
             foreach($motivos as $indice => $motivo){
-                $stmt->bind_param('iis',$id,$indice,$motivo);
                 $stmt->execute();
                 if($indice==$motivoCorrecto){
                     $sql = "UPDATE conflicto SET numMotivo = ? where idConflicto = ?;";
@@ -158,9 +158,9 @@ class conflictoModel extends Conexion{
             $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
             VALUES (?,?,?);";
             $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('iis',$id,$indice,$motivo);
             //Y metemos los nuevos motivos modificados
             foreach($motivos as $indice => $motivo){
-                $stmt->bind_param('iis',$id,$indice,$motivo);
                 $stmt->execute();
                 if($indice==$motivoCorrecto){
                     $sql = "UPDATE conflicto SET numMotivo = ? where idConflicto = ?;";
