@@ -73,6 +73,7 @@
       this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz()
       this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
       this.vistas.get(Vista.VISTA4).actualizarPuntuacionEnInterfaz()
+      this.vistas.get(Vista.VISTA7).actualizarPuntuacionEnInterfaz()
     }
 
     /**

@@ -17,7 +17,7 @@ export class VistaContinente extends Vista {
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
     // Nombre para mostrar en la vista continente
-    this.mostrarInformacion('NOMEBRE DEL CONTINENTE')
+    this.mostrarInformacion('NOMBRE DEL CONTINENTE')
     
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
@@ -32,10 +32,10 @@ export class VistaContinente extends Vista {
     this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
+    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
 
   }
 
@@ -60,6 +60,10 @@ export class VistaContinente extends Vista {
     NombreElemento.textContent = Nombre
 
     const NombreContainer = this.base.querySelector('#nombreContinente')
+    NombreContainer.appendChild(NombreElemento)    
+
+    const NombreContainer2 = this.base.querySelector('#infoContinente')
+    NombreContainer2.textContent = Nombre
     NombreContainer.appendChild(NombreElemento)
   }
 

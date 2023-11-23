@@ -61,7 +61,7 @@ export class VistaMapa extends Vista {
 
     this.boton3.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto3))
     this.boton3.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto3))
-    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA3)) // Cambiamos a Vista Continente para el terccer botón
+    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el terccer botón
     
     this.boton4.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto4))
     this.boton4.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto4))
@@ -74,6 +74,12 @@ export class VistaMapa extends Vista {
     this.boton6.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto6))
     this.boton6.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto6))
     this.boton6.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)) // Cambiamos a Vista Continente para el sexto botón
+
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+
+    this.enlaceRanking = this.base.querySelector('.verRanking')
+    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
 
   }
 

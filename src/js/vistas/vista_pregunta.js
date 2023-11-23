@@ -13,13 +13,19 @@ export class VistaPregunta extends Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
      */
   constructor (controlador, base) {
-    super(controlador, base, Vista.VISTA2)
+    super(controlador, base, Vista.VISTA6)
 
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
     // Pregunta para mostrar en la vista continente
     this.mostrarPregunta('¿Cuál es la capital de este continente?')
     this.actualizarPuntuacionEnInterfaz()
+
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+
+    this.enlaceRanking = this.base.querySelector('.verRanking')
+    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
   }
 
   /**
