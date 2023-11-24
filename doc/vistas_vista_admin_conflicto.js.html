@@ -1,14 +1,42 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistas/vista_admin_conflicto.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistas/vista_admin_conflicto.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Script para la validación y manipulación de formularios en la aplicación.
  */
 
 console.log('Carga el script');
 
 // Expresiones regulares para validaciones
-let regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/;
-let regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"' ]{0,1998}$/;
+let regexTitulo = /^[a-zA-Z][a-zA-Z0-9 ]{0,49}$/;
+let regexInformacion = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
 let regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/;  // Ajustada para el formato de fecha "aaaa-mm-dd"
-let regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1998}$/;
+let regexMotivo = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
 
 // Referencias a los elementos del formulario
 let titulo = document.getElementById("titulo");
@@ -50,7 +78,7 @@ function validarFormulario() {
     console.log("textareasValidos:", textareasValidos);
 
     // Verificar si todos los campos son válidos
-    if (tituloValido && informacionValida && fechaValida && imagenValida && radiosValidos && textareasValidos) {
+    if (tituloValido &amp;&amp; informacionValida &amp;&amp; fechaValida &amp;&amp; imagenValida &amp;&amp; radiosValidos &amp;&amp; textareasValidos) {
         // Aquí puedes enviar el formulario o realizar otras acciones
         document.getElementById("form").submit();
     } else {
@@ -92,7 +120,7 @@ function validarRadios() {
     let algunSeleccionado = false;
 
     // Iterar sobre los elementos de radio
-    for (let i = 0; i < radios.length; i++) {
+    for (let i = 0; i &lt; radios.length; i++) {
         if (radios[i].checked) {
             algunSeleccionado = true;
             break;  // Si al menos uno está seleccionado, salir del bucle
@@ -109,20 +137,25 @@ function validarRadios() {
     }
 }
 
-// Contador divs duplicados creados 
-let contadorDuplicados = contenedorDuplicados.getElementsByTagName('div').length;
+// Contador para generar IDs únicos
+let contadorDuplicados = 0;
 
-function borrarDuplicado(){
+/**
+ * Función para borrar el último duplicado creado.
+ */
+function borrarDuplicado() {
     if (contadorDuplicados > 0) {
-        contenedorDuplicados.removeChild(contenedorDuplicados.lastElementChild);
+        contenedorDuplicados.removeChild(contenedorDuplicados.firstElementChild);
         contadorDuplicados--;
     }
 }
 
+/**
+ * Función para duplicar el div original.
+ */
 function duplicarDiv() {
     // Clonar el nodo del div original (incluyendo todos los elementos dentro)
     let nuevoDiv = divOriginal.cloneNode(true);
-    
 
     // Generar un ID único para el nuevo div clonado
     let nuevoID = "duplicado" + contadorDuplicados;
@@ -131,21 +164,13 @@ function duplicarDiv() {
     // Incrementar el contador para el próximo clon
     contadorDuplicados++;
 
-    nuevoDiv.querySelector("label").htmlFor = "motivo"+(contadorDuplicados+3);
-    nuevoDiv.getElementsByTagName("textarea")[0].id = "motivo"+(contadorDuplicados+3);
-    nuevoDiv.getElementsByTagName("textarea")[0].class = "textarea";
-    nuevoDiv.getElementsByTagName("textarea")[0].name = "motivos[" + (contadorDuplicados+3) + "]";
-    nuevoDiv.getElementsByTagName("textarea")[0].value = "";
-    nuevoDiv.getElementsByTagName("h2")[0].textContent = "Motivo "+(contadorDuplicados+3)
-    nuevoDiv.querySelector("input[type='radio']").value = (contadorDuplicados+3);
-    
-    if (nuevoDiv.querySelector("input[type='radio']").checked == true){
-        nuevoDiv.querySelector("input[type='radio']").checked = false;
-        divOriginal.querySelector("input[type='radio']").checked = true;
-    }
-
     // Agregar el nuevo div clonado al contenedor de duplicados
     contenedorDuplicados.appendChild(nuevoDiv);
+
+    nuevoDiv.getElementsByTagName("textarea")[0].id = "motivo" + (contadorDuplicados + 3);
+    nuevoDiv.getElementsByTagName("textarea")[0].class = "textarea";
+    nuevoDiv.getElementsByTagName("textarea")[0].name = "motivos[" + (contadorDuplicados + 3) + "]";
+    nuevoDiv.getElementsByTagName("h2")[0].textContent = "Motivo " + (contadorDuplicados + 3);
 }
 
 /**
@@ -175,7 +200,7 @@ function validarFecha() {
     // Ajustar el formato de fecha formateada al formato "yyyy-mm-dd"
     let fechaFormateadaAjustada = fechaFormateada.split('/').reverse().join('-');
 
-    if (fechaIntroducida <= fechaFormateadaAjustada) {
+    if (fechaIntroducida &lt;= fechaFormateadaAjustada) {
         // La fecha introducida es válida y es igual o anterior a la fecha actual
         fecha.classList.remove("box_shadow_red");
         fecha.classList.add("box_shadow_green");
@@ -251,3 +276,26 @@ function validar(regex, element) {
         return false;
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaContinente.html">VistaContinente</a></li><li><a href="VistaFormulario.html">VistaFormulario</a></li><li><a href="VistaMapa.html">VistaMapa</a></li><li><a href="VistaMenu.html">VistaMenu</a></li><li><a href="VistaPregunta.html">VistaPregunta</a></li><li><a href="VistaRanking.html">VistaRanking</a></li></ul><h3>Global</h3><ul><li><a href="global.html#borrarDuplicado">borrarDuplicado</a></li><li><a href="global.html#duplicarDiv">duplicarDiv</a></li><li><a href="global.html#obtenerFechaActual">obtenerFechaActual</a></li><li><a href="global.html#puntosPorPregunta">puntosPorPregunta</a></li><li><a href="global.html#validar">validar</a></li><li><a href="global.html#validarFecha">validarFecha</a></li><li><a href="global.html#validarFormulario">validarFormulario</a></li><li><a href="global.html#validarInformacion">validarInformacion</a></li><li><a href="global.html#validarRadios">validarRadios</a></li><li><a href="global.html#validarTamanioImagen">validarTamanioImagen</a></li><li><a href="global.html#validarTextarea">validarTextarea</a></li><li><a href="global.html#validarTitulo">validarTitulo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Nov 24 2023 13:15:27 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

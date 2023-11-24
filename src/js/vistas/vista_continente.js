@@ -10,15 +10,15 @@ export class VistaContinente extends Vista {
      * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
      */
-  constructor(controlador, base) {
+  constructor (controlador, base) {
     super(controlador, base, Vista.VISTA2)
 
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
-    
+
     // Nombre para mostrar en la vista continente
     this.mostrarInformacion('NOMBRE DEL CONTINENTE')
-    
+
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
     this.boton1 = this.base.querySelector('#problema_1')
@@ -42,7 +42,7 @@ export class VistaContinente extends Vista {
    * Función para manejar la pulsación de tecla.
    * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
    */
-  irAtras(event) {
+  irAtras (event) {
     // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
     if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
       // Cambiar a Vista2
@@ -54,19 +54,19 @@ export class VistaContinente extends Vista {
    * Función para mostrar Nombres en la vista continente.
    * @param {string} Nombre - Nombre a mostrar.
    */
-  mostrarInformacion(Nombre) {
+  mostrarInformacion (Nombre) {
     const NombreElemento = document.createElement('h2')
     NombreElemento.textContent = Nombre
 
     const NombreContainer = this.base.querySelector('#nombreContinente')
-    NombreContainer.appendChild(NombreElemento)    
+    NombreContainer.appendChild(NombreElemento)
 
     const NombreContainer2 = this.base.querySelector('#infoContinente')
     NombreContainer2.textContent = Nombre
     NombreContainer.appendChild(NombreElemento)
   }
 
-  actualizarPuntuacionEnInterfaz() {
+  actualizarPuntuacionEnInterfaz () {
     const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     if (puntuacionElemento) {
       const puntuacionActual = this.controlador.obtenerPuntuacionActual()
@@ -74,7 +74,7 @@ export class VistaContinente extends Vista {
     }
   }
 
-  pulsarBoton(vista) {
+  pulsarBoton (vista) {
     this.controlador.verVista(vista)
   }
 }
