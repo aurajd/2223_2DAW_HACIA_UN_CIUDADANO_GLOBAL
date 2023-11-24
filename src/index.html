@@ -3,7 +3,7 @@
 	<head>
 		<meta charset=utf-8 />
 		<meta name=viewport content='width=device-width, initial-scale=1' />
-		<meta name=author content='Manuel Nieto Benítez' />
+		<meta name=author content='Manuel Nieto Benítez, Rubén Sancho Jiménez' />
 		<title>PROYECTO-F</title>
 		<link rel="stylesheet" href="./css/reset.css">
 		<link rel="stylesheet" href="./css/style.css">
@@ -19,7 +19,6 @@
 					<a>
 						<p>Iniciar</p>
 					</a>
-
 					<a>
 						<p>Ranking</p>
 					</a>
@@ -30,29 +29,141 @@
 			</main>
 		</div>
 		<div id="divvistaMapa">
-			<h2>MAPAMUNDI</h2>
-			<!--Meteré el Mockup-->
-			<button id="Boton_eu1">Botones continentes 1</button>
-			<button id="Boton_eu2">Botones continentes 2</button>
-			<button id="Boton_eu3">Botones volver a rankings</button>
+			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
+				<ul>
+					<li>
+						<a class="verMenu">
+							Inicio
+						</a>
+					</li>
+					<li>
+						<a class="verRanking">
+							Rankings
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<button id="boton_eu1">Europa</button>
+				<button id="boton_eu2">Asia</button>
+				<button id="boton_eu3">Oceanía</button>
+				<button id="boton_eu4">América del Norte</button>
+				<button id="boton_eu5">América del Sur</button>
+				<button id="boton_eu6">África</button>
+			</main>
+		</div>
+		<div id="divvistaPreg">
+			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
+				<ul>
+					<li>
+						<a class="verMenu">
+							Inicio
+						</a>
+					</li>
+					<li>
+						<a class="verRanking">
+							Rankings
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div>
+					<img src="img/logo.png" alt="Foto continente" id="imagenInfo">
+					<br>
+					<div id="informacion">
+						Información
+					</div>
+				</div>
+				<div>
+					<div id="divProblemas">
+						<h2 class="encabezados">NOMBRE DEL PROBLEMA</h2>
+						<div id="preguntaContainer" class="problemas">
+							<button id="pregunta1">SOLUCIÓN A</button>
+						</div>
+						<div id="opcionesContainer" class="problemas">
+							<button id="pregunta2">SOLUCIÓN B</button>
+						</div>
+						<div id="opcionesContainer" class="problemas">
+							<button id="pregunta3">SOLUCIÓN C</button>
+						</div>
+					</div>
+					<button id="botonAceptar">ACEPTAR</button>
+				</div>
+			</main>
+		</div>
+		<div id="divvistaRef">
+			<nav>
+				<ul>
+					<li>
+						<a class ="verMenu">
+							Inicio
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div id="divPuntuacion"> 
+					<h1>Reflexión</h1>
+					<form action="ranking.html" method="post">
+						<fieldset>REF</fieldset>
+						<p id="puntuacionRef">0 Puntos</p>
+						<a>Continuar</a>
+					</form>
+				</div>
+			</main>
 		</div>
 		<div id="divvistaCont">
-			<h2>CONTINENTE SELECCIONADO</h2>
-			<!--Meteré el Mockup-->
-			<div id="preguntaContainer">
-				<!-- Aquí se mostrará la pregunta -->
-			</div>
-			<div id="opcionesContainer">
-				<!-- Aquí se mostrarán los botones de opción -->
-			</div>
-			Control + B para volver atrás
+			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
+				<ul>
+					<li>
+						<a class="verMenu">
+							Inicio
+						</a>
+					</li>
+					<li>
+						<a class="verRanking">
+							Rankings
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div id="infoContinente">
+					<div id="nombreContinente"></div>
+					<br>
+					<img src="img/logo.png" alt="Foto continente" id="imagenInfo">
+					<br>
+					<div id="informacion">
+						Información
+					</div>
+				</div>
+				<div>
+					<div id="divProblemas">
+						<h2 class="encabezados">PROBLEMAS DEL CONTINENTE</h2>
+						<div id="preguntaContainer" class="problemas">
+							<button id="problema_1">Problema1</button>
+						</div>
+						<div id="opcionesContainer" class="problemas">
+							<button id="problema_2">Problema2</button>
+						</div>
+						<div id="opcionesContainer" class="problemas">
+							<button id="problema_3">Problema3</button>
+						</div>
+						Control + B para volver atrás a elección de continente
+					</div>
+				</div>
+			</main>
 		</div>
 		<div id="divvistaRank">
 			<nav>
-				<p id="puntuacion">Puntuación: 0</p>
+				<p class="puntosMensaje">Puntuación: 0</p>
 				<ul>
 					<li>
-						<a id="volverMenu">
+						<a class="verMenu">
 							Volver
 						</a>
 					</li>
@@ -90,7 +201,7 @@
 			<nav>
 				<ul>
 					<li>
-						<a>
+						<a class="verMenu">
 							Inicio
 						</a>
 					</li>
@@ -102,7 +213,7 @@
 					<form>
 						<input type="text" id="username" placeholder="Introduce tu nombre">
 						<p id="usernameError" style="color: red;"></p>
-						<p id="puntosMensaje">0 Puntos</p>
+						<p class="puntosMensaje">0 Puntos</p>
 						<input type="submit" value="Enviar">
 						<a>Cancelar</a>
 					</form>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistas/vista_mapa.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistas/vista_mapa.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Vista } from './vista.js';
+
+/**
+ * Clase que representa la vista del mapa de la aplicación.
+ * @extends Vista
+ */
+export class VistaMapa extends Vista {
+  /**
+   * Construye una instancia de la clase Vista_mapa.
+   * @constructor
+   * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del mapa.
+   */
+  constructor(controlador, base) {
+    super(controlador, base);
+
+    // Coger referencias del interfaz
+    /** @type {HTMLElement} */
+    this.boton1 = this.base.querySelector('#boton_eu1');
+    /** @type {HTMLElement} */
+    this.boton2 = this.base.querySelector('#boton_eu2');
+    /** @type {HTMLElement} */
+    this.boton3 = this.base.querySelector('#boton_eu3');
+    /** @type {HTMLElement} */
+    this.boton4 = this.base.querySelector('#boton_eu4');
+    /** @type {HTMLElement} */
+    this.boton5 = this.base.querySelector('#boton_eu5');
+    /** @type {HTMLElement} */
+    this.boton6 = this.base.querySelector('#boton_eu6');
+
+    // Crear cuadros de texto
+    /** @type {HTMLElement} */
+    this.cuadroTexto1 = this.crearCuadroTexto('Información detallada sobre el primer botón');
+    /** @type {HTMLElement} */
+    this.cuadroTexto2 = this.crearCuadroTexto('Información detallada sobre el segundo botón');
+    /** @type {HTMLElement} */
+    this.cuadroTexto3 = this.crearCuadroTexto('Información detallada sobre el tercer botón');
+    /** @type {HTMLElement} */
+    this.cuadroTexto4 = this.crearCuadroTexto('Información detallada sobre el cuarto botón');
+    /** @type {HTMLElement} */
+    this.cuadroTexto5 = this.crearCuadroTexto('Información detallada sobre el quinto botón');
+    /** @type {HTMLElement} */
+    this.cuadroTexto6 = this.crearCuadroTexto('Información detallada sobre el sexto botón');
+
+    // Agregar cuadros de texto al DOM
+    this.base.appendChild(this.cuadroTexto1);
+    this.base.appendChild(this.cuadroTexto2);
+    this.base.appendChild(this.cuadroTexto3);
+    this.base.appendChild(this.cuadroTexto4);
+    this.base.appendChild(this.cuadroTexto5);
+    this.base.appendChild(this.cuadroTexto6);
+
+    // Asociar eventos
+    this.boton1.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto1));
+    this.boton1.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto1));
+    this.boton1.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el primer botón
+
+    this.boton2.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto2));
+    this.boton2.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto2));
+    this.boton2.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el segundo botón
+
+    this.boton3.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto3));
+    this.boton3.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto3));
+    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el tercer botón
+
+    this.boton4.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto4));
+    this.boton4.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto4));
+    this.boton4.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el cuarto botón
+
+    this.boton5.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto5));
+    this.boton5.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto5));
+    this.boton5.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el quinto botón
+
+    this.boton6.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto6));
+    this.boton6.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto6));
+    this.boton6.addEventListener('click', () => this.pulsarBoton(Vista.VISTA4)); // Cambiamos a Vista Continente para el sexto botón
+
+    this.enlaceInicio = this.base.querySelector('.verMenu');
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1));
+
+    this.enlaceRanking = this.base.querySelector('.verRanking');
+    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3));
+  }
+
+  /**
+   * Crea un cuadro de texto con el texto proporcionado.
+   * @param {string} texto - Texto para el cuadro de texto.
+   * @returns {HTMLElement} - Cuadro de texto creado.
+   */
+  crearCuadroTexto(texto) {
+    const cuadroTexto = document.createElement('div');
+    cuadroTexto.classList.add('cuadro-texto');
+    cuadroTexto.textContent = texto;
+    cuadroTexto.style.display = 'none';
+    return cuadroTexto;
+  }
+
+  /**
+   * Muestra un cuadro de texto.
+   * @param {HTMLElement} cuadroTexto - Cuadro de texto a mostrar.
+   */
+  mostrarCuadroTexto(cuadroTexto) {
+    cuadroTexto.style.display = 'block';
+    cuadroTexto.style.backgroundColor = 'black';
+    cuadroTexto.style.color = 'white';
+  }
+
+  /**
+   * Oculta un cuadro de texto.
+   * @param {HTMLElement} cuadroTexto - Cuadro de texto a ocultar.
+   */
+  ocultarCuadroTexto(cuadroTexto) {
+    cuadroTexto.style.display = 'none';
+  }
+
+  /**
+   * Maneja el evento de hacer clic en un botón.
+   * @param {Symbol} vista - Vista a la que se cambiará.
+   */
+  pulsarBoton(vista) {
+    this.controlador.verVista(vista);
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaContinente.html">VistaContinente</a></li><li><a href="VistaFormulario.html">VistaFormulario</a></li><li><a href="VistaMapa.html">VistaMapa</a></li><li><a href="VistaMenu.html">VistaMenu</a></li><li><a href="VistaPregunta.html">VistaPregunta</a></li><li><a href="VistaRanking.html">VistaRanking</a></li></ul><h3>Global</h3><ul><li><a href="global.html#borrarDuplicado">borrarDuplicado</a></li><li><a href="global.html#duplicarDiv">duplicarDiv</a></li><li><a href="global.html#obtenerFechaActual">obtenerFechaActual</a></li><li><a href="global.html#puntosPorPregunta">puntosPorPregunta</a></li><li><a href="global.html#validar">validar</a></li><li><a href="global.html#validarFecha">validarFecha</a></li><li><a href="global.html#validarFormulario">validarFormulario</a></li><li><a href="global.html#validarInformacion">validarInformacion</a></li><li><a href="global.html#validarRadios">validarRadios</a></li><li><a href="global.html#validarTamanioImagen">validarTamanioImagen</a></li><li><a href="global.html#validarTextarea">validarTextarea</a></li><li><a href="global.html#validarTitulo">validarTitulo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Nov 24 2023 13:15:27 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

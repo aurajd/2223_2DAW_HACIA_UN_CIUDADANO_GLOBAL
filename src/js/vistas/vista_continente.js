@@ -1,6 +1,4 @@
 import { Vista } from './vista.js'
-import { Rest } from '../servicios/rest.js'
-
 /**
  * Clase que representa la vista de un continente en la aplicación.
  * @extends Vista
@@ -17,19 +15,33 @@ export class VistaContinente extends Vista {
 
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
-    // Pregunta para mostrar en la vista continente
-    this.mostrarPregunta('¿Cuál es la capital de este continente?')
-    // Opciones de respuesta
-    this.opcionesRespuesta = ['Opción 1', 'Opción 2', 'Opción 3']
-    // Crear botones para cada opción de respuesta
-    this.crearBotonesRespuesta()
-    this.actualizarPuntuacionEnInterfaz()
+
+    // Nombre para mostrar en la vista continente
+    this.mostrarInformacion('NOMBRE DEL CONTINENTE')
+
+    // Coger referencias del interfaz
+    /** @type {HTMLElement} */
+    this.boton1 = this.base.querySelector('#problema_1')
+    /** @type {HTMLElement} */
+    this.boton2 = this.base.querySelector('#problema_2')
+    /** @type {HTMLElement} */
+    this.boton3 = this.base.querySelector('#problema_3')
+
+    this.boton1.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
+    this.boton2.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
+    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
+
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+
+    this.enlaceRanking = this.base.querySelector('.verRanking')
+    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
   }
 
   /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
+   * Función para manejar la pulsación de tecla.
+   * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
+   */
   irAtras (event) {
     // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
     if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
@@ -39,63 +51,30 @@ export class VistaContinente extends Vista {
   }
 
   /**
-     * Función para mostrar preguntas en la vista continente.
-     * @param {string} pregunta - Pregunta a mostrar.
-     */
-  mostrarPregunta (pregunta) {
-    const preguntaElemento = document.createElement('p')
-    preguntaElemento.textContent = pregunta
+   * Función para mostrar Nombres en la vista continente.
+   * @param {string} Nombre - Nombre a mostrar.
+   */
+  mostrarInformacion (Nombre) {
+    const NombreElemento = document.createElement('h2')
+    NombreElemento.textContent = Nombre
 
-    const preguntaContainer = this.base.querySelector('#preguntaContainer')
-    preguntaContainer.appendChild(preguntaElemento)
-  }
+    const NombreContainer = this.base.querySelector('#nombreContinente')
+    NombreContainer.appendChild(NombreElemento)
 
-  /**
-     * Función para crear botones de opción de respuesta.
-     */
-  crearBotonesRespuesta () {
-    const opcionesContainer = this.base.querySelector('#opcionesContainer')
-
-    // Crear y agregar botones para cada opción de respuesta
-    this.opcionesRespuesta.forEach((opcion, index) => {
-      const boton = document.createElement('button')
-      boton.textContent = opcion
-      boton.addEventListener('click', () => this.responder(index + 1)) // Sumar 1 para evitar índices de opción 0
-
-      opcionesContainer.appendChild(boton)
-    })
-  }
-
-  /**
-     * Función para manejar la respuesta del usuario.
-     * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
-     */
-
-  responder (opcionSeleccionada) {
-    // Obtener la URL correcta para la solicitud GET
-    const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbmlldG9iZW5pdGV6Lmd1YWRhbHVwZUBhbHVtbmFkby5mdW5kYWNpb25sb3lvbGEubmV0IiwianRpIjoiZDQzMDE0ZTctZmY5OS00OTc2LWExYzYtYWY3NTE0MWQxNzM4IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3MDAyMDk1ODcsInVzZXJJZCI6ImQ0MzAxNGU3LWZmOTktNDk3Ni1hMWM2LWFmNzUxNDFkMTczOCIsInJvbGUiOiIifQ.aQyVYfeUFTx0wDjDVX3y5ahE1nNN7zULVhL0-DCjyKU' // Reemplaza con la URL correcta
-
-    // Realizar la petición GET para obtener información sobre continentes
-    Rest.getContinentInfo(url, data => {
-      console.log('Información de continentes:', data)
-      // Puedes realizar acciones adicionales en función de la respuesta de la API
-    })
-
-    // Resto del código de la función responder
-    if (opcionSeleccionada === 1) {
-      console.log('Respuesta correcta')
-      this.controlador.acertarPregunta()
-      this.actualizarPuntuacionEnInterfaz()
-    } else {
-      console.log('Respuesta incorrecta')
-    }
+    const NombreContainer2 = this.base.querySelector('#infoContinente')
+    NombreContainer2.textContent = Nombre
+    NombreContainer.appendChild(NombreElemento)
   }
 
   actualizarPuntuacionEnInterfaz () {
-    const puntuacionElemento = this.base.querySelector('#puntuacion')
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     if (puntuacionElemento) {
       const puntuacionActual = this.controlador.obtenerPuntuacionActual()
       puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
     }
+  }
+
+  pulsarBoton (vista) {
+    this.controlador.verVista(vista)
   }
 }

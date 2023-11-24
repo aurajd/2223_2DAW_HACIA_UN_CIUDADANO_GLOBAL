@@ -16,8 +16,8 @@ export class VistaRanking extends Vista {
 
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    this.enlaceInicio = this.base.querySelector('#volverMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
   }
 
   /**
@@ -35,7 +35,7 @@ export class VistaRanking extends Vista {
          */
   actualizarPuntuacionEnInterfaz () {
     const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('#puntuacion')
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
   }
 }

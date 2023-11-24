@@ -222,7 +222,7 @@ th {
     left: 0%;
 }
 
-#divPuntuacion #puntosMensaje {
+#divPuntuacion .puntosMensaje {
     width: 35%;
     height: 30%;
     margin: 0;
