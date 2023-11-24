@@ -98,6 +98,12 @@ input[type="file"]{
     color: white;
 }
 
+#menuLogo{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #anadirBoton {
     font-family: 'Roboto', sans-serif;
     margin: 20px auto 0;
@@ -165,7 +171,7 @@ td img{
     max-height: 200px;
     max-width: 100%;
     display: block;
-    margin: auto;
+    margin: auto;
 }
 
 td ul{
@@ -383,5 +389,4 @@ h2{
         min-width: 70%; /* Ajuste del ancho mínimo del botón para tablets */
         /* Este carácter invisible puede causar problemas:   */
     }
-    
 }
