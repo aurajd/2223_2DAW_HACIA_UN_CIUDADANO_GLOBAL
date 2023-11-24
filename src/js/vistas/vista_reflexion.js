@@ -8,6 +8,4 @@ export class VistaReflexion extends Vista{
 
     }
 
-    
-
 }

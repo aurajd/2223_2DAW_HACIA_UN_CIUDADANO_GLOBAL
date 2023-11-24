@@ -2,15 +2,15 @@ import { Vista } from './vista.js'
 import { Rest } from '../servicios/rest.js'
 
 /**
- * Clase que representa la vista de un continente en la aplicación.
+ * Clase que representa la vista de una pregunta en la aplicación.
  * @extends Vista
  */
 export class VistaPregunta extends Vista {
   /**
-     * Construye una instancia de la clase Vista_continente.
+     * Construye una instancia de la clase VistaPregunta.
      * @constructor
      * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
+     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista de la pregunta.
      */
   constructor (controlador, base) {
     super(controlador, base, Vista.VISTA6)
@@ -18,7 +18,7 @@ export class VistaPregunta extends Vista {
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    // Pregunta para mostrar en la vista continente
+    // Pregunta para mostrar en la vista de la pregunta
     this.mostrarPregunta('¿Cuál es la capital de este continente?')
     this.actualizarPuntuacionEnInterfaz()
 
@@ -32,6 +32,9 @@ export class VistaPregunta extends Vista {
     botonAjax.addEventListener("click", this.llamarAjax);
   }
 
+  /**
+   * Método para realizar una solicitud AJAX y manejar la respuesta.
+   */
   llamarAjax = () => {
     // Recojo valores y hago validaciones
     const i1Value = document.getElementById("pregunta1").value;
@@ -46,6 +49,10 @@ export class VistaPregunta extends Vista {
     Rest.post('js/servicios/ajax1.php', params, this.verResultadoAJAX);
   };
 
+  /**
+   * Método para mostrar el resultado de la solicitud AJAX.
+   * @param {Object} respuesta - Objeto que representa la respuesta de la solicitud.
+   */
   verResultadoAJAX = (respuesta) => {
     console.log(respuesta);
     const p = document.createElement('p');
@@ -66,7 +73,7 @@ export class VistaPregunta extends Vista {
   }
 
   /**
-     * Función para mostrar preguntas en la vista continente.
+     * Función para mostrar preguntas en la vista de la pregunta.
      * @param {string} pregunta - Pregunta a mostrar.
      */
   mostrarPregunta (pregunta) {
@@ -81,10 +88,9 @@ export class VistaPregunta extends Vista {
      * Función para manejar la respuesta del usuario.
      * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
      */
-
   responder (opcionSeleccionada) {
     // Obtener la URL correcta para la solicitud GET
-    const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbmlldG9iZW5pdGV6Lmd1YWRhbHVwZUBhbHVtbmFkby5mdW5kYWNpb25sb3lvbGEubmV0IiwianRpIjoiZDQzMDE0ZTctZmY5OS00OTc2LWExYzYtYWY3NTE0MWQxNzM4IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3MDAyMDk1ODcsInVzZXJJZCI6ImQ0MzAxNGU3LWZmOTktNDk3Ni1hMWM2LWFmNzUxNDFkMTczOCIsInJvbGUiOiIifQ.aQyVYfeUFTx0wDjDVX3y5ahE1nNN7zULVhL0-DCjyKU' // Reemplaza con la URL correcta
+    const url = 'https://opendata.aemet.es/opendata/api/observacion/convencional/todas?api_key=...' // Reemplaza con la URL correcta
 
     // Realizar la petición GET para obtener información sobre continentes
     Rest.getContinentInfo(url, data => {
@@ -102,6 +108,9 @@ export class VistaPregunta extends Vista {
     }
   }
 
+  /**
+   * Método para actualizar la puntuación en la interfaz.
+   */
   actualizarPuntuacionEnInterfaz () {
     const puntuacionElemento = this.base.querySelector('#puntuacion')
     if (puntuacionElemento) {
