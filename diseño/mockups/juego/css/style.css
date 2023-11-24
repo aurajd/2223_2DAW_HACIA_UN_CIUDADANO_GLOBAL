@@ -5,7 +5,6 @@ body {
 }
 
 #menu {
-    background-color: #09A8C9;
     /* Usamos display flex para colocar las dos opciones centradas en una columna */
     display: flex;
     /* Esto indica que los items estarán colocados en columna */
@@ -16,6 +15,18 @@ body {
     align-items: center;
     height: 100vh;
     row-gap: 5%;
+}
+
+/* Fondo de color */
+.fondo-color {
+    background-color: #09A8C9;
+}
+
+/* Fondo de imagen PNG con transparencia */
+.fondo-imagen {
+    background-image: url('../img/fo.png'); /* Ruta de la imagen PNG */
+    background-repeat: no-repeat; 
+    background-position: -700px -300px;
 }
 
 #menu img{
@@ -275,4 +286,97 @@ nav a {
     height: 25vh; /* 5% de la altura de la ventana */
     max-width: 100%; /* La imagen no superará el ancho del viewport */
     max-height: 100%; /* La imagen no superará la altura del viewport */
+}
+
+.problemas {
+    background-color: #CD7F32;
+    padding: 2.5%;
+    margin: 0.5%;
+    border-radius: 5px;
+}
+
+#divProblemas {
+    background-color: #C0C0C0;
+    padding: 5%;
+    border-radius: 15px;
+}
+
+.encabezados {
+    background-color: #09A8C9;
+    padding: 5%;
+    margin-bottom: 3%;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#imagenInfo {
+    height: 50%;
+    
+}
+
+#informacion { 
+    background-color: #d7d7d7;
+    border: black 2px;
+}
+
+/*#botonAceptar {
+    
+}*/
+
+#puntuacionRef{
+    width: 35%;
+    height: 30%;
+    left: 15%;
+    top: 75%;
+}
+
+/* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
+@media only screen and (max-width: 768px) {
+    #menu img {
+        width: 40%; /* Ajusta el ancho de la imagen en tablets */
+    }
+
+    #tituloLogo {
+        font-size: 7rem; /* Ajusta el tamaño del título en tablets */
+    }
+
+    #menu a {
+        font-size: 2rem; /* Ajusta el tamaño de los enlaces en tablets */
+    }
+
+    nav {
+        font-size: 0.8rem; /* Ajusta el tamaño de la fuente en la barra de navegación en tablets */
+    }
+
+    .mainJuego>div {
+        height: 70%; /* Ajusta la altura del contenedor principal en tablets */
+        width: 80%; /* Ajusta el ancho del contenedor principal en tablets */
+    }
+
+    #ranking th {
+        height: 15%; /* Ajusta la altura de las celdas del encabezado de la tabla en tablets */
+    }
+
+    #ranking td, #ranking th {
+        font-size: 1rem; /* Ajusta el tamaño de la fuente en las celdas de la tabla en tablets */
+    }
+
+    #divPuntuacion h1 {
+        font-size: 1.5rem; /* Ajusta el tamaño del título en tablets */
+    }
+
+    #divPuntuacion input[type="text"] {
+        width: 80%; /* Ajusta el ancho del campo de texto en tablets */
+    }
+
+    #divPuntuacion p, #divPuntuacion input[type="submit"], #divPuntuacion a {
+        width: 40%; /* Ajusta el ancho de los elementos en tablets */
+        height: 15%; /* Ajusta la altura de los elementos en tablets */
+        font-size: 1rem; /* Ajusta el tamaño de la fuente de los elementos en tablets */
+    }
+
+    .imagen-fija {
+        width: 10vw; /* Ajusta el tamaño de la imagen fija en tablets */
+        height: 15vh; /* Ajusta el tamaño de la imagen fija en tablets */
+    }
 }

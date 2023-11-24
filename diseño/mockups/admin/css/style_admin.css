@@ -98,6 +98,12 @@ input[type="file"]{
     color: white;
 }
 
+#menuLogo{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #anadirBoton {
     font-family: 'Roboto', sans-serif;
     margin: 20px auto 0;
@@ -162,8 +168,10 @@ td{
 }
 
 td img{
-    width: 100%;
-    vertical-align: middle;
+    max-height: 200px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
 }
 
 td ul{
@@ -334,4 +342,51 @@ h2{
 
  .columna-correcto {
     width: 20%;
+}
+
+/* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
+@media only screen and (max-width:1025px) {
+    body {
+        background-attachment: scroll; /* Cambia la fijación de fondo para permitir el desplazamiento */
+    }
+
+    nav {
+        height: 8vh; /* Reduzco la altura de la barra de navegación en tablets */
+    }
+
+    main>div {
+        width: 95%; /* Ajusta el ancho para pantallas más pequeñas */
+        min-height: 70vh; /* Reduzco la altura mínima del contenedor principal */
+        padding: 2% 3%; /* Ajusto el relleno para tablets */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Ajusta el ancho del input para ocupar toda la pantalla */
+        box-sizing: border-box;
+    }
+
+    textarea {
+        width: 100%; /* Ajusta el ancho del textarea para ocupar toda la pantalla */
+    }
+
+    table {
+        width: 100%; /* Ocupa todo el ancho del contenedor */
+    }
+
+    th, td {
+        padding: 10px; /* Ajusta el espaciado interno de las celdas en tablets */
+    }
+
+    .opciones input[type="submit"],
+    .opciones a {
+        width: 100%; /* Ajusta el ancho de los botones para que se ajusten a las celdas */
+        box-sizing: border-box; /* Asegura que el padding no aumente el ancho total del botón */
+    }
+
+    .boton {
+        padding: 20px 50px; /* Ajuste del tamaño del botón para tablets */
+        font-size: 1.5em; /* Ajuste del tamaño de la fuente para tablets */
+        min-width: 70%; /* Ajuste del ancho mínimo del botón para tablets */
+        /* Este carácter invisible puede causar problemas:   */
+    }
 }
