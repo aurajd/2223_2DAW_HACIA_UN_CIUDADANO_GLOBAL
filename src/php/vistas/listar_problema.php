@@ -46,6 +46,9 @@
     <?php } else{ ?>
         <div class="no_lista">
             <h1 >No hay ningún problema en la base de datos.</h1>
+            <div class='opciones'>
+                <a href='index.php?controller=conflicto'>Volver atrás</a>
+            </div>
         </div>
     <?php } ?>
 <main>

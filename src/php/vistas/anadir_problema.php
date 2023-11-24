@@ -8,6 +8,7 @@
                 <?php echo $_GET["msg"] ?>
             </p>
         <?php } ?>
+        <h1>Añadir problema</h1>
         <form action="index.php?controller=problema&action=insertar" method="post" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" name="titulo" id="titulo" placeholder="Introducir título">

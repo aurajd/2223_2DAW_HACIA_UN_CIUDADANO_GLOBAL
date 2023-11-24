@@ -31,9 +31,9 @@ class conflictoController{
     }
 
     /**
-     * Lista los conflictos.
+     * Muestra una lista con varias opciones para gestionar los conflictos.
      *
-     * @return array Resultado de la operación.
+     * @return array Array con todos los datos de los conflictos.
      */
     function gestionar(){
         $this->view = "gestionar_conflicto";
@@ -41,12 +41,22 @@ class conflictoController{
         return $this->modelo->listar();
     }
 
+    /**
+     * Muestra una lista resumida de los conflictos.
+     *
+     * @return array Array con todos los datos de los conflictos.
+     */
     function listar(){
         $this->view = "listar_conflicto";
         $this->titulo = "Listar conflictos";
         return $this->modelo->listar();
     }
 
+    /**
+     * Muestra información detallada de un conflicto concreto.
+     *
+     * @return array Array con todos los datos del conflicto.
+     */
     function ver_conflicto(){
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteConflicto($id)){
@@ -62,7 +72,7 @@ class conflictoController{
     /**
      * Lista los motivos de un conflicto.
      *
-     * @return array Resultado de la operación.
+     * @return void|array Resultado de la operación, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
      */
     function listar_motivos(){
         //Si $_GET['id'] no es NULL $id toma su valor, si es NULL se le asigna '' en su lugar
@@ -92,7 +102,7 @@ class conflictoController{
     /**
      * Muestra el formulario para modificar un conflicto. Si la id que recibe no existe muestra la lista de conflictos.
      *
-     * @return void|array Puede o no devolver nada o devolver información del conflicto a modificar.
+     * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
      */
     function mostrar_modificar(){
         //Si $_GET['id'] no es NULL $id toma su valor, si es NULL se le asigna '' en su lugar
@@ -112,7 +122,7 @@ class conflictoController{
     /**
      * Muestra el formulario para eliminar un conflicto. Si la id que recibe no existe muestra la lista de conflictos.
      *
-     * @return void|array Puede o no devolver nada o devolver información del conflicto a eliminar.
+     * @return void|array Información del conflicto a eliminar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
      */
     function confirmar_borrado(){
         //Si $_GET['id'] no es NULL $id toma su valor, si es NULL se le asigna '' en su lugar
@@ -163,7 +173,7 @@ class conflictoController{
 
     /**
      * Modifica un conflicto. Si lo consigue envia por $_GET un mensaje de exito, 
-     * si no, uno de error. Si la id que recibe no existe muestra la lista de conflictos.
+     * si no, uno de error. Si la id que recibe no existe muestra la gestión de conflictos.
      *
      * @return void
      */
@@ -203,7 +213,7 @@ class conflictoController{
     
     /**
      * Borra un conflicto. Si lo consigue envia por $_GET un mensaje de exito, 
-     * si no, uno de error. Si la id que recibe no existe muestra la lista de conflictos.
+     * si no, uno de error. Si la id que recibe no existe muestra la gestión de conflictos.
      *
      * @return void
      */
@@ -270,25 +280,23 @@ class conflictoController{
             return false;
         }
 
-        // Comprueba que el campo título solo contenga letras, números, y una serie de carácteres especiales concretos
-        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]{0,49}$/', $titulo))
+        //Comprueba que los campos no superen el máximo de carácteres permitidos.
+        if(strlen($titulo)>50 || strlen($informacion)>2000){
+            $_GET["msg"] = "Uno de los campos excede el límite de carácteres.";
+            return false;
+        }
+
+        // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres concretos
+        if (!preg_match('/^[a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/', $titulo))
         {
             $_GET["msg"] = "El título no puede contener carácteres especiales.";
             return false;
         }
 
-        // Comprueba que el campo título solo contenga letras, números, y una serie de carácteres especiales concretos
-        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"\']{0,1998}$/', $informacion))
+        // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres especiales concretos
+        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/', $informacion))
         {
             $_GET["msg"] = "La información no puede contener carácteres especiales.";
-            return false;
-        }
-
-        
-
-        //Comprueba que los campos no superen el máximo de carácteres permitidos.
-        if(strlen($titulo)>50 || strlen($informacion)>2000){
-            $_GET["msg"] = "Uno de los campos excede el límite de carácteres.";
             return false;
         }
 
@@ -362,6 +370,12 @@ class conflictoController{
             //Comprobamos que no mida mas de 2000 carácteres
             if(strlen($motivo)>2000){
                 $_GET["msg"] = "Uno de los motivos excede el límite de carácteres..";
+                return false;
+            }
+            // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres especiales concretos
+            if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/', $motivo))
+            {
+                $_GET["msg"] = "Los motivos no puede contener carácteres especiales.";
                 return false;
             }
         }

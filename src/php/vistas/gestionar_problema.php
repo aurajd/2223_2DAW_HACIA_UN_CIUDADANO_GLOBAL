@@ -1,15 +1,15 @@
 <main>
+<div>
     <?php if(count($dataToView["data"])>0){ ?>
-        <div>
+        <div class='opciones'>
+            <a href='index.php?controller=problema'>Volver atrás</a>
+            <a href='index.php?controller=problema&action=mostrar_anadir'>Añadir problema</a>
+        </div>
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>">
                     <?php echo $_GET["msg"] ?>
                 </p>
             <?php } ?>
-            <div class='opciones'>
-                <a href='index.php?controller=problema'>Volver atrás</a>
-                <a href='index.php?controller=problema&action=mostrar_anadir'>Añadir problema</a>
-            </div>
             <h1>Gestión de problemas</h1>
             <table>
                 <tr>
@@ -54,10 +54,15 @@
                     </tr>
                 <?php } ?>
             </table>
-        </div>
+        
     <?php } else{ ?>
         <div class="no_lista">
             <h1 >No hay ningún problema en la base de datos.</h1>
+            <div class='opciones'>
+                <a href='index.php?controller=problema'>Volver atrás</a>
+                <a href='index.php?controller=problema&action=mostrar_anadir'>Añadir problema</a>
+            </div>
         </div>
     <?php } ?>
+    </div>
 <main>

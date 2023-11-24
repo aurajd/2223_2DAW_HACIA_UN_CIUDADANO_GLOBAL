@@ -12,7 +12,6 @@ class menuController{
 
     // Constructor de la clase que inicializa el modelo
     public function __construct() {
-        
         $this->titulo = 'Menú Principal';
         $this->view = "menu_principal";
     }

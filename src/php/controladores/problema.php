@@ -165,12 +165,6 @@ class problemaController{
             return false;
         }
 
-        if (preg_match('/[\^£$%&*()}{@#~><>|=_+¬-]/', $titulo))
-        {
-            $_GET["msg"] = "El título no puede contener carácteres especiales.";
-            return false;
-        }
-
         if(is_numeric(substr($titulo, 0, 1))){
             $_GET["msg"] = "El título no puede comenzar por un número.";
             return false;
@@ -180,7 +174,21 @@ class problemaController{
             $_GET["msg"] = "Uno de los campos excede el límite de carácteres.";
             return false;
         }
-        
+
+        // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres concretos
+        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/', $titulo))
+        {
+            $_GET["msg"] = "El título no puede contener carácteres especiales.";
+            return false;
+        }
+
+        // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres especiales concretos
+        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/', $informacion))
+        {
+            $_GET["msg"] = "La información no puede contener carácteres especiales.";
+            return false;
+        }
+ 
         //Si el archivo no existe (no se ha subido ninguno), no se realizan las validaciones de la imagen
         if(file_exists($imagen['tmp_name'])){
             //Si pesa más de 10 megabytes da error
