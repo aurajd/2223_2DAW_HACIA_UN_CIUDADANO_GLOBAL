@@ -1,5 +1,8 @@
 <main>    
     <div>
+        <div class="opciones">
+            <a href='index.php?controller=problema&action=gestionar'>Volver atrás</a>
+        </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">
                 <?php echo $_GET["msg"] ?>

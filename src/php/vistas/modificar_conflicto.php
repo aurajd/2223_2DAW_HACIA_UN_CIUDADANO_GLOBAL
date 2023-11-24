@@ -3,7 +3,8 @@
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
         <?php } ?>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"] ?>'>
+        <h1>Modificar conflicto</h1>
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"]?>'id="form">
             <label for='titulo'>Título:</label>
             <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>'>
             
@@ -30,7 +31,7 @@
                 $numMotivo = $dataToView["data"]["motivos"][$i]["numMotivo"];
                 $motivo = $dataToView["data"]["motivos"][$i]["textoMotivo"]
                 ?>
-                <div class="motivos">
+                <div class="motivos" <?php if ($numMotivo == 3) {echo 'id="duplicadoOriginal"';}?>>
                     <h2>Motivo <?php echo $numMotivo?></h2>
                     <label for="motivo<?php echo $numMotivo?>">Información:</label>
                     <textarea name="motivos[<?php echo $numMotivo?>]" id="motivo<?php echo $numMotivo?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($motivo,ENT_QUOTES)?></textarea>      
@@ -40,12 +41,12 @@
                     </label>
                 </div>
             <?php } ?>
-            
+            <div id="contenedorDuplicados">
             <?php
             // Empieza un for desde la posicion tres
             for($offset=3; $offset < count($dataToView["data"]["motivos"]); $offset++) {
-                $numMotivo = $dataToView["data"]["motivos"][$i]["numMotivo"];
-                $motivo = $dataToView["data"]["motivos"][$i]["textoMotivo"]
+                $numMotivo = $dataToView["data"]["motivos"][$offset]["numMotivo"];
+                $motivo = $dataToView["data"]["motivos"][$offset]["textoMotivo"]
                 ?>
                 <div class="motivos">
                     <h2>Motivo <?php echo $numMotivo?></h2>
@@ -57,12 +58,16 @@
                     </label>
                 </div>
             <?php } ?>
-
-
+            </div>
+            <div class="botones-cuadrado">
+                <button class="boton-cuadrado" id="boton1" type="button">Añadir</button>
+                <button class="boton-cuadrado" id="boton2" type="button">Eliminar</button>
+            </div>
             <div class='opciones'>
-                <input type='submit' value='Aceptar' name='aceptar'>
-                <a href='index.php?controller=conflicto&action=listar'>Cancelar</a>
+                <button type="button" name='enviar' id='enviar'>Enviar</button>
+                <a href='index.php?controller=conflicto&action=gestionar'>Cancelar</a>
             </div>
         </form>
     </div>
 </main>
+<script type=module src="js/vistas/vista_admin_conflicto.js"></script>

@@ -1,11 +1,15 @@
 <main>   
     <div>
+        <div class="opciones">
+            <a href='index.php?controller=conflicto&action=gestionar'>Volver atrás</a>
+        </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">
                 <?php echo $_GET["msg"] ?>
             </p>
         <?php } ?>
-        <form action="index.php?controller=conflicto&action=insertar" method="post" enctype="multipart/form-data">
+        <h1>Añadir conflicto</h1>
+        <form action="index.php?controller=conflicto&action=insertar" method="post" id="form" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Introducir título">
 
@@ -37,7 +41,7 @@
                         Es correcto
                     </label>
                 </div>
-                <div class="motivos">
+                <div class="motivos" id="duplicadoOriginal">
                     <h2>Motivo 3</h2>
                     <label for="motivo3">Información:</label>
                     <textarea name="motivos[3]" id="motivo3" placeholder="Escribe aquí"></textarea>      
@@ -46,13 +50,17 @@
                         Es correcto
                     </label>
                 </div>
+                <div id="contenedorDuplicados">
+
+                </div>
                 <div class="botones-cuadrado">
-                    <button class="boton-cuadrado" id="boton1">Añadir</button>
-                    <button class="boton-cuadrado" id="boton2">Eliminar</button>
+                    <button class="boton-cuadrado" id="boton1" type="button">Añadir</button>
+                    <button class="boton-cuadrado" id="boton2" type="button">Eliminar</button>
                 </div>
                 <div class='opciones'>
-                    <input type='submit' value='Enviar' name='enviar'>
+                    <button type="button" name='enviar' id='enviar'>Enviar</button>
                 </div>
         </form>
     </div>
 </main>   
+<script type=module src="js/vistas/vista_admin_conflicto.js"></script>

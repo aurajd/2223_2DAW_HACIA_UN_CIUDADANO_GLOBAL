@@ -27,7 +27,7 @@
             <input type='file' name='imagen'>
             <div class='opciones'>
                 <input type='submit' value='Aceptar' name='aceptar'>
-                <a href='index.php?controller=problema&action=listar'>Cancelar</a>
+                <a href='index.php?controller=problema&action=gestionar'>Cancelar</a>
             </div>
         </form>
     </div>

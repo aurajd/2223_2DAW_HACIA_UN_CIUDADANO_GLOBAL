@@ -13,14 +13,6 @@ class conflictoController{
      */
     public $titulo;
     /**
-     * @var string Nombre del controlador al que se redirige para volver atrás.
-     */
-    public $controladorVolver;
-    /**
-     * @var string Método a ejecutar al volver atrás.
-     */
-    public $accionVolver;
-    /**
      * @var conflictoModel Instancia del modelo de conflicto.
      */
     public $modelo;
@@ -36,8 +28,6 @@ class conflictoController{
         $this->modelo = new conflictoModel();
         $this->view = "menu_conflicto";
         $this->titulo = "Menú conflictos";
-        $this->controladorVolver = "situacion";
-        $this->accionVolver = "";
     }
 
     /**
@@ -45,11 +35,28 @@ class conflictoController{
      *
      * @return array Resultado de la operación.
      */
+    function gestionar(){
+        $this->view = "gestionar_conflicto";
+        $this->titulo = "Gestionar conflictos";
+        return $this->modelo->listar();
+    }
+
     function listar(){
         $this->view = "listar_conflicto";
         $this->titulo = "Listar conflictos";
-        $this->controladorVolver = "conflicto";
         return $this->modelo->listar();
+    }
+
+    function ver_conflicto(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteConflicto($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el conflicto seleccionado.";
+            return $this->listar();
+        }
+        $this->view = "ver_conflicto";
+        $this->titulo = "Ver conflicto";
+        return $this->modelo->listar_conflicto_motivo($id);
     }
 
     /**
@@ -67,12 +74,10 @@ class conflictoController{
             // si tipomsg vale error se le da un estilo al p distinto que si vale exito
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el conflicto seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->view = "listar_motivos";
         $this->titulo = "Listar motivos";
-        $this->controladorVolver = "conflicto";
-        $this->accionVolver = "listar";
         return $this->modelo->listar_conflicto_motivo($id);
     }
 
@@ -82,7 +87,6 @@ class conflictoController{
     function mostrar_anadir(){
         $this->view = "anadir_conflicto";
         $this->titulo = "Añadir conflictos";
-        $this->controladorVolver = "conflicto";
     }
     
     /**
@@ -98,12 +102,10 @@ class conflictoController{
         if(!$this->modelo->comprobarExisteConflicto($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el conflicto seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->view = "modificar_conflicto";
         $this->titulo = "Modificar conflicto";
-        $this->controladorVolver = "conflicto";
-        $this->accionVolver = "listar";
         return $this->modelo->listar_conflicto_motivo($id);
     }
 
@@ -120,12 +122,10 @@ class conflictoController{
         if(!$this->modelo->comprobarExisteConflicto($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el conflicto seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->view = "borrar_conflicto";
         $this->titulo = "Borrar conflicto";
-        $this->controladorVolver = "conflicto";
-        $this->accionVolver ="listar";
         return $this->modelo->listar_conflicto($id);
     }
 
@@ -175,7 +175,7 @@ class conflictoController{
         if(!$this->modelo->comprobarExisteConflicto($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el conflicto que deseas modificar.";
-            return $this->listar();
+            return $this->gestionar();
         }
         // Hacemos trim a los datos recibidos para eliminar espacios en blanco antes y después del texto
         $titulo = trim($_POST['titulo']);
@@ -193,7 +193,7 @@ class conflictoController{
             if ($resultado) {
                 $_GET["tipomsg"] = "exito";
                 $_GET["msg"] = "Conflicto modificado con éxito.";
-                return $this->listar();
+                return $this->gestionar();
             }
             $_GET["tipomsg"] = "error";
         }
@@ -214,13 +214,13 @@ class conflictoController{
         if(!$this->modelo->comprobarExisteConflicto($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el conflicto que deseas eliminar.";
-            return $this->listar();
+            return $this->gestionar();
         }
         // Llama al método del modelo para borrar el conflicto
         $this->modelo->borrar_conflicto($id);
         $_GET["tipomsg"] = "exito";
         $_GET["msg"] = "Conflicto eliminado con éxito.";
-        return $this->listar();
+        return $this->gestionar();
     }
 
     /**
@@ -262,20 +262,29 @@ class conflictoController{
             return false;
         }
 
-        // Comprueba que el campo título no contenga ninguno de estos carácteres haciendo uso de expresiones regulares
-        if (preg_match('/[\^£$%&*()}{@#~><>|=_+¬-]/', $titulo))
+        // Comprueba que el campo título no comienze por un número, 
+        // toma el primer carácter creando una substring que empieza por el índice 0 y es de tamaño 1, 
+        // y comprueba si es un número con is_numeric
+        if(is_numeric(substr($titulo, 0, 1))||is_numeric(substr($informacion, 0, 1))){
+            $_GET["msg"] = "Los campos no puede comenzar por un número.";
+            return false;
+        }
+
+        // Comprueba que el campo título solo contenga letras, números, y una serie de carácteres especiales concretos
+        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9]{0,49}$/', $titulo))
         {
             $_GET["msg"] = "El título no puede contener carácteres especiales.";
             return false;
         }
 
-        // Comprueba que el campo título no comienze por un número, 
-        // toma el primer carácter creando una substring que empieza por el índice 0 y es de tamaño 1, 
-        // y comprueba si es un número con is_numeric
-        if(is_numeric(substr($titulo, 0, 1))){
-            $_GET["msg"] = "El título no puede comenzar por un número.";
+        // Comprueba que el campo título solo contenga letras, números, y una serie de carácteres especiales concretos
+        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"\']{0,1998}$/', $informacion))
+        {
+            $_GET["msg"] = "La información no puede contener carácteres especiales.";
             return false;
         }
+
+        
 
         //Comprueba que los campos no superen el máximo de carácteres permitidos.
         if(strlen($titulo)>50 || strlen($informacion)>2000){

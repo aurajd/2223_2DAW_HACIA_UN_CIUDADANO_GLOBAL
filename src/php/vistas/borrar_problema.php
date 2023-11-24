@@ -1,5 +1,7 @@
 <main>
     <div>
+        <h1>Eliminar problema</h1>
+
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>' readonly>
 
@@ -15,7 +17,7 @@
         <?php } ?>
         <div class='opciones'>
             <a href='index.php?controller=problema&action=borrar_fila&id=<?php echo $dataToView["data"]['idSituacion']?>'>Aceptar</a>
-            <a href='index.php?controller=problema&action=listar'>Cancelar</a>
+            <a href='index.php?controller=problema&action=gestionar'>Cancelar</a>
         </div>
     </div>
 </main>

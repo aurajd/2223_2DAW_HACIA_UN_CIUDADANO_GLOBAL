@@ -1,7 +1,15 @@
 <div class="menu">
     <div class="botones">
-        <a class="boton" href="index.php?controller=conflicto&action=listar">Listar</a>
-        <a class="boton" href="index.php?controller=conflicto&action=mostrar_anadir">Añadir</a>
+        <h1>OPCIONES CONFLICTO</h1>
+        <select name="continentes">
+            <option value="value1">Europa</option>
+            <option value="value2">Asia</option>
+            <option value="value3">Oceanía</option>
+            <option value="value3">América del norte</option>
+            <option value="value3">América del sur</option>
+            <option value="value3">África</option>
+        </select>
+        <a class="boton" href="index.php?controller=conflicto&action=gestionar">Gestionar</a>
+        <a class="boton" href="index.php?controller=conflicto&action=listar">Listar</a>   
     </div>
 </div>
-    

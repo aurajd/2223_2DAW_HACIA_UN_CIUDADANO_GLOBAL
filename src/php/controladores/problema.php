@@ -9,8 +9,6 @@ class problemaController{
 
     // Propiedades de la clase
     public $titulo;
-    public $controladorVolver;
-    public $accionVolver;
     public $modelo;
     public $view;
 
@@ -19,20 +17,34 @@ class problemaController{
         $this->modelo = new problemaModel();
         $this->titulo = 'Menú problemas';
         $this->view="menu_problema";
-        $this->controladorVolver = "situacion";
-        $this->accionVolver = "";
     }
 
     function mostrar_anadir(){
         $this->view = "anadir_problema";
         $this->titulo = "Añadir problemas";
-        $this->controladorVolver = "problema";
     }
 
     function listar(){
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
-        $this->controladorVolver = "problema";
+        return $this->modelo->listar();
+    }
+
+    function ver_problema(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->listar();
+        }
+        $this->view = "ver_problema";
+        $this->titulo = "Ver problema";
+        return $this->modelo->listar_fila($id);
+    }
+
+    function gestionar(){
+        $this->view = "gestionar_problema";
+        $this->titulo = "Gestionar problema";
         return $this->modelo->listar();
     }
 
@@ -41,12 +53,10 @@ class problemaController{
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->view = "modificar_problema";
         $this->titulo = "Modificar problema";
-        $this->controladorVolver = "problema";
-        $this->accionVolver = "listar";
         return $this->modelo->listar_fila($id);
     }
 
@@ -55,13 +65,11 @@ class problemaController{
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->view = "borrar_problema";
         $this->titulo = "Borrar problema";
         
-        $this->controladorVolver = "problema";
-        $this->accionVolver = "listar";
         return $this->modelo->listar_fila($id);
     }
 
@@ -111,7 +119,7 @@ class problemaController{
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $titulo = trim($_POST['titulo']);
         $informacion = trim($_POST['informacion']); 
@@ -124,7 +132,7 @@ class problemaController{
             if($resultado){
                 $_GET["tipomsg"] = "exito";
                 $_GET["msg"] = "Problema modificado con éxito.";
-                return $this->listar();
+                return $this->gestionar();
             }
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = $this->modelo->error;
@@ -143,12 +151,12 @@ class problemaController{
         if(!$this->modelo->comprobarExisteProblema($id)){
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
+            return $this->gestionar();
         }
         $this->modelo->borrar_situacion($id);
         $_GET["tipomsg"] = "exito";
         $_GET["msg"] = "Problema eliminado con éxito.";
-        return $this->listar();
+        return $this->gestionar();
     }
 
     function validar($titulo,$informacion,$reflexion, $imagen){
