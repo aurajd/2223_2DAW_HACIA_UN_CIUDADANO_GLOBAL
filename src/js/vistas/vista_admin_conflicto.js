@@ -2,9 +2,9 @@ console.log('Carga el script');
 
 // Regex para validaciones
 let regexTitulo = /^[a-zA-Z][a-zA-Z0-9 ]{0,49}$/;
-let regexInformacion = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"']{0,1998}$/;
+let regexInformacion = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
 let regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/;  // Ajustada para el formato de fecha "aaaa-mm-dd"
-let regexMotivo = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"']{0,1998}$/;
+let regexMotivo = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
 
 // Referencias a los elementos del formulario
 let titulo = document.getElementById("titulo");
