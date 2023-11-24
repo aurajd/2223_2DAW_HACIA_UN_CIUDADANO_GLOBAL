@@ -17,6 +17,7 @@ export class VistaPregunta extends Vista {
 
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
+
     // Pregunta para mostrar en la vista continente
     this.mostrarPregunta('¿Cuál es la capital de este continente?')
     this.actualizarPuntuacionEnInterfaz()
@@ -26,7 +27,31 @@ export class VistaPregunta extends Vista {
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
+
+    let botonAjax = document.getElementById("pregunta1");
+    botonAjax.addEventListener("click", this.llamarAjax);
   }
+
+  llamarAjax = () => {
+    // Recojo valores y hago validaciones
+    const i1Value = document.getElementById("pregunta1").value;
+    const i2Value = document.getElementById("pregunta2").value;
+
+    const params = {
+      param1: i1Value,
+      param2: i2Value,
+    };
+
+    // Asegúrate de que Rest.post esté implementado adecuadamente
+    Rest.post('js/servicios/ajax1.php', params, this.verResultadoAJAX);
+  };
+
+  verResultadoAJAX = (respuesta) => {
+    console.log(respuesta);
+    const p = document.createElement('p');
+    document.body.appendChild(p);
+    p.textContent = respuesta.atrib1 + ' ' + respuesta.atrib2;
+  };    
 
   /**
      * Función para manejar la pulsación de tecla.
