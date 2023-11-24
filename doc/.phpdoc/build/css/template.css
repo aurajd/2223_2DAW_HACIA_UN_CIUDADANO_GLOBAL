@@ -4,17 +4,9 @@
     display: flex;
     gap: var(--spacing-md);
 }
-
 .phpdocumentor-content > section:first-of-type {
-    width: 75%;
+    width: 100%;
     flex: 1 1 auto;
-}
-
-@media (min-width: 1900px) {
-    .phpdocumentor-content > section:first-of-type {
-        width: 100%;
-        flex: 1 1 auto;
-    }
 }
 
 .phpdocumentor .phpdocumentor-content__title {
