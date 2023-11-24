@@ -1,10 +1,14 @@
+/**
+ * Script para la validación y manipulación de formularios en la aplicación.
+ */
+
 console.log('Carga el script');
 
-// Regex para validaciones
-let regexTitulo = /^[a-zA-Z][a-zA-Z0-9 ]{0,49}$/;
-let regexInformacion = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
+// Expresiones regulares para validaciones
+let regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/;
+let regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"' ]{0,1998}$/;
 let regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/;  // Ajustada para el formato de fecha "aaaa-mm-dd"
-let regexMotivo = /^[a-zA-Z][a-zA-Z0-9!¡:;,.¿?"' ]{0,1998}$/;
+let regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1998}$/;
 
 // Referencias a los elementos del formulario
 let titulo = document.getElementById("titulo");
@@ -15,7 +19,7 @@ let botonAniadir = document.getElementById("boton1");
 let botonBorrar = document.getElementById("boton2");
 let contenedorDuplicados = document.getElementById("contenedorDuplicados");
 let divOriginal = document.getElementById("duplicadoOriginal");
-let botonEnviar = document.getElementById("enviar")
+let botonEnviar = document.getElementById("enviar");
 
 // Asignar eventos blur a los campos de entrada
 titulo.addEventListener("blur", validarTitulo);
@@ -26,6 +30,9 @@ botonAniadir.addEventListener("click", duplicarDiv);
 botonBorrar.addEventListener("click", borrarDuplicado);
 botonEnviar.addEventListener("click", validarFormulario);
 
+/**
+ * Función para validar el formulario antes de enviarlo.
+ */
 function validarFormulario() {
     // Realizar todas las validaciones
     let tituloValido = validarTitulo();
@@ -53,6 +60,10 @@ function validarFormulario() {
     }
 }
 
+/**
+ * Función para validar los campos de tipo textarea.
+ * @returns {boolean} - true si todos los campos son válidos, false si al menos uno es inválido.
+ */
 function validarTextarea() {
     let textareas = document.querySelectorAll('textarea');
     let textareasValidos = true;
@@ -63,12 +74,16 @@ function validarTextarea() {
 
         // Actualizar la variable textareasValidos basada en la validez del motivo
         if (motivoValido == false)
-            textareasValidos = false
+            textareasValidos = false;
     });
 
     return textareasValidos;
 }
 
+/**
+ * Función para validar los campos de tipo radio.
+ * @returns {boolean} - true si al menos un radio está seleccionado, false si ninguno está seleccionado.
+ */
 function validarRadios() {
     // Obtener todos los elementos de tipo radio con name="motivoCorrecto"
     let radios = document.querySelectorAll('input[name="motivoCorrecto"]');
@@ -133,28 +148,26 @@ function duplicarDiv() {
     contenedorDuplicados.appendChild(nuevoDiv);
 }
 
+/**
+ * Función para validar el campo de título.
+ * @returns {boolean} - true si el campo es válido, false si es inválido.
+ */
 function validarTitulo() {
     return validar(regexTitulo, titulo);
 }
 
+/**
+ * Función para validar el campo de información.
+ * @returns {boolean} - true si el campo es válido, false si es inválido.
+ */
 function validarInformacion() {
     return validar(regexInformacion, informacion);
 }
 
-function validar(regex, element) {
-    if (regex.test(element.value)) {
-        // La entrada es válida, aplicar estilo verde
-        element.classList.remove("box_shadow_red");
-        element.classList.add("box_shadow_green");
-        return true;
-    } else {
-        // La entrada no es válida, aplicar estilo rojo
-        element.classList.remove("box_shadow_green");
-        element.classList.add("box_shadow_red");
-        return false;
-    }
-}
-
+/**
+ * Función para validar el campo de fecha.
+ * @returns {boolean} - true si el campo es válido, false si es inválido.
+ */
 function validarFecha() {
     let fechaIntroducida = fecha.value;
     let fechaFormateada = obtenerFechaActual();
@@ -175,6 +188,10 @@ function validarFecha() {
     }
 }
 
+/**
+ * Función para obtener la fecha actual en formato "dd/mm/aaaa".
+ * @returns {string} - La fecha actual formateada.
+ */
 function obtenerFechaActual() {
     // Crea un nuevo objeto Date, que representa la fecha y la hora actuales
     let fechaActual = new Date();
@@ -186,6 +203,10 @@ function obtenerFechaActual() {
     return fechaFormateada;
 }
 
+/**
+ * Función para validar el tamaño de la imagen seleccionada.
+ * @returns {boolean} - true si la imagen es válida, false si es inválida.
+ */
 function validarTamanioImagen() {
     // Obtener el primer archivo seleccionado (asumimos que solo se permite seleccionar un archivo a la vez)
     let archivo = imagen.files[0];
@@ -200,7 +221,7 @@ function validarTamanioImagen() {
 
         // Verificar si el tamaño del archivo es menor o igual a 3 MB
         if (tamanoEnMB > 3) {
-            alert("La imagen debe pesar menos de 3 MB")
+            alert("La imagen debe pesar menos de 3 MB");
             return false;
         } else {
             return true;
@@ -209,4 +230,24 @@ function validarTamanioImagen() {
 
     // No se seleccionó ningún archivo, considerar la validación como "válida"
     return true;
+}
+
+/**
+ * Función para aplicar la validación con una expresión regular a un elemento.
+ * @param {RegExp} regex - Expresión regular para la validación.
+ * @param {HTMLElement} element - Elemento HTML a validar.
+ * @returns {boolean} - true si el elemento es válido, false si es inválido.
+ */
+function validar(regex, element) {
+    if (regex.test(element.value)) {
+        // La entrada es válida, aplicar estilo verde
+        element.classList.remove("box_shadow_red");
+        element.classList.add("box_shadow_green");
+        return true;
+    } else {
+        // La entrada no es válida, aplicar estilo rojo
+        element.classList.remove("box_shadow_green");
+        element.classList.add("box_shadow_red");
+        return false;
+    }
 }

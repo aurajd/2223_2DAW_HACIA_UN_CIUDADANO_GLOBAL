@@ -1,10 +1,13 @@
 <?php
 require_once __DIR__.'/conexion.php';
 /**
- * Clase conflictoModel: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
+ * Clase conflictoModel: Proporciona métodos para interactuar con la base de datos en relación con conflictos.
  */
 class conflictoModel extends Conexion{
 
+    /**
+     * @var string|null $error Mensaje de error en caso de excepciones.
+     */
     public $error;
 
     /**
@@ -14,6 +17,12 @@ class conflictoModel extends Conexion{
         parent::__construct();
     }
 
+    
+    /**
+     * Obtiene la lista de todos los conflictos.
+     *
+     * @return array Lista de conflictos.
+     */
     function listar(){
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, c.fechaInicio
                 FROM situacion s
@@ -25,6 +34,12 @@ class conflictoModel extends Conexion{
         return $lista;
     }
 
+     /**
+     * Obtiene la información de un conflicto específico.
+     *
+     * @param int $id ID del conflicto.
+     * @return array Información del conflicto.
+     */
     function listar_conflicto($id){
         $sql = "SELECT s.idSituacion, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
         FROM situacion s
@@ -40,6 +55,12 @@ class conflictoModel extends Conexion{
         return $conflicto;
     }
 
+    /**
+     * Obtiene la información de un conflicto y sus motivos asociados.
+     *
+     * @param int $id ID del conflicto.
+     * @return array Información del conflicto y sus motivos.
+     */
     function listar_conflicto_motivo($id){
         $conflicto = $this->listar_conflicto($id);
 
@@ -62,6 +83,17 @@ class conflictoModel extends Conexion{
         return $conflictoMotivos;
     }
 
+    /**
+     * Inserta un nuevo conflicto en la base de datos.
+     *
+     * @param string $titulo Título del conflicto.
+     * @param string $informacion Información asociada al conflicto.
+     * @param string $fecha Fecha de inicio del conflicto.
+     * @param array $imagen Información de la imagen asociada al conflicto.
+     * @param int $motivoCorrecto Índice del motivo correcto en la lista de motivos.
+     * @param array $motivos Lista de motivos asociados al conflicto.
+     * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
+     */
     function insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos){
       
         if(file_exists($imagen["tmp_name"])){
@@ -133,6 +165,18 @@ class conflictoModel extends Conexion{
         
     }
 
+    /**
+     * Modifica un conflicto existente en la base de datos.
+     *
+     * @param int $id ID del conflicto a modificar.
+     * @param string $titulo Nuevo título del conflicto.
+     * @param string $informacion Nueva información asociada al conflicto.
+     * @param string $fecha Nueva fecha de inicio del conflicto.
+     * @param array $imagen Nueva información de la imagen asociada al conflicto.
+     * @param int $motivoCorrecto Índice del nuevo motivo correcto en la lista de motivos.
+     * @param array $motivos Lista de nuevos motivos asociados al conflicto.
+     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
+     */
     function modificar_conflicto($id,$titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos){
         
         try {
@@ -224,6 +268,12 @@ class conflictoModel extends Conexion{
         return true;
     }
 
+    /**
+     * Borra un conflicto de la base de datos.
+     *
+     * @param int $id ID del conflicto a borrar.
+     * @return void
+     */
     function borrar_conflicto($id){
         //Obtiene el valor de la imagen
         $sql = "SELECT imagen FROM situacion WHERE idSituacion = ?;";
@@ -247,6 +297,12 @@ class conflictoModel extends Conexion{
             unlink(__DIR__."/../../img/".$img);
     }
 
+    /**
+     * Verifica si un conflicto con la ID dada existe en la base de datos.
+     *
+     * @param int $id ID del conflicto a verificar.
+     * @return bool Devuelve true si el conflicto existe, false en caso contrario.
+     */
     function comprobarExisteConflicto($id){
         $sql = "SELECT idSituacion
         FROM situacion 

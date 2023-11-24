@@ -5,6 +5,9 @@ require_once __DIR__.'/conexion.php';
  */
 class problemaModel extends Conexion{
 
+    /**
+     * @var string|null $error Mensaje de error en caso de excepciones.
+     */
     public $error;
 
     /**
@@ -17,10 +20,11 @@ class problemaModel extends Conexion{
     /**
      * Inserta una nueva situación con su problema asociado en la base de datos.
      *
-     * @param string $titulo Título de la situación.
-     * @param string $info Información de la situación.
+     * @param string $titulo Título del problema.
+     * @param string $info Información del problema.
      * @param string $reflexion Reflexión asociada al problema.
-     * @param array|null $imagen Datos de la imagen (si se proporciona).
+     * @param array $imagen Información de la imagen asociada al problema.
+     * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
      */
     function insertar_problema($titulo, $informacion, $reflexion, $imagen){
 
@@ -80,10 +84,10 @@ class problemaModel extends Conexion{
     }
 
     /**
-     * Borra una situación y su problema asociado por ID, además de borrar la imagen del servidor.
+     * Borra un problema de la base de datos.
      *
-     * @param int $id ID de la situación a borrar.
-     * @param string $img Nombre de la imagen asociada.
+     * @param int $id ID del problema a borrar.
+     * @return void
      */
     function borrar_situacion($id){
         //Obtiene el valor de la imagen
@@ -108,9 +112,9 @@ class problemaModel extends Conexion{
     }
 
     /**
-     * Lista todas las situaciones con sus problemas asociados desde la base de datos.
+     * Obtiene la lista de todos los problemas.
      *
-     * @return array Arreglo asociativo con los datos de las situaciones y sus problemas.
+     * @return array Lista de problemas.
      */
     function listar(){
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
@@ -124,10 +128,10 @@ class problemaModel extends Conexion{
     }
     
     /**
-     * Obtiene los detalles de una situación y su problema asociado por ID desde la base de datos.
+     * Obtiene la información de un problema específico.
      *
-     * @param int $id ID de la situación a obtener detalles.
-     * @return array Arreglo asociativo con los detalles de la situación y su problema.
+     * @param int $id ID del problema.
+     * @return array Información del problema.
      */
     function listar_fila($id){
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
@@ -145,13 +149,14 @@ class problemaModel extends Conexion{
     }
 
     /**
-     * Modifica los datos de una situación y su problema asociado por ID en la base de datos.
+     * Modifica un conflicto existente en la base de datos.
      *
-     * @param int $id ID de la situación a modificar.
-     * @param string $titulo Nuevo título de la situación.
-     * @param string $informacion Nueva información de la situación.
+     * @param int $id ID del problema a modificar.
+     * @param string $titulo Nuevo título del problema.
+     * @param string $informacion Nueva información asociada al problema.
      * @param string $reflexion Nueva reflexión asociada al problema.
      * @param array $imagen Datos de la nueva imagen (si se proporciona).
+     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
      */
     function modificar_fila($id, $titulo, $informacion, $reflexion, $imagen){
         try {
@@ -223,6 +228,12 @@ class problemaModel extends Conexion{
         return true;
     }
 
+    /**
+     * Verifica si un problema con la ID dada existe en la base de datos.
+     *
+     * @param int $id ID del problema a verificar.
+     * @return bool Devuelve true si el problema existe, false en caso contrario.
+     */
     function comprobarExisteProblema($id){
         $sql = "SELECT idSituacion
         FROM situacion 

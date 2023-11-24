@@ -11,7 +11,7 @@ if(isset($_GET["controller"])) {
     $nombreControlador = constant("DEFAULT_CONTROLLER");
 }
 
-
+//Si no se envia un método se deja la variable en blanco
 $nombreMetodo = $_GET["action"] ?? '';
 
 $rutaControlador = __DIR__.'/php/controladores/'.$nombreControlador.'.php';

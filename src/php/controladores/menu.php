@@ -1,16 +1,28 @@
 <?php
 
-
 /**
- * Clase Controlador para manejar la lógica de negocio relacionada con situaciones o problemas.
+ * Controlador que gestiona el menú principal.
  */
 class menuController{
 
     // Propiedades de la clase
+    /**
+     * @var string Título de la página.
+     */
     public $titulo;
+    /**
+     * @var string Vista por defecto.
+     */
     public $view;
 
-    // Constructor de la clase que inicializa el modelo
+    /**
+     * Constructor de la clase menuController.
+     *
+     * Este constructor inicializa las propiedades de la clase, estableciendo un título por defecto
+     * y la vista asociada al menú principal.
+     *
+     * @return void
+     */
     public function __construct() {
         $this->titulo = 'Menú Principal';
         $this->view = "menu_principal";

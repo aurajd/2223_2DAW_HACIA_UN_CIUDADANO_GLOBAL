@@ -22,7 +22,9 @@ class conflictoController{
     public $view;
 
     /**
-     * Constructor de la clase que inicializa propiedades por defecto.
+     * Constructor de la clase que inicializa propiedades por defecto además del modelo.
+     * 
+     * @return void
      */
     public function __construct() {
         $this->modelo = new conflictoModel();
@@ -31,7 +33,7 @@ class conflictoController{
     }
 
     /**
-     * Muestra una lista con varias opciones para gestionar los conflictos.
+     * Muestra una lista de conflictos con varias opciones para gestionarlos.
      *
      * @return array Array con todos los datos de los conflictos.
      */
@@ -93,6 +95,8 @@ class conflictoController{
 
     /**
      * Muestra el formulario para añadir un conflicto.
+     * 
+     * @return void
      */
     function mostrar_anadir(){
         $this->view = "anadir_conflicto";
@@ -100,7 +104,7 @@ class conflictoController{
     }
     
     /**
-     * Muestra el formulario para modificar un conflicto. Si la id que recibe no existe muestra la lista de conflictos.
+     * Muestra el formulario para modificar un conflicto. Si la id que recibe no existe muestra la vista de gestión de conflictos.
      *
      * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
      */
@@ -120,7 +124,7 @@ class conflictoController{
     }
 
     /**
-     * Muestra el formulario para eliminar un conflicto. Si la id que recibe no existe muestra la lista de conflictos.
+     * Muestra el formulario para eliminar un conflicto. Si la id que recibe no existe muestra la vista de gestión de conflictos.
      *
      * @return void|array Información del conflicto a eliminar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
      */

@@ -3,33 +3,61 @@
 require_once __DIR__.'/../modelos/problema.php';
 
 /**
- * Clase Controlador para manejar la lógica de negocio relacionada con situaciones o problemas.
+ * Controlador para gestionar operaciones relacionadas con problemas.
  */
 class problemaController{
 
     // Propiedades de la clase
+    /**
+     * @var string Título de la página.
+     */
     public $titulo;
+    /**
+     * @var problemaModel Instancia del modelo de conflicto.
+     */
     public $modelo;
+    /**
+     * @var string Vista por defecto.
+     */
     public $view;
 
-    // Constructor de la clase que inicializa el modelo
+    /**
+     * Constructor de la clase que inicializa propiedades por defecto además del modelo.
+     * 
+     * @return void
+     */
     public function __construct() {
         $this->modelo = new problemaModel();
         $this->titulo = 'Menú problemas';
         $this->view="menu_problema";
     }
 
+    /**
+     * Muestra el formulario para añadir un problema.
+     * 
+     * @return void
+     */
     function mostrar_anadir(){
         $this->view = "anadir_problema";
         $this->titulo = "Añadir problemas";
     }
 
+    /**
+     * Muestra una lista resumida de los problemas.
+     *
+     * @return array Array con todos los datos de los problemas.
+     */
     function listar(){
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
         return $this->modelo->listar();
     }
 
+    /**
+     * Muestra información detallada de un problema concreto.
+     *
+     * @return array Array con todos los datos del problema.
+     */
     function ver_problema(){
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
@@ -42,12 +70,22 @@ class problemaController{
         return $this->modelo->listar_fila($id);
     }
 
+    /**
+     * Muestra una lista de problemas con varias opciones para gestionarlos.
+     *
+     * @return array Array con todos los datos de los problemas.
+     */
     function gestionar(){
         $this->view = "gestionar_problema";
         $this->titulo = "Gestionar problema";
         return $this->modelo->listar();
     }
 
+    /**
+     * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
+     *
+     * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
+     */
     function mostrar_modificar(){
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
@@ -60,6 +98,11 @@ class problemaController{
         return $this->modelo->listar_fila($id);
     }
 
+    /**
+     * Muestra el formulario para eliminar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
+     *
+     * @return void|array Información del problema a eliminar, si la id que recibe no está asociada a ningún problema no devuelve nada.
+     */
     function confirmar_borrado(){
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
@@ -74,11 +117,10 @@ class problemaController{
     }
 
     /**
-     * Método para insertar una nueva situación o problema.
-     * @param string $titulo Título de la situación.
-     * @param string $informacion Información asociada a la situación.
-     * @param string $reflexion Reflexión sobre la situación.
-     * @param array $imagen Información de la imagen asociada a la situación.
+     * Inserta un nuevo problema. Si lo consigue envia por $_GET un mensaje de exito, 
+     * si no, uno de error
+     *
+     * @return void
      */
     function insertar(){
         $titulo = trim($_POST['titulo']);
@@ -107,13 +149,11 @@ class problemaController{
 
 
     /**
-     * Método para modificar una situación o problema existente.
-     * @param int $id ID de la situación a modificar.
-     * @param string $titulo Nuevo título de la situación.
-     * @param string $informacion Nueva información asociada a la situación.
-     * @param string $reflexion Nueva reflexión sobre la situación.
-     * @param array $imagen Nueva información de la imagen asociada a la situación.
-     */
+    * Modifica un problema. Si lo consigue envia por $_GET un mensaje de exito, 
+    * si no, uno de error. Si la id que recibe no existe muestra la gestión de problemas.
+    *
+    * @return void
+    */
     function modificar(){
         $id = $_GET['id'] ?? '';
         if(!$this->modelo->comprobarExisteProblema($id)){
@@ -142,9 +182,10 @@ class problemaController{
     }
 
     /**
-     * Método para borrar una fila (situación) por su ID y su imagen asociada.
-     * @param int $id ID de la situación a borrar.
-     * @param array $img Nombre de la imagen asociada.
+     * Borra un problema. Si lo consigue envia por $_GET un mensaje de exito, 
+     * si no, uno de error. Si la id que recibe no existe muestra la gestión de problemas.
+     *
+     * @return void
      */
     function borrar_fila(){
         $id = $_GET['id'] ?? '';
@@ -159,6 +200,16 @@ class problemaController{
         return $this->gestionar();
     }
 
+    /**
+     * Valida los datos de un problema.
+     *
+     * @param string $titulo Título del problema.
+     * @param string $informacion Información del problema.
+     * @param string $reflexion Texto de reflexión sobre el problema.
+     * @param array $imagen Datos de la imagen.
+     *
+     * @return bool True si los datos son válidos, false si no.
+     */
     function validar($titulo,$informacion,$reflexion, $imagen){
         if(empty($titulo) || empty($informacion) || empty($reflexion)){
             $_GET["msg"] = "Debes rellenar todos los campos.";
