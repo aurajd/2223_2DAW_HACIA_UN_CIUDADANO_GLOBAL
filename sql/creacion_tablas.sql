@@ -41,7 +41,7 @@ CREATE TABLE solucion (
     correcta BIT NOT NULL,
     PRIMARY KEY(idSituacion, numSolucion),
     CONSTRAINT fk_solucion_situacion FOREIGN KEY (idSituacion) REFERENCES situacion (idSituacion) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;.
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 CREATE TABLE ranking (
     idPartida MEDIUMINT unsigned AUTO_INCREMENT PRIMARY KEY,
