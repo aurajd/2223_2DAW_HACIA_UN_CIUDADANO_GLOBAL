@@ -142,6 +142,11 @@ class problemaController{
         } else{
             $_GET["tipomsg"] = "error";
         }
+
+        // Añadir soluciones
+        $soluciones = explode(',', $_POST['soluciones']);
+        $this->modelo->insertar_problema_con_soluciones($titulo, $informacion, $reflexion, $imagen, $soluciones);
+
         $this->mostrar_anadir();
     }
 
@@ -178,6 +183,14 @@ class problemaController{
             $_GET["msg"] = $this->modelo->error;
         }
         $_GET["tipomsg"] = "error";
+
+        // Borrar todas las soluciones asociadas al problema
+        $this->modelo->borrar_soluciones($id);
+
+        // Añadir soluciones actualizadas
+        $soluciones = explode(',', $_POST['soluciones']);
+        $this->modelo->insertar_soluciones($id, $soluciones);
+        
         return $this->mostrar_modificar();
     }
 

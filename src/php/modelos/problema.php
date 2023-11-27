@@ -27,60 +27,49 @@ class problemaModel extends Conexion{
      * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
      */
     function insertar_problema($titulo, $informacion, $reflexion, $imagen){
-
-        if(file_exists($imagen["tmp_name"])){
+        if (file_exists($imagen["tmp_name"])) {
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
-            $nombreImagen = uniqid().".".$ext;
-        } else{
+            $nombreImagen = uniqid() . "." . $ext;
+        } else {
             $nombreImagen = null;
         }
-
 
         try {
             $this->conexion->autocommit(false);
 
-            $this->conexion->begin_transaction();
-
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
-            VALUES (?,?,?);";
-
+            $sql = "INSERT INTO situacion(titulo, informacion, imagen) VALUES (?, ?, ?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("sss",$titulo,$informacion,$nombreImagen);
+            $stmt->bind_param("sss", $titulo, $informacion, $nombreImagen);
             $stmt->execute();
 
             // Recogemos la idSituacion de la inserción realizada
             $id = $stmt->insert_id;
-            
+
             // Consulta SQL para insertar en la tabla 'problema'
-            $sql = "INSERT INTO problema(idProblema, reflexion) 
-            VALUES (?,?);";
+            $sql = "INSERT INTO problema(idProblema, reflexion) VALUES (?, ?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('is',$id,$reflexion);
+            $stmt->bind_param('is', $id, $reflexion);
             $stmt->execute();
 
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
             if (file_exists($imagen["tmp_name"])) {
-                // Ruta de destino para mover el archivo
-                $directorio_destino = __DIR__."/../../img";
-                $ruta_temporal = $imagen["tmp_name"];   
+                $directorio_destino = __DIR__ . "/../../img";
+                $ruta_temporal = $imagen["tmp_name"];
                 $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 
-                // Mover el archivo a la nueva ubicación
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
-
-        }catch (mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             $this->conexion->rollback();
-            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
+            $this->error = "Error " . $e->getCode() . ": Contacte con el administrador.";
             return false;
-        }finally {
+        } finally {
             $stmt->close();
         }
 
         $this->conexion->commit();
         return true;
-        
     }
 
     /**
@@ -252,5 +241,46 @@ class problemaModel extends Conexion{
         $existe = $stmt->num_rows()>0 ? true : false;
         $stmt->close();
         return $existe;
+    }
+
+    function insertar_problema_con_soluciones($titulo, $informacion, $reflexion, $imagen, $soluciones){
+        $this->conexion->autocommit(false);
+
+        try {
+            $id = $this->insertar_problema($titulo, $informacion, $reflexion, $imagen);
+
+            if ($id) {
+                // Insertar soluciones
+                $this->insertar_soluciones($id, $soluciones);
+
+                $this->conexion->commit();
+                return true;
+            } else {
+                throw new Exception("Error al insertar el problema principal.");
+            }
+        } catch (Exception $e) {
+            $this->conexion->rollback();
+            $this->error = "Error " . $e->getCode() . ": " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function insertar_soluciones($idProblema, $soluciones){
+        foreach ($soluciones as $solucion) {
+            $sql = "INSERT INTO solucion(idProblema, descripcion) VALUES (?, ?);";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('is', $idProblema, $solucion);
+            $stmt->execute();
+            $stmt->close();  // Cerrar la declaración después de ejecutar cada consulta
+        }
+    }
+    
+    
+    function borrar_soluciones($idProblema){
+        $sql = "DELETE FROM solucion WHERE idProblema = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i', $idProblema);
+        $stmt->execute();
+        $stmt->close();
     }
 }
