@@ -94,12 +94,24 @@ class Controlador {
        * Maneja la validación del formulario.
        */
   manejarValidacionFormulario () {
+    // Obtener el valor del nombre de usuario
+    /** @type {string} */
+    const username = document.getElementById('username').value
+    console.log(username)
+
+    // Obtener el valor de la puntuación
+    /** @type {number} */
+    const puntuacion = this.modelo.obtenerPuntuacion()
+    console.log(puntuacion)
+
     /** @type {boolean} */
-    const esValido = this.validarFormulario()
+    const esValido = this.validarFormulario(username)
 
     if (esValido) {
       // Realizar acciones adicionales si el formulario es válido
       alert('Formulario válido.')
+      this.anadirPuntuacion(username,puntuacion)
+      this.actualizarTop5()
       this.verVista(Vista.VISTA3)
     } else {
       alert('Formulario no válido.')
@@ -110,10 +122,7 @@ class Controlador {
        * Valida el formulario.
        * @returns {boolean} - true si el formulario es válido, false de lo contrario.
        */
-  validarFormulario () {
-    // Obtener el valor del nombre de usuario
-    /** @type {string} */
-    const username = document.getElementById('username').value
+  validarFormulario (username,puntuacion) {
     // Expresión regular para verificar que no comienza con números y tiene máximo 30 caracteres
     /** @type {RegExp} */
     const usernameRegex = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,29}$/
@@ -170,6 +179,27 @@ class Controlador {
 
   resetearConflicto(){
     this.vistas.get(Vista.VISTA8).resetearSeleccion();
+  }
+
+  anadirPuntuacion(username,puntuacion){
+    this.modelo.puntuacionPOST(username,puntuacion)
+  }
+
+  obtenerRanking(){
+
+    fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
+    .then(respuesta => respuesta.json() )
+    .then(objeto => {
+        for(let [index, fila] of objeto.filas.entries()){
+            console.log(index)
+            console.log(fila)
+            this.vistas.get(Vista.VISTA3).actualizarFila(fila,index)
+        }
+    })
+  }
+
+  actualizarTop5(){
+    this.obtenerRanking()
   }
 }
 

@@ -13,6 +13,7 @@ export class VistaRanking extends Vista {
      */
   constructor (controlador, base) {
     super(controlador, base)
+    this.filas = this.base.getElementsByTagName('tr')
 
     document.addEventListener('keydown', this.irAtras.bind(this))
 
@@ -37,5 +38,11 @@ export class VistaRanking extends Vista {
     const puntuacionActual = this.controlador.obtenerPuntuacionActual()
     const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+  }
+
+  actualizarFila(fila,index){
+    const filaRanking = this.filas[index+1]
+    filaRanking.getElementsByTagName('td')[0].textContent = fila['nombreJugador']
+    filaRanking.getElementsByTagName('td')[1].textContent = "Puntuación: "+fila['puntuacion']
   }
 }

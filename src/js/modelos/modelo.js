@@ -64,4 +64,20 @@ export class Modelo {
     let idMotivo = 1;
     return idMotivo;
   }
+
+  puntuacionPOST(username,puntuacion){
+    //Validación de datos...
+    const formData = new FormData()
+    formData.append('nombre', username)
+    formData.append('puntuacion', puntuacion)
+    const opciones = {
+        method: 'POST',
+        body: formData
+    }
+    fetch('./index.php?controller=ranking&action=anadir_puntuacion',opciones)
+    .then(respuesta => respuesta.text())
+    .then(texto => {
+        console.log(texto)
+    })
+  }
 }
