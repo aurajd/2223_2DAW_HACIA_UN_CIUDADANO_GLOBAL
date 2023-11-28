@@ -200,9 +200,9 @@ nav a {
     color: white;
 }
 
-/* */
+/* Vista divvistaProb*/
 
-.mainJuego>div {
+.maainJuego>div {
     height: 60%;
     width: 60%;
     border: 2px solid black;
@@ -211,20 +211,59 @@ nav a {
     padding: 5% 5%;
 }
 
-#ranking {
+
+/* Vista divvistaConf*/
+
+
+/* Vista divvistaProb*/
+
+
+/* Vista divvistaRank*/
+
+#divvistaRank{
+    background-image: url("../img/ranking.jpeg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#divvistaRank main{
+    height: calc(100vh - 10vh);
+    display: flex;
+    align-items: center;
+}
+
+#divvistaRank div{
+    margin: 0 auto;
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #ffffffcc;
+    padding: 5% 5%;
+    display: flex;
+}
+
+#divvistaRank table {
     height: 100%;
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
     border-collapse: separate;
     border-spacing: 0.5rem 1rem;
+    margin: 0 auto;
 }
 
-#ranking th {
-    height: 20%;
+#divvistaRank th {
+    height: 7vh;
 }
 
-#ranking td,
+#divvistaRank td {
+    height: 5vh;
+}
+
+#divvistaRank td,
 th {
     vertical-align: middle;
     background-color: white;
@@ -232,7 +271,7 @@ th {
     border-radius: 10px;
 }
 
-#ranking td:first-child {
+#divvistaRank td:first-child {
     width: 70%;
 }
 
@@ -248,7 +287,18 @@ th {
     background-color: #CD7F32 !important;
 }
 
-#divPuntuacion h1 {
+/* Vista divvistaForm*/
+
+#divvistaForm main{
+    height: 60%;
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #ffffffcc;
+    padding: 5% 5%;
+}
+
+#divvistaForm h1 {
     height: 30%;
     margin: 0;
     font-size: 2rem;
@@ -256,13 +306,13 @@ th {
     font-weight: bold;
 }
 
-#divPuntuacion form {
+#divvistaForm form {
     width: 100%;
     height: 70%;
     position: relative;
 }
 
-#divPuntuacion input[type="text"] {
+#divvistaForm input[type="text"] {
     width: 60%;
     height: 30%;
     font-size: 2rem;
@@ -275,7 +325,7 @@ th {
     left: 0%;
 }
 
-#divPuntuacion .puntosMensaje {
+#divvistaForm .puntosMensaje {
     width: 35%;
     height: 30%;
     margin: 0;
@@ -292,7 +342,7 @@ th {
     justify-content: center;
 }
 
-#divPuntuacion input[type="submit"],
+#divvistaForm input[type="submit"],
 #divPuntuacion a {
     width: 30%;
     height: 20%;
