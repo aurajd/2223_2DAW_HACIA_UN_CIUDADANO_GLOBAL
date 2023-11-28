@@ -28,4 +28,40 @@ export class Modelo {
   obtenerPuntuacion () {
     return this.puntuacion
   }
+
+  obtenerProblemas(id){
+    let problemas = [
+      {'texto': "Problema 1 de continente "+id, 'id': 1},
+      {'texto': "Problema 2 de continente "+id, 'id': 2},
+    ]
+    return problemas
+  }
+
+  obtenerConflicto(id){
+    let conflicto = {'texto': "Conflicto 1 de continente "+id, 'id': 3}
+    return conflicto
+  }
+
+  obtenerSoluciones(id){
+    let respuestas = [
+      {'texto': "solucion 1 de pregunta "+id, 'correcto': true},
+      {'texto': "solucion 2 de pregunta "+id, 'correcto': false},
+      {'texto': "solucion 3 de pregunta "+id, 'correcto': true},
+    ]
+    return respuestas
+  }
+
+  obtenerMotivos(id){
+    let respuestas = [
+      {'texto': "Motivo 1 de pregunta "+id, 'id': 1},
+      {'texto': "Motivo 2 de pregunta "+id, 'id': 2},
+      {'texto': "Motivo 3 de pregunta "+id, 'id': 3},
+    ]
+    return respuestas
+  }
+
+  obtenerMotivoCorrecto(id){
+    let idMotivo = 1;
+    return idMotivo;
+  }
 }

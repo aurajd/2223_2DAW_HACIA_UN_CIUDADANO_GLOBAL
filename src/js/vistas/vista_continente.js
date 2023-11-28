@@ -21,15 +21,15 @@ export class VistaContinente extends Vista {
 
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
-    this.boton1 = this.base.querySelector('#problema_1')
+    this.boton1 = this.base.getElementsByClassName('problema')[0]
     /** @type {HTMLElement} */
-    this.boton2 = this.base.querySelector('#problema_2')
+    this.boton2 = this.base.getElementsByClassName('problema')[1]
     /** @type {HTMLElement} */
-    this.boton3 = this.base.querySelector('#problema_3')
+    this.boton3 = this.base.getElementsByClassName('problema')[2]
 
-    this.boton1.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
-    this.boton2.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
-    this.boton3.addEventListener('click', () => this.pulsarBoton(Vista.VISTA6))
+    this.boton1.addEventListener('click', this.prepararSoluciones.bind(this))
+    this.boton2.addEventListener('click', this.prepararSoluciones.bind(this))
+    this.boton3.addEventListener('click', this.prepararMotivos.bind(this))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
@@ -48,6 +48,18 @@ export class VistaContinente extends Vista {
       // Cambiar a Vista2
       this.controlador.verVista(Vista.VISTA2)
     }
+  }
+
+  prepararSoluciones(event){
+    this.controlador.resetearProblema();
+    this.controlador.modificarSoluciones(event.target.id);
+    this.controlador.verVista(Vista.VISTA6)
+  }
+
+  prepararMotivos(event){
+    this.controlador.resetearConflicto();
+    this.controlador.modificarMotivos(event.target.id);
+    this.controlador.verVista(Vista.VISTA8)
   }
 
   /**
@@ -74,7 +86,9 @@ export class VistaContinente extends Vista {
     }
   }
 
-  pulsarBoton (vista) {
-    this.controlador.verVista(vista)
+  modificarPregunta (pregunta, index) {
+    const botonRespuesta = this.base.getElementsByClassName('problema')[index]
+    botonRespuesta.textContent = pregunta.texto
+    botonRespuesta.id = 'idPregunta'+pregunta.id
   }
 }

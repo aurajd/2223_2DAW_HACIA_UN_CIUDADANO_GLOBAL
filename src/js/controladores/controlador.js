@@ -11,8 +11,9 @@ import { VistaMapa } from '../vistas/vista_mapa.js'
 import { VistaRanking } from '../vistas/vista_ranking.js'
 import { VistaContinente } from '../vistas/vista_continente.js'
 import { VistaFormulario } from '../vistas/vista_formulario.js'
-import { VistaPregunta } from '../vistas/vista_pregunta.js'
+import { VistaProblema } from '../vistas/vista_problema.js'
 import { VistaReflexion } from '../vistas/vista_reflexion.js'
+import { VistaConflicto } from '../vistas/vista_conflicto.js'
 
 class Controlador {
   /**
@@ -29,18 +30,21 @@ class Controlador {
     const divvistaCont = document.getElementById('divvistaCont')
     const divvistaRank = document.getElementById('divvistaRank')
     const divvistaForm = document.getElementById('divvistaForm')
-    const divvistaPreg = document.getElementById('divvistaPreg')
+    const divvistaProb = document.getElementById('divvistaProb')
     const divvistaRef = document.getElementById('divvistaRef')
+    const divvistaconf = document.getElementById('divvistaConf')
 
     // Crear instancias de las vistas
     this.vistas = new Map()
     this.vistas.set(Vista.VISTA1, new VistaMenu(this, divvistaMenu))
     this.vistas.set(Vista.VISTA2, new VistaMapa(this, divvistaMapa))
     this.vistas.set(Vista.VISTA3, new VistaRanking(this, divvistaRank))
-    this.vistas.set(Vista.VISTA6, new VistaPregunta(this, divvistaPreg))
+    this.vistas.set(Vista.VISTA6, new VistaProblema(this, divvistaProb))
     this.vistas.set(Vista.VISTA5, new VistaFormulario(this, divvistaForm))
     this.vistas.set(Vista.VISTA4, new VistaContinente(this, divvistaCont))
     this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
+    this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaconf))
+
 
     this.verVista(Vista.VISTA1)
   }
@@ -70,7 +74,9 @@ class Controlador {
     /** @const {number} puntosPorPregunta - Puntos otorgados por acertar una pregunta. */
     const puntosPorPregunta = 10
     this.modelo.aumentarPuntuacion(puntosPorPregunta)
+    this.vistas.get(Vista.VISTA2).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA6).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA4).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA7).actualizarPuntuacionEnInterfaz()
@@ -110,7 +116,7 @@ class Controlador {
     const username = document.getElementById('username').value
     // Expresión regular para verificar que no comienza con números y tiene máximo 30 caracteres
     /** @type {RegExp} */
-    const usernameRegex = /^[a-zA-Z][a-zA-Z\s0-9]{0,29}$/
+    const usernameRegex = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,29}$/
     // Verificar si el nombre de usuario cumple con la expresión regular
     if (!usernameRegex.test(username)) {
       // Mostrar mensaje de error
@@ -121,6 +127,49 @@ class Controlador {
       document.getElementById('usernameError').innerHTML = ''
       return true // Permitir que el formulario se envíe
     }
+  }
+
+  modificarSoluciones (id) {
+    let idProblema = id.slice(-1);
+    // let reflexion = this.modelo.obtenerReflexion(idProblema)
+    let soluciones = this.modelo.obtenerSoluciones(idProblema);
+    let i = 1;
+    soluciones.forEach((element) => {
+      this.vistas.get(Vista.VISTA6).modificarRespuesta(element,i++)
+    });
+  }
+
+  modificarProblemas (id) {
+    let problemas = this.modelo.obtenerProblemas(id);
+    let i = 0;
+    problemas.forEach((element) => {
+      this.vistas.get(Vista.VISTA4).modificarPregunta(element,i++)
+    });
+  }
+
+  modificarConflicto (id) {
+    let conflicto = this.modelo.obtenerConflicto(id);
+    this.vistas.get(Vista.VISTA4).modificarPregunta(conflicto,2)
+  }
+
+  modificarMotivos(id){
+    let idProblema = id.slice(-1);
+    // let reflexion = this.modelo.obtenerReflexion(idProblema)
+    let motivos = this.modelo.obtenerMotivos(idProblema);
+    let motivoCorrecto = this.modelo.obtenerMotivoCorrecto(idProblema);
+    this.vistas.get(Vista.VISTA8).modificarMotivoCorrecto(motivoCorrecto)
+    let i = 1;
+    motivos.forEach((element) => {
+      this.vistas.get(Vista.VISTA8).modificarRespuesta(element,i++)
+    });
+  }
+
+  resetearProblema(){
+    this.vistas.get(Vista.VISTA6).resetearSeleccion();
+  }
+
+  resetearConflicto(){
+    this.vistas.get(Vista.VISTA8).resetearSeleccion();
   }
 }
 
