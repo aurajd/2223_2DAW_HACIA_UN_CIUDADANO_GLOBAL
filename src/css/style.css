@@ -2,32 +2,36 @@
 
 body {
     margin: 0;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;;
 }
 
 a {
     cursor: pointer;
 }
 
-#menu {
-    /* Usamos display flex para colocar las dos opciones centradas en una columna */
+/* vista divvistaMenu */
+
+#divvistaMenu main {
     display: flex;
-    /* Esto indica que los items estarán colocados en columna */
     flex-direction: column;
-    /* Esto que están justificados al centro */
     justify-content: center;
-    /* Esto que están verticalmente centrados */
     align-items: center;
     height: 100vh;
     row-gap: 5%;
-    background-color: #09A8C9;
+    background-image: url("../img/imagenFondo.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-#menu img {
+#divvistaMenu img {
     width: 20%;
+    border-radius: 200px;
 }
 
-#menu div {
-    font-family: 'Poppins', sans-serif;
+#divvistaMenu div {
     width: 100%;
 }
 
@@ -46,7 +50,7 @@ a {
     column-gap: 5%;
 }
 
-#menu a {
+#divvistaMenu a {
     font-size: 3rem;
     padding: 20px;
     text-decoration: none;
@@ -55,15 +59,20 @@ a {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 5px 10px black;
-    /* Centramos el enlace dentro del borde usando display flex */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#menu a:hover {
-    background-color: gray;
+#divvistaMenu a:hover {
+    background-color: #002041;
+    border: 2px solid white;
+    color: white;
+    box-shadow: 5px 5px 10px white;
 }
+
+
+/* Navegador general */
 
 nav {
     font-size: 1rem;
@@ -71,7 +80,6 @@ nav {
     width: 100%;
     height: 10vh;
     background-color: #002041;
-    /* Posicionamiento relativo para colocar la puntuación de forma absoluta */
     position: relative;
 }
 
@@ -86,28 +94,22 @@ nav p {
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    /* El border box para que no se descuadre por el borde */
     box-sizing: border-box;
-    /* display flex para centrar el parrafo vertical y horizontalmente */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-ul {
+nav ul {
     padding: 0;
     margin: 0;
     height: 100%;
     width: 30%;
     margin: auto;
     list-style-type: none;
-    /* La lista tiene un display flex */
     display: flex;
-    /* Dirección fila, los items deben estar en una sola linea */
     flex-flow: row nowrap;
-    /* Centrados verticalmente */
     align-items: center;
-    /* Existe el mismo espacio entre todos los items */
     justify-content: space-evenly;
 }
 
@@ -123,14 +125,16 @@ nav a {
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    /* El border box para que no se descuadre por el borde */
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.mainJuego {
+
+/* vista divvistaMapa */
+
+#divvistaMapa main {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
     max-height: 90vh;
@@ -141,13 +145,62 @@ nav a {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
-    display: flex;
-    /* Esto centra horizontalmente. */
-    justify-content: center;
-    /* Esto centra verticalmente. */
-    align-items: center;
+    position: relative;
 }
+
+#boton_eu1{
+    position: absolute;
+    top: 28%;
+    right: 47%;
+}
+
+#boton_eu2{
+    position: absolute;
+    top: 32%;
+    right: 28%;
+}
+
+#boton_eu3{
+    position: absolute;
+    bottom: 18%;
+    right: 10%;
+}
+
+#boton_eu4{
+    position: absolute;
+    top: 32%;
+    left: 15%;
+}
+
+#boton_eu5{
+    position: absolute;
+    bottom: 25%;
+    left: 28%;
+}
+
+#boton_eu6{
+    position: absolute;
+    top: 50%;
+    right: 47%;
+}
+
+#divvistaMapa img{
+    height: 50px;
+}
+
+.cuadro-texto{
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    height: 50%;
+    width: 13%;
+    border-radius: 20px;
+    padding: 2.5%;
+    background-color: #002041;
+    color: white;
+}
+
+/* */
 
 .mainJuego>div {
     height: 60%;
