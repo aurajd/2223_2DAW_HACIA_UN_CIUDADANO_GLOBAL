@@ -11,41 +11,99 @@ body{
 
 nav{
     height: 10vh;
-    background-color: #002041;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    box-shadow: 0px 0px 15px white;
+    padding: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+nav a{
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav a:hover{
+    background-color: rgba(70, 160, 73, 0.7);
+    box-shadow: 0px 0px 15px white;
 }
 
 main{
     /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
     display: flex;
-    /* Esto centra horizontalmente. */
     justify-content: center;
-    /* Esto centra verticalmente. */
     align-items: center;
-    /* Le ponemos una altura minima del 100% de la altura del dispositivo. 
-    Para permitir que pueda aumentar su altura si lo necesita*/
     min-height: 90vh;
 }
 
 /* Creamos un div dentro del main el cual estará centrado. */
 main>div{
     font-family: 'Roboto', sans-serif;
-    width: 80%;
-    /* Tiene una altura mínima del 80% de la pestaña del navegador */
+    width: 50%;
     min-height: 75vh;
-    margin: 10px 0;
+    margin: 10px 0px;
     padding: 2% 5%;
     border-radius: 20px;
-    /* Utilizamos un color con transparencia para el fondo del div, así se podrá ver la imagen de fondo. */
-    background-color: #002141a0;
-    border: 1px solid white;
-    /* Le ponemos una sombra a la caja el primer numero indica el desplazamiento horizontal, el segundo el vertical, 
-    el tercero el radio de difuminado */
-    box-shadow: 5px 5px 10px black;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid white;
+    box-shadow: 0px 0px 15px white;
     display: flex;
     flex-direction: column;
     /* Esto mete espacio entre items si no ocupan el 100% del espacio */
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
 }
+
+.menu {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    height: 90vh; /* Ocupa el 100% de la altura de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menu h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+img{
+    border-radius: 50px;
+}
+
+.boton {
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    margin: 10px;
+    padding: 35px 75px; /* Ajuste del tamaño del botón */
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 2em; /* Ajuste del tamaño de la fuente */
+    min-width: 40%;
+}
+
+.boton:hover{
+    background-color: rgba(70, 160, 73, 0.7);
+    box-shadow: 0px 0px 15px white;
+}  
 
 .no_lista{
     justify-content: center;
@@ -102,30 +160,12 @@ input[type="file"]{
     color: white;
 }
 
-#menuLogo{
-    width: 35%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #anadirBoton {
     font-family: 'Roboto', sans-serif;
     margin: 20px auto 0;
     width: 10%;
     height: 40px;
     display: block;
-}
-
-#exito{
-    color:green;
-    text-align: center;
-    margin: 20px 0 0 ;
-}
-
-#error{
-    color:red;
-    text-align: center;
-    margin: 20px 0 0 ;
 }
 
 table{
@@ -148,6 +188,7 @@ th,td{
 th{
     background-color: gray;
     padding: 10px 0;
+    color: white;
 }
 
 td{
@@ -250,72 +291,6 @@ td a:hover {
     color: black;
 }
 
-.menu {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    height: 90vh; /* Ocupa el 100% de la altura de la pantalla */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.menu h1 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.botones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.boton {
-    font-family: 'Poppins', sans-serif;
-    text-decoration: none;
-    margin: 10px;
-    padding: 35px 75px; /* Ajuste del tamaño del botón */
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 2em; /* Ajuste del tamaño de la fuente */
-    min-width: 40%;
-}
-
-.boton:hover{
-    background-color: #459e48;
-}
-
-
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 0 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar h1 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.back-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #4caf50;
-    font-size: 1em;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-}
-
 h2{
     color: white;
 }
@@ -357,6 +332,8 @@ h2{
     text-align: center;
 }
 
+
+/*Modificaciones dinámicas por código*/
 .box_shadow_green{
     box-shadow: 0px 0px 30px #4caf50;
 }
@@ -365,6 +342,19 @@ h2{
     box-shadow: 0px 0px 30px red;
 }
 
+#exito{
+    color:#4caf50;
+    text-align: center;
+    margin: 20px 0 0 ;
+    font-family: 'Poppins', sans-serif;
+}
+
+#error{
+    color:red;
+    text-align: center;
+    margin: 20px 0 0 ;
+    font-family: 'Poppins', sans-serif;
+}
 
 /* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
 @media screen and (min-width: 768px) and (max-width: 1025px) {

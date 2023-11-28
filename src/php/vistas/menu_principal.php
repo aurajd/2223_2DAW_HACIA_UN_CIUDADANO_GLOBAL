@@ -1,6 +1,9 @@
 <main>
     <div>
         <h1>Menú administrador</h1>
-        <img src="img/logo.jpeg" alt="Logo" id="menuLogo">
+        <a href="index.php?controller=continente" class="boton">Continentes</a>        
+        <a href="index.php?controller=problema" class="boton">Problemas</a>        
+        <a href="index.php?controller=conflicto" class="boton">Conflictos</a>
+        <a href="index.php?controller=puntuacion" class="boton">Puntuaciones</a>
     </div>
 </main>
