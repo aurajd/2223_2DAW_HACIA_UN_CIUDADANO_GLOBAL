@@ -53,3 +53,6 @@ CREATE TABLE ranking (
 
 ALTER TABLE conflicto
 ADD CONSTRAINT fk_conflicto_motivo FOREIGN KEY (idConflicto, numMotivo) REFERENCES motivo (idConflicto, numMotivo);
+
+ALTER TABLE situacion
+ADD CONSTRAINT fk_situacion_contiente FOREIGN KEY (idContinente) REFERENCES continente (idContinente);
