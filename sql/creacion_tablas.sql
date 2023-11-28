@@ -47,7 +47,7 @@ CREATE TABLE solucion (
 
 CREATE TABLE ranking (
     idPartida MEDIUMINT unsigned AUTO_INCREMENT PRIMARY KEY,
-    puntuacion CHAR(17) NOT NULL,
+    puntuacion tinyint NOT NULL,
     nombreJugador CHAR(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

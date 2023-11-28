@@ -29,9 +29,6 @@
                 <input type='submit' value='Aceptar' name='aceptar'>
                 <a href='index.php?controller=problema&action=gestionar'>Cancelar</a>
             </div>
-            
-            <label for="soluciones">Soluciones (separadas por comas):</label>
-            <input type="text" name="soluciones" id="soluciones" value="<?php echo htmlspecialchars(implode(', ', $dataToView["data"]["soluciones"]), ENT_QUOTES); ?>" placeholder="Ejemplo: Solución 1, Solución 2">
         </form>
     </div>
 </main>
