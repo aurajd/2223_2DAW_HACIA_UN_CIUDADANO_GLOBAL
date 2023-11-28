@@ -25,33 +25,33 @@
             <div class="motivos">
                 <h2>Solución 1</h2>
                 <label for="motivo1">Información:</label>
-                <textarea name="motivos[1]" id="motivo1" placeholder="Escribe aquí"></textarea>      
+                <textarea name="soluciones[1]" id="motivo1" placeholder="Escribe aquí"></textarea>      
                 <label>
-                    <input type="checkbox" name="motivoCorrecto" value="1">
+                    <input type="checkbox" name="correctas[1]" value="1">
                     Es correcto
                 </label>
             </div>
             <div class="motivos">
                 <h2>Solución 2</h2>
-                <label for="motivo1">Información:</label>
-                <textarea name="motivos[1]" id="motivo1" placeholder="Escribe aquí"></textarea>      
+                <label for="motivo2">Información:</label>
+                <textarea name="soluciones[2]" id="motivo2" placeholder="Escribe aquí"></textarea>      
                 <label>
-                    <input type="checkbox" name="motivoCorrecto" value="1">
+                    <input type="checkbox" name="correctas[2]" value="1">
                     Es correcto
                 </label>
             </div>
             <div class="motivos">
                 <h2>Solución 3</h2>
-                <label for="motivo1">Información:</label>
-                <textarea name="motivos[1]" id="motivo1" placeholder="Escribe aquí"></textarea>      
+                <label for="motivo3">Información:</label>
+                <textarea name="soluciones[3]" id="motivo3" placeholder="Escribe aquí"></textarea>      
                 <label>
-                    <input type="checkbox" name="motivoCorrecto" value="1">
+                    <input type="checkbox" name="correctas[3]" value="1">
                     Es correcto
                 </label>
             </div>
             <div class='opciones'>
-                    <button type="button" name='enviar' id='enviar'>Enviar</button>
+                <input type='submit' value='Aceptar' name='aceptar'>
             </div>
         </form>
     </div>
-</main>   
+</main>

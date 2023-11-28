@@ -124,22 +124,23 @@ class problemaController{
      */
     function insertar(){
         $titulo = trim($_POST['titulo']);
-        $informacion = trim($_POST['informacion']); 
+        $informacion = trim($_POST['informacion']);
         $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
-        // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            
-            // Llama al método del modelo para insertar la situación
-            $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen);
-            if($resultado){
+        $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
+        $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
+
+        if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
+            $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
+
+            if ($resultado) {
                 $_GET["tipomsg"] = "exito";
                 $_GET["msg"] = "Problema añadido con éxito.";
-            }
-            else{
+            } else {
                 $_GET["tipomsg"] = "error";
                 $_GET["msg"] = $this->modelo->error;
             }
-        } else{
+        } else {
             $_GET["tipomsg"] = "error";
         }
 

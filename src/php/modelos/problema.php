@@ -26,7 +26,7 @@ class problemaModel extends Conexion{
      * @param array $imagen Información de la imagen asociada al problema.
      * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
      */
-    function insertar_problema($titulo, $informacion, $reflexion, $imagen){
+    function insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas) {
         if (file_exists($imagen["tmp_name"])) {
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
             $nombreImagen = uniqid() . "." . $ext;
@@ -51,6 +51,17 @@ class problemaModel extends Conexion{
             $stmt = $this->conexion->prepare($sql);
             $stmt->bind_param('is', $id, $reflexion);
             $stmt->execute();
+
+            // Si hay soluciones, las insertamos en la tabla 'solucion'
+            if (!empty($soluciones)) {
+                foreach ($soluciones as $key => $solucion) {
+                    $correcta = in_array($key, $correctas) ? 1 : 0;
+                    $sql = "INSERT INTO solucion(idSituacion, numSolucion, textoSolucion, correcta) VALUES (?, ?, ?, ?);";
+                    $stmt = $this->conexion->prepare($sql);
+                    $stmt->bind_param('iisi', $id, $key, $solucion, $correcta);
+                    $stmt->execute();
+                }
+            }
 
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
             if (file_exists($imagen["tmp_name"])) {
