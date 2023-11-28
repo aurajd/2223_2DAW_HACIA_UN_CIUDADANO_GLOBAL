@@ -101,8 +101,6 @@ export class VistaMapa extends Vista {
    */
   mostrarCuadroTexto (cuadroTexto) {
     cuadroTexto.style.display = 'block'
-    cuadroTexto.style.backgroundColor = 'black'
-    cuadroTexto.style.color = 'white'
   }
 
   /**
