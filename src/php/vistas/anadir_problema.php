@@ -25,9 +25,6 @@
                 <div class='opciones'>
                     <input type='submit' value='Enviar' name='enviar'>
                 </div>
-
-                <label for="soluciones">Soluciones (separadas por comas):</label>
-                <input type="text" name="soluciones" id="soluciones" placeholder="Ejemplo: Solución 1, Solución 2">
         </form>
     </div>
 </main>

@@ -242,45 +242,4 @@ class problemaModel extends Conexion{
         $stmt->close();
         return $existe;
     }
-
-    function insertar_problema_con_soluciones($titulo, $informacion, $reflexion, $imagen, $soluciones){
-        $this->conexion->autocommit(false);
-
-        try {
-            $id = $this->insertar_problema($titulo, $informacion, $reflexion, $imagen);
-
-            if ($id) {
-                // Insertar soluciones
-                $this->insertar_soluciones($id, $soluciones);
-
-                $this->conexion->commit();
-                return true;
-            } else {
-                throw new Exception("Error al insertar el problema principal.");
-            }
-        } catch (Exception $e) {
-            $this->conexion->rollback();
-            $this->error = "Error " . $e->getCode() . ": " . $e->getMessage();
-            return false;
-        }
-    }
-
-    function insertar_soluciones($idProblema, $soluciones){
-        foreach ($soluciones as $solucion) {
-            $sql = "INSERT INTO solucion(idProblema, descripcion) VALUES (?, ?);";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('is', $idProblema, $solucion);
-            $stmt->execute();
-            $stmt->close();  // Cerrar la declaración después de ejecutar cada consulta
-        }
-    }
-    
-    
-    function borrar_soluciones($idProblema){
-        $sql = "DELETE FROM solucion WHERE idProblema = ?;";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param('i', $idProblema);
-        $stmt->execute();
-        $stmt->close();
-    }
 }
