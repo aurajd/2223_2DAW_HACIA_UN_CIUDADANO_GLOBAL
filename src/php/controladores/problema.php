@@ -129,24 +129,32 @@ class problemaController{
         $imagen = $_FILES['imagen'];
         $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
         $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
-
-        if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
-            $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
-
-            if ($resultado) {
-                $_GET["tipomsg"] = "exito";
-                $_GET["msg"] = "Problema añadido con éxito.";
+    
+        // Verificar que al menos una opción sea marcada como correcta
+        if (empty($correctas)) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error
+        } else {
+            // Realizar la inserción en la base de datos
+            if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
+                $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
+    
+                if ($resultado) {
+                    $_GET["tipomsg"] = "exito";
+                    $_GET["msg"] = "Problema añadido con éxito.";
+                } else {
+                    $_GET["tipomsg"] = "error";
+                    $_GET["msg"] = $this->modelo->error;
+                }
             } else {
                 $_GET["tipomsg"] = "error";
-                $_GET["msg"] = $this->modelo->error;
             }
-        } else {
-            $_GET["tipomsg"] = "error";
+    
+            $this->mostrar_anadir();
         }
-
-        $this->mostrar_anadir();
     }
-
+    
     
 
 

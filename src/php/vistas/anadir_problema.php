@@ -36,7 +36,7 @@
                 <label for="motivo2">Información:</label>
                 <textarea name="soluciones[2]" id="motivo2" placeholder="Escribe aquí"></textarea>      
                 <label>
-                    <input type="checkbox" name="correctas[2]" value="1">
+                    <input type="checkbox" name="correctas[2]" value="2">
                     Es correcto
                 </label>
             </div>
@@ -45,7 +45,7 @@
                 <label for="motivo3">Información:</label>
                 <textarea name="soluciones[3]" id="motivo3" placeholder="Escribe aquí"></textarea>      
                 <label>
-                    <input type="checkbox" name="correctas[3]" value="1">
+                    <input type="checkbox" name="correctas[3]" value="3">
                     Es correcto
                 </label>
             </div>
