@@ -14,6 +14,8 @@ export class VistaMapa extends Vista {
   constructor (controlador, base) {
     super(controlador, base)
 
+    // this.preguntaContinentes = this.modelo.obtenerPreguntas();
+
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
     this.boton1 = this.base.querySelector('#boton_eu1')
@@ -107,7 +109,7 @@ export class VistaMapa extends Vista {
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
+    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
   }
 
   /**

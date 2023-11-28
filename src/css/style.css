@@ -280,3 +280,7 @@ th {
     top: 50% !important;
     left: 50% !important;
 }
+
+.marcado{
+    background-color: gray;
+}

@@ -39,8 +39,7 @@ export class VistaMenu extends Vista {
      * Maneja el evento de hacer clic en el segundo enlace del menú.
      */
   pulsarEnlace2 () {
-    this.controlador.obtenerRanking();
-    this.controlador.verVista(Vista.VISTA3) // Cambiamos a Vista Ranking
+    this.controlador.mostrarRankingActualizado()
   }
 
   /**

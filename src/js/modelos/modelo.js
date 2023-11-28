@@ -6,7 +6,8 @@ export class Modelo {
      * Constructor de la clase Modelo.
      * Inicializa el mapa y la puntuación.
      */
-  constructor () {
+  constructor (modelo) {
+    this.modelo = modelo; // - Instancia del controlador asociada al modelo.
     /** @type {Map} */
     this.mapa = new Map() // Mapa para almacenar datos, puedes ajustar según necesidades específicas.
     /** @type {number} */
@@ -79,5 +80,68 @@ export class Modelo {
     .then(texto => {
         console.log(texto)
     })
+  }
+
+  async obtenerPreguntas(){
+    const preguntas = []
+    const preguntasEuropa = await this.obtenerPreguntasContinente(1);
+    preguntas.push(preguntasEuropa)
+    const preguntasAsia = await this.obtenerPreguntasContinente(2);
+    preguntas.push(preguntasAsia)
+    const preguntasOceania = await this.obtenerPreguntasContinente(3);
+    preguntas.push(preguntasOceania)
+    const preguntasAmericaNorte = await this.obtenerPreguntasContinente(4);
+    preguntas.push(preguntasAmericaNorte)
+    const preguntasAmericaSur = await this.obtenerPreguntasContinente(5);
+    preguntas.push(preguntasAmericaSur)
+    const preguntasAfrica = await this.obtenerPreguntasContinente(6);
+    preguntas.push(preguntasAfrica)
+    return preguntas;
+  }
+
+  obtenerPreguntasContinente(id){
+    return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random')
+    .then(respuesta => respuesta.json() )
+    .then(objeto => {
+        return objeto
+    })
+
+    // Estructura
+    // [
+    //   {'tipo': 'problema', 
+    //   'titulo': "titulo problema 1",
+    //   'informacion': "informacion problema 1",
+    //   'imagen': null,
+    //   'reflexion': 'reflexion ejemplo 1',
+    //   "respuestas": [
+    //     { "texto" : "respuesta 11" , "correcta" : false },
+    //     { "texto" : "respuesta 12" , "correcta" : false },
+    //     { "texto" : "respuesta 13" , "correcta" : true }
+    //   ]
+    //   },
+    //   {'tipo': 'problema', 
+    //   'texto': "titulo problema 2",
+    //   'informacion': "informacion problema 1",
+    //   'imagen': null,
+    //   'reflexion': 'reflexion ejemplo 1',
+    //   "respuestas": [
+    //     { "texto" : "respuesta 21" , "correcta" : true },
+    //     { "texto" : "respuesta 22" , "correcta" : false },
+    //     { "texto" : "respuesta 23" , "correcta" : true }
+    //   ]
+    //   },
+    //   {'tipo': 'conflicto', 
+    //   'texto': "titulo conflicto 3",
+    //   'informacion': "informacion problema 1",
+    //   'imagen': null,
+    //   'fechaInicio': '2023-11-28',
+    //   'numMotivo' : 1,
+    //   "respuestas": [
+    //     { "texto" : "respuesta 31" , 'numMotivo' : 1},
+    //     { "texto" : "respuesta 32", 'numMotivo' : 2},
+    //     { "texto" : "respuesta 33", 'numMotivo' : 3}
+    //   ]
+    //   },
+    // ]
   }
 }

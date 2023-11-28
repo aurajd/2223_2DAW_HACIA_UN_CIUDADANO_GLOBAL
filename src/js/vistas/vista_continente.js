@@ -35,7 +35,7 @@ export class VistaContinente extends Vista {
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
+    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
   }
 
   /**

@@ -30,7 +30,7 @@ export class VistaProblema extends Vista {
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.verVista(Vista.VISTA3))
+    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
 
     const divOpciones1 = this.base.getElementsByClassName('opcionesContainer')[0]
     this.solucion1 = divOpciones1.getElementsByTagName('button')[0]

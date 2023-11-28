@@ -22,7 +22,9 @@ class Controlador {
        */
   constructor () {
     /** @type {Modelo} */
-    this.modelo = new Modelo()
+    this.modelo = new Modelo(this)
+
+    this.inicializarPreguntas();
 
     // Obtener referencias de las vistas del HTML
     const divvistaMenu = document.getElementById('divvistaMenu')
@@ -45,8 +47,12 @@ class Controlador {
     this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
     this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaconf))
 
-
     this.verVista(Vista.VISTA1)
+  }
+
+  async inicializarPreguntas(){
+    this.preguntas = await this.modelo.obtenerPreguntas()
+    console.log(this.preguntas)
   }
 
   /**
@@ -185,21 +191,9 @@ class Controlador {
     this.modelo.puntuacionPOST(username,puntuacion)
   }
 
-  obtenerRanking(){
-
-    fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
-    .then(respuesta => respuesta.json() )
-    .then(objeto => {
-        for(let [index, fila] of objeto.filas.entries()){
-            console.log(index)
-            console.log(fila)
-            this.vistas.get(Vista.VISTA3).actualizarFila(fila,index)
-        }
-    })
-  }
-
-  actualizarTop5(){
-    this.obtenerRanking()
+  mostrarRankingActualizado(){
+    this.vistas.get(Vista.VISTA3).actualizarRanking()
+    this.verVista(Vista.VISTA3)
   }
 }
 
