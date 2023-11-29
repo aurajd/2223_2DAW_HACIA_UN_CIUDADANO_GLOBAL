@@ -13,9 +13,6 @@ export class VistaContinente extends Vista {
   constructor (controlador, base) {
     super(controlador, base, Vista.VISTA2)
 
-    // Agregar un event listener para el evento de pulsación de tecla
-    document.addEventListener('keydown', this.irAtras.bind(this))
-
     this.h2Nombre = document.querySelector("#nombreContinente") 
     this.imagenContinente = document.querySelector("#imagenInfo")
 
@@ -24,7 +21,7 @@ export class VistaContinente extends Vista {
     this.divsPreguntas = this.base.getElementsByClassName('opcionesContainer')
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
@@ -34,18 +31,6 @@ export class VistaContinente extends Vista {
 
   }
 
-  /**
-   * Función para manejar la pulsación de tecla.
-   * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-   */
-  irAtras (event) {
-    // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
-    if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
-      // Cambiar a Vista2
-      this.controlador.verVista(Vista.VISTA2)
-    }
-  }
-
   async actualizarContinente(preguntas,id){
     const continente = await this.controlador.devolverContinente(id);
     for (let divsPregunta of this.divsPreguntas) {
@@ -53,6 +38,7 @@ export class VistaContinente extends Vista {
     }
     let i = 0;
     this.idContinente = id;
+    console.log(this.idContinente)
     this.modificarImagen(continente["imagen"])
     this.mostrarNombre(continente["nombre"])
     this.mostrarInformacion(continente["informacion"])

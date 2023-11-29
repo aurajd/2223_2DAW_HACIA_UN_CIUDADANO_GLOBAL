@@ -124,12 +124,14 @@ export class VistaMapa extends Vista {
     cuadroTexto.style.display = 'none'
   }
 
-  async modificarPreguntas(event){
+  modificarPreguntas(event){
     let id = event.target.id.slice(-1)-1
-    await this.controlador.cambiarContinentes(id);
+    this.controlador.cambiarContinentes(id);
   }
 
   eliminarContinente(idContinente){
-    eval('this.boton' + (idContinente+1)).remove()
+    const boton = 'this.boton' + (idContinente+1)
+    console.log(boton)
+    eval(boton).remove()
   }
 }

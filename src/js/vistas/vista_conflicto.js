@@ -20,11 +20,9 @@ export class VistaConflicto extends Vista {
 
     this.divInfoConflicto = document.querySelector("#informacionConflicto")
     this.imagenConflicto = document.querySelector("#imagenConflicto")
-    // Agregar un event listener para el evento de pulsación de tecla
-    document.addEventListener('keydown', this.irAtras.bind(this))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
@@ -47,6 +45,7 @@ export class VistaConflicto extends Vista {
   }
 
   actualizarConflicto(conflicto,idContinente,idConflicto){
+    console.log(idConflicto)
     this.resetearSeleccion();
     this.restaurarBotones(this.motivo1)
     this.restaurarBotones(this.motivo2)
@@ -60,6 +59,7 @@ export class VistaConflicto extends Vista {
     this.fecha = conflicto["fechaInicio"]
     this.idContinente = idContinente;
     this.idConflicto = idConflicto;
+    console.log(this.idContinente)
     for (let [index,solucion] of conflicto["respuestas"].entries()){
       this.modificarRespuesta(index,solucion,conflicto["numMotivo"])
     };
@@ -103,18 +103,6 @@ export class VistaConflicto extends Vista {
   }
 
   /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
-  irAtras (event) {
-    // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
-    if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
-      // Cambiar a Vista2
-      this.controlador.verVista(Vista.VISTA2)
-    }
-  }
-
-  /**
      * Función para mostrar preguntas en la vista de la pregunta.
      * @param {string} pregunta - Pregunta a mostrar.
      */
@@ -146,8 +134,8 @@ export class VistaConflicto extends Vista {
         eval('this.motivo' + this.respuestaSeleccionada).classList.add ("respuestaIncorrecta")
         console.log('Respuesta incorrecta')
       }
+      console.log(this.idContinente)
       this.controlador.eliminarFila(this.idContinente,this.idConflicto)
-      this.controlador.comprobarFilasContinente(this.idContinente)
     }
   }
 
@@ -168,7 +156,8 @@ export class VistaConflicto extends Vista {
   }
 
   continuar(){
-    this.controlador.cambiarFecha(this.fecha)
+    console.log(this.idConflicto)
+    this.controlador.cambiarFecha(this.fecha, this.idContinente)
     this.resetearSeleccion();
     this.controlador.verVista(Vista.VISTA9)
   }

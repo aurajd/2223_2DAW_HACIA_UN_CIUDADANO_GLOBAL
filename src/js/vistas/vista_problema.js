@@ -20,11 +20,9 @@ export class VistaProblema extends Vista {
 
     this.divInfoProblema = document.querySelector("#informacionProblema")
     this.imagenProblema = document.querySelector("#imagenProblema")
-    // Agregar un event listener para el evento de pulsación de tecla
-    document.addEventListener('keydown', this.irAtras.bind(this))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
@@ -111,18 +109,6 @@ export class VistaProblema extends Vista {
   }
 
   /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
-  irAtras (event) {
-    // Verificar si la tecla presionada es 'b' y si también se presionó la tecla 'Ctrl'
-    if (event.key === 'b' && (event.ctrlKey || event.metaKey)) {
-      // Cambiar a Vista2
-      this.controlador.verVista(Vista.VISTA2)
-    }
-  }
-
-  /**
      * Función para mostrar preguntas en la vista de la pregunta.
      * @param {string} pregunta - Pregunta a mostrar.
      */
@@ -167,7 +153,6 @@ export class VistaProblema extends Vista {
       }
       
       this.controlador.eliminarFila(this.idContinente,this.idConflicto)
-      this.controlador.comprobarFilasContinente(this.idContinente)
     }
   }
 
@@ -185,7 +170,7 @@ export class VistaProblema extends Vista {
   }
 
   continuar(){
-    this.controlador.cambiarReflexion(this.reflexion)
+    this.controlador.cambiarReflexion(this.reflexion,this.idContinente)
     this.resetearSeleccion();
     this.controlador.verVista(Vista.VISTA7)
   }

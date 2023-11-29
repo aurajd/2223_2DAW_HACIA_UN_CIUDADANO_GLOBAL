@@ -6,16 +6,19 @@ export class VistaFecha extends Vista {
 
     this.divFecha = document.getElementById("fraseFecha")
     this.botonVolver = document.getElementById("botonVolverFecha")
-    this.botonVolver.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
+    this.botonVolver.addEventListener('click', () => this.controlador.comprobarContinentesCambiar(this.idContinente))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
   }
 
-  actualizarFecha(fecha){
+  actualizarFecha(fecha, idContinente){
+    console.log(idContinente)
+    this.idContinente = idContinente
+    console.log(this.idContinente)
     let date = new Date(fecha)
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
     this.divFecha.textContent = "El conflicto comenzó el "+date.toLocaleDateString("es-ES", options)

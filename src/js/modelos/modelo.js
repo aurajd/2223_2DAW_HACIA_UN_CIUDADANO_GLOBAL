@@ -99,6 +99,17 @@ export class Modelo {
     return longitud<1;
   }
 
+  async comprobarContinentesVacio(){
+    let preguntas = await this.preguntas
+    for (const pregunta of preguntas) {
+      let longitud = pregunta.length
+      if(longitud>0){
+        return false
+      }
+    }
+    return true;
+  }
+
   async eliminarFilaContinente(idContinente){
     let preguntas = await this.preguntas
     console.log(preguntas)

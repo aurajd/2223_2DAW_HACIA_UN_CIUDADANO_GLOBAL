@@ -97,7 +97,7 @@ class Controlador {
   /**
        * Maneja la validación del formulario.
        */
-  manejarValidacionFormulario () {
+  async manejarValidacionFormulario () {
     // Obtener el valor del nombre de usuario
     /** @type {string} */
     const username = document.getElementById('username').value
@@ -116,7 +116,6 @@ class Controlador {
       alert('Formulario válido.')
       this.anadirPuntuacion(username,puntuacion)
       this.mostrarRankingActualizado()
-      this.verVista(Vista.VISTA3)
     } else {
       alert('Formulario no válido.')
     }
@@ -154,6 +153,7 @@ class Controlador {
   }
 
   async cambiarMotivos(idContinente,idConflicto){
+    console.log(idContinente)
     const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
     this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
@@ -173,12 +173,13 @@ class Controlador {
     return continente
   }
 
-  cambiarFecha(fecha){
-    this.vistas.get(Vista.VISTA9).actualizarFecha(fecha)
+  cambiarFecha(fecha,idContinente){
+    console.log(idContinente)
+    this.vistas.get(Vista.VISTA9).actualizarFecha(fecha,idContinente)
   }
 
-  cambiarReflexion(reflexion){
-    this.vistas.get(Vista.VISTA7).actualizarReflexion(reflexion)
+  cambiarReflexion(reflexion,idContinente){
+    this.vistas.get(Vista.VISTA7).actualizarReflexion(reflexion,idContinente)
   }
   
   eliminarFila(idContinente,idFila){
@@ -186,10 +187,50 @@ class Controlador {
   }
 
   async comprobarFilasContinente(idContinente){
-    if(await this.modelo.comprobarFilasContinenteVacio(idContinente)){
+    const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
+    if(continenteVacio){
       this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+      this.verVista(Vista.VISTA2)
+    }else{
+      this.cambiarContinentes(idContinente)
     }
   }
+
+  async comprobarContinentesCambiar(idContinente){
+    const continentesVacios = await this.modelo.comprobarContinentesVacio()
+    if(continentesVacios){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.comprobarFilasContinente(idContinente);
+    }
+  }
+
+  async comprobarContinentesMapa(idContinente){
+    const continentesVacios = await this.modelo.comprobarContinentesVacio()
+    if(continentesVacios){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.comprobarFilasMapa(idContinente);
+    }
+  }
+
+  async comprobarFilasMapa(idContinente){
+    const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
+    if(continenteVacio){
+      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+    }
+    this.verVista(Vista.VISTA2)
+
+  }
+
+  async volverMapaComprobar(){
+    if(await this.modelo.comprobarContinentesVacio()){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.verVista(Vista.VISTA2)
+    }
+  }
+  
 }
 
 /** Inicializa el Controlador cuando la ventana se carga completamente. */
