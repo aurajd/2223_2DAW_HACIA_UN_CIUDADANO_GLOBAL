@@ -50,8 +50,26 @@ class problemaController{
     function listar(){
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
-        return $this->modelo->listar();
+    
+        // Verifica si se ha enviado el formulario y si se proporcionó el ID del continente
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['continentes'])) {
+            $idContinente = $_POST['continentes'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            // Si no se ha enviado el formulario, muestra la lista general
+            return $this->modelo->listar();
+        }
     }
+    
 
     /**
      * Muestra información detallada de un problema concreto.
@@ -78,9 +96,27 @@ class problemaController{
     function gestionar(){
         $this->view = "gestionar_problema";
         $this->titulo = "Gestionar problema";
-        return $this->modelo->listar();
+    
+        // Verifica si se ha enviado el formulario y si se proporcionó el ID del continente
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['continentes'])) {
+            $idContinente = $_POST['continentes'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
     }
-
+    
     /**
      * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
      *

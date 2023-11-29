@@ -116,14 +116,24 @@ class problemaModel extends Conexion{
      *
      * @return array Lista de problemas.
      */
-    function listar(){
+    // ... (código existente)
+
+    /**
+     * Obtiene la lista de todos los problemas.
+     *
+     * @return array Lista de problemas.
+     */
+    function listar($idContinente) {
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
                 FROM situacion s
-                INNER JOIN problema p ON s.idSituacion = p.idProblema;";
-        $resultado = $this->conexion->query($sql);
-        $this->conexion->close();
+                INNER JOIN problema p ON s.idSituacion = p.idProblema
+                WHERE s.idContinente = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i', $idContinente);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $lista = $resultado->fetch_all(MYSQLI_ASSOC);
-        $resultado->close();
+        $stmt->close();
         return $lista;
     }
     
