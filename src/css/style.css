@@ -80,21 +80,6 @@ nav {
     width: 100%;
     height: 10vh;
     background-color: #002041;
-    position: relative;
-}
-
-nav p {
-    position: absolute;
-    left: 2%;
-    top: 20%;
-    height: 60%;
-    min-width: 10%;
-    margin: 0;
-    color: black;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,7 +90,7 @@ nav ul {
     margin: 0;
     height: 100%;
     width: 30%;
-    margin: auto;
+    margin: 0  auto;
     list-style-type: none;
     display: flex;
     flex-flow: row nowrap;
@@ -129,6 +114,10 @@ nav a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.puntosMensaje{
+    cursor: default;
 }
 
 
@@ -304,13 +293,21 @@ th {
 
 /* Vista divvistaForm*/
 
-#divvistaForm main{
-    height: 60%;
-    width: 60%;
+#divvistaForm main {
+    height: 70vh;
+    width: 60%; /* Cambiado a 60% para dejar espacio al menú */
     border: 2px solid black;
     border-radius: 20px;
     background-color: #ffffffcc;
     padding: 5% 5%;
+    margin: 0 auto;
+    display: flex;
+}
+
+#divvistaForm div {
+    height: 80%; 
+    width: 80%; 
+    margin: 0 auto; 
 }
 
 #divvistaForm h1 {
@@ -328,38 +325,26 @@ th {
 
 #divvistaForm input[type="text"] {
     width: 60%;
-    height: 30%;
+    height: 40px;
     font-size: 2rem;
     text-align: center;
     border-radius: 15px;
     background-color: white;
-    display: inline-block;
-    position: absolute;
-    top: 0%;
-    left: 0%;
 }
 
 #divvistaForm .puntosMensaje {
     width: 35%;
-    height: 30%;
-    margin: 0;
+    height: 40px;
     font-size: 2rem;
     background-color: #09A8C9;
     border: 2px solid black;
     border-radius: 15px;
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    /* Usamos inline-flex para poder centrarlo vertical y horizontalmente pero tambien poder darle width y height */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #divvistaForm input[type="submit"],
 #divPuntuacion a {
     width: 30%;
-    height: 20%;
+    height: 40px;
     font-size: 2rem;
     text-decoration: none;
     color: black;
@@ -370,18 +355,11 @@ th {
 
 #divvistaForm input[type="submit"] {
     font-family: 'Roboto', sans-serif;
-    position: absolute;
-    bottom: 0%;
-    left: 15%;
 }
 
 #divvistaForm a {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    bottom: 0%;
-    right: 15%;
 }
 
 #divvistaForm input:hover[type="submit"],
