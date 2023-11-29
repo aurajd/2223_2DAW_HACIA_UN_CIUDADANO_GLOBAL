@@ -108,8 +108,8 @@ class problemaController{
         $this->titulo = "Gestionar problema";
     
         // Verifica si se ha enviado el formulario y si se proporcionó el ID del continente
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['continentes'])) {
-            $idContinente = $_POST['continentes'];
+        if (isset($_POST['continente']) || isset($_GET['continente']) ) {
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
     
             // Validar que el ID del continente sea un número
             if (!is_numeric($idContinente)) {
@@ -169,6 +169,12 @@ class problemaController{
      * @return void
      */
     function insertar(){
+        $idContinente = $_GET['continente'];
+        if(!is_numeric($idContinente)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "La id del continente no es válida.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error 
+        }
         $titulo = trim($_POST['titulo']);
         $informacion = trim($_POST['informacion']);
         $reflexion = trim($_POST['reflexion']);
@@ -184,7 +190,7 @@ class problemaController{
         } else {
             // Realizar la inserción en la base de datos
             if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
-                $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
+                $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas,$idContinente);
     
                 if ($resultado) {
                     $_GET["tipomsg"] = "exito";

@@ -3,7 +3,7 @@
         <h1>OPCIONES PROBLEMA</h1>
         <form id="formulario" method="post">
             <label for="continente">Seleccionar continente:</label>
-            <select name="continentes" id="continente">
+            <select name="continente" id="continente">
                 <option value="1">Europa</option>
                 <option value="2">Asia</option>
                 <option value="3">Oceanía</option>

@@ -5,7 +5,7 @@
                 <?php echo $_GET["msg"] ?>
             </p>
         <?php } ?>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"] ?>'>
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"] ?>&continente=<?php echo $_GET["continente"]?>'>
             <label for='titulo'>Título:</label>
             <input type='text' name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>'>
             
@@ -27,7 +27,7 @@
             <input type='file' name='imagen'>
             <div class='opciones'>
                 <input type='submit' value='Aceptar' name='aceptar'>
-                <a href='index.php?controller=problema&action=gestionar'>Cancelar</a>
+                <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"]?>'>Cancelar</a>
             </div>
         </form>
     </div>
