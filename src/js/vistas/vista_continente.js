@@ -16,26 +16,22 @@ export class VistaContinente extends Vista {
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    // Nombre para mostrar en la vista continente
-    this.mostrarInformacion('NOMBRE DEL CONTINENTE')
+    this.h2Nombre = document.querySelector("#nombreContinente") 
+    this.imagenContinente = document.querySelector("#imagenInfo")
 
-    // Coger referencias del interfaz
-    /** @type {HTMLElement} */
-    this.boton1 = this.base.getElementsByClassName('problema')[0]
-    /** @type {HTMLElement} */
-    this.boton2 = this.base.getElementsByClassName('problema')[1]
-    /** @type {HTMLElement} */
-    this.boton3 = this.base.getElementsByClassName('problema')[2]
+    this.infoContinente = document.querySelector("#informacionContinente")
 
-    this.boton1.addEventListener('click', this.prepararSoluciones.bind(this))
-    this.boton2.addEventListener('click', this.prepararSoluciones.bind(this))
-    this.boton3.addEventListener('click', this.prepararMotivos.bind(this))
+    this.divsPreguntas = this.base.getElementsByClassName('opcionesContainer')
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
+
+    this.idContinente = ''
+
+
   }
 
   /**
@@ -50,15 +46,50 @@ export class VistaContinente extends Vista {
     }
   }
 
+  async actualizarContinente(preguntas,id){
+    const continente = await this.controlador.devolverContinente(id);
+    for (let divsPregunta of this.divsPreguntas) {
+      divsPregunta.textContent= ''
+    }
+    let i = 0;
+    this.idContinente = id;
+    this.modificarImagen(continente["imagen"])
+    this.mostrarNombre(continente["nombre"])
+    this.mostrarInformacion(continente["informacion"])
+    for (let [index,pregunta] of preguntas.entries()){
+      const btnPregunta = document.createElement("button");
+      btnPregunta.classList.add('problema')
+      btnPregunta.textContent = pregunta["titulo"]
+      if(pregunta["tipo"]=="problema"){
+        this.prepararProblema(btnPregunta,index)
+      }else{
+        this.prepararConflicto(btnPregunta,index)
+      }
+      this.divsPreguntas[i++].appendChild(btnPregunta)
+    };
+  }
+
+  prepararProblema(btnPregunta,index){
+    btnPregunta.id = "idProblema"+index
+    btnPregunta.onclick = this.prepararSoluciones.bind(this)
+  }
+
+  prepararConflicto(btnPregunta,index){
+    btnPregunta.id = "idConflicto"+index
+    btnPregunta.onclick = this.prepararMotivos.bind(this)
+  }
+
   prepararSoluciones(event){
+    let idProblema = event.target.id.slice(-1)
     this.controlador.resetearProblema();
-    this.controlador.modificarSoluciones(event.target.id);
+    this.controlador.cambiarSoluciones(this.idContinente,idProblema);
     this.controlador.verVista(Vista.VISTA6)
   }
 
   prepararMotivos(event){
+    let idConflicto = event.target.id.slice(-1)
     this.controlador.resetearConflicto();
-    this.controlador.modificarMotivos(event.target.id);
+    this.controlador.modificarMotivos(idConflicto);
     this.controlador.verVista(Vista.VISTA8)
   }
 
@@ -66,17 +97,26 @@ export class VistaContinente extends Vista {
    * Función para mostrar Nombres en la vista continente.
    * @param {string} Nombre - Nombre a mostrar.
    */
-  mostrarInformacion (Nombre) {
-    const NombreElemento = document.createElement('h2')
-    NombreElemento.textContent = Nombre
-
-    const NombreContainer = this.base.querySelector('#nombreContinente')
-    NombreContainer.appendChild(NombreElemento)
-
-    const NombreContainer2 = this.base.querySelector('#infoContinente')
-    NombreContainer2.textContent = Nombre
-    NombreContainer.appendChild(NombreElemento)
+  mostrarNombre(nombre) {
+    this.h2Nombre.textContent = nombre
   }
+
+  mostrarInformacion (info) {
+    console.log(info)
+    this.infoContinente.textContent = info
+  }
+
+  modificarImagen(img){
+    if(img === null){
+      this.imagenContinente.style.display = "none";
+    }else{
+      this.imagenContinente.src = "img/"+img
+      // this.imagenContinente.style = "block";
+    }
+    console.log(this.imagenContinente)
+
+  }
+
 
   actualizarPuntuacionEnInterfaz () {
     const puntuacionElemento = this.base.querySelector('.puntosMensaje')
@@ -84,11 +124,5 @@ export class VistaContinente extends Vista {
       const puntuacionActual = this.controlador.obtenerPuntuacionActual()
       puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
     }
-  }
-
-  modificarPregunta (pregunta, index) {
-    const botonRespuesta = this.base.getElementsByClassName('problema')[index]
-    botonRespuesta.textContent = pregunta.texto
-    botonRespuesta.id = 'idPregunta'+pregunta.id
   }
 }

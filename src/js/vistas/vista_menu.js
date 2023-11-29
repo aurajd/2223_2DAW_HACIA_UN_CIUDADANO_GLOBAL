@@ -16,11 +16,11 @@ export class VistaMenu extends Vista {
 
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
-    this.enlace1 = this.base.querySelectorAll('p')[0]
+    this.enlace1 = this.base.querySelectorAll('a')[0]
     /** @type {HTMLElement} */
-    this.enlace2 = this.base.querySelectorAll('p')[1]
+    this.enlace2 = this.base.querySelectorAll('a')[1]
     /** @type {HTMLElement} */
-    this.enlace3 = this.base.querySelectorAll('p')[2]
+    this.enlace3 = this.base.querySelectorAll('a')[2]
 
     // Asociar eventos
     this.enlace1.onclick = this.pulsarEnlace1.bind(this)

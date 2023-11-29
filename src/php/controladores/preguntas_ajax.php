@@ -45,5 +45,16 @@ class preguntas_ajaxController{
         echo json_encode($objeto);
         die();
     }
+
+    function devolver_info_continentes(){
+        $continentes = $this->modelo->devolver_info_continentes();
+        $objeto = new stdClass();
+        $objeto = [];
+        foreach ($continentes as $fila) {
+            array_push($objeto,$fila);
+        }
+        echo json_encode($objeto);
+        die();
+    }
         
 }

@@ -40,16 +40,12 @@ export class VistaRanking extends Vista {
     puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
   }
 
-  actualizarRanking(){
-    fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
-    .then(respuesta => respuesta.json() )
-    .then(objeto => {
-        for(let [index, fila] of objeto.filas.entries()){
-            console.log(index)
-            console.log(fila)
-            this.actualizarFila(fila,index)
-        }
-    })
+  actualizarRanking(ranking){
+    for(let [index, fila] of ranking.filas.entries()){
+        console.log(index)
+        console.log(fila)
+        this.actualizarFila(fila,index)
+    }
   }
   
   actualizarFila(fila,index){

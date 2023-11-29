@@ -30,79 +30,54 @@ export class VistaMapa extends Vista {
     /** @type {HTMLElement} */
     this.boton6 = this.base.querySelector('#boton_eu6')
 
+    this.cuadrosTexto = []
+
     // Crear cuadros de texto
     /** @type {HTMLElement} */
-    this.cuadroTexto1 = this.crearCuadroTexto('Información detallada sobre el primer botón')
-    this.cuadroTexto1.id = "texto_eur"
-    /** @type {HTMLElement} */
-    this.cuadroTexto2 = this.crearCuadroTexto('Información detallada sobre el segundo botón')
-    this.cuadroTexto2.id = "texto_asi"
+    this.crearCuadroTexto(0,"texto_eur",this.boton1)
 
     /** @type {HTMLElement} */
-    this.cuadroTexto3 = this.crearCuadroTexto('Información detallada sobre el tercer botón')
-    this.cuadroTexto3.id = "texto_oce"
+    this.crearCuadroTexto(1,"texto_asi",this.boton2)
 
     /** @type {HTMLElement} */
-    this.cuadroTexto4 = this.crearCuadroTexto('Información detallada sobre el cuarto botón')
-    this.cuadroTexto4.id = "texto_ame_nor"
+    this.crearCuadroTexto(2,"texto_oce",this.boton3)
 
     /** @type {HTMLElement} */
-    this.cuadroTexto5 = this.crearCuadroTexto('Información detallada sobre el quinto botón')
-    this.cuadroTexto5.id = "texto_ame_sur"
+    this.crearCuadroTexto(3,"texto_ame_nor",this.boton4)
 
     /** @type {HTMLElement} */
-    this.cuadroTexto6 = this.crearCuadroTexto('Información detallada sobre el sexto botón')
-    this.cuadroTexto6.id = "texto_afr"
+    this.crearCuadroTexto(4,"texto_ame_sur",this.boton5)
 
-    // Agregar cuadros de texto al DOM
-    this.base.appendChild(this.cuadroTexto1)
-    this.base.appendChild(this.cuadroTexto2)
-    this.base.appendChild(this.cuadroTexto3)
-    this.base.appendChild(this.cuadroTexto4)
-    this.base.appendChild(this.cuadroTexto5)
-    this.base.appendChild(this.cuadroTexto6)
+    /** @type {HTMLElement} */
+    this.crearCuadroTexto(5,"texto_afr",this.boton6)
 
-    // Asociar eventos
-    this.boton1.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto1))
-    this.boton1.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto1))
     this.boton1.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el primer botón
 
-    this.boton2.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto2))
-    this.boton2.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto2))
+
     this.boton2.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el segundo botón
 
-    this.boton3.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto3))
-    this.boton3.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto3))
+
     this.boton3.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el tercer botón
 
-    this.boton4.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto4))
-    this.boton4.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto4))
+
     this.boton4.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el cuarto botón
 
-    this.boton5.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto5))
-    this.boton5.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto5))
+    
     this.boton5.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el quinto botón
 
-    this.boton6.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadroTexto6))
-    this.boton6.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadroTexto6))
+    
     this.boton6.addEventListener('click', (event) => {
       this.modificarPreguntas(event);
-      this.pulsarBoton(Vista.VISTA4)
     }) // Cambiamos a Vista Continente para el sexto botón
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
@@ -117,12 +92,20 @@ export class VistaMapa extends Vista {
    * @param {string} texto - Texto para el cuadro de texto.
    * @returns {HTMLElement} - Cuadro de texto creado.
    */
-  crearCuadroTexto (texto) {
+  async crearCuadroTexto (idContinente,idDiv, boton) {
     const cuadroTexto = document.createElement('div')
     cuadroTexto.classList.add('cuadro-texto')
-    cuadroTexto.textContent = texto
+    const continente = await this.controlador.devolverContinente(idContinente)
+    cuadroTexto.textContent = continente["resumenInfo"]
     cuadroTexto.style.display = 'none'
-    return cuadroTexto
+    cuadroTexto.id = idDiv
+    this.base.appendChild(cuadroTexto)
+    this.cuadrosTexto.push(cuadroTexto)
+
+
+    // Asociar eventos
+    boton.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadrosTexto[idContinente]))
+    boton.addEventListener('mouseleave', () => this.ocultarCuadroTexto(this.cuadrosTexto[idContinente]))
   }
 
   /**
@@ -141,14 +124,6 @@ export class VistaMapa extends Vista {
     cuadroTexto.style.display = 'none'
   }
 
-  /**
-   * Maneja el evento de hacer clic en un botón.
-   * @param {Symbol} vista - Vista a la que se cambiará.
-   */
-  pulsarBoton (vista) {
-    this.controlador.verVista(vista)
-  } 
-
   actualizarPuntuacionEnInterfaz () {
     const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     if (puntuacionElemento) {
@@ -157,9 +132,9 @@ export class VistaMapa extends Vista {
     }
   }
 
-  modificarPreguntas(event){
-    let id = event.target.id.slice(-1)
-    this.controlador.modificarProblemas(id);
-    this.controlador.modificarConflicto(id);
+  async modificarPreguntas(event){
+    let id = event.target.id.slice(-1)-1
+    await this.controlador.cambiarProblemas(id);
+    this.controlador.verVista(Vista.VISTA4)
   }
 }

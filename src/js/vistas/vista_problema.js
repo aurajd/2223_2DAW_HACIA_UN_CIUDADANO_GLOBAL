@@ -19,6 +19,9 @@ export class VistaProblema extends Vista {
     this.respuestasSeleccionadas = [false,false,false]
 
     this.idContinente = 0;
+
+    this.divInfoProblema = document.querySelector("#informacionProblema")
+    this.imagenProblema = document.querySelector("#imagenProblema")
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
@@ -44,7 +47,8 @@ export class VistaProblema extends Vista {
     this.solucion2.onclick = this.seleccionarRespuestaProblema.bind(this);
     this.solucion3.onclick = this.seleccionarRespuestaProblema.bind(this);
 
-
+    this.idContinente = ''
+    this.idProblema = ''
     const botonResponder = document.getElementById('botonAceptar')
     botonResponder.addEventListener('click',this.responder)
   }
@@ -66,19 +70,41 @@ export class VistaProblema extends Vista {
     Rest.post('js/servicios/ajax1.php', params, this.verResultadoAJAX)
   }
 
-  modificarRespuesta (respuesta, id) {
-    const botonRespuesta = document.getElementById('solucion'+id)
-    botonRespuesta.textContent = respuesta.texto
-    if(respuesta.correcto){
-      this.respuestasCorrectas[id-1] = true
-    } else{
-      this.respuestasCorrectas[id-1] = false
+  actualizarProblema(problema,idContinente,idProblema){
+    this.resetearSeleccion();
+    this.modificarInformacion(problema["informacion"]);
+    this.modificarImagen(problema["imagen"])
+    let i = 0;
+    this.idContinente = idContinente;
+    this.idProblema = idProblema;
+
+    for (let [index,solucion] of problema["respuestas"].entries()){
+      this.modificarRespuesta(index,solucion)
+    };
+  }
+
+  modificarInformacion(info){
+    this.divInfoProblema.textContent = info
+  }
+
+  modificarImagen(img){
+    if(img == null){
+      this.imagenProblema.style.display = "none";
+    }else{
+      this.imagenProblema.src = "img/"+img
+      this.imagenProblema.style.display = "block";
     }
   }
 
-  
-  modificarInformacionProblema(problema){
-    
+  modificarRespuesta (id,solucion) {
+    let idBoton = id+1
+    const botonRespuesta = document.getElementById('solucion'+idBoton)
+    botonRespuesta.textContent = solucion["textoSolucion"]
+    if(solucion["correcta"]){
+      this.respuestasCorrectas[id] = true
+    } else{
+      this.respuestasCorrectas[id] = false
+    }
   }
 
   resetearSeleccion (){

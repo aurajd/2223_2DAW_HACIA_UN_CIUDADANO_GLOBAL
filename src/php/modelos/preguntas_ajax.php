@@ -29,6 +29,14 @@ class preguntas_ajaxModel extends Conexion{
         return $problemas;
     }
 
+    function devolver_info_continentes(){
+        $sql = "SELECT idContinente, nombre, informacion, resumenInfo, imagen 
+        FROM continente;";
+        $resultado = $this->conexion->query($sql);
+        $continente = $resultado->fetch_all(MYSQLI_ASSOC);
+        return $continente;
+    }
+
     function devolver_soluciones($id){
         try {
             // Consulta SQL para insertar en la tabla 'situacion'

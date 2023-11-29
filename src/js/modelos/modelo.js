@@ -12,6 +12,9 @@ export class Modelo {
     this.mapa = new Map() // Mapa para almacenar datos, puedes ajustar según necesidades específicas.
     /** @type {number} */
     this.puntuacion = 0 // Puntuación inicializada en 0.
+
+    this.preguntas = this.obtenerPreguntas();
+    this.infoContinentes = this.obtenerInfoContinentes();
   }
 
   /**
@@ -29,38 +32,6 @@ export class Modelo {
   obtenerPuntuacion () {
     return this.puntuacion
   }
-
-  obtenerProblemas(id){
-    let problemas = [
-      {'texto': "Problema 1 de continente "+id, 'id': 1},
-      {'texto': "Problema 2 de continente "+id, 'id': 2},
-    ]
-    return problemas
-  }
-
-  obtenerConflicto(id){
-    let conflicto = {'texto': "Conflicto 1 de continente "+id, 'id': 3}
-    return conflicto
-  }
-
-  obtenerSoluciones(id){
-    let respuestas = [
-      {'texto': "solucion 1 de pregunta "+id, 'correcto': true},
-      {'texto': "solucion 2 de pregunta "+id, 'correcto': false},
-      {'texto': "solucion 3 de pregunta "+id, 'correcto': true},
-    ]
-    return respuestas
-  }
-
-  obtenerMotivos(id){
-    let respuestas = [
-      {'texto': "Motivo 1 de pregunta "+id, 'id': 1},
-      {'texto': "Motivo 2 de pregunta "+id, 'id': 2},
-      {'texto': "Motivo 3 de pregunta "+id, 'id': 3},
-    ]
-    return respuestas
-  }
-
   obtenerMotivoCorrecto(id){
     let idMotivo = 1;
     return idMotivo;
@@ -81,22 +52,40 @@ export class Modelo {
         console.log(texto)
     })
   }
+  
+  obtenerInfoContinentes(){
+    return fetch('./index.php?controller=preguntas_ajax&action=devolver_info_continentes')
+    .then(respuesta => respuesta.json() )
+    .then(objeto => {
+        return objeto
+    })
+  }
+
 
   async obtenerPreguntas(){
     const preguntas = []
-    const preguntasEuropa = await this.obtenerPreguntasContinente(1);
-    preguntas.push(preguntasEuropa)
-    const preguntasAsia = await this.obtenerPreguntasContinente(2);
-    preguntas.push(preguntasAsia)
-    const preguntasOceania = await this.obtenerPreguntasContinente(3);
-    preguntas.push(preguntasOceania)
-    const preguntasAmericaNorte = await this.obtenerPreguntasContinente(4);
-    preguntas.push(preguntasAmericaNorte)
-    const preguntasAmericaSur = await this.obtenerPreguntasContinente(5);
-    preguntas.push(preguntasAmericaSur)
-    const preguntasAfrica = await this.obtenerPreguntasContinente(6);
-    preguntas.push(preguntasAfrica)
+    preguntas.push(await this.obtenerPreguntasContinente(1))
+    preguntas.push(await this.obtenerPreguntasContinente(2))
+    preguntas.push(await this.obtenerPreguntasContinente(3))
+    preguntas.push(await this.obtenerPreguntasContinente(4))
+    preguntas.push(await this.obtenerPreguntasContinente(5))
+    preguntas.push(await this.obtenerPreguntasContinente(6))
     return preguntas;
+  }
+
+  async devolverProblema(idContinente,idProblema){
+    let preguntas = await this.preguntas;
+    return preguntas[idContinente][idProblema];
+  }
+
+  async devolverPreguntasContinente(id){
+    let preguntas = await this.preguntas;
+    return preguntas[id];
+  }
+
+  async devolverContinente(id){
+    let continente = await this.infoContinentes;
+    return continente[id];
   }
 
   obtenerPreguntasContinente(id){
@@ -144,4 +133,13 @@ export class Modelo {
     //   },
     // ]
   }
+
+  obtenerRanking(){
+    return fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
+    .then(respuesta => respuesta.json() )
+    .then(objeto => {
+        return objeto
+    })
+  }
+
 }

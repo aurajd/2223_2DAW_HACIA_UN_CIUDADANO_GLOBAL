@@ -24,8 +24,6 @@ class Controlador {
     /** @type {Modelo} */
     this.modelo = new Modelo(this)
 
-    this.inicializarPreguntas();
-
     // Obtener referencias de las vistas del HTML
     const divvistaMenu = document.getElementById('divvistaMenu')
     const divvistaMapa = document.getElementById('divvistaMapa')
@@ -50,10 +48,6 @@ class Controlador {
     this.verVista(Vista.VISTA1)
   }
 
-  async inicializarPreguntas(){
-    this.preguntas = await this.modelo.obtenerPreguntas()
-    console.log(this.preguntas)
-  }
 
   /**
        * Muestra una vista.
@@ -117,7 +111,7 @@ class Controlador {
       // Realizar acciones adicionales si el formulario es válido
       alert('Formulario válido.')
       this.anadirPuntuacion(username,puntuacion)
-      this.actualizarTop5()
+      this.mostrarRankingActualizado()
       this.verVista(Vista.VISTA3)
     } else {
       alert('Formulario no válido.')
@@ -144,39 +138,15 @@ class Controlador {
     }
   }
 
-  modificarSoluciones (id) {
-    let idProblema = id.slice(-1);
-    // let reflexion = this.modelo.obtenerReflexion(idProblema)
-    let soluciones = this.modelo.obtenerSoluciones(idProblema);
-    let i = 1;
-    soluciones.forEach((element) => {
-      this.vistas.get(Vista.VISTA6).modificarRespuesta(element,i++)
-    });
+  async cambiarProblemas(id){
+    const preguntas = await this.modelo.devolverPreguntasContinente(id);
+    console.log(preguntas)
+    this.vistas.get(Vista.VISTA4).actualizarContinente(preguntas,id)
   }
 
-  modificarProblemas (id) {
-    let problemas = this.modelo.obtenerProblemas(id);
-    let i = 0;
-    problemas.forEach((element) => {
-      this.vistas.get(Vista.VISTA4).modificarPregunta(element,i++)
-    });
-  }
-
-  modificarConflicto (id) {
-    let conflicto = this.modelo.obtenerConflicto(id);
-    this.vistas.get(Vista.VISTA4).modificarPregunta(conflicto,2)
-  }
-
-  modificarMotivos(id){
-    let idProblema = id.slice(-1);
-    // let reflexion = this.modelo.obtenerReflexion(idProblema)
-    let motivos = this.modelo.obtenerMotivos(idProblema);
-    let motivoCorrecto = this.modelo.obtenerMotivoCorrecto(idProblema);
-    this.vistas.get(Vista.VISTA8).modificarMotivoCorrecto(motivoCorrecto)
-    let i = 1;
-    motivos.forEach((element) => {
-      this.vistas.get(Vista.VISTA8).modificarRespuesta(element,i++)
-    });
+  async cambiarSoluciones (idContinente,idProblema){
+    const problema = await this.modelo.devolverProblema(idContinente,idProblema);
+    this.vistas.get(Vista.VISTA6).actualizarProblema(problema,idContinente,idProblema)
   }
 
   resetearProblema(){
@@ -191,10 +161,17 @@ class Controlador {
     this.modelo.puntuacionPOST(username,puntuacion)
   }
 
-  mostrarRankingActualizado(){
-    this.vistas.get(Vista.VISTA3).actualizarRanking()
+  async mostrarRankingActualizado(){
+    const ranking = await this.modelo.obtenerRanking()
+    this.vistas.get(Vista.VISTA3).actualizarRanking(ranking)
     this.verVista(Vista.VISTA3)
   }
+
+  async devolverContinente(id){
+    const continente = await this.modelo.devolverContinente(id)
+    return continente
+  }
+  
 }
 
 /** Inicializa el Controlador cuando la ventana se carga completamente. */
