@@ -47,13 +47,14 @@ class problemaController{
      *
      * @return array Array con todos los datos de los problemas.
      */
-    function listar(){
+    function listar() {
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
-    
-        // Verifica si se ha enviado el formulario y si se proporcionó el ID del continente
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['continentes'])) {
-            $idContinente = $_POST['continentes'];
+        
+        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
+        if (isset($_POST['continente']) || isset($_GET['continente'])) {
+            // Obtén el ID del continente, dando prioridad al valor en el formulario ($_POST)
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
     
             // Validar que el ID del continente sea un número
             if (!is_numeric($idContinente)) {
@@ -63,22 +64,14 @@ class problemaController{
             }
     
             // Llama al método listar con el ID del continente como argumento
-            $problemas = $this->modelo->listar($idContinente);
-    
-            // Aquí deberías retornar o procesar $problemas según tus necesidades
-            // (por ejemplo, pasarlos a la vista)
-            return $problemas;
+            return $this->modelo->listar($idContinente);
         } else {
-            // Si no se ha enviado el formulario, muestra la lista general
-            // Pasa un argumento válido para el método listar
-            $idContinente = 1; // Por ejemplo, aquí puedes establecer el valor que necesites
-            $problemas = $this->modelo->listar($idContinente);
-    
-            // Aquí deberías retornar o procesar $problemas según tus necesidades
-            // (por ejemplo, pasarlos a la vista)
-            return $problemas;
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
     }
+    
     
 
     /**
