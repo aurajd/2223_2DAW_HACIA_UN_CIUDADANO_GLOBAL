@@ -134,6 +134,15 @@ nav a {
 
 /* vista divvistaMapa */
 
+#divvistaMapa{
+    background-image: url("../img/fondoMapa.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
 #divvistaMapa main {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
@@ -150,42 +159,48 @@ nav a {
 
 #boton_eu1{
     position: absolute;
-    top: 28%;
+    top: 18%;
     right: 47%;
+    cursor: pointer;
 }
 
 #boton_eu2{
     position: absolute;
-    top: 32%;
+    top: 22%;
     right: 28%;
+    cursor: pointer;
 }
 
 #boton_eu3{
     position: absolute;
     bottom: 18%;
     right: 10%;
+    cursor: pointer;
 }
 
 #boton_eu4{
     position: absolute;
-    top: 32%;
+    top: 18%;
     left: 15%;
+    cursor: pointer;
 }
 
 #boton_eu5{
     position: absolute;
     bottom: 25%;
     left: 28%;
+    cursor: pointer;
 }
 
 #boton_eu6{
     position: absolute;
-    top: 50%;
+    top: 43%;
     right: 47%;
+    cursor: pointer;
 }
 
 #divvistaMapa img{
-    height: 50px;
+    height: 130px;
 }
 
 .cuadro-texto{
@@ -299,16 +314,15 @@ th {
 }
 
 #divvistaForm h1 {
-    height: 30%;
-    margin: 0;
     font-size: 2rem;
     text-align: center;
     font-weight: bold;
+    margin: 0 0 20px;
 }
 
 #divvistaForm form {
     width: 100%;
-    height: 70%;
+    height: 100%;
     position: relative;
 }
 
@@ -354,14 +368,14 @@ th {
     border-radius: 10px;
 }
 
-#divPuntuacion input[type="submit"] {
+#divvistaForm input[type="submit"] {
     font-family: 'Roboto', sans-serif;
     position: absolute;
     bottom: 0%;
     left: 15%;
 }
 
-#divPuntuacion a {
+#divvistaForm a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -370,7 +384,7 @@ th {
     right: 15%;
 }
 
-#divPuntuacion input:hover[type="submit"],
+#divvistaForm input:hover[type="submit"],
 #divPuntuacion a:hover {
     background-color: #d7d7d7;
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
