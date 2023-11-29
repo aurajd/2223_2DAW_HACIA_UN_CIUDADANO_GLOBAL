@@ -73,7 +73,7 @@ export class Modelo {
     return preguntas;
   }
 
-  async devolverProblema(idContinente,idProblema){
+  async devolverPregunta(idContinente,idProblema){
     let preguntas = await this.preguntas;
     return preguntas[idContinente][idProblema];
   }

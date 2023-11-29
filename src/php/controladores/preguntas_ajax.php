@@ -41,6 +41,7 @@ class preguntas_ajaxController{
         shuffle($motivos);
         $conflicto["respuestas"] = $motivos;
         array_push($objeto,$conflicto);
+        shuffle($objeto);
 
         echo json_encode($objeto);
         die();

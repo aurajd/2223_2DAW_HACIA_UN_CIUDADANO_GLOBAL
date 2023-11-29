@@ -15,13 +15,15 @@ export class VistaConflicto extends Vista {
   constructor (controlador, base) {
     super(controlador, base)
 
-    this.respuestasCorrecta = 0;
-    this.respuestasSeleccionada = 0;
+    this.respuestaCorrecta = 0;
+    this.respuestaSeleccionada = 0;
+
+    this.divInfoConflicto = document.querySelector("#informacionConflicto")
+    this.imagenConflicto = document.querySelector("#imagenConflicto")
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
     // Pregunta para mostrar en la vista de la pregunta
-    this.mostrarPregunta('¿Cuál es la capital de este continente?')
     this.actualizarPuntuacionEnInterfaz()
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
@@ -42,53 +44,54 @@ export class VistaConflicto extends Vista {
     this.motivo3.onclick = this.seleccionarMotivo.bind(this);
 
 
-    const botonResponder = document.getElementById('botonAceptar')
-    botonResponder.addEventListener('click',this.responder)
+    this.idContinente = ''
+    this.idConflicto = ''
+    this.botonResponder = document.getElementById('botonAceptarConflicto')
+    this.botonResponder.addEventListener('click',this.responder.bind(this))
+    this.botonContinuar = document.getElementById('botonContinuarConflicto')
+    this.botonContinuar.addEventListener('click',this.continuar)
   }
 
-  /**
-   * Método para realizar una solicitud AJAX y manejar la respuesta.
-   */
-  llamarAjax = () => {
-    // Recojo valores y hago validaciones
-    const i1Value = document.getElementById('respuesta1').value
-    const i2Value = document.getElementById('respuesta2').value
+  actualizarConflicto(conflicto,idContinente,idConflicto){
+    this.resetearSeleccion();
+    this.botonResponder.style.display = "block";
+    this.botonContinuar.style.display = "none";
+    this.mostrarPregunta(conflicto["titulo"])
+    this.modificarInformacion(conflicto["informacion"]);
+    this.modificarImagen(conflicto["imagen"])
+    let i = 0;
+    this.idContinente = idContinente;
+    this.idConflicto = idConflicto;
+    this.respuestaCorrecta = conflicto["numMotivo"];
+    for (let [index,solucion] of conflicto["respuestas"].entries()){
+      this.modificarRespuesta(index,solucion)
+    };
+  }
 
-    const params = {
-      param1: i1Value,
-      param2: i2Value
+  modificarInformacion(info){
+    this.divInfoConflicto.textContent = info
+  }
+
+  modificarRespuesta (id,motivo) {
+    let idBoton = id+1
+    const botonRespuesta = document.getElementById('motivo'+idBoton)
+    botonRespuesta.textContent = motivo["textoMotivo"]
+  }
+
+  modificarImagen(img){
+    if(img == null){
+      this.imagenConflicto.style.display = "none";
+    }else{
+      this.imagenConflicto.src = "img/"+img
+      this.imagenConflicto.style.display = "block";
     }
-
-    // Asegúrate de que Rest.post esté implementado adecuadamente
-    Rest.post('js/servicios/ajax1.php', params, this.verResultadoAJAX)
-  }
-
-  modificarRespuesta (respuesta, id) {
-    const botonRespuesta = document.getElementsByClassName('motivo'+id)[0]
-    botonRespuesta.textContent = respuesta.texto
-    botonRespuesta.id = 'idMotivo'+respuesta.id
-  }
-
-  modificarMotivoCorrecto(id){
-    this.respuestasCorrecta = id;
   }
 
   resetearSeleccion (){
-    this.respuestasSeleccionada = 0
+    this.respuestaSeleccionada = 0
     this.motivo1.classList.remove('marcado')
     this.motivo2.classList.remove('marcado')
     this.motivo3.classList.remove('marcado')
-  }
-
-  /**
-   * Método para mostrar el resultado de la solicitud AJAX.
-   * @param {Object} respuesta - Objeto que representa la respuesta de la solicitud.
-   */
-  verResultadoAJAX = (respuesta) => {
-    console.log(respuesta)
-    const p = document.createElement('p')
-    document.body.appendChild(p)
-    p.textContent = respuesta.atrib1 + ' ' + respuesta.atrib2
   }
 
   /**
@@ -112,6 +115,7 @@ export class VistaConflicto extends Vista {
     preguntaElemento.textContent = pregunta
 
     const preguntaContainer = this.base.querySelector('.preguntaContainer')
+    preguntaContainer.textContent = ""
     preguntaContainer.appendChild(preguntaElemento)
   }
 
@@ -119,12 +123,16 @@ export class VistaConflicto extends Vista {
      * Función para manejar la respuesta del usuario.
      * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
      */
-  responder (event) {
-    let opcionSeleccionada = event.target.id
-    if (opcionSeleccionada == 'respuesta1') {
+  responder () {
+    console.log(this.respuestaSeleccionada)
+    console.log(this.respuestaCorrecta)
+
+    this.botonResponder.style.display = "none";
+    this.botonContinuar.style.display = "block";
+    if (this.respuestaSeleccionada == this.respuestaCorrecta) {
       console.log('Respuesta correcta')
-      this.controlador.acertarPregunta()
-      this.actualizarPuntuacionEnInterfaz()
+      // this.controlador.acertarPregunta()
+      // this.actualizarPuntuacionEnInterfaz()
     } else {
       console.log('Respuesta incorrecta')
     }
@@ -146,13 +154,19 @@ export class VistaConflicto extends Vista {
     let idRespuestaSeleccionada = event.target.id.match(/\d+$/)[0]
     if(event.target.classList.contains('marcado')){
       event.target.classList.remove('marcado')
-      this.respuestasSeleccionada = 0;
+      this.respuestaSeleccionada = 0;
     }else{
       this.motivo1.classList.remove('marcado')
       this.motivo2.classList.remove('marcado')
       this.motivo3.classList.remove('marcado')
       event.target.classList.add('marcado')
-      this.respuestasSeleccionada = idRespuestaSeleccionada;
+      this.respuestaSeleccionada = idRespuestaSeleccionada;
     }
+    console.log("respuesta seleccionada:"+this.respuestaSeleccionada)
+    console.log("respuesta correcta:"+this.respuestaCorrecta)
+  }
+
+  continuar(){
+    this.controlador.verVista(Vista.VISTA7)
   }
 }

@@ -14,6 +14,7 @@ export class Vista {
   static VISTA6 = Symbol('Problema')
   static VISTA7 = Symbol('Reflexion')
   static VISTA8 = Symbol('conflicto')
+  static VISTA9 = Symbol('fecha')
 
   /**
      * Constructor de la clase Vista.

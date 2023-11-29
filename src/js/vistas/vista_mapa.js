@@ -134,7 +134,6 @@ export class VistaMapa extends Vista {
 
   async modificarPreguntas(event){
     let id = event.target.id.slice(-1)-1
-    await this.controlador.cambiarProblemas(id);
-    this.controlador.verVista(Vista.VISTA4)
+    await this.controlador.cambiarContinentes(id);
   }
 }

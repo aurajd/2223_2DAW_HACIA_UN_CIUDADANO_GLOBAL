@@ -18,15 +18,11 @@ export class VistaProblema extends Vista {
     this.respuestasCorrectas = [false,false,false]
     this.respuestasSeleccionadas = [false,false,false]
 
-    this.idContinente = 0;
-
     this.divInfoProblema = document.querySelector("#informacionProblema")
     this.imagenProblema = document.querySelector("#imagenProblema")
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    // Pregunta para mostrar en la vista de la pregunta
-    this.mostrarPregunta('¿Cuál es la capital de este continente?')
     this.actualizarPuntuacionEnInterfaz()
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
@@ -49,29 +45,13 @@ export class VistaProblema extends Vista {
 
     this.idContinente = ''
     this.idProblema = ''
-    const botonResponder = document.getElementById('botonAceptar')
+    const botonResponder = document.getElementById('botonAceptarProblema')
     botonResponder.addEventListener('click',this.responder)
-  }
-
-  /**
-   * Método para realizar una solicitud AJAX y manejar la respuesta.
-   */
-  llamarAjax = () => {
-    // Recojo valores y hago validaciones
-    const i1Value = document.getElementById('respuesta1').value
-    const i2Value = document.getElementById('respuesta2').value
-
-    const params = {
-      param1: i1Value,
-      param2: i2Value
-    }
-
-    // Asegúrate de que Rest.post esté implementado adecuadamente
-    Rest.post('js/servicios/ajax1.php', params, this.verResultadoAJAX)
   }
 
   actualizarProblema(problema,idContinente,idProblema){
     this.resetearSeleccion();
+    this.mostrarPregunta(problema["titulo"])
     this.modificarInformacion(problema["informacion"]);
     this.modificarImagen(problema["imagen"])
     let i = 0;
@@ -115,17 +95,6 @@ export class VistaProblema extends Vista {
   }
 
   /**
-   * Método para mostrar el resultado de la solicitud AJAX.
-   * @param {Object} respuesta - Objeto que representa la respuesta de la solicitud.
-   */
-  verResultadoAJAX = (respuesta) => {
-    console.log(respuesta)
-    const p = document.createElement('p')
-    document.body.appendChild(p)
-    p.textContent = respuesta.atrib1 + ' ' + respuesta.atrib2
-  }
-
-  /**
      * Función para manejar la pulsación de tecla.
      * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
      */
@@ -146,6 +115,7 @@ export class VistaProblema extends Vista {
     preguntaElemento.textContent = pregunta
 
     const preguntaContainer = this.base.querySelector('.preguntaContainer')
+    preguntaContainer.textContent = ""
     preguntaContainer.appendChild(preguntaElemento)
   }
 
@@ -185,6 +155,7 @@ export class VistaProblema extends Vista {
       event.target.classList.remove('marcado')
       this.respuestasSeleccionadas[idSeleccionado] = false;
     }
-    console.log(this.respuestasSeleccionadas)
+    console.log("respuestas seleccionadas:"+this.respuestasSeleccionadas)
+    console.log("respuestas correctas:"+this.respuestasCorrectas)
   }
 }

@@ -32,7 +32,8 @@ class Controlador {
     const divvistaForm = document.getElementById('divvistaForm')
     const divvistaProb = document.getElementById('divvistaProb')
     const divvistaRef = document.getElementById('divvistaRef')
-    const divvistaconf = document.getElementById('divvistaConf')
+    const divvistaConf = document.getElementById('divvistaConf')
+    const divvistaFech = document.getElementById('divvistaFech')
 
     // Crear instancias de las vistas
     this.vistas = new Map()
@@ -43,7 +44,8 @@ class Controlador {
     this.vistas.set(Vista.VISTA5, new VistaFormulario(this, divvistaForm))
     this.vistas.set(Vista.VISTA4, new VistaContinente(this, divvistaCont))
     this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
-    this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaconf))
+    this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaConf))
+    // this.vistas.set(Vista.VISTA9, new vistaFecha(this, divvistaFech))
 
     this.verVista(Vista.VISTA1)
   }
@@ -138,15 +140,20 @@ class Controlador {
     }
   }
 
-  async cambiarProblemas(id){
+  async cambiarContinentes(id){
     const preguntas = await this.modelo.devolverPreguntasContinente(id);
-    console.log(preguntas)
-    this.vistas.get(Vista.VISTA4).actualizarContinente(preguntas,id)
+    await this.vistas.get(Vista.VISTA4).actualizarContinente(preguntas,id)
+    this.verVista(Vista.VISTA4)
   }
 
   async cambiarSoluciones (idContinente,idProblema){
-    const problema = await this.modelo.devolverProblema(idContinente,idProblema);
+    const problema = await this.modelo.devolverPregunta(idContinente,idProblema);
     this.vistas.get(Vista.VISTA6).actualizarProblema(problema,idContinente,idProblema)
+  }
+
+  async cambiarMotivos(idContinente,idConflicto){
+    const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
+    this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
 
   resetearProblema(){

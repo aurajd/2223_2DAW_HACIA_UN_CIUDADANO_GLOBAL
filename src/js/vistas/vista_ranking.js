@@ -42,8 +42,6 @@ export class VistaRanking extends Vista {
 
   actualizarRanking(ranking){
     for(let [index, fila] of ranking.filas.entries()){
-        console.log(index)
-        console.log(fila)
         this.actualizarFila(fila,index)
     }
   }

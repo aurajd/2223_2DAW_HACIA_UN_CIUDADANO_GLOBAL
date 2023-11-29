@@ -66,7 +66,7 @@ export class VistaContinente extends Vista {
         this.prepararConflicto(btnPregunta,index)
       }
       this.divsPreguntas[i++].appendChild(btnPregunta)
-    };
+    }
   }
 
   prepararProblema(btnPregunta,index){
@@ -89,7 +89,7 @@ export class VistaContinente extends Vista {
   prepararMotivos(event){
     let idConflicto = event.target.id.slice(-1)
     this.controlador.resetearConflicto();
-    this.controlador.modificarMotivos(idConflicto);
+    this.controlador.cambiarMotivos(this.idContinente,idConflicto);
     this.controlador.verVista(Vista.VISTA8)
   }
 
@@ -102,18 +102,16 @@ export class VistaContinente extends Vista {
   }
 
   mostrarInformacion (info) {
-    console.log(info)
     this.infoContinente.textContent = info
   }
 
   modificarImagen(img){
-    if(img === null){
-      this.imagenContinente.style.display = "none";
+    if(img == null){
+      this.imagenContinente.style.display = "none"
     }else{
       this.imagenContinente.src = "img/"+img
-      // this.imagenContinente.style = "block";
+      this.imagenContinente.style = "block";
     }
-    console.log(this.imagenContinente)
 
   }
 
