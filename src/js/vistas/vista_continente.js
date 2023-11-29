@@ -81,14 +81,12 @@ export class VistaContinente extends Vista {
 
   prepararSoluciones(event){
     let idProblema = event.target.id.slice(-1)
-    this.controlador.resetearProblema();
     this.controlador.cambiarSoluciones(this.idContinente,idProblema);
     this.controlador.verVista(Vista.VISTA6)
   }
 
   prepararMotivos(event){
     let idConflicto = event.target.id.slice(-1)
-    this.controlador.resetearConflicto();
     this.controlador.cambiarMotivos(this.idContinente,idConflicto);
     this.controlador.verVista(Vista.VISTA8)
   }
@@ -115,12 +113,4 @@ export class VistaContinente extends Vista {
 
   }
 
-
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    if (puntuacionElemento) {
-      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
-    }
-  }
 }

@@ -1,10 +1,11 @@
 import { Vista } from './vista.js'
 
-export class VistaReflexion extends Vista {
+export class VistaFecha extends Vista {
   constructor (controlador, base) {
     super(controlador, base)
-    this.divReflexion = document.getElementById("fraseReflexion")
-    this.botonVolver = document.getElementById("botonVolverReflexion")
+
+    this.divFecha = document.getElementById("fraseFecha")
+    this.botonVolver = document.getElementById("botonVolverFecha")
     this.botonVolver.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
@@ -14,7 +15,9 @@ export class VistaReflexion extends Vista {
     this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
   }
 
-  actualizarReflexion(reflexion){
-    this.divReflexion.textContent = reflexion
+  actualizarFecha(fecha){
+    let date = new Date(fecha)
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    this.divFecha.textContent = "El conflicto comenzó el "+date.toLocaleDateString("es-ES", options)
   }
 }

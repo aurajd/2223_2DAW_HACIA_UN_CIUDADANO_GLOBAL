@@ -124,16 +124,12 @@ export class VistaMapa extends Vista {
     cuadroTexto.style.display = 'none'
   }
 
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    if (puntuacionElemento) {
-      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
-    }
-  }
-
   async modificarPreguntas(event){
     let id = event.target.id.slice(-1)-1
     await this.controlador.cambiarContinentes(id);
+  }
+
+  eliminarContinente(idContinente){
+    eval('this.boton' + (idContinente+1)).remove()
   }
 }

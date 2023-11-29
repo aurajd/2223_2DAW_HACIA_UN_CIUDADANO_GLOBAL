@@ -284,3 +284,15 @@ th {
 .marcado{
     background-color: gray;
 }
+
+.respuestaCorrecta{
+    background-color: greenyellow;
+}
+
+.respuestaIncorrecta{
+    background-color: red;
+}
+
+.respuestaCorrectaNoMarcada{
+    background-color: yellow;
+}

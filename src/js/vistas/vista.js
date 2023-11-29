@@ -37,4 +37,13 @@ export class Vista {
       this.base.style.display = 'none'
     }
   }
+
+  actualizarPuntuacionEnInterfaz () {
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
+    if (puntuacionElemento) {
+      
+      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
+      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+    }
+  }
 }

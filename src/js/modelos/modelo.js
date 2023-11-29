@@ -88,6 +88,25 @@ export class Modelo {
     return continente[id];
   }
 
+  async eliminarFilaPregunta(idContinente,idFila){
+    let preguntas = await this.preguntas
+    preguntas[idContinente].splice(idFila,1)
+  }
+
+  async comprobarFilasContinenteVacio(idContinente){
+    let preguntas = await this.preguntas
+    let longitud = preguntas[idContinente].length
+    return longitud<1;
+  }
+
+  async eliminarFilaContinente(idContinente){
+    let preguntas = await this.preguntas
+    console.log(preguntas)
+    preguntas.splice(idContinente,1)
+    console.log(preguntas)
+
+  }
+
   obtenerPreguntasContinente(id){
     return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random')
     .then(respuesta => respuesta.json() )

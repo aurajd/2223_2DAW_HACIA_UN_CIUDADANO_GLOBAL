@@ -14,6 +14,7 @@ import { VistaFormulario } from '../vistas/vista_formulario.js'
 import { VistaProblema } from '../vistas/vista_problema.js'
 import { VistaReflexion } from '../vistas/vista_reflexion.js'
 import { VistaConflicto } from '../vistas/vista_conflicto.js'
+import { VistaFecha } from '../vistas/vista_fecha.js'
 
 class Controlador {
   /**
@@ -45,7 +46,7 @@ class Controlador {
     this.vistas.set(Vista.VISTA4, new VistaContinente(this, divvistaCont))
     this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
     this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaConf))
-    // this.vistas.set(Vista.VISTA9, new vistaFecha(this, divvistaFech))
+    this.vistas.set(Vista.VISTA9, new VistaFecha(this, divvistaFech))
 
     this.verVista(Vista.VISTA1)
   }
@@ -77,11 +78,12 @@ class Controlador {
     const puntosPorPregunta = 10
     this.modelo.aumentarPuntuacion(puntosPorPregunta)
     this.vistas.get(Vista.VISTA2).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA6).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA4).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA7).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA8).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA9).actualizarPuntuacionEnInterfaz()
   }
 
   /**
@@ -156,14 +158,6 @@ class Controlador {
     this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
 
-  resetearProblema(){
-    this.vistas.get(Vista.VISTA6).resetearSeleccion();
-  }
-
-  resetearConflicto(){
-    this.vistas.get(Vista.VISTA8).resetearSeleccion();
-  }
-
   anadirPuntuacion(username,puntuacion){
     this.modelo.puntuacionPOST(username,puntuacion)
   }
@@ -178,7 +172,24 @@ class Controlador {
     const continente = await this.modelo.devolverContinente(id)
     return continente
   }
+
+  cambiarFecha(fecha){
+    this.vistas.get(Vista.VISTA9).actualizarFecha(fecha)
+  }
+
+  cambiarReflexion(reflexion){
+    this.vistas.get(Vista.VISTA7).actualizarReflexion(reflexion)
+  }
   
+  eliminarFila(idContinente,idFila){
+    this.modelo.eliminarFilaPregunta(idContinente,idFila)
+  }
+
+  async comprobarFilasContinente(idContinente){
+    if(await this.modelo.comprobarFilasContinenteVacio(idContinente)){
+      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+    }
+  }
 }
 
 /** Inicializa el Controlador cuando la ventana se carga completamente. */

@@ -23,9 +23,6 @@ export class VistaConflicto extends Vista {
     // Agregar un event listener para el evento de pulsación de tecla
     document.addEventListener('keydown', this.irAtras.bind(this))
 
-    // Pregunta para mostrar en la vista de la pregunta
-    this.actualizarPuntuacionEnInterfaz()
-
     this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
 
@@ -39,43 +36,54 @@ export class VistaConflicto extends Vista {
     const divOpciones3 = this.base.getElementsByClassName('opcionesContainer')[2]
     this.motivo3 = divOpciones3.getElementsByTagName('button')[0]
 
-    this.motivo1.onclick = this.seleccionarMotivo.bind(this);
-    this.motivo2.onclick = this.seleccionarMotivo.bind(this);
-    this.motivo3.onclick = this.seleccionarMotivo.bind(this);
-
-
-    this.idContinente = ''
-    this.idConflicto = ''
+    this.restaurarBotones(this.motivo1)
+    this.restaurarBotones(this.motivo2)
+    this.restaurarBotones(this.motivo3)
+    
     this.botonResponder = document.getElementById('botonAceptarConflicto')
     this.botonResponder.addEventListener('click',this.responder.bind(this))
     this.botonContinuar = document.getElementById('botonContinuarConflicto')
-    this.botonContinuar.addEventListener('click',this.continuar)
+    this.botonContinuar.addEventListener('click',this.continuar.bind(this))
   }
 
   actualizarConflicto(conflicto,idContinente,idConflicto){
     this.resetearSeleccion();
+    this.restaurarBotones(this.motivo1)
+    this.restaurarBotones(this.motivo2)
+    this.restaurarBotones(this.motivo3)
     this.botonResponder.style.display = "block";
     this.botonContinuar.style.display = "none";
     this.mostrarPregunta(conflicto["titulo"])
     this.modificarInformacion(conflicto["informacion"]);
     this.modificarImagen(conflicto["imagen"])
     let i = 0;
+    this.fecha = conflicto["fechaInicio"]
     this.idContinente = idContinente;
     this.idConflicto = idConflicto;
-    this.respuestaCorrecta = conflicto["numMotivo"];
     for (let [index,solucion] of conflicto["respuestas"].entries()){
-      this.modificarRespuesta(index,solucion)
+      this.modificarRespuesta(index,solucion,conflicto["numMotivo"])
     };
+  }
+
+  restaurarBotones(boton){
+    boton.onclick = this.seleccionarMotivo.bind(this);
+  }
+
+  eliminarClickBotones(boton){
+    boton.onclick = "";
   }
 
   modificarInformacion(info){
     this.divInfoConflicto.textContent = info
   }
 
-  modificarRespuesta (id,motivo) {
+  modificarRespuesta (id,motivo,numMotivo) {
     let idBoton = id+1
     const botonRespuesta = document.getElementById('motivo'+idBoton)
     botonRespuesta.textContent = motivo["textoMotivo"]
+    if(motivo["numMotivo"]==numMotivo){
+      this.respuestaCorrecta = idBoton
+    }
   }
 
   modificarImagen(img){
@@ -89,9 +97,9 @@ export class VistaConflicto extends Vista {
 
   resetearSeleccion (){
     this.respuestaSeleccionada = 0
-    this.motivo1.classList.remove('marcado')
-    this.motivo2.classList.remove('marcado')
-    this.motivo3.classList.remove('marcado')
+    this.motivo1.className = ""
+    this.motivo2.className = ""
+    this.motivo3.className = ""
   }
 
   /**
@@ -124,29 +132,22 @@ export class VistaConflicto extends Vista {
      * @param {number} opcionSeleccionada - Índice de la opción seleccionada.
      */
   responder () {
-    console.log(this.respuestaSeleccionada)
-    console.log(this.respuestaCorrecta)
-
-    this.botonResponder.style.display = "none";
-    this.botonContinuar.style.display = "block";
-    if (this.respuestaSeleccionada == this.respuestaCorrecta) {
-      console.log('Respuesta correcta')
-      // this.controlador.acertarPregunta()
-      // this.actualizarPuntuacionEnInterfaz()
-    } else {
-      console.log('Respuesta incorrecta')
-    }
-  }
-
-  /**
-   * Método para actualizar la puntuación en la interfaz.
-   */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    if (puntuacionElemento) {
-      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-      console.log(puntuacionActual)
-      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+    if(this.respuestaSeleccionada !==0){
+      this.botonResponder.style.display = "none";
+      this.botonContinuar.style.display = "block";
+      this.eliminarClickBotones(this.motivo1);
+      this.eliminarClickBotones(this.motivo2);
+      this.eliminarClickBotones(this.motivo3);
+      eval('this.motivo' + this.respuestaCorrecta).classList.add ("respuestaCorrecta")
+      if (this.respuestaSeleccionada == this.respuestaCorrecta) {
+        console.log('Respuesta correcta')
+        this.controlador.acertarPregunta()
+      } else {
+        eval('this.motivo' + this.respuestaSeleccionada).classList.add ("respuestaIncorrecta")
+        console.log('Respuesta incorrecta')
+      }
+      this.controlador.eliminarFila(this.idContinente,this.idConflicto)
+      this.controlador.comprobarFilasContinente(this.idContinente)
     }
   }
 
@@ -167,6 +168,8 @@ export class VistaConflicto extends Vista {
   }
 
   continuar(){
-    this.controlador.verVista(Vista.VISTA7)
+    this.controlador.cambiarFecha(this.fecha)
+    this.resetearSeleccion();
+    this.controlador.verVista(Vista.VISTA9)
   }
 }

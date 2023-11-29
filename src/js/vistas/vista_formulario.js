@@ -47,13 +47,4 @@ export class VistaFormulario extends Vista {
     event.preventDefault()
     this.controlador.manejarValidacionFormulario()
   }
-
-  /**
-     * Actualiza la puntuación en la interfaz.
-     */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
-  }
 }

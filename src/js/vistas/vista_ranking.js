@@ -31,15 +31,6 @@ export class VistaRanking extends Vista {
     }
   }
 
-  /**
-         * Actualiza la puntuación en la interfaz.
-         */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
-  }
-
   actualizarRanking(ranking){
     for(let [index, fila] of ranking.filas.entries()){
         this.actualizarFila(fila,index)
