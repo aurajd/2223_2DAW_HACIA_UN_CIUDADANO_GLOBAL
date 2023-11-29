@@ -63,10 +63,20 @@ class problemaController{
             }
     
             // Llama al método listar con el ID del continente como argumento
-            return $this->modelo->listar($idContinente);
+            $problemas = $this->modelo->listar($idContinente);
+    
+            // Aquí deberías retornar o procesar $problemas según tus necesidades
+            // (por ejemplo, pasarlos a la vista)
+            return $problemas;
         } else {
             // Si no se ha enviado el formulario, muestra la lista general
-            return $this->modelo->listar();
+            // Pasa un argumento válido para el método listar
+            $idContinente = 1; // Por ejemplo, aquí puedes establecer el valor que necesites
+            $problemas = $this->modelo->listar($idContinente);
+    
+            // Aquí deberías retornar o procesar $problemas según tus necesidades
+            // (por ejemplo, pasarlos a la vista)
+            return $problemas;
         }
     }
     
@@ -179,6 +189,10 @@ class problemaController{
                 if ($resultado) {
                     $_GET["tipomsg"] = "exito";
                     $_GET["msg"] = "Problema añadido con éxito.";
+                    
+                    // Redireccionar a la vista "anadir_problema"
+                    $this->mostrar_anadir();
+                    return;
                 } else {
                     $_GET["tipomsg"] = "error";
                     $_GET["msg"] = $this->modelo->error;
@@ -187,6 +201,7 @@ class problemaController{
                 $_GET["tipomsg"] = "error";
             }
     
+            // Si la inserción no fue exitosa o hubo un error de validación, redirigir a "mostrar_anadir"
             $this->mostrar_anadir();
         }
     }

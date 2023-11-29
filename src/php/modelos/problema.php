@@ -38,9 +38,9 @@ class problemaModel extends Conexion{
             $this->conexion->autocommit(false);
 
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion, imagen) VALUES (?, ?, ?);";
+            $sql = "INSERT INTO situacion(titulo, informacion, imagen, idContinente) VALUES (?, ?, ?, ?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("sss", $titulo, $informacion, $nombreImagen);
+            $stmt->bind_param("ssss", $titulo, $informacion, $nombreImagen,$idContinente);
             $stmt->execute();
 
             // Recogemos la idSituacion de la inserción realizada
@@ -110,13 +110,6 @@ class problemaModel extends Conexion{
         if(!is_null($img))
             unlink(__DIR__."/../../img/".$img);
     }
-
-    /**
-     * Obtiene la lista de todos los problemas.
-     *
-     * @return array Lista de problemas.
-     */
-    // ... (código existente)
 
     /**
      * Obtiene la lista de todos los problemas.
