@@ -10,9 +10,6 @@ export class VistaFecha extends Vista {
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
-
-    this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
   }
 
   actualizarFecha(fecha, idContinente){

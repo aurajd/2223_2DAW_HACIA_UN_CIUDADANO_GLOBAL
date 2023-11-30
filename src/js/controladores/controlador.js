@@ -114,7 +114,8 @@ class Controlador {
     if (esValido) {
       // Realizar acciones adicionales si el formulario es válido
       alert('Formulario válido.')
-      this.anadirPuntuacion(username,puntuacion)
+      this.cambiarEnlaceRankingInicio()
+      await this.anadirPuntuacion(username,puntuacion)
       this.mostrarRankingActualizado()
     } else {
       alert('Formulario no válido.')
@@ -158,8 +159,8 @@ class Controlador {
     this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
 
-  anadirPuntuacion(username,puntuacion){
-    this.modelo.puntuacionPOST(username,puntuacion)
+  async anadirPuntuacion(username,puntuacion){
+    await this.modelo.puntuacionPOST(username,puntuacion)
   }
 
   async mostrarRankingActualizado(){
@@ -230,7 +231,18 @@ class Controlador {
       this.verVista(Vista.VISTA2)
     }
   }
+
+  cambiarEnlaceRankingInicio(){
+    this.vistas.get(Vista.VISTA3).cambiarEnlaceInicio()
+  }
+
+  cambiarEnlaceRankingMapa(){
+    this.vistas.get(Vista.VISTA3).cambiarEnlaceMapa()
+  }
   
+  borrarBotonInicio(){
+    this.vistas.get(Vista.VISTA1).borrarBotonInicio()
+  }
 }
 
 /** Inicializa el Controlador cuando la ventana se carga completamente. */

@@ -15,20 +15,7 @@ export class VistaRanking extends Vista {
     super(controlador, base)
     this.filas = this.base.getElementsByTagName('tr')
 
-    document.addEventListener('keydown', this.irAtras.bind(this))
-
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
-  }
-
-  /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
-  irAtras (event) {
-    if (event.key === 'Enter') {
-      this.controlador.verVista(Vista.VISTA1)
-    }
   }
 
   actualizarRanking(ranking){
@@ -41,5 +28,13 @@ export class VistaRanking extends Vista {
     const filaRanking = this.filas[index+1]
     filaRanking.getElementsByTagName('td')[0].textContent = fila['nombreJugador']
     filaRanking.getElementsByTagName('td')[1].textContent = "Puntuación: "+fila['puntuacion']
+  }
+
+  cambiarEnlaceMapa(){
+    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTA2)}
+  }
+
+  cambiarEnlaceInicio(){
+    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTA1)}
   }
 }

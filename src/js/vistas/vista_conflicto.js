@@ -24,9 +24,6 @@ export class VistaConflicto extends Vista {
     this.enlaceInicio = this.base.querySelector('.verMenu')
     this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
 
-    this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
-
     const divOpciones1 = this.base.getElementsByClassName('opcionesContainer')[0]
     this.motivo1 = divOpciones1.getElementsByTagName('button')[0]
     const divOpciones2 = this.base.getElementsByClassName('opcionesContainer')[1]

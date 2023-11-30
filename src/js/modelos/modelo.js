@@ -46,10 +46,10 @@ export class Modelo {
         method: 'POST',
         body: formData
     }
-    fetch('./index.php?controller=ranking&action=anadir_puntuacion',opciones)
+    return fetch('./index.php?controller=ranking&action=anadir_puntuacion',opciones)
     .then(respuesta => respuesta.text())
     .then(texto => {
-        console.log(texto)
+        return true;
     })
   }
   
@@ -122,8 +122,10 @@ export class Modelo {
     return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random')
     .then(respuesta => respuesta.json() )
     .then(objeto => {
+      console.log(objeto)
         return objeto
     })
+    
 
     // Estructura
     // [

@@ -40,17 +40,34 @@ class preguntas_ajaxModel extends Conexion{
     function devolver_soluciones($id){
         try {
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "SELECT textoSolucion, correcta
+            $sql = "SELECT numSolucion, textoSolucion, correcta
             FROM solucion
-            WHERE idSituacion = ?";
+            WHERE idSituacion = ? and correcta = 1
+            ORDER BY RAND()
+            LIMIT 1";
 
             $stmt = $this->conexion->prepare($sql);
             $stmt->bind_param('i',$id);
             $stmt->execute();
 
             $resultado = $stmt->get_result();
-            $soluciones = $resultado->fetch_all(MYSQLI_ASSOC);
+            $SolucionCorrecta = $resultado->fetch_array(MYSQLI_ASSOC);
             $resultado->close();
+
+            $sql = "SELECT numSolucion, textoSolucion, correcta
+            FROM solucion
+            WHERE idSituacion = ? and NOT numSolucion = ?
+            ORDER BY RAND()
+            LIMIT 2";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('ii',$id, $SolucionCorrecta["numSolucion"]);
+            $stmt->execute();
+
+            $resultado = $stmt->get_result();
+            $soluciones = $resultado->fetch_all(MYSQLI_ASSOC);
+            array_push($soluciones,$SolucionCorrecta);
+
             return $soluciones;
         }catch(mysqli_sql_exception $e){
             $this->error = "Error ".$e->getCode().": Contacte con el administrador.";

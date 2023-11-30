@@ -80,11 +80,11 @@ export class VistaMapa extends Vista {
       this.modificarPreguntas(event);
     }) // Cambiamos a Vista Continente para el sexto botón
 
-    this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
-
     this.enlaceRanking = this.base.querySelector('.verRanking')
-    this.enlaceRanking.addEventListener('click', () => this.controlador.mostrarRankingActualizado())
+    this.enlaceRanking.addEventListener('click', () => {
+      this.controlador.cambiarEnlaceRankingMapa()
+      this.controlador.mostrarRankingActualizado()
+    })
   }
 
   /**
