@@ -22,7 +22,7 @@ export class VistaMenu extends Vista {
 
     // Asociar eventos
     this.enlace1.onclick = this.pulsarEnlace1.bind(this)
-    this.enlace2.onclick = this.pulsarEnlace2.bind(this)
+    this.enlace2.onclick = () => this.controlador.verVista(Vista.VISTA5)
   }
 
   /**

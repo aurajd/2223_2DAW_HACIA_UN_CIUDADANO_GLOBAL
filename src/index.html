@@ -39,7 +39,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<article><img id="boton_eu1" src="img/boton.gif" alt="Europa"></article>
 				<article><img id="boton_eu2" src="img/boton.gif" alt="Asia"></article>
 				<article><img id="boton_eu3" src="img/boton.gif" alt="Oceanía"></article>
@@ -48,7 +48,7 @@
 				<article><img id="boton_eu6" src="img/boton.gif" alt="África"></article>
 			</main>
 		</div>
-		<div id="divvistaProb">
+		<div id="divvistaProb" class="divProbConf">
 			<nav>
 				<ul>
 					<li>
@@ -63,7 +63,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="infoProblema">
 					<div>
 						<img src="" alt="Foto Problema" id="imagenProblema">
@@ -92,7 +92,7 @@
 				</div>
 			</main>
 		</div>
-		<div id="divvistaConf">
+		<div id="divvistaConf" class="divProbConf">
 			<nav>
 				<ul>
 					<li>
@@ -107,7 +107,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="infoConflicto">
 					<div>
 						<img src="" alt="Foto Problema" id="imagenConflicto">
@@ -151,7 +151,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="divReflexion"> 
 					<h1>Reflexión</h1>
 					<div id="fraseReflexion">
@@ -175,7 +175,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="divFecha"> 
 					<h1>Fecha de inicio</h1>
 					<div id="fraseFecha">
@@ -199,7 +199,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="infoContinente">
 					<h2 id="nombreContinente"></h2>
 					<div>
@@ -232,7 +232,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div>
 					<table id="ranking">
 						<tr><th colspan="2">Ranking</th></tr>
@@ -261,15 +261,17 @@
 			</main>
 		</div>
 		<div id="divvistaForm">
-			<main class="mainJuego">
+			<main>
 				<div id="divPuntuacion">
 					<h1>Guardar puntuación:</h1>
 					<form>
-						<input type="text" id="username" placeholder="Introduce tu nombre">
 						<p id="usernameError" style="color: red;"></p>
+						<input type="text" id="username" placeholder="Introduce tu nombre">
 						<p class="puntosMensaje">0 Puntos</p>
-						<input type="submit" value="Enviar">
-						<button type="button" id="botonCancelarFormulario">Cancelar</button>
+						<aside>
+							<input type="submit" value="Enviar">
+							<button type="button" id="botonCancelarFormulario">Cancelar</button>
+						</aside>
 					</form>
 				</div>
 			</main>

@@ -147,7 +147,7 @@ export class VistaProblema extends Vista {
         }
       }
       
-      this.controlador.eliminarFila(this.idContinente,this.idConflicto)
+      this.controlador.eliminarFila(this.idContinente,this.idProblema)
     }
   }
 

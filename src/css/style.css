@@ -363,7 +363,7 @@ th {
 }
 
 #divPuntuacion input[type="submit"],
-#divPuntuacion a {
+#divPuntuacion button {
     padding: 5px;
     box-sizing: content-box;
     font-size: 2rem;
@@ -373,18 +373,26 @@ th {
     border: 2px solid black;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
+    width: 40%;
 }
 
 #divPuntuacion input:hover[type="submit"],
-#divPuntuacion a:hover {
+#divPuntuacion button:hover {
     background-color: #d7d7d7;
     cursor: pointer;
 }
 
-#usernameError {
-    font-family: 'Roboto', sans-serif;
+#divvistaForm aside{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    width: 100%;
 }
 
+#usernameError {
+    font-family: 'Roboto', sans-serif;
+    max-width: 300px;
+}
 
 /* */
 .marcado{
