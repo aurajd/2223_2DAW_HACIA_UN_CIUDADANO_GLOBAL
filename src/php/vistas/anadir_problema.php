@@ -40,15 +40,22 @@
                     Es correcto
                 </label>
             </div>
-            <div class="motivos">
-                <h2>Solución 3</h2>
-                <label for="motivo3">Información:</label>
-                <textarea name="soluciones[3]" id="motivo3" placeholder="Escribe aquí"></textarea>      
-                <label>
-                    <input type="checkbox" name="correctas[3]" value="3">
-                    Es correcto
-                </label>
-            </div>
+            <div class="motivos" id="duplicadoOriginal">
+                    <h2>Solución 3</h2>
+                    <label for="motivo3">Información:</label>
+                    <textarea name="soluciones[3]" id="motivo3" placeholder="Escribe aquí"></textarea>      
+                    <label>
+                        <input type="checkbox" name="correctas[3]" value="3">
+                        Es correcto
+                    </label>
+                </div>
+                <div id="contenedorDuplicados">
+
+                </div>
+                <div class="botones-cuadrado">
+                    <button class="boton-cuadrado" id="boton1" type="button">Añadir</button>
+                    <button class="boton-cuadrado" id="boton2" type="button">Eliminar</button>
+                </div>
             <div class='opciones'>
                 <input type='submit' value='Aceptar' name='aceptar'>
             </div>

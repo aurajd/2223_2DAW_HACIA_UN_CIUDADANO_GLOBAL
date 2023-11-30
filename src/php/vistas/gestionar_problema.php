@@ -18,7 +18,6 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Imagen</th>
                     <th>Opciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
@@ -37,15 +36,6 @@
                             <div class='scroll'>
                                 <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
-                        </td>
-                        <td>
-                            <?php 
-                                if(!is_null($fila['imagen'])){
-                                ?>
-                                    <img src='img/<?php echo $fila['imagen']; ?>'>
-                                <?php
-                                }
-                            ?>
                         </td>
                         <td>
                             <ul>

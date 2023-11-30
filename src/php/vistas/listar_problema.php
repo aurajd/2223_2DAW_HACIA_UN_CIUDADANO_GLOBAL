@@ -15,7 +15,6 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Opciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
                     <tr>
@@ -33,11 +32,6 @@
                             <div class='scroll'>
                                 <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
-                        </td>
-                        <td>
-                            <ul>
-                                <li><a href='index.php?controller=problema&action=ver_problema&id=<?php echo $fila['idSituacion'] ?>'>Ver</a></li>
-                            </ul>
                         </td>
                     </tr>
                 <?php } ?>
