@@ -120,6 +120,7 @@ export class VistaAdminProblema {
         nuevoDiv.getElementsByTagName("textarea")[0].name = "soluciones[" + (this.contadorDuplicados+3) + "]";
         nuevoDiv.getElementsByTagName("textarea")[0].value = "";
         nuevoDiv.getElementsByTagName("textarea")[0].className = "";
+        nuevoDiv.getElementsByTagName("textarea")[0].addEventListener("blur", (event) => this.validar(this.regexSolucion,event.target))
         nuevoDiv.getElementsByTagName("h2")[0].textContent = "Solución "+(this.contadorDuplicados+3)
         nuevoDiv.querySelector("input[type='checkbox']").name = "correctas[" + (this.contadorDuplicados+3) + "]";
         nuevoDiv.querySelector("input[type='checkbox']").value = (this.contadorDuplicados+3);
