@@ -19,10 +19,6 @@ export class VistaFormulario extends Vista {
     this.formulario = this.base.querySelector('form')
     this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event))
 
-    // Agregar evento al enlace de "Inicio"
-    const enlaceInicio = this.base.querySelector('nav ul li a')
-    enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
-
     // Agregar evento al enlace de "Cancelar"
     const enlaceCancelar = this.base.querySelector('form a')
     enlaceCancelar.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
