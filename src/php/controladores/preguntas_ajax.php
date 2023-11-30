@@ -21,7 +21,8 @@ class preguntas_ajaxController{
     }
 
     function devolver_problema_random(){
-        $problemas = $this->modelo->devolver_problemas();
+        $id = $_GET["id"];
+        $problemas = $this->modelo->devolver_problemas($id);
         foreach ($problemas as $key => $problema) {
             $soluciones = $this->modelo->devolver_soluciones($problema["idProblema"]);
             shuffle($soluciones);
@@ -35,7 +36,7 @@ class preguntas_ajaxController{
             array_push($objeto,$fila);
         }
 
-        $conflicto = $this->modelo->devolver_conflicto();
+        $conflicto = $this->modelo->devolver_conflicto($id);
         $conflicto["tipo"] = "conflicto";
         $motivos = $this->modelo->devolver_motivos($conflicto["idConflicto"], $conflicto["numMotivo"]);
         shuffle($motivos);

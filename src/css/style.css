@@ -240,7 +240,7 @@ th {
 }
 
 #divPuntuacion input[type="submit"],
-#divPuntuacion a {
+#divPuntuacion button {
     width: 30%;
     height: 20%;
     font-size: 2rem;
@@ -258,7 +258,7 @@ th {
     left: 15%;
 }
 
-#divPuntuacion a {
+#divPuntuacion button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -268,7 +268,7 @@ th {
 }
 
 #divPuntuacion input:hover[type="submit"],
-#divPuntuacion a:hover {
+#divPuntuacion button:hover {
     background-color: #d7d7d7;
     /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;

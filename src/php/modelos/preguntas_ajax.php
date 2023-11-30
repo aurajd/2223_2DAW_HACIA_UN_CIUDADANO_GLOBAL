@@ -17,16 +17,32 @@ class preguntas_ajaxModel extends Conexion{
         parent::__construct();
     }
 
-    function devolver_problemas(){
-        $sql = "SELECT idProblema, titulo, informacion, imagen, reflexion 
-        FROM problema
-        INNER JOIN situacion 
-        ON problema.idProblema = situacion.idSituacion
-        ORDER BY RAND()
-        LIMIT 2";
-        $resultado = $this->conexion->query($sql);
-        $problemas = $resultado->fetch_all(MYSQLI_ASSOC);
-        return $problemas;
+    function devolver_problemas($id){
+        try {
+            $sql = "SELECT idProblema, titulo, informacion, imagen, reflexion 
+            FROM problema
+            INNER JOIN situacion 
+            ON problema.idProblema = situacion.idSituacion
+            where idContinente = ?
+            ORDER BY RAND()
+            LIMIT 2";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('i',$id);
+            $stmt->execute();
+
+            $resultado = $stmt->get_result();
+            $problemas = $resultado->fetch_all(MYSQLI_ASSOC);
+            
+            $resultado->close();
+            return $problemas;
+
+        }catch(mysqli_sql_exception $e){
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
+            return false;
+        }finally {
+            $stmt->close();
+        }
     }
 
     function devolver_info_continentes(){
@@ -37,7 +53,7 @@ class preguntas_ajaxModel extends Conexion{
         return $continente;
     }
 
-    function devolver_soluciones($id){
+    function devolver_soluciones(){
         try {
             // Consulta SQL para insertar en la tabla 'situacion'
             $sql = "SELECT numSolucion, textoSolucion, correcta
@@ -77,16 +93,31 @@ class preguntas_ajaxModel extends Conexion{
         }
     }
 
-    function devolver_conflicto(){
-        $sql = "SELECT idConflicto, titulo, informacion, imagen, numMotivo, fechaInicio
-        FROM conflicto
-        INNER JOIN situacion 
-        ON conflicto.idConflicto = situacion.idSituacion
-        ORDER BY RAND()
-        LIMIT 1";
-        $resultado = $this->conexion->query($sql);
-        $conflicto = $resultado->fetch_array(MYSQLI_ASSOC);
-        return $conflicto;
+    function devolver_conflicto($id){
+        try {
+            $sql = "SELECT idConflicto, titulo, informacion, imagen, numMotivo, fechaInicio
+            FROM conflicto
+            INNER JOIN situacion 
+            ON conflicto.idConflicto = situacion.idSituacion
+            where idContinente = ?
+            ORDER BY RAND()
+            LIMIT 1";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param('i',$id);
+            $stmt->execute();
+
+            $resultado = $stmt->get_result();
+            $conflicto = $resultado->fetch_array(MYSQLI_ASSOC);
+            
+            $resultado->close();
+            return $conflicto;
+
+        }catch(mysqli_sql_exception $e){
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
+            return false;
+        }finally {
+            $stmt->close();
+        }
     }
 
     function devolver_motivos($id, $numMotivoCorrecto){

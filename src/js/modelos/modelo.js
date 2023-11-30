@@ -119,7 +119,7 @@ export class Modelo {
   }
 
   obtenerPreguntasContinente(id){
-    return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random')
+    return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random&id='+id)
     .then(respuesta => respuesta.json() )
     .then(objeto => {
       console.log(objeto)
