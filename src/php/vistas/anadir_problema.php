@@ -62,3 +62,4 @@
         </form>
     </div>
 </main>
+<script type=module src="js/vistas/vista_admin_problema.js"></script>

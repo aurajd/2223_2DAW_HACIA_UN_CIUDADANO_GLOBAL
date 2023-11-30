@@ -121,21 +121,21 @@ class problemaController{
     }
     
     /**
- * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
- *
- * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
- */
-function mostrar_modificar(){
-    $id = $_GET['id'] ?? '';
-    if(!$this->modelo->comprobarExisteProblema($id)){
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "No existe el problema seleccionado.";
-        return $this->gestionar();
+     * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
+     *
+     * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
+     */
+    function mostrar_modificar(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->gestionar();
+        }
+        $this->view = "modificar_problema";
+        $this->titulo = "Modificar problema";
+        return $this->modelo->listar_fila($id);
     }
-    $this->view = "modificar_problema";
-    $this->titulo = "Modificar problema";
-    return $this->modelo->listar_fila($id);
-}
 
     /**
      * Muestra el formulario para eliminar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
@@ -173,7 +173,7 @@ function mostrar_modificar(){
         $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
         $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
-        $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
+        $correctas = $_POST['correctas'] ?? "";   // Se obtienen las respuestas correctas
     
         // Verificar que al menos una opción sea marcada como correcta
         if (empty($correctas)) {
@@ -206,39 +206,49 @@ function mostrar_modificar(){
     }
     
     
-    /**
- * Modifica un problema. Si lo consigue envía por $_GET un mensaje de éxito,
- * si no, uno de error. Si la id que recibe no existe muestra la gestión de problemas.
+   /**
+ * Modifica un problema. Si lo consigue, envía por $_GET un mensaje de éxito,
+ * si no, uno de error. Si la id que recibe no existe, muestra la gestión de problemas.
  *
  * @return void
  */
-function modificar(){
+function modificar()
+{
     $id = $_GET['id'] ?? '';
-    if(!$this->modelo->comprobarExisteProblema($id)){
+    if (!$this->modelo->comprobarExisteProblema($id)) {
         $_GET["tipomsg"] = "error";
         $_GET["msg"] = "No existe el problema seleccionado.";
         return $this->gestionar();
     }
+
     $titulo = trim($_POST['titulo']);
     $informacion = trim($_POST['informacion']);
     $reflexion = trim($_POST['reflexion']);
     $imagen = $_FILES['imagen'];
-    $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
-    $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
+    $correctas = $_POST['correctas'] ?? [];
 
-    // Verifica que los datos necesarios no estén vacíos antes de insertar
-    if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
-        // Llama al método del modelo para insertar la situación
-        $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
-        if($resultado){
-            $_GET["tipomsg"] = "exito";
-            $_GET["msg"] = "Problema modificado con éxito.";
-            return $this->gestionar();
-        }
+    // Verificar que al menos una opción sea marcada como correcta
+    if (empty($correctas)) {
         $_GET["tipomsg"] = "error";
-        $_GET["msg"] = $this->modelo->error;
+        $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
+        return $this->mostrar_modificar();  // Redirecciona en caso de error
+    } else {
+        // Verifica que los datos necesarios no estén vacíos antes de insertar
+        if ($this->validar($titulo, $informacion, $reflexion, $imagen)) {
+            // Llama al método del modelo para insertar la situación
+            $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $correctas);
+            if ($resultado) {
+                $_GET["tipomsg"] = "exito";
+                $_GET["msg"] = "Problema modificado con éxito.";
+                return $this->gestionar();
+            }
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = $this->modelo->error;
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Todos los campos son obligatorios.";
+        }
     }
-    $_GET["tipomsg"] = "error";
 
     return $this->mostrar_modificar();
 }
