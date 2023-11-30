@@ -47,11 +47,32 @@ class problemaController{
      *
      * @return array Array con todos los datos de los problemas.
      */
-    function listar(){
+    function listar() {
         $this->view = "listar_problema";
         $this->titulo = "Listar problemas";
-        return $this->modelo->listar();
+        
+        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
+        if (isset($_POST['continente']) || isset($_GET['continente'])) {
+            // Obtén el ID del continente, dando prioridad al valor en el formulario ($_POST)
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
     }
+    
+    
 
     /**
      * Muestra información detallada de un problema concreto.
@@ -78,9 +99,27 @@ class problemaController{
     function gestionar(){
         $this->view = "gestionar_problema";
         $this->titulo = "Gestionar problema";
-        return $this->modelo->listar();
+    
+        // Verifica si se ha enviado el formulario y si se proporcionó el ID del continente
+        if (isset($_POST['continente']) || isset($_GET['continente']) ) {
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
     }
-
+    
     /**
      * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
      *
@@ -123,28 +162,49 @@ class problemaController{
      * @return void
      */
     function insertar(){
+        $idContinente = $_GET['continente'];
+        if(!is_numeric($idContinente)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "La id del continente no es válida.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error 
+        }
         $titulo = trim($_POST['titulo']);
-        $informacion = trim($_POST['informacion']); 
+        $informacion = trim($_POST['informacion']);
         $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
-        // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo,$informacion,$reflexion,$imagen)) {            
-            // Llama al método del modelo para insertar la situación
-            $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen);
-            if($resultado){
-                $_GET["tipomsg"] = "exito";
-                $_GET["msg"] = "Problema añadido con éxito.";
-            }
-            else{
-                $_GET["tipomsg"] = "error";
-                $_GET["msg"] = $this->modelo->error;
-            }
-        } else{
+        $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
+        $correctas = $_POST['correctas'] ?? "";   // Se obtienen las respuestas correctas
+    
+        // Verificar que al menos una opción sea marcada como correcta
+        if (empty($correctas)) {
             $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error
+        } else {
+            // Realizar la inserción en la base de datos
+            if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
+                $resultado = $this->modelo->insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas,$idContinente);
+    
+                if ($resultado) {
+                    $_GET["tipomsg"] = "exito";
+                    $_GET["msg"] = "Problema añadido con éxito.";
+                    
+                    // Redireccionar a la vista "anadir_problema"
+                    $this->mostrar_anadir();
+                    return;
+                } else {
+                    $_GET["tipomsg"] = "error";
+                    $_GET["msg"] = $this->modelo->error;
+                }
+            } else {
+                $_GET["tipomsg"] = "error";
+            }
+    
+            // Si la inserción no fue exitosa o hubo un error de validación, redirigir a "mostrar_anadir"
+            $this->mostrar_anadir();
         }
-        $this->mostrar_anadir();
     }
-
+    
     
 
 
@@ -178,6 +238,7 @@ class problemaController{
             $_GET["msg"] = $this->modelo->error;
         }
         $_GET["tipomsg"] = "error";
+        
         return $this->mostrar_modificar();
     }
 

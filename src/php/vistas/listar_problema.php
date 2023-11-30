@@ -15,7 +15,6 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Opciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
                     <tr>
@@ -34,11 +33,6 @@
                                 <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
                         </td>
-                        <td>
-                            <ul>
-                                <li><a href='index.php?controller=problema&action=ver_problema&id=<?php echo $fila['idSituacion'] ?>'>Ver</a></li>
-                            </ul>
-                        </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -47,7 +41,7 @@
         <div class="no_lista">
             <h1 >No hay ningún problema en la base de datos.</h1>
             <div class='opciones'>
-                <a href='index.php?controller=conflicto'>Volver atrás</a>
+                <a href='index.php?controller=problema'>Volver atrás</a>
             </div>
         </div>
     <?php } ?>
