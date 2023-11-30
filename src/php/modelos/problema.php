@@ -152,7 +152,35 @@ class problemaModel extends Conexion{
     }
 
     /**
-     * Modifica un conflicto existente en la base de datos.
+     * Obtiene la información de un problema y sus soluciones asociadas.
+     *
+     * @param int $id ID del problema.
+     * @return array Información del problema y sus soluciones.
+     */
+    function listar_problema_solucion($id){
+        $problema = $this->listar_fila($id);
+
+        $sql = "SELECT numSolucion, textoSolucion, correcta
+        FROM solucion  
+        WHERE idSituacion = ?;";
+                
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $stmt->close();
+        $arraySoluciones = $resultado->fetch_all(MYSQLI_ASSOC);
+        $resultado->close();
+        $this->conexion->close();
+        $problemaSolucion = array(
+            "problema" => $problema,
+            "soluciones" => $arraySoluciones
+        );
+        return $problemaSolucion;
+    }
+
+    /**
+     * Modifica un problema existente en la base de datos.
      *
      * @param int $id ID del problema a modificar.
      * @param string $titulo Nuevo título del problema.
