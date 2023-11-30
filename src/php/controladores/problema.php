@@ -72,7 +72,6 @@ class problemaController{
         }
     }
     
-    
 
     /**
      * Muestra información detallada de un problema concreto.
@@ -207,50 +206,50 @@ class problemaController{
     
     
    /**
- * Modifica un problema. Si lo consigue, envía por $_GET un mensaje de éxito,
- * si no, uno de error. Si la id que recibe no existe, muestra la gestión de problemas.
- *
- * @return void
- */
-function modificar()
-{
-    $id = $_GET['id'] ?? '';
-    if (!$this->modelo->comprobarExisteProblema($id)) {
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "No existe el problema seleccionado.";
-        return $this->gestionar();
-    }
-
-    $titulo = trim($_POST['titulo']);
-    $informacion = trim($_POST['informacion']);
-    $reflexion = trim($_POST['reflexion']);
-    $imagen = $_FILES['imagen'];
-    $correctas = $_POST['correctas'] ?? [];
-
-    // Verificar que al menos una opción sea marcada como correcta
-    if (empty($correctas)) {
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
-        return $this->mostrar_modificar();  // Redirecciona en caso de error
-    } else {
-        // Verifica que los datos necesarios no estén vacíos antes de insertar
-        if ($this->validar($titulo, $informacion, $reflexion, $imagen)) {
-            // Llama al método del modelo para insertar la situación
-            $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $correctas);
-            if ($resultado) {
-                $_GET["tipomsg"] = "exito";
-                $_GET["msg"] = "Problema modificado con éxito.";
-                return $this->gestionar();
-            }
+     * Modifica un problema. Si lo consigue, envía por $_GET un mensaje de éxito,
+     * si no, uno de error. Si la id que recibe no existe, muestra la gestión de problemas.
+     *
+     * @return void
+     */
+    function modificar() {
+        $id = $_GET['id'] ?? '';
+        if (!$this->modelo->comprobarExisteProblema($id)) {
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = $this->modelo->error;
-        } else {
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "Todos los campos son obligatorios.";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->gestionar();
         }
-    }
 
-    return $this->mostrar_modificar();
+        $titulo = trim($_POST['titulo']);
+        $informacion = trim($_POST['informacion']);
+        $reflexion = trim($_POST['reflexion']);
+        $imagen = $_FILES['imagen'];
+        $soluciones = $_POST['soluciones'] ?? [];  // Asegúrate de que tienes $soluciones disponible
+        $correctas = $_POST['correctas'] ?? [];
+
+
+        // Verificar que al menos una opción sea marcada como correcta
+        if (empty($correctas)) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error
+        } else {
+            // Validar antes de modificar
+            if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
+                // Continuar con la lógica de modificación
+                $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $correctas);
+                if ($resultado) {
+                    $_GET["tipomsg"] = "exito";
+                    $_GET["msg"] = "Problema modificado con éxito.";
+                    return $this->gestionar();
+                }
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = $this->modelo->error;
+            } else {
+                $_GET["tipomsg"] = "error";
+                // Mensaje de error ya establecido en la función validar
+            }
+        }
+        return $this->mostrar_modificar();
 }
 
 
@@ -283,7 +282,7 @@ function modificar()
      *
      * @return bool True si los datos son válidos, false si no.
      */
-    function validar($titulo,$informacion,$reflexion, $imagen){
+    function validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas){
         if(empty($titulo) || empty($informacion) || empty($reflexion)){
             $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
@@ -327,7 +326,28 @@ function modificar()
                 return false;
             }    
         }
-        return true;
-    }
-    
+
+            // Validar soluciones
+        if (empty($soluciones) || !is_array($soluciones)) {
+            $_GET["msg"] = "Debes proporcionar al menos una solución.";
+            return false;
+        }
+
+        foreach ($soluciones as $solucion) {
+            // Comprobar si la solución está vacía o contiene caracteres especiales
+            if (empty($solucion) || !preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,199}$/', $solucion)) {
+                $_GET["msg"] = "Las soluciones no pueden estar vacías y deben contener solo caracteres válidos.";
+                return false;
+            }
+        }
+
+        foreach ($correctas as $respuestaCorrecta) {
+            if (!preg_match('/^[a-zA-Z0-9,]+$/', $respuestaCorrecta)) {
+                $_GET["msg"] = "Las respuestas correctas deben contener solo letras, números y comas.";
+                return false;
+            }
+        }
+        
+            return true;
+        }
 }
