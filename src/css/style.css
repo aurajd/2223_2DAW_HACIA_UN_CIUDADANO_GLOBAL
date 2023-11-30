@@ -2,32 +2,36 @@
 
 body {
     margin: 0;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;;
 }
 
 a {
     cursor: pointer;
 }
 
-#menu {
-    /* Usamos display flex para colocar las dos opciones centradas en una columna */
+/* vista divvistaMenu */
+
+#divvistaMenu main {
     display: flex;
-    /* Esto indica que los items estarán colocados en columna */
     flex-direction: column;
-    /* Esto que están justificados al centro */
     justify-content: center;
-    /* Esto que están verticalmente centrados */
     align-items: center;
     height: 100vh;
     row-gap: 5%;
-    background-color: #09A8C9;
+    background-image: url("../img/imagenFondo.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-#menu img {
+#divvistaMenu img {
     width: 20%;
+    border-radius: 200px;
 }
 
-#menu div {
-    font-family: 'Poppins', sans-serif;
+#divvistaMenu div {
     width: 100%;
 }
 
@@ -46,8 +50,9 @@ a {
     column-gap: 5%;
 }
 
-#menu a {
-    font-size: 3rem;
+#divvistaMenu a {
+    width: 20%;
+    font-size: 2rem;
     padding: 20px;
     text-decoration: none;
     color: black;
@@ -55,15 +60,20 @@ a {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 5px 10px black;
-    /* Centramos el enlace dentro del borde usando display flex */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#menu a:hover {
-    background-color: gray;
+#divvistaMenu a:hover {
+    background-color: #002041;
+    border: 2px solid white;
+    color: white;
+    box-shadow: 5px 5px 10px white;
 }
+
+
+/* Navegador general */
 
 nav {
     font-size: 1rem;
@@ -71,43 +81,21 @@ nav {
     width: 100%;
     height: 10vh;
     background-color: #002041;
-    /* Posicionamiento relativo para colocar la puntuación de forma absoluta */
-    position: relative;
-}
-
-nav p {
-    position: absolute;
-    left: 2%;
-    top: 20%;
-    height: 60%;
-    min-width: 10%;
-    margin: 0;
-    color: black;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    /* El border box para que no se descuadre por el borde */
-    box-sizing: border-box;
-    /* display flex para centrar el parrafo vertical y horizontalmente */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-ul {
+nav ul {
     padding: 0;
     margin: 0;
     height: 100%;
     width: 30%;
-    margin: auto;
+    margin: 0  auto;
     list-style-type: none;
-    /* La lista tiene un display flex */
     display: flex;
-    /* Dirección fila, los items deben estar en una sola linea */
     flex-flow: row nowrap;
-    /* Centrados verticalmente */
     align-items: center;
-    /* Existe el mismo espacio entre todos los items */
     justify-content: space-evenly;
 }
 
@@ -123,17 +111,33 @@ nav a {
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    /* El border box para que no se descuadre por el borde */
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.mainJuego {
+.puntosMensaje{
+    cursor: default;
+}
+
+
+/* vista divvistaMapa */
+
+#divvistaMapa{
+    background-image: url("../img/fondoMapa.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+#divvistaMapa main {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
     max-height: 90vh;
+    width: 100%;
     /* El aspect-ratio de la imagen de fondo, el tablero de juego, para posteriormente poder colocar las marcas en el
     mapamundi con posicionamiento absoluto con porcentajes y que no se descuadre */
     aspect-ratio: 577/333;
@@ -141,15 +145,70 @@ nav a {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
-    display: flex;
-    /* Esto centra horizontalmente. */
-    justify-content: center;
-    /* Esto centra verticalmente. */
-    align-items: center;
+    position: relative;
 }
 
-.mainJuego>div {
+#boton_eu1{
+    position: absolute;
+    top: 18%;
+    right: 47%;
+    cursor: pointer;
+}
+
+#boton_eu2{
+    position: absolute;
+    top: 22%;
+    right: 35%;
+    cursor: pointer;
+}
+
+#boton_eu3{
+    position: absolute;
+    bottom: 18%;
+    right: 20%;
+    cursor: pointer;
+}
+
+#boton_eu4{
+    position: absolute;
+    top: 18%;
+    left: 25%;
+    cursor: pointer;
+}
+
+#boton_eu5{
+    position: absolute;
+    bottom: 25%;
+    left: 33%;
+    cursor: pointer;
+}
+
+#boton_eu6{
+    position: absolute;
+    top: 43%;
+    right: 47%;
+    cursor: pointer;
+}
+
+#divvistaMapa img{
+    height: 130px;
+}
+
+.cuadro-texto{
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    height: 50%;
+    width: 13%;
+    border-radius: 20px;
+    padding: 2.5%;
+    background-color: #002041;
+    color: white;
+}
+
+/* Vista divvistaProb*/
+
+.maainJuego>div {
     height: 60%;
     width: 60%;
     border: 2px solid black;
@@ -158,20 +217,58 @@ nav a {
     padding: 5% 5%;
 }
 
-#ranking {
+
+/* Vista divvistaConf*/
+
+
+/* Vista divvistaProb*/
+
+
+/* Vista divvistaRank*/
+
+#divvistaRank{
+    background-image: url("../img/ranking.jpeg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#divvistaRank main{
+    height: calc(100vh - 10vh);
+    display: flex;
+    align-items: center;
+}
+
+#divvistaRank div{
+    margin: 0 auto;
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #ffffffcc;
+    padding: 5% 5%;
+}
+
+#divvistaRank table {
     height: 100%;
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
     border-collapse: separate;
     border-spacing: 0.5rem 1rem;
+    margin: 0 auto;
 }
 
-#ranking th {
-    height: 20%;
+#divvistaRank th {
+    height: 7vh;
 }
 
-#ranking td,
+#divvistaRank td {
+    height: 5vh;
+}
+
+#divvistaRank td,
 th {
     vertical-align: middle;
     background-color: white;
@@ -179,7 +276,7 @@ th {
     border-radius: 10px;
 }
 
-#ranking td:first-child {
+#divvistaRank td:first-child {
     width: 70%;
 }
 
@@ -195,90 +292,97 @@ th {
     background-color: #CD7F32 !important;
 }
 
-#divPuntuacion h1 {
-    height: 30%;
-    margin: 0;
+/* Vista divvistaForm*/
+
+#divvistaForm{
+    height: 100vh;
+    width: 100%;
+    background-image: url("../img/fondoPuntuacion.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#divvistaForm main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+#divvistaForm div {
+    margin: 0 auto;
+    width: 40%;
+    height: 60%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #ffffffcc;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#divvistaForm h1 {
     font-size: 2rem;
     text-align: center;
     font-weight: bold;
+    margin: 0 0 20px;
 }
 
-#divPuntuacion form {
-    width: 100%;
+#divvistaForm form {
     height: 70%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
-#divPuntuacion input[type="text"] {
-    width: 60%;
-    height: 30%;
+#divvistaForm input[type="text"] {
+    width: 100%;
+    height: 40px;
     font-size: 2rem;
     text-align: center;
     border-radius: 15px;
     background-color: white;
-    display: inline-block;
-    position: absolute;
-    top: 0%;
-    left: 0%;
 }
 
-#divPuntuacion .puntosMensaje {
-    width: 35%;
-    height: 30%;
-    margin: 0;
+#divvistaForm .puntosMensaje {
+    width: 60%;
+    text-align: center;
+    height: 20%;
     font-size: 2rem;
     background-color: #09A8C9;
     border: 2px solid black;
     border-radius: 15px;
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    /* Usamos inline-flex para poder centrarlo vertical y horizontalmente pero tambien poder darle width y height */
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 #divPuntuacion input[type="submit"],
-#divPuntuacion button {
-    width: 30%;
-    height: 20%;
+#divPuntuacion a {
+    padding: 5px;
+    box-sizing: content-box;
     font-size: 2rem;
     text-decoration: none;
     color: black;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-}
-
-#divPuntuacion input[type="submit"] {
     font-family: 'Roboto', sans-serif;
-    position: absolute;
-    bottom: 0%;
-    left: 15%;
-}
-
-#divPuntuacion button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 0%;
-    right: 15%;
 }
 
 #divPuntuacion input:hover[type="submit"],
-#divPuntuacion button:hover {
+#divPuntuacion a:hover {
     background-color: #d7d7d7;
-    /* Para que el submit muestre la manita para hacer click cuando haces hover */
     cursor: pointer;
 }
 
 #usernameError {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50% !important;
-    left: 50% !important;
+    font-family: 'Roboto', sans-serif;
 }
 
 .marcado{
