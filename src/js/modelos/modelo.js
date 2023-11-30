@@ -32,10 +32,6 @@ export class Modelo {
   obtenerPuntuacion () {
     return this.puntuacion
   }
-  obtenerMotivoCorrecto(id){
-    let idMotivo = 1;
-    return idMotivo;
-  }
 
   puntuacionPOST(username,puntuacion){
     //Validación de datos...

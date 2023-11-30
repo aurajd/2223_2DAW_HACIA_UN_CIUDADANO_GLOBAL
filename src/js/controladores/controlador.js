@@ -38,17 +38,17 @@ class Controlador {
 
     // Crear instancias de las vistas
     this.vistas = new Map()
-    this.vistas.set(Vista.VISTA1, new VistaMenu(this, divvistaMenu))
-    this.vistas.set(Vista.VISTA2, new VistaMapa(this, divvistaMapa))
-    this.vistas.set(Vista.VISTA3, new VistaRanking(this, divvistaRank))
-    this.vistas.set(Vista.VISTA6, new VistaProblema(this, divvistaProb))
-    this.vistas.set(Vista.VISTA5, new VistaFormulario(this, divvistaForm))
-    this.vistas.set(Vista.VISTA4, new VistaContinente(this, divvistaCont))
-    this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
-    this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaConf))
-    this.vistas.set(Vista.VISTA9, new VistaFecha(this, divvistaFech))
+    this.vistas.set(Vista.VISTAMENU, new VistaMenu(this, divvistaMenu))
+    this.vistas.set(Vista.VISTAMAPA, new VistaMapa(this, divvistaMapa))
+    this.vistas.set(Vista.VISTARANKING, new VistaRanking(this, divvistaRank))
+    this.vistas.set(Vista.VISTAPROBLEMA, new VistaProblema(this, divvistaProb))
+    this.vistas.set(Vista.VISTAFORMULARIO, new VistaFormulario(this, divvistaForm))
+    this.vistas.set(Vista.VISTACONTINENTE, new VistaContinente(this, divvistaCont))
+    this.vistas.set(Vista.VISTAREFLEXION, new VistaReflexion(this, divvistaRef))
+    this.vistas.set(Vista.VISTACONFLICTO, new VistaConflicto(this, divvistaConf))
+    this.vistas.set(Vista.VISTAFECHA, new VistaFecha(this, divvistaFech))
 
-    this.verVista(Vista.VISTA1)
+    this.verVista(Vista.VISTAMENU)
   }
 
 
@@ -77,13 +77,13 @@ class Controlador {
     /** @const {number} puntosPorPregunta - Puntos otorgados por acertar una pregunta. */
     const puntosPorPregunta = 10
     this.modelo.aumentarPuntuacion(puntosPorPregunta)
-    this.vistas.get(Vista.VISTA2).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA6).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA4).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA7).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA8).actualizarPuntuacionEnInterfaz()
-    this.vistas.get(Vista.VISTA9).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTAMAPA).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTAPROBLEMA).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTAFORMULARIO).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTACONTINENTE).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTAREFLEXION).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTACONFLICTO).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTAFECHA).actualizarPuntuacionEnInterfaz()
   }
 
   /**
@@ -144,19 +144,19 @@ class Controlador {
 
   async cambiarContinentes(id){
     const preguntas = await this.modelo.devolverPreguntasContinente(id);
-    await this.vistas.get(Vista.VISTA4).actualizarContinente(preguntas,id)
-    this.verVista(Vista.VISTA4)
+    await this.vistas.get(Vista.VISTACONTINENTE).actualizarContinente(preguntas,id)
+    this.verVista(Vista.VISTACONTINENTE)
   }
 
   async cambiarSoluciones (idContinente,idProblema){
     const problema = await this.modelo.devolverPregunta(idContinente,idProblema);
-    this.vistas.get(Vista.VISTA6).actualizarProblema(problema,idContinente,idProblema)
+    this.vistas.get(Vista.VISTAPROBLEMA).actualizarProblema(problema,idContinente,idProblema)
   }
 
   async cambiarMotivos(idContinente,idConflicto){
     console.log(idContinente)
     const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
-    this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
+    this.vistas.get(Vista.VISTACONFLICTO).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
 
   async anadirPuntuacion(username,puntuacion){
@@ -165,8 +165,8 @@ class Controlador {
 
   async mostrarRankingActualizado(){
     const ranking = await this.modelo.obtenerRanking()
-    this.vistas.get(Vista.VISTA3).actualizarRanking(ranking)
-    this.verVista(Vista.VISTA3)
+    this.vistas.get(Vista.VISTARANKING).actualizarRanking(ranking)
+    this.verVista(Vista.VISTARANKING)
   }
 
   async devolverContinente(id){
@@ -176,11 +176,11 @@ class Controlador {
 
   cambiarFecha(fecha,idContinente){
     console.log(idContinente)
-    this.vistas.get(Vista.VISTA9).actualizarFecha(fecha,idContinente)
+    this.vistas.get(Vista.VISTAFECHA).actualizarFecha(fecha,idContinente)
   }
 
   cambiarReflexion(reflexion,idContinente){
-    this.vistas.get(Vista.VISTA7).actualizarReflexion(reflexion,idContinente)
+    this.vistas.get(Vista.VISTAREFLEXION).actualizarReflexion(reflexion,idContinente)
   }
   
   eliminarFila(idContinente,idFila){
@@ -190,8 +190,8 @@ class Controlador {
   async comprobarFilasContinente(idContinente){
     const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
     if(continenteVacio){
-      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
-      this.verVista(Vista.VISTA2)
+      this.vistas.get(Vista.VISTAMAPA).eliminarContinente(idContinente)
+      this.verVista(Vista.VISTAMAPA)
     }else{
       this.cambiarContinentes(idContinente)
     }
@@ -200,7 +200,7 @@ class Controlador {
   async comprobarContinentesCambiar(idContinente){
     const continentesVacios = await this.modelo.comprobarContinentesVacio()
     if(continentesVacios){
-      this.verVista(Vista.VISTA5)
+      this.verVista(Vista.VISTAFORMULARIO)
     }else{
       this.comprobarFilasContinente(idContinente);
     }
@@ -209,7 +209,7 @@ class Controlador {
   async comprobarContinentesMapa(idContinente){
     const continentesVacios = await this.modelo.comprobarContinentesVacio()
     if(continentesVacios){
-      this.verVista(Vista.VISTA5)
+      this.verVista(Vista.VISTAFORMULARIO)
     }else{
       this.comprobarFilasMapa(idContinente);
     }
@@ -218,30 +218,30 @@ class Controlador {
   async comprobarFilasMapa(idContinente){
     const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
     if(continenteVacio){
-      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+      this.vistas.get(Vista.VISTAMAPA).eliminarContinente(idContinente)
     }
-    this.verVista(Vista.VISTA2)
+    this.verVista(Vista.VISTAMAPA)
 
   }
 
   async volverMapaComprobar(){
     if(await this.modelo.comprobarContinentesVacio()){
-      this.verVista(Vista.VISTA5)
+      this.verVista(Vista.VISTAFORMULARIO)
     }else{
-      this.verVista(Vista.VISTA2)
+      this.verVista(Vista.VISTAMAPA)
     }
   }
 
   cambiarEnlaceRankingInicio(){
-    this.vistas.get(Vista.VISTA3).cambiarEnlaceInicio()
+    this.vistas.get(Vista.VISTARANKING).cambiarEnlaceInicio()
   }
 
   cambiarEnlaceRankingMapa(){
-    this.vistas.get(Vista.VISTA3).cambiarEnlaceMapa()
+    this.vistas.get(Vista.VISTARANKING).cambiarEnlaceMapa()
   }
   
   borrarBotonInicio(){
-    this.vistas.get(Vista.VISTA1).borrarBotonInicio()
+    this.vistas.get(Vista.VISTAMENU).borrarBotonInicio()
   }
 }
 

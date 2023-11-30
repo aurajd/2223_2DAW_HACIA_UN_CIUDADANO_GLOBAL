@@ -29,7 +29,7 @@ export class VistaMenu extends Vista {
      * Maneja el evento de hacer clic en el primer enlace del menú.
      */
   pulsarEnlace1 () {
-    this.controlador.verVista(Vista.VISTA2) // Cambiamos a Vista Mapa
+    this.controlador.verVista(Vista.VISTAMAPA) // Cambiamos a Vista Mapa
   }
 
   /**

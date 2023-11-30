@@ -1,7 +1,7 @@
 /**
  * Clase que representa una vista en la aplicación.
  */
-export class VistaAdminProblema {
+class VistaAdminProblema {
     
     constructor () {
         this.regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/;
@@ -22,6 +22,7 @@ export class VistaAdminProblema {
         
         this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
 
+        this.imagen.addEventListener("change", this.validarTamanioImagen.bind(this));
         this.titulo.addEventListener("blur", (event) => this.validar(this.regexTitulo,event.target))
         this.informacion.addEventListener("blur", (event) => this.validar(this.regexInformacion,event.target))
         this.reflexion.addEventListener("blur", (event) => this.validar(this.regexInformacion,event.target))
@@ -65,6 +66,7 @@ export class VistaAdminProblema {
             // Verificar si el tamaño del archivo es menor o igual a 3 MB
             if (tamanoEnMB > 3) {
                 alert("La imagen debe pesar menos de 3 MB");
+                this.imagen.value = null
                 return false;
             }
         }

@@ -11,7 +11,7 @@ export class VistaProblema extends Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista de la pregunta.
      */
   constructor (controlador, base) {
-    super(controlador, base, Vista.VISTA6)
+    super(controlador, base, Vista.VISTAPROBLEMA)
 
     this.respuestasCorrectas = [false,false,false]
     this.respuestasSeleccionadas = [false,false,false]
@@ -167,6 +167,6 @@ export class VistaProblema extends Vista {
   continuar(){
     this.controlador.cambiarReflexion(this.reflexion,this.idContinente)
     this.resetearSeleccion();
-    this.controlador.verVista(Vista.VISTA7)
+    this.controlador.verVista(Vista.VISTAREFLEXION)
   }
 }

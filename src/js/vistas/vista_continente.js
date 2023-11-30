@@ -11,7 +11,7 @@ export class VistaContinente extends Vista {
      * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
      */
   constructor (controlador, base) {
-    super(controlador, base, Vista.VISTA2)
+    super(controlador, base, Vista.VISTAMAPA)
 
     this.h2Nombre = document.querySelector("#nombreContinente") 
     this.imagenContinente = document.querySelector("#imagenInfo")
@@ -65,13 +65,13 @@ export class VistaContinente extends Vista {
   prepararSoluciones(event){
     let idProblema = event.target.id.slice(-1)
     this.controlador.cambiarSoluciones(this.idContinente,idProblema);
-    this.controlador.verVista(Vista.VISTA6)
+    this.controlador.verVista(Vista.VISTAPROBLEMA)
   }
 
   prepararMotivos(event){
     let idConflicto = event.target.id.slice(-1)
     this.controlador.cambiarMotivos(this.idContinente,idConflicto);
-    this.controlador.verVista(Vista.VISTA8)
+    this.controlador.verVista(Vista.VISTACONFLICTO)
   }
 
   /**

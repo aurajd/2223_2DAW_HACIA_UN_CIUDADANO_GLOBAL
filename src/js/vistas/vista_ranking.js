@@ -31,10 +31,10 @@ export class VistaRanking extends Vista {
   }
 
   cambiarEnlaceMapa(){
-    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTA2)}
+    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTAMAPA)}
   }
 
   cambiarEnlaceInicio(){
-    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTA1)}
+    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTAMENU)}
   }
 }

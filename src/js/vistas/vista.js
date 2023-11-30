@@ -6,15 +6,15 @@ export class Vista {
      * Símbolos que representan distintas vistas en la aplicación.
      * @type {Symbol}
      */
-  static VISTA1 = Symbol('Inicio')
-  static VISTA2 = Symbol('Mapa')
-  static VISTA3 = Symbol('Ranking')
-  static VISTA4 = Symbol('Continente')
-  static VISTA5 = Symbol('Formulario')
-  static VISTA6 = Symbol('Problema')
-  static VISTA7 = Symbol('Reflexion')
-  static VISTA8 = Symbol('conflicto')
-  static VISTA9 = Symbol('fecha')
+  static VISTAMENU = Symbol('Inicio')
+  static VISTAMAPA = Symbol('Mapa')
+  static VISTARANKING = Symbol('Ranking')
+  static VISTACONTINENTE = Symbol('Continente')
+  static VISTAFORMULARIO = Symbol('Formulario')
+  static VISTAPROBLEMA = Symbol('Problema')
+  static VISTAREFLEXION = Symbol('Reflexion')
+  static VISTACONFLICTO = Symbol('conflicto')
+  static VISTAFECHA = Symbol('fecha')
 
   /**
      * Constructor de la clase Vista.

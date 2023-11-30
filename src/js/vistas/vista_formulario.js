@@ -34,7 +34,7 @@ export class VistaFormulario extends Vista {
   cancelarEnvio(){
     console.log("hola")
     this.borrarBotonInicio()
-    this.controlador.verVista(Vista.VISTA1)
+    this.controlador.verVista(Vista.VISTAMENU)
   }
 
   borrarBotonInicio(){

@@ -155,6 +155,6 @@ export class VistaConflicto extends Vista {
     console.log(this.idConflicto)
     this.controlador.cambiarFecha(this.fecha, this.idContinente)
     this.resetearSeleccion();
-    this.controlador.verVista(Vista.VISTA9)
+    this.controlador.verVista(Vista.VISTAFECHA)
   }
 }
