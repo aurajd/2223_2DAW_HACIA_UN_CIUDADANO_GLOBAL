@@ -11,8 +11,10 @@ export class Vista {
   static VISTA3 = Symbol('Ranking')
   static VISTA4 = Symbol('Continente')
   static VISTA5 = Symbol('Formulario')
-  static VISTA6 = Symbol('Pregunta')
+  static VISTA6 = Symbol('Problema')
   static VISTA7 = Symbol('Reflexion')
+  static VISTA8 = Symbol('conflicto')
+  static VISTA9 = Symbol('fecha')
 
   /**
      * Constructor de la clase Vista.
@@ -33,6 +35,15 @@ export class Vista {
       this.base.style.display = 'block'
     } else {
       this.base.style.display = 'none'
+    }
+  }
+
+  actualizarPuntuacionEnInterfaz () {
+    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
+    if (puntuacionElemento) {
+      
+      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
+      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
     }
   }
 }

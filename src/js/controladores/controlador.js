@@ -11,8 +11,10 @@ import { VistaMapa } from '../vistas/vista_mapa.js'
 import { VistaRanking } from '../vistas/vista_ranking.js'
 import { VistaContinente } from '../vistas/vista_continente.js'
 import { VistaFormulario } from '../vistas/vista_formulario.js'
-import { VistaPregunta } from '../vistas/vista_pregunta.js'
+import { VistaProblema } from '../vistas/vista_problema.js'
 import { VistaReflexion } from '../vistas/vista_reflexion.js'
+import { VistaConflicto } from '../vistas/vista_conflicto.js'
+import { VistaFecha } from '../vistas/vista_fecha.js'
 
 class Controlador {
   /**
@@ -21,7 +23,7 @@ class Controlador {
        */
   constructor () {
     /** @type {Modelo} */
-    this.modelo = new Modelo()
+    this.modelo = new Modelo(this)
 
     // Obtener referencias de las vistas del HTML
     const divvistaMenu = document.getElementById('divvistaMenu')
@@ -29,21 +31,26 @@ class Controlador {
     const divvistaCont = document.getElementById('divvistaCont')
     const divvistaRank = document.getElementById('divvistaRank')
     const divvistaForm = document.getElementById('divvistaForm')
-    const divvistaPreg = document.getElementById('divvistaPreg')
+    const divvistaProb = document.getElementById('divvistaProb')
     const divvistaRef = document.getElementById('divvistaRef')
+    const divvistaConf = document.getElementById('divvistaConf')
+    const divvistaFech = document.getElementById('divvistaFech')
 
     // Crear instancias de las vistas
     this.vistas = new Map()
     this.vistas.set(Vista.VISTA1, new VistaMenu(this, divvistaMenu))
     this.vistas.set(Vista.VISTA2, new VistaMapa(this, divvistaMapa))
     this.vistas.set(Vista.VISTA3, new VistaRanking(this, divvistaRank))
-    this.vistas.set(Vista.VISTA6, new VistaPregunta(this, divvistaPreg))
+    this.vistas.set(Vista.VISTA6, new VistaProblema(this, divvistaProb))
     this.vistas.set(Vista.VISTA5, new VistaFormulario(this, divvistaForm))
     this.vistas.set(Vista.VISTA4, new VistaContinente(this, divvistaCont))
     this.vistas.set(Vista.VISTA7, new VistaReflexion(this, divvistaRef))
+    this.vistas.set(Vista.VISTA8, new VistaConflicto(this, divvistaConf))
+    this.vistas.set(Vista.VISTA9, new VistaFecha(this, divvistaFech))
 
     this.verVista(Vista.VISTA1)
   }
+
 
   /**
        * Muestra una vista.
@@ -70,10 +77,13 @@ class Controlador {
     /** @const {number} puntosPorPregunta - Puntos otorgados por acertar una pregunta. */
     const puntosPorPregunta = 10
     this.modelo.aumentarPuntuacion(puntosPorPregunta)
-    this.vistas.get(Vista.VISTA3).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA2).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA6).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA5).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA4).actualizarPuntuacionEnInterfaz()
     this.vistas.get(Vista.VISTA7).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA8).actualizarPuntuacionEnInterfaz()
+    this.vistas.get(Vista.VISTA9).actualizarPuntuacionEnInterfaz()
   }
 
   /**
@@ -87,14 +97,26 @@ class Controlador {
   /**
        * Maneja la validación del formulario.
        */
-  manejarValidacionFormulario () {
+  async manejarValidacionFormulario () {
+    // Obtener el valor del nombre de usuario
+    /** @type {string} */
+    const username = document.getElementById('username').value
+    console.log(username)
+
+    // Obtener el valor de la puntuación
+    /** @type {number} */
+    const puntuacion = this.modelo.obtenerPuntuacion()
+    console.log(puntuacion)
+
     /** @type {boolean} */
-    const esValido = this.validarFormulario()
+    const esValido = this.validarFormulario(username)
 
     if (esValido) {
       // Realizar acciones adicionales si el formulario es válido
       alert('Formulario válido.')
-      this.verVista(Vista.VISTA3)
+      this.cambiarEnlaceRankingInicio()
+      await this.anadirPuntuacion(username,puntuacion)
+      this.mostrarRankingActualizado()
     } else {
       alert('Formulario no válido.')
     }
@@ -104,13 +126,10 @@ class Controlador {
        * Valida el formulario.
        * @returns {boolean} - true si el formulario es válido, false de lo contrario.
        */
-  validarFormulario () {
-    // Obtener el valor del nombre de usuario
-    /** @type {string} */
-    const username = document.getElementById('username').value
+  validarFormulario (username,puntuacion) {
     // Expresión regular para verificar que no comienza con números y tiene máximo 30 caracteres
     /** @type {RegExp} */
-    const usernameRegex = /^[a-zA-Z][a-zA-Z\s0-9]{0,29}$/
+    const usernameRegex = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,29}$/
     // Verificar si el nombre de usuario cumple con la expresión regular
     if (!usernameRegex.test(username)) {
       // Mostrar mensaje de error
@@ -121,6 +140,108 @@ class Controlador {
       document.getElementById('usernameError').innerHTML = ''
       return true // Permitir que el formulario se envíe
     }
+  }
+
+  async cambiarContinentes(id){
+    const preguntas = await this.modelo.devolverPreguntasContinente(id);
+    await this.vistas.get(Vista.VISTA4).actualizarContinente(preguntas,id)
+    this.verVista(Vista.VISTA4)
+  }
+
+  async cambiarSoluciones (idContinente,idProblema){
+    const problema = await this.modelo.devolverPregunta(idContinente,idProblema);
+    this.vistas.get(Vista.VISTA6).actualizarProblema(problema,idContinente,idProblema)
+  }
+
+  async cambiarMotivos(idContinente,idConflicto){
+    console.log(idContinente)
+    const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
+    this.vistas.get(Vista.VISTA8).actualizarConflicto(conflicto,idContinente,idConflicto)
+  }
+
+  async anadirPuntuacion(username,puntuacion){
+    await this.modelo.puntuacionPOST(username,puntuacion)
+  }
+
+  async mostrarRankingActualizado(){
+    const ranking = await this.modelo.obtenerRanking()
+    this.vistas.get(Vista.VISTA3).actualizarRanking(ranking)
+    this.verVista(Vista.VISTA3)
+  }
+
+  async devolverContinente(id){
+    const continente = await this.modelo.devolverContinente(id)
+    return continente
+  }
+
+  cambiarFecha(fecha,idContinente){
+    console.log(idContinente)
+    this.vistas.get(Vista.VISTA9).actualizarFecha(fecha,idContinente)
+  }
+
+  cambiarReflexion(reflexion,idContinente){
+    this.vistas.get(Vista.VISTA7).actualizarReflexion(reflexion,idContinente)
+  }
+  
+  eliminarFila(idContinente,idFila){
+    this.modelo.eliminarFilaPregunta(idContinente,idFila)
+  }
+
+  async comprobarFilasContinente(idContinente){
+    const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
+    if(continenteVacio){
+      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+      this.verVista(Vista.VISTA2)
+    }else{
+      this.cambiarContinentes(idContinente)
+    }
+  }
+
+  async comprobarContinentesCambiar(idContinente){
+    const continentesVacios = await this.modelo.comprobarContinentesVacio()
+    if(continentesVacios){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.comprobarFilasContinente(idContinente);
+    }
+  }
+
+  async comprobarContinentesMapa(idContinente){
+    const continentesVacios = await this.modelo.comprobarContinentesVacio()
+    if(continentesVacios){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.comprobarFilasMapa(idContinente);
+    }
+  }
+
+  async comprobarFilasMapa(idContinente){
+    const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
+    if(continenteVacio){
+      this.vistas.get(Vista.VISTA2).eliminarContinente(idContinente)
+    }
+    this.verVista(Vista.VISTA2)
+
+  }
+
+  async volverMapaComprobar(){
+    if(await this.modelo.comprobarContinentesVacio()){
+      this.verVista(Vista.VISTA5)
+    }else{
+      this.verVista(Vista.VISTA2)
+    }
+  }
+
+  cambiarEnlaceRankingInicio(){
+    this.vistas.get(Vista.VISTA3).cambiarEnlaceInicio()
+  }
+
+  cambiarEnlaceRankingMapa(){
+    this.vistas.get(Vista.VISTA3).cambiarEnlaceMapa()
+  }
+  
+  borrarBotonInicio(){
+    this.vistas.get(Vista.VISTA1).borrarBotonInicio()
   }
 }
 

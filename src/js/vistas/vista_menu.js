@@ -19,13 +19,10 @@ export class VistaMenu extends Vista {
     this.enlace1 = this.base.querySelectorAll('a')[0]
     /** @type {HTMLElement} */
     this.enlace2 = this.base.querySelectorAll('a')[1]
-    /** @type {HTMLElement} */
-    this.enlace3 = this.base.querySelectorAll('a')[2]
 
     // Asociar eventos
     this.enlace1.onclick = this.pulsarEnlace1.bind(this)
     this.enlace2.onclick = this.pulsarEnlace2.bind(this)
-    this.enlace3.onclick = this.pulsarEnlace3.bind(this)
   }
 
   /**
@@ -39,13 +36,11 @@ export class VistaMenu extends Vista {
      * Maneja el evento de hacer clic en el segundo enlace del menú.
      */
   pulsarEnlace2 () {
-    this.controlador.verVista(Vista.VISTA3) // Cambiamos a Vista Ranking
+    this.controlador.cambiarEnlaceRankingInicio()
+    this.controlador.mostrarRankingActualizado()
   }
 
-  /**
-     * Maneja el evento de hacer clic en el tercer enlace del menú.
-     */
-  pulsarEnlace3 () {
-    this.controlador.verVista(Vista.VISTA5) // Cambiamos a Vista Formulario
+  borrarBotonInicio(){
+    this.enlace1.remove()
   }
 }

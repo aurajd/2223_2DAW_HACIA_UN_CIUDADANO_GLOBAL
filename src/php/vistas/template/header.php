@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/style_admin.css">
 </head>
 <body>
-    <nav>
-        <h1>MENÚ ADMINISTRADOR</h1>
-        <a href="index.php?controller=continente">Continentes</a>        
-        <a href="index.php?controller=problema">Problemas</a>        
-        <a href="index.php?controller=conflicto">Conflictos</a>
-        <a href="index.php?controller=puntuacion">Puntuaciones</a>
+    <nav class="navbar">
+        <h1>Menú administrador</h1>
+        <a href="index.php?controller=continente" class="back-link">Continentes</a>        
+        <a href="index.php?controller=problema" class="back-link">Problemas</a>        
+        <a href="index.php?controller=conflicto" class="back-link">Conflictos</a>
+        <a href="index.php?controller=puntuacion" class="back-link">Puntuaciones</a>
     </nav>
