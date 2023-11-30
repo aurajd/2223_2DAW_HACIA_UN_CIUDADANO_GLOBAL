@@ -9,6 +9,7 @@ body{
     margin: 0;
 }
 
+/* Navegador principal */
 nav{
     height: 10vh;
     background-color: rgba(0, 0, 0, 0.7);
@@ -41,19 +42,18 @@ nav a:hover{
     box-shadow: 0px 0px 15px white;
 }
 
+/* div general para el contenido */
 main{
-    /* Usamos display flex para centrar vertical y horizontalmente el contenido dentro del main. */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
+    height: 90vh;
 }
 
-/* Creamos un div dentro del main el cual estará centrado. */
 main>div{
     font-family: 'Roboto', sans-serif;
-    width: 50%;
-    min-height: 75vh;
+    width: 85%;
+    min-height: 75%;
     margin: 10px 0px;
     padding: 2% 5%;
     border-radius: 20px;
@@ -62,7 +62,6 @@ main>div{
     box-shadow: 0px 0px 15px white;
     display: flex;
     flex-direction: column;
-    /* Esto mete espacio entre items si no ocupan el 100% del espacio */
     justify-content: space-evenly;
     align-items: center;
 }
@@ -71,7 +70,7 @@ main>div{
     background-color: #333;
     color: #fff;
     text-align: center;
-    height: 90vh; /* Ocupa el 100% de la altura de la pantalla */
+    height: 90vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,14 +89,14 @@ img{
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
     margin: 10px;
-    padding: 35px 75px; /* Ajuste del tamaño del botón */
+    padding: 10px; 
     background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 2em; /* Ajuste del tamaño de la fuente */
-    min-width: 40%;
+    font-size: 2em; 
+    width: 300px;
 }
 
 .boton:hover{
@@ -121,10 +120,7 @@ h1{
 }
 
 .titulo, label{
-    /* Usamos display block para que el label se encuentre encima del input */
     display: block;
-    /* Metemos más margin por encima del label, separando los distintos elementos del formulario, 
-    que por debajo, para separa el label del input */
     margin: 20px 0 5px;
     font-size: 1.3rem;
     color: white;
@@ -149,9 +145,7 @@ textarea{
     min-height: 100px;  
     padding: 0.5rem 1rem;
     background-color: #efefef;
-    /* Permitimos que la textarea se pueda redimensionar verticalmente */
     resize: vertical;
-    /* Usamos box-sizing border-box para que no se descuadre con el padding en rem */
     box-sizing: border-box;
     margin: 10px 0;
 }

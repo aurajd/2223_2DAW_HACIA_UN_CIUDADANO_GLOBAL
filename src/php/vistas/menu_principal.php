@@ -1,9 +1,9 @@
 <main>
     <div>
         <h1>Menú administrador</h1>
-        <a href="index.php?controller=continente" class="boton">Continentes</a>        
-        <a href="index.php?controller=problema" class="boton">Problemas</a>        
-        <a href="index.php?controller=conflicto" class="boton">Conflictos</a>
-        <a href="index.php?controller=puntuacion" class="boton">Puntuaciones</a>
+        <a href="index.php?controller=continente"><button class="boton">Continentes</button></a>  
+        <a href="index.php?controller=problema"><button class="boton">Problemas</button></a>        
+        <a href="index.php?controller=conflicto"><button class="boton">Conflictos</button></a>  
+        <a href="index.php?controller=puntuacion"><button class="boton">Puntuaciones</button></a>  
     </div>
 </main>

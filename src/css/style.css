@@ -384,3 +384,21 @@ th {
 #usernameError {
     font-family: 'Roboto', sans-serif;
 }
+
+
+/* */
+.marcado{
+    background-color: gray;
+}
+
+.respuestaCorrecta{
+    background-color: greenyellow;
+}
+
+.respuestaIncorrecta{
+    background-color: red;
+}
+
+.respuestaCorrectaNoMarcada{
+    background-color: yellow;
+}

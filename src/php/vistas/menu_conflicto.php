@@ -9,7 +9,9 @@
             <option value="Am_sur">América del sur</option>
             <option value="Africa">África</option>
         </select>
-        <a class="boton" href="index.php?controller=conflicto&action=gestionar">Gestionar</a>
-        <a class="boton" href="index.php?controller=conflicto&action=listar">Listar</a>   
+        <div>
+            <a href="index.php?controller=conflicto&action=gestionar"><button class="boton">Gestionar</button></a>
+            <a href="index.php?controller=conflicto&action=listar"><button class="boton">Listar</button></a>
+        </div>
     </div>
 </main>

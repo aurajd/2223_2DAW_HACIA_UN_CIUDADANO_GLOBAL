@@ -21,9 +21,6 @@
 					<a>
 						<p>Ranking</p>
 					</a>
-					<a>
-						<p>Formulario</p>
-					</a>
 				</div>
 			</main>
 		</div>
@@ -36,11 +33,6 @@
 						</a>
 					</li>
 					<li>
-						<a class="verMenu">
-							Inicio
-						</a>
-					</li>
-					<li>
 						<a class="verRanking">
 							Rankings
 						</a>
@@ -48,88 +40,131 @@
 				</ul>
 			</nav>
 			<main>
-				<article id="boton_eu1"><img src="img/boton.gif" alt="Europa"></article>
-				<article id="boton_eu2"><img src="img/boton.gif" alt="Asia"></article>
-				<article id="boton_eu3"><img src="img/boton.gif" alt="Oceanía"></article>
-				<article id="boton_eu4"><img src="img/boton.gif" alt="América del Norte"></article>
-				<article id="boton_eu5"><img src="img/boton.gif" alt="América del Sur"></article>
-				<article id="boton_eu6"><img src="img/boton.gif" alt="África"></article>
+				<article><img id="boton_eu1" src="img/boton.gif" alt="Europa"></article>
+				<article><img id="boton_eu2" src="img/boton.gif" alt="Asia"></article>
+				<article><img id="boton_eu3" src="img/boton.gif" alt="Oceanía"></article>
+				<article><img id="boton_eu4" src="img/boton.gif" alt="América del Norte"></article>
+				<article><img id="boton_eu5" src="img/boton.gif" alt="América del Sur"></article>
+				<article><img id="boton_eu6" src="img/boton.gif" alt="África"></article>
 			</main>
 		</div>
-		<div id="divvistaPreg">
+		<div id="divvistaProb">
 			<nav>
 				<p class="puntosMensaje">Puntuación: 0</p>
 				<ul>
 					<li>
-						<a class="puntosMensaje">
-							Puntuación: 0
-						</a>
-					</li>
-					<li>
 						<a class="verMenu">
-							Inicio
-						</a>
-					</li>
-					<li>
-						<a class="verRanking">
-							Rankings
+							Volver al mapa
 						</a>
 					</li>
 				</ul>
 			</nav>
 			<main class="mainJuego">
-				<div>
-					<img src="img/logo.png" alt="Foto continente" id="imagenInfo">
-					<br>
-					<div id="informacion">
+				<div id="infoProblema">
+					<div>
+						<img src="" alt="Foto Problema" id="imagenProblema">
+					</div>
+					<div id="informacionProblema">
 						Información
 					</div>
 				</div>
 				<div>
 					<div id="divProblemas">
-						<h2 class="encabezados">NOMBRE DEL PROBLEMA</h2>
-						<div id="preguntaContainer" class="problemas">
-							<button id="pregunta1">SOLUCIÓN A</button>
+						<div class="preguntaContainer">
 						</div>
-						<div id="opcionesContainer" class="problemas">
-							<button id="pregunta2">SOLUCIÓN B</button>
+						<h2 class="encabezados">¿Cuáles son posibles soluciones de este problema?</h2>
+						<div class="opcionesContainer">
+							<button id="solucion1">SOLUCIÓN A</button>
 						</div>
-						<div id="opcionesContainer" class="problemas">
-							<button id="pregunta3">SOLUCIÓN C</button>
+						<div class="opcionesContainer">
+							<button id="solucion2">SOLUCIÓN B</button>
+						</div>
+						<div class="opcionesContainer">
+							<button id="solucion3">SOLUCIÓN C</button>
 						</div>
 					</div>
-					<button id="botonAceptar">ACEPTAR</button>
+					<button id="botonAceptarProblema">ACEPTAR</button>
+					<button id="botonContinuarProblema">CONTINUAR</button>
 				</div>
 			</main>
 		</div>
-		<div id="divvistaRef">
+		<div id="divvistaConf">
 			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
 				<ul>
 					<li>
-						<a class="puntosMensaje">
-							Puntuación: 0
-						</a>
-					</li>
-					<li>
 						<a class="verMenu">
-							Inicio
-						</a>
-					</li>
-					<li>
-						<a class="verRanking">
-							Rankings
+							Volver al mapa
 						</a>
 					</li>
 				</ul>
 			</nav>
 			<main class="mainJuego">
-				<div id="divPuntuacion"> 
+				<div id="infoConflicto">
+					<div>
+						<img src="" alt="Foto Problema" id="imagenConflicto">
+					</div>
+					<div id="informacionConflicto">
+						Información
+					</div>
+				</div>
+				<div>
+					<div id="divConflictos">
+						<div class="preguntaContainer">
+						</div>
+						<h2 class="encabezados">¿Cuáles es el motivo de este conflicto?</h2>
+						<div class="opcionesContainer">
+							<button id="motivo1">SOLUCIÓN A</button>
+						</div>
+						<div class="opcionesContainer">
+							<button id="motivo2">SOLUCIÓN B</button>
+						</div>
+						<div class="opcionesContainer">
+							<button id="motivo3">SOLUCIÓN C</button>
+						</div>
+					</div>
+					<button id="botonAceptarConflicto">ACEPTAR</button>
+					<button id="botonContinuarConflicto">CONTINUAR</button>
+				</div>
+			</main>
+		</div>
+		<div id="divvistaRef">
+			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
+				<ul>
+					<li>
+						<a class="verMenu">
+							Volver al mapa
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div id="divReflexion"> 
 					<h1>Reflexión</h1>
-					<form action="ranking.html" method="post">
-						<fieldset>REF</fieldset>
-						<p id="puntuacionRef">0 Puntos</p>
-						<a>Continuar</a>
-					</form>
+					<div id="fraseReflexion">
+					</div>
+					<button id="botonVolverReflexion">Volver</button>
+				</div>
+			</main>
+		</div>
+		<div id="divvistaFech">
+			<nav>
+				<p class="puntosMensaje">Puntuación: 0</p>
+				<ul>
+					<li>
+						<a class="verMenu">
+							Volver al mapa
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="mainJuego">
+				<div id="divFecha"> 
+					<h1>Fecha de inicio</h1>
+					<div id="fraseFecha">
+					</div>
+					<button id="botonVolverFecha">Volver</button>
 				</div>
 			</main>
 		</div>
@@ -144,39 +179,30 @@
 					</li>
 					<li>
 						<a class="verMenu">
-							Inicio
-						</a>
-					</li>
-					<li>
-						<a class="verRanking">
-							Rankings
+							Volver al mapa
 						</a>
 					</li>
 				</ul>
 			</nav>
 			<main class="mainJuego">
 				<div id="infoContinente">
-					<div id="nombreContinente"></div>
-					<br>
-					<img src="img/logo.png" alt="Foto continente" id="imagenInfo">
-					<br>
-					<div id="informacion">
+					<h2 id="nombreContinente"></h2>
+					<div>
+						<img src="" alt="Foto Problema" id="imagenInfo">
+					</div>
+					<div id="informacionContinente">
 						Información
 					</div>
 				</div>
 				<div>
 					<div id="divProblemas">
-						<h2 class="encabezados">PROBLEMAS DEL CONTINENTE</h2>
-						<div id="preguntaContainer" class="problemas">
-							<button id="problema_1">Problema1</button>
+						<h2 class="encabezados">SITUACIONES DEL CONTINENTE</h2>
+						<div class="opcionesContainer">
 						</div>
-						<div id="opcionesContainer" class="problemas">
-							<button id="problema_2">Problema2</button>
+						<div class="opcionesContainer">
 						</div>
-						<div id="opcionesContainer" class="problemas">
-							<button id="problema_3">Problema3</button>
+						<div class="opcionesContainer">
 						</div>
-						Control + B para volver atrás a elección de continente
 					</div>
 				</div>
 			</main>
@@ -185,18 +211,8 @@
 			<nav>
 				<ul>
 					<li>
-						<a class="puntosMensaje">
-							Puntuación: 0
-						</a>
-					</li>
-					<li>
 						<a class="verMenu">
-							Inicio
-						</a>
-					</li>
-					<li>
-						<a class="verRanking">
-							Rankings
+							Volver
 						</a>
 					</li>
 				</ul>
@@ -234,13 +250,11 @@
 				<div id="divPuntuacion">
 					<h1>Guardar puntuación:</h1>
 					<form>
-						<p id="usernameError" style="color: red;"></p>
 						<input type="text" id="username" placeholder="Introduce tu nombre">
+						<p id="usernameError" style="color: red;"></p>
 						<p class="puntosMensaje">0 Puntos</p>
-						<article>
-							<input type="submit" value="Enviar">
-							<a>Cancelar</a>
-						</article>
+						<input type="submit" value="Enviar">
+						<button type="button" id="botonCancelarFormulario">Cancelar</button>
 					</form>
 				</div>
 			</main>
