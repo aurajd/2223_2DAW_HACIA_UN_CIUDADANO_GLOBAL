@@ -53,7 +53,7 @@ class preguntas_ajaxModel extends Conexion{
         return $continente;
     }
 
-    function devolver_soluciones(){
+    function devolver_soluciones($id){
         try {
             // Consulta SQL para insertar en la tabla 'situacion'
             $sql = "SELECT numSolucion, textoSolucion, correcta

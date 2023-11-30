@@ -1,6 +1,4 @@
 import { Vista } from './vista.js'
-import { Rest } from '../servicios/rest.js'
-
 /**
  * Clase que representa la vista de una pregunta en la aplicación.
  * @extends Vista
