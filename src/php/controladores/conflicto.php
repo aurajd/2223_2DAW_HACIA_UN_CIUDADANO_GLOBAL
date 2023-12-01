@@ -33,36 +33,6 @@ class conflictoController{
     }
 
     /**
-     * Muestra una lista de conflictos con varias opciones para gestionarlos.
-     *
-     * @return array Array con todos los datos de los conflictos.
-     */
-    function gestionar(){
-        $this->view = "gestionar_conflicto";
-        $this->titulo = "Gestionar conflictos";
-        
-        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
-        if (isset($_POST['continente']) || isset($_GET['continente']) ) {
-            $idContinente = $_POST['continente'] ?? $_GET['continente'];
-    
-            // Validar que el ID del continente sea un número
-            if (!is_numeric($idContinente)) {
-                $_GET["tipomsg"] = "error";
-                $_GET["msg"] = "El ID del continente debe ser un número.";
-                return $this->listar();  // Redirecciona a la lista general en caso de error
-            }
-    
-            // Llama al método listar con el ID del continente como argumento
-            return $this->modelo->listar($idContinente);
-        } else {
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "Se requiere especificar el ID del continente.";
-            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
-        }
-    }
-    
-
-    /**
      * Muestra una lista resumida de los conflictos.
      *
      * @return array Array con todos los datos de los conflictos.
@@ -92,6 +62,45 @@ class conflictoController{
         }
     }
 
+    /**
+     * Muestra una lista de conflictos con varias opciones para gestionarlos.
+     *
+     * @return array Array con todos los datos de los conflictos.
+     */
+    function gestionar(){
+        $this->view = "gestionar_conflicto";
+        $this->titulo = "Gestionar conflictos";
+        
+        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
+        if (isset($_POST['continente']) || isset($_GET['continente']) ) {
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
+    }
+
+    /**
+     * Muestra el formulario para añadir un conflicto.
+     * 
+     * @return void
+     */
+    function mostrar_anadir(){
+        $this->view = "anadir_conflicto";
+        $this->titulo = "Añadir conflictos";
+    }
+    
     /**
      * Muestra información detallada de un conflicto concreto.
      *
@@ -129,16 +138,6 @@ class conflictoController{
         $this->view = "listar_motivos";
         $this->titulo = "Listar motivos";
         return $this->modelo->listar_conflicto_motivo($id);
-    }
-
-    /**
-     * Muestra el formulario para añadir un conflicto.
-     * 
-     * @return void
-     */
-    function mostrar_anadir(){
-        $this->view = "anadir_conflicto";
-        $this->titulo = "Añadir conflictos";
     }
     
     /**

@@ -33,16 +33,6 @@ class problemaController{
     }
 
     /**
-     * Muestra el formulario para añadir un problema.
-     * 
-     * @return void
-     */
-    function mostrar_anadir(){
-        $this->view = "anadir_problema";
-        $this->titulo = "Añadir problemas";
-    }
-
-    /**
      * Muestra una lista resumida de los problemas.
      *
      * @return array Array con todos los datos de los problemas.
@@ -70,24 +60,6 @@ class problemaController{
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
             return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
-    }
-    
-
-    /**
-     * Muestra información detallada de un problema concreto.
-     *
-     * @return array Array con todos los datos del problema.
-     */
-    function ver_problema(){
-        $id = $_GET['id'] ?? '';
-        if(!$this->modelo->comprobarExisteProblema($id)){
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
-        }
-        $this->view = "ver_problema";
-        $this->titulo = "Ver problema";
-        return $this->modelo->listar_fila($id);
     }
 
     /**
@@ -117,6 +89,33 @@ class problemaController{
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
             return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
+    }
+
+    /**
+     * Muestra el formulario para añadir un problema.
+     * 
+     * @return void
+     */
+    function mostrar_anadir(){
+        $this->view = "anadir_problema";
+        $this->titulo = "Añadir problemas";
+    }
+
+    /**
+     * Muestra información detallada de un problema concreto.
+     *
+     * @return array Array con todos los datos del problema.
+     */
+    function ver_problema(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->listar();
+        }
+        $this->view = "ver_problema";
+        $this->titulo = "Ver problema";
+        return $this->modelo->listar_fila($id);
     }
     
     /**
@@ -223,7 +222,7 @@ class problemaController{
         $informacion = trim($_POST['informacion']);
         $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
-        $soluciones = $_POST['soluciones'] ?? [];  // Asegúrate de que tienes $soluciones disponible
+        $soluciones = $_POST['soluciones'] ?? [];  // Hay que asgurarse de tener $soluciones disponible
         $correctas = $_POST['correctas'] ?? [];
 
 
@@ -246,7 +245,6 @@ class problemaController{
                 $_GET["msg"] = $this->modelo->error;
             } else {
                 $_GET["tipomsg"] = "error";
-                // Mensaje de error ya establecido en la función validar
             }
         }
         return $this->mostrar_modificar();
