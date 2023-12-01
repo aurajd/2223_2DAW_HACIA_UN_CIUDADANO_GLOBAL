@@ -187,6 +187,8 @@ class conflictoController{
      * @return void
      */
     function insertar(){
+        $idContinente = isset($_GET['idContinente']) ? $_GET['idContinente'] : null;
+
         // Hacemos trim a los datos recibidos para eliminar espacios en blanco antes y después del texto
         $titulo = trim($_POST['titulo']);
         $informacion = trim($_POST['informacion']); 
@@ -197,7 +199,7 @@ class conflictoController{
         //Validamos que todos los datos recibidos sean correctos
         if ($this->validar($titulo,$informacion,$fecha,$imagen,$motivoCorrecto,$motivos)) {            
             // Llama al método del modelo para insertar el conflicto y sus motivos
-            $resultado = $this->modelo->insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos);
+            $resultado = $this->modelo->insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos, $idContinente);
             if ($resultado) {
                 $_GET["tipomsg"] = "exito";
                 $_GET["msg"] = "Conflicto añadido con éxito.";
