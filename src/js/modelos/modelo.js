@@ -8,11 +8,11 @@ export class Modelo {
    * @param {Controlador} modelo - Instancia del controlador asociada al modelo.
    */
   constructor (modelo) {
-    this.modelo = modelo; // - Instancia del controlador asociada al modelo.
+    this.modelo = modelo // - Instancia del controlador asociada al modelo.
     this.puntuacion = 0 // Puntuación inicializada en 0.
 
-    this.preguntas = this.obtenerPreguntas();
-    this.infoContinentes = this.obtenerInfoContinentes();
+    this.preguntas = this.obtenerPreguntas()
+    this.infoContinentes = this.obtenerInfoContinentes()
   }
 
   /**
@@ -37,39 +37,39 @@ export class Modelo {
    * @param {number} puntuacion - Puntuación a añadir.
    * @returns {Promise<boolean>} - Promesa que resuelve a true si la operación fue exitosa.
    */
-  puntuacionPOST(username,puntuacion){
-    //Validación de datos...
+  puntuacionPOST (username, puntuacion) {
+    // Validación de datos...
     const formData = new FormData()
     formData.append('nombre', username)
     formData.append('puntuacion', puntuacion)
     const opciones = {
-        method: 'POST',
-        body: formData
+      method: 'POST',
+      body: formData
     }
-    return fetch('./index.php?controller=ranking&action=anadir_puntuacion',opciones)
-    .then(respuesta => respuesta.text())
-    .then(texto => {
-        return true;
-    })
+    return fetch('./index.php?controller=ranking&action=anadir_puntuacion', opciones)
+      .then(respuesta => respuesta.text())
+      .then(texto => {
+        return true
+      })
   }
-  
-   /**
+
+  /**
    * Obtiene la información de los continentes desde el servidor.
    * @returns {Promise<Object>} - Promesa que resuelve a un objeto con la información de los continentes.
    */
-  obtenerInfoContinentes(){
+  obtenerInfoContinentes () {
     return fetch('./index.php?controller=preguntas_ajax&action=devolver_info_continentes')
-    .then(respuesta => respuesta.json() )
-    .then(objeto => {
+      .then(respuesta => respuesta.json())
+      .then(objeto => {
         return objeto
-    })
+      })
   }
 
   /**
    * Obtiene todas las preguntas de los continentes.
    * @returns {Promise<Array>} - Promesa que resuelve a un array de preguntas.
    */
-  async obtenerPreguntas(){
+  async obtenerPreguntas () {
     const preguntas = []
     preguntas.push(await this.obtenerPreguntasContinente(1))
     preguntas.push(await this.obtenerPreguntasContinente(2))
@@ -77,7 +77,7 @@ export class Modelo {
     preguntas.push(await this.obtenerPreguntasContinente(4))
     preguntas.push(await this.obtenerPreguntasContinente(5))
     preguntas.push(await this.obtenerPreguntasContinente(6))
-    return preguntas;
+    return preguntas
   }
 
   /**
@@ -86,9 +86,9 @@ export class Modelo {
    * @param {number} idPregunta - Identificador de la pregunta.
    * @returns {Promise<Object>} - Promesa que resuelve a un objeto que representa la pregunta.
    */
-  async devolverPregunta(idContinente,idPregunta){
-    let preguntas = await this.preguntas;
-    return preguntas[idContinente][idPregunta];
+  async devolverPregunta (idContinente, idPregunta) {
+    const preguntas = await this.preguntas
+    return preguntas[idContinente][idPregunta]
   }
 
   /**
@@ -96,9 +96,9 @@ export class Modelo {
    * @param {number} id - Identificador del continente.
    * @returns {Promise<Array>} - Promesa que resuelve a un array de preguntas.
    */
-  async devolverPreguntasContinente(id){
-    let preguntas = await this.preguntas;
-    return preguntas[id];
+  async devolverPreguntasContinente (id) {
+    const preguntas = await this.preguntas
+    return preguntas[id]
   }
 
   /**
@@ -106,9 +106,9 @@ export class Modelo {
    * @param {number} id - Identificador del continente.
    * @returns {Promise<Object>} - Promesa que resuelve a un objeto que representa el continente.
    */
-  async devolverContinente(id){
-    let continente = await this.infoContinentes;
-    return continente[id];
+  async devolverContinente (id) {
+    const continente = await this.infoContinentes
+    return continente[id]
   }
 
   /**
@@ -116,9 +116,9 @@ export class Modelo {
    * @param {number} idContinente - Identificador del continente.
    * @param {number} idFila - Identificador de la fila.
    */
-  async eliminarFilaPregunta(idContinente,idFila){
-    let preguntas = await this.preguntas
-    preguntas[idContinente].splice(idFila,1)
+  async eliminarFilaPregunta (idContinente, idFila) {
+    const preguntas = await this.preguntas
+    preguntas[idContinente].splice(idFila, 1)
   }
 
   /**
@@ -126,34 +126,34 @@ export class Modelo {
    * @param {number} idContinente - Identificador del continente.
    * @returns {Promise<boolean>} - Promesa que resuelve a true si todas las filas están vacías.
    */
-  async comprobarFilasContinenteVacio(idContinente){
-    let preguntas = await this.preguntas
-    let longitud = preguntas[idContinente].length
-    return longitud<1;
+  async comprobarFilasContinenteVacio (idContinente) {
+    const preguntas = await this.preguntas
+    const longitud = preguntas[idContinente].length
+    return longitud < 1
   }
 
   /**
    * Comprueba si todos los continentes están vacíos.
    * @returns {Promise<boolean>} - Promesa que resuelve a true si todos los continentes están vacíos.
    */
-  async comprobarContinentesVacio(){
-    let preguntas = await this.preguntas
+  async comprobarContinentesVacio () {
+    const preguntas = await this.preguntas
     for (const pregunta of preguntas) {
-      let longitud = pregunta.length
-      if(longitud>0){
+      const longitud = pregunta.length
+      if (longitud > 0) {
         return false
       }
     }
-    return true;
+    return true
   }
 
   /**
    * Elimina un continente y todas sus filas de preguntas asociadas.
    * @param {number} idContinente - Identificador del continente.
    */
-  async eliminarFilaContinente(idContinente){
-    let preguntas = await this.preguntas
-    preguntas.splice(idContinente,1)
+  async eliminarFilaContinente (idContinente) {
+    const preguntas = await this.preguntas
+    preguntas.splice(idContinente, 1)
   }
 
   /**
@@ -161,18 +161,17 @@ export class Modelo {
    * @param {number} id - Identificador del continente.
    * @returns {Promise<Array>} - Promesa que resuelve a un array de preguntas.
    */
-  obtenerPreguntasContinente(id){
-    return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random&id='+id)
-    .then(respuesta => respuesta.json() )
-    .then(objeto => {
+  obtenerPreguntasContinente (id) {
+    return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random&id=' + id)
+      .then(respuesta => respuesta.json())
+      .then(objeto => {
         return objeto
-    })
-    
+      })
 
     // Estructura
     // [
     //   {'idProblema': 1,
-    //   'tipo': 'problema', 
+    //   'tipo': 'problema',
     //   'titulo': "titulo problema 1",
     //   'informacion': "informacion problema 1",
     //   'imagen': null,
@@ -184,7 +183,7 @@ export class Modelo {
     //   ]
     //   },
     //   {'idProblema': 2,
-    //   'tipo': 'problema', 
+    //   'tipo': 'problema',
     //   'texto': "titulo problema 2",
     //   'informacion': "informacion problema 1",
     //   'imagen': null,
@@ -196,7 +195,7 @@ export class Modelo {
     //   ]
     //   },
     //   {'idConflicto': 3,
-    //   'tipo': 'conflicto', 
+    //   'tipo': 'conflicto',
     //   'texto': "titulo conflicto 3",
     //   'informacion': "informacion problema 1",
     //   'imagen': null,
@@ -215,12 +214,11 @@ export class Modelo {
    * Obtiene el ranking de puntuaciones desde el servidor.
    * @returns {Promise<Array>} - Promesa que resuelve a un array de puntuaciones.
    */
-  obtenerRanking(){
+  obtenerRanking () {
     return fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
-    .then(respuesta => respuesta.json() )
-    .then(objeto => {
+      .then(respuesta => respuesta.json())
+      .then(objeto => {
         return objeto
-    })
+      })
   }
-
 }

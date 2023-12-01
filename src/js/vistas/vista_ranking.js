@@ -22,34 +22,34 @@ export class VistaRanking extends Vista {
    * Actualiza la vista del ranking con la información proporcionada.
    * @param {Object} ranking - Información del ranking.
    */
-  actualizarRanking(ranking){
-    for(let [index, fila] of ranking.filas.entries()){
-        this.actualizarFila(fila,index)
+  actualizarRanking (ranking) {
+    for (const [index, fila] of ranking.filas.entries()) {
+      this.actualizarFila(fila, index)
     }
   }
-  
+
   /**
    * Actualiza una fila específica en la tabla de ranking.
    * @param {Object} fila - Información de la fila del ranking.
    * @param {number} index - Índice de la fila en la tabla.
    */
-  actualizarFila(fila,index){
-    const filaRanking = this.filas[index+1]
-    filaRanking.getElementsByTagName('td')[0].textContent = fila['nombreJugador']
-    filaRanking.getElementsByTagName('td')[1].textContent = "Puntuación: "+fila['puntuacion']
+  actualizarFila (fila, index) {
+    const filaRanking = this.filas[index + 1]
+    filaRanking.getElementsByTagName('td')[0].textContent = fila.nombreJugador
+    filaRanking.getElementsByTagName('td')[1].textContent = 'Puntuación: ' + fila.puntuacion
   }
 
   /**
    * Cambia el enlace del botón de inicio para regresar al mapa.
    */
-  cambiarEnlaceMapa(){
-    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTAMAPA)}
+  cambiarEnlaceMapa () {
+    this.enlaceInicio.onclick = () => { this.controlador.verVista(Vista.VISTAMAPA) }
   }
 
   /**
    * Cambia el enlace del botón de inicio para regresar al menú.
    */
-  cambiarEnlaceInicio(){
-    this.enlaceInicio.onclick = () => {this.controlador.verVista(Vista.VISTAMENU)}
+  cambiarEnlaceInicio () {
+    this.enlaceInicio.onclick = () => { this.controlador.verVista(Vista.VISTAMENU) }
   }
 }

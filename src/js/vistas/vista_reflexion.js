@@ -13,8 +13,8 @@ export class VistaReflexion extends Vista {
    */
   constructor (controlador, base) {
     super(controlador, base)
-    this.divReflexion = document.getElementById("fraseReflexion")
-    this.botonVolver = document.getElementById("botonVolverReflexion")
+    this.divReflexion = document.getElementById('fraseReflexion')
+    this.botonVolver = document.getElementById('botonVolverReflexion')
     this.botonVolver.addEventListener('click', () => this.controlador.comprobarContinentesCambiar(this.idContinente))
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
@@ -26,7 +26,7 @@ export class VistaReflexion extends Vista {
    * @param {string} reflexion - Texto de la reflexión.
    * @param {string} idContinente - Identificador del continente asociado.
    */
-  actualizarReflexion(reflexion, idContinente){
+  actualizarReflexion (reflexion, idContinente) {
     this.divReflexion.textContent = reflexion
     this.idContinente = idContinente
   }

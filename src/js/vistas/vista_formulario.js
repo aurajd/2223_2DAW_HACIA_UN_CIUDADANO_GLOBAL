@@ -34,7 +34,7 @@ export class VistaFormulario extends Vista {
   /**
    * Función para cancelar el envío del formulario.
    */
-  cancelarEnvio(){
+  cancelarEnvio () {
     this.borrarBotonInicio()
     this.controlador.verVista(Vista.VISTAMENU)
   }
@@ -42,7 +42,7 @@ export class VistaFormulario extends Vista {
   /**
    * Borra el botón de inicio.
    */
-  borrarBotonInicio(){
-    this.controlador.borrarBotonInicio();
+  borrarBotonInicio () {
+    this.controlador.borrarBotonInicio()
   }
 }

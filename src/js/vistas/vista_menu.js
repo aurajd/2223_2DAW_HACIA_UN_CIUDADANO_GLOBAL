@@ -43,7 +43,7 @@ export class VistaMenu extends Vista {
   /**
    * Elimina el botón de inicio.
    */
-  borrarBotonInicio(){
+  borrarBotonInicio () {
     this.enlace1.remove()
   }
 }

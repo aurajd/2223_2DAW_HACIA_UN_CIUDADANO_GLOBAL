@@ -48,10 +48,9 @@ class Controlador {
     this.vistas.set(Vista.VISTACONFLICTO, new VistaConflicto(this, divvistaConf))
     this.vistas.set(Vista.VISTAFECHA, new VistaFecha(this, divvistaFech))
 
-    //Muestra la vista del menú
+    // Muestra la vista del menú
     this.verVista(Vista.VISTAMENU)
   }
-
 
   /**
    * Muestra una vista.
@@ -113,7 +112,7 @@ class Controlador {
       // Realizar acciones adicionales si el formulario es válido
       alert('Formulario válido.')
       this.cambiarEnlaceRankingInicio()
-      await this.anadirPuntuacion(username,puntuacion)
+      await this.anadirPuntuacion(username, puntuacion)
       this.mostrarRankingActualizado()
     } else {
       alert('Formulario no válido.')
@@ -144,9 +143,9 @@ class Controlador {
    * Cambia a la vista de continente y carga las preguntas asociadas al continente.
    * @param {number} id - Identificador del continente.
    */
-  async cambiarContinentes(id){
-    const preguntas = await this.modelo.devolverPreguntasContinente(id);
-    await this.vistas.get(Vista.VISTACONTINENTE).actualizarContinente(preguntas,id)
+  async cambiarContinentes (id) {
+    const preguntas = await this.modelo.devolverPreguntasContinente(id)
+    await this.vistas.get(Vista.VISTACONTINENTE).actualizarContinente(preguntas, id)
     this.verVista(Vista.VISTACONTINENTE)
   }
 
@@ -155,9 +154,9 @@ class Controlador {
    * @param {number} idContinente - Identificador del continente.
    * @param {number} idProblema - Identificador del problema.
    */
-  async cambiarSoluciones (idContinente,idProblema){
-    const problema = await this.modelo.devolverPregunta(idContinente,idProblema);
-    this.vistas.get(Vista.VISTAPROBLEMA).actualizarProblema(problema,idContinente,idProblema)
+  async cambiarSoluciones (idContinente, idProblema) {
+    const problema = await this.modelo.devolverPregunta(idContinente, idProblema)
+    this.vistas.get(Vista.VISTAPROBLEMA).actualizarProblema(problema, idContinente, idProblema)
   }
 
   /**
@@ -165,9 +164,9 @@ class Controlador {
    * @param {number} idContinente - Identificador del continente.
    * @param {number} idConflicto - Identificador del conflicto.
    */
-  async cambiarMotivos(idContinente,idConflicto){
-    const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
-    this.vistas.get(Vista.VISTACONFLICTO).actualizarConflicto(conflicto,idContinente,idConflicto)
+  async cambiarMotivos (idContinente, idConflicto) {
+    const conflicto = await this.modelo.devolverPregunta(idContinente, idConflicto)
+    this.vistas.get(Vista.VISTACONFLICTO).actualizarConflicto(conflicto, idContinente, idConflicto)
   }
 
   /**
@@ -175,14 +174,14 @@ class Controlador {
    * @param {string} username - Nombre de usuario.
    * @param {number} puntuacion - Puntuación a añadir.
    */
-  async anadirPuntuacion(username,puntuacion){
-    await this.modelo.puntuacionPOST(username,puntuacion)
+  async anadirPuntuacion (username, puntuacion) {
+    await this.modelo.puntuacionPOST(username, puntuacion)
   }
 
   /**
    * Muestra la vista de ranking actualizado con las puntuaciones almacenadas en el servidor.
    */
-  async mostrarRankingActualizado(){
+  async mostrarRankingActualizado () {
     const ranking = await this.modelo.obtenerRanking()
     this.vistas.get(Vista.VISTARANKING).actualizarRanking(ranking)
     this.verVista(Vista.VISTARANKING)
@@ -193,7 +192,7 @@ class Controlador {
    * @param {number} id - Identificador del continente.
    * @returns {Object} - Objeto que representa el continente.
    */
-  async devolverContinente(id){
+  async devolverContinente (id) {
     const continente = await this.modelo.devolverContinente(id)
     return continente
   }
@@ -203,8 +202,8 @@ class Controlador {
    * @param {string} fecha - Nueva fecha.
    * @param {number} idContinente - Identificador del continente.
    */
-  cambiarFecha(fecha,idContinente){
-    this.vistas.get(Vista.VISTAFECHA).actualizarFecha(fecha,idContinente)
+  cambiarFecha (fecha, idContinente) {
+    this.vistas.get(Vista.VISTAFECHA).actualizarFecha(fecha, idContinente)
   }
 
   /**
@@ -212,29 +211,29 @@ class Controlador {
    * @param {string} reflexion - Nueva reflexión.
    * @param {number} idContinente - Identificador del continente.
    */
-  cambiarReflexion(reflexion,idContinente){
-    this.vistas.get(Vista.VISTAREFLEXION).actualizarReflexion(reflexion,idContinente)
+  cambiarReflexion (reflexion, idContinente) {
+    this.vistas.get(Vista.VISTAREFLEXION).actualizarReflexion(reflexion, idContinente)
   }
-  
+
   /**
    * Elimina la fila asociada al continente dado.
    * @param {number} idContinente - Identificador del continente.
    * @param {number} idFila - Identificador de la fila.
    */
-  eliminarFila(idContinente,idFila){
-    this.modelo.eliminarFilaPregunta(idContinente,idFila)
+  eliminarFila (idContinente, idFila) {
+    this.modelo.eliminarFilaPregunta(idContinente, idFila)
   }
 
   /**
    * Comprueba si todas las filas de un continente están vacías, elimina el continente y muestra el mapa si lo está.
    * @param {number} idContinente - Identificador del continente.
    */
-  async comprobarFilasContinente(idContinente){
+  async comprobarFilasContinente (idContinente) {
     const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
-    if(continenteVacio){
+    if (continenteVacio) {
       this.vistas.get(Vista.VISTAMAPA).eliminarContinente(idContinente)
       this.verVista(Vista.VISTAMAPA)
-    }else{
+    } else {
       this.cambiarContinentes(idContinente)
     }
   }
@@ -244,12 +243,12 @@ class Controlador {
    * si no, comprueba si el continente actual está vacío.
    * @param {number} idContinente - Identificador del continente.
    */
-  async comprobarContinentesCambiar(idContinente){
+  async comprobarContinentesCambiar (idContinente) {
     const continentesVacios = await this.modelo.comprobarContinentesVacio()
-    if(continentesVacios){
+    if (continentesVacios) {
       this.verVista(Vista.VISTAFORMULARIO)
-    }else{
-      this.comprobarFilasContinente(idContinente);
+    } else {
+      this.comprobarFilasContinente(idContinente)
     }
   }
 
@@ -257,12 +256,12 @@ class Controlador {
    * Comprueba si todos los continentes están vacíos y muestra la vista de formulario o mapa.
    * @param {number} idContinente - Identificador del continente.
    */
-  async comprobarContinentesMapa(idContinente){
+  async comprobarContinentesMapa (idContinente) {
     const continentesVacios = await this.modelo.comprobarContinentesVacio()
-    if(continentesVacios){
+    if (continentesVacios) {
       this.verVista(Vista.VISTAFORMULARIO)
-    }else{
-      this.comprobarFilasMapa(idContinente);
+    } else {
+      this.comprobarFilasMapa(idContinente)
     }
   }
 
@@ -270,33 +269,32 @@ class Controlador {
    * Comprueba si todas las filas del continente están vacías, si lo están lo elimina y muestra la vista de mapa.
    * @param {number} idContinente - Identificador del continente.
    */
-  async comprobarFilasMapa(idContinente){
+  async comprobarFilasMapa (idContinente) {
     const continenteVacio = await this.modelo.comprobarFilasContinenteVacio(idContinente)
-    if(continenteVacio){
+    if (continenteVacio) {
       this.vistas.get(Vista.VISTAMAPA).eliminarContinente(idContinente)
     }
     this.verVista(Vista.VISTAMAPA)
-
   }
 
   /**
    * Cambia el enlace en la vista de ranking para volver al inicio.
    */
-  cambiarEnlaceRankingInicio(){
+  cambiarEnlaceRankingInicio () {
     this.vistas.get(Vista.VISTARANKING).cambiarEnlaceInicio()
   }
 
   /**
    * Cambia el enlace en la vista de ranking para volver al mapa.
    */
-  cambiarEnlaceRankingMapa(){
+  cambiarEnlaceRankingMapa () {
     this.vistas.get(Vista.VISTARANKING).cambiarEnlaceMapa()
   }
-  
+
   /**
    * Elimina el botón de inicio en la vista de menú.
    */
-  borrarBotonInicio(){
+  borrarBotonInicio () {
     this.vistas.get(Vista.VISTAMENU).borrarBotonInicio()
   }
 }
