@@ -5,11 +5,11 @@ import { Vista } from './vista.js'
  */
 export class VistaContinente extends Vista {
   /**
-     * Construye una instancia de la clase Vista_continente.
-     * @constructor
-     * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
-     */
+   * Construye una instancia de la clase VistaContinente.
+   * @constructor
+   * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del continente.
+   */
   constructor (controlador, base) {
     super(controlador, base, Vista.VISTAMAPA)
 
@@ -28,6 +28,11 @@ export class VistaContinente extends Vista {
 
   }
 
+  /**
+   * Actualiza la vista del continente con la información proporcionada.
+   * @param {array} preguntas - Lista de preguntas asociadas al continente.
+   * @param {string} id - Identificador único del continente.
+   */
   async actualizarContinente(preguntas,id){
     const continente = await this.controlador.devolverContinente(id);
     for (let divsPregunta of this.divsPreguntas) {
@@ -52,22 +57,40 @@ export class VistaContinente extends Vista {
     }
   }
 
+  /**
+   * Prepara un problema para ser mostrado en la vista de soluciones.
+   * @param {HTMLElement} btnPregunta - Botón de la pregunta.
+   * @param {number} index - Índice de la pregunta.
+   */
   prepararProblema(btnPregunta,index){
     btnPregunta.id = "idProblema"+index
     btnPregunta.onclick = this.prepararSoluciones.bind(this)
   }
 
+  /**
+   * Prepara un conflicto para ser mostrado en la vista de motivos.
+   * @param {HTMLElement} btnPregunta - Botón de la pregunta.
+   * @param {number} index - Índice de la pregunta.
+   */
   prepararConflicto(btnPregunta,index){
     btnPregunta.id = "idConflicto"+index
     btnPregunta.onclick = this.prepararMotivos.bind(this)
   }
 
+  /**
+   * Prepara la vista de soluciones para mostrar las soluciones de un problema.
+   * @param {Event} event - Evento de clic en el botón de la pregunta.
+   */
   prepararSoluciones(event){
     let idProblema = event.target.id.slice(-1)
     this.controlador.cambiarSoluciones(this.idContinente,idProblema);
     this.controlador.verVista(Vista.VISTAPROBLEMA)
   }
 
+  /**
+   * Prepara la vista de motivos para mostrar los motivos de un conflicto.
+   * @param {Event} event - Evento de clic en el botón de la pregunta.
+   */
   prepararMotivos(event){
     let idConflicto = event.target.id.slice(-1)
     this.controlador.cambiarMotivos(this.idContinente,idConflicto);
@@ -75,17 +98,25 @@ export class VistaContinente extends Vista {
   }
 
   /**
-   * Función para mostrar Nombres en la vista continente.
-   * @param {string} Nombre - Nombre a mostrar.
+   * Muestra el nombre en la vista del continente.
+   * @param {string} nombre - Nombre a mostrar.
    */
   mostrarNombre(nombre) {
     this.h2Nombre.textContent = nombre
   }
 
+  /**
+   * Muestra la información en la vista del continente.
+   * @param {string} info - Información a mostrar.
+   */
   mostrarInformacion (info) {
     this.infoContinente.textContent = info
   }
 
+  /**
+   * Modifica la imagen en la vista del continente.
+   * @param {string|null} img - Nombre del archivo de imagen o null si no hay imagen.
+   */
   modificarImagen(img){
     if(img == null){
       this.imagenContinente.style.display = "none"

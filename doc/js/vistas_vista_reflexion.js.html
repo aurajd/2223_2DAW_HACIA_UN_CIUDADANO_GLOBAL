@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: vistas/vista_formulario.js</title>
+    <title>JSDoc: Source: vistas/vista_reflexion.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: vistas/vista_formulario.js</h1>
+    <h1 class="page-title">Source: vistas/vista_reflexion.js</h1>
 
     
 
@@ -29,50 +29,34 @@
             <pre class="prettyprint source linenums"><code>import { Vista } from './vista.js'
 
 /**
- * Clase que representa la vista del formulario en la aplicación.
+ * Clase que representa la vista de reflexión en la aplicación.
  * @extends Vista
  */
-export class VistaFormulario extends Vista {
+export class VistaReflexion extends Vista {
   /**
-     * Construye una instancia de la clase Vista_formulario.
-     * @constructor
-     * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del formulario.
-     */
+   * Construye una instancia de la clase VistaReflexion.
+   * @constructor
+   * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista de reflexión.
+   */
   constructor (controlador, base) {
     super(controlador, base)
+    this.divReflexion = document.getElementById("fraseReflexion")
+    this.botonVolver = document.getElementById("botonVolverReflexion")
+    this.botonVolver.addEventListener('click', () => this.controlador.comprobarContinentesCambiar(this.idContinente))
 
-    this.formulario = this.base.querySelector('form')
-    this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event))
-
-    this.botonCancelar = document.getElementById('botonCancelarFormulario')
-    this.botonCancelar.addEventListener('click', () => this.cancelarEnvio())
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
   }
 
   /**
-   * Función para manejar el envío del formulario.
-   * @param {Event} event - Objeto que representa el evento de formulario.
+   * Actualiza la vista de reflexión con la información proporcionada.
+   * @param {string} reflexion - Texto de la reflexión.
+   * @param {string} idContinente - Identificador del continente asociado.
    */
-  enviarFormulario (event) {
-    event.preventDefault()
-    this.borrarBotonInicio()
-    this.controlador.manejarValidacionFormulario()
-  }
-
-  /**
-   * Función para cancelar el envío del formulario.
-   */
-  cancelarEnvio(){
-    console.log("hola")
-    this.borrarBotonInicio()
-    this.controlador.verVista(Vista.VISTAMENU)
-  }
-
-  /**
-   * Borra el botón de inicio.
-   */
-  borrarBotonInicio(){
-    this.controlador.borrarBotonInicio();
+  actualizarReflexion(reflexion, idContinente){
+    this.divReflexion.textContent = reflexion
+    this.idContinente = idContinente
   }
 }
 </code></pre>

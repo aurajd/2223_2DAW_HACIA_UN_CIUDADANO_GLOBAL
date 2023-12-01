@@ -6,7 +6,7 @@ import { Vista } from './vista.js'
  */
 export class VistaMapa extends Vista {
   /**
-   * Construye una instancia de la clase Vista_mapa.
+   * Construye una instancia de la clase VistaMapa.
    * @constructor
    * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
    * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del mapa.
@@ -89,8 +89,9 @@ export class VistaMapa extends Vista {
 
   /**
    * Crea un cuadro de texto con el texto proporcionado.
-   * @param {string} texto - Texto para el cuadro de texto.
-   * @returns {HTMLElement} - Cuadro de texto creado.
+   * @param {number} idContinente - ID del continente asociado al cuadro de texto.
+   * @param {string} idDiv - ID del cuadro de texto HTML.
+   * @param {HTMLElement} boton - Botón asociado al cuadro de texto.
    */
   async crearCuadroTexto (idContinente,idDiv, boton) {
     const cuadroTexto = document.createElement('div')
@@ -124,11 +125,19 @@ export class VistaMapa extends Vista {
     cuadroTexto.style.display = 'none'
   }
 
+  /**
+   * Modifica las preguntas al hacer clic en un botón.
+   * @param {Event} event - Objeto que representa el evento de clic.
+   */
   modificarPreguntas(event){
     let id = event.target.id.slice(-1)-1
     this.controlador.cambiarContinentes(id);
   }
 
+  /**
+   * Elimina un continente.
+   * @param {number} idContinente - ID del continente a eliminar.
+   */
   eliminarContinente(idContinente){
     const boton = 'this.boton' + (idContinente+1)
     console.log(boton)

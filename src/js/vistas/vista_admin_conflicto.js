@@ -1,7 +1,13 @@
 /**
- * Script para la validación y manipulación de formularios en la aplicación.
+ * Clase que maneja la validación y manipulación de formularios en la aplicación.
+ * @class
  */
 class VistaAdminConflicto {
+    /**
+     * Constructor de la clase VistaAdminConflicto.
+     * Inicializa las expresiones regulares y establece las referencias a los elementos del formulario.
+     * @constructor
+     */
     constructor () {
         // Expresiones regulares para validaciones
         this.regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/;
@@ -11,6 +17,7 @@ class VistaAdminConflicto {
 
 
         this.contadorDuplicados = contenedorDuplicados.getElementsByTagName('div').length;
+
         // Referencias a los elementos del formulario
         this.titulo = document.getElementById("titulo");
         this.informacion = document.getElementById("informacion");
@@ -25,7 +32,7 @@ class VistaAdminConflicto {
         this.botonEnviar = document.getElementById("enviar");
 
 
-        // Asignar eventos blur a los campos de entrada
+        // Asignar eventos a los campos de entrada
         this.titulo.addEventListener("blur", this.validarTitulo.bind(this));
         this.informacion.addEventListener("blur", this.validarInformacion.bind(this));
         this.fecha.addEventListener("change", this.validarFecha.bind(this));
@@ -41,8 +48,10 @@ class VistaAdminConflicto {
         //PARA EVITAR QUE CON EL ENTER SE MANDE
         this.formulario.addEventListener("submit",(event) => this.validarFormularioSubmit(event))
     }
+    
     /**
      * Función para validar el formulario antes de enviarlo.
+     * @returns {boolean} - true si todos los campos son válidos, false si al menos uno es inválido.
      */
     validarFormulario() {
         // Realizar todas las validaciones
@@ -71,6 +80,10 @@ class VistaAdminConflicto {
         }
     }
 
+    /**
+     * Función para validar el formulario antes de enviarlo (utilizada en el evento submit).
+     * @param {Event} event - Objeto de evento de formulario.
+     */
     validarFormularioSubmit(event) {
         // Realizar todas las validaciones
         let tituloValido = this.validarTitulo();
@@ -144,6 +157,9 @@ class VistaAdminConflicto {
         }
     }
 
+    /**
+     * Función para borrar el último duplicado de div en el formulario.
+     */
     borrarDuplicado(){
         if (this.contadorDuplicados > 0) {
             this.contenedorDuplicados.removeChild(this.contenedorDuplicados.lastElementChild);
@@ -151,6 +167,9 @@ class VistaAdminConflicto {
         }
     }
 
+    /**
+     * Función para duplicar el div original en el formulario.
+     */
     duplicarDiv() {
         // Clonar el nodo del div original (incluyendo todos los elementos dentro)
         let nuevoDiv = this.divOriginal.cloneNode(true);

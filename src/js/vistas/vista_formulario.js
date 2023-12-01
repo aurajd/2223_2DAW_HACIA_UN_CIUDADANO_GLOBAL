@@ -22,21 +22,27 @@ export class VistaFormulario extends Vista {
   }
 
   /**
-     * Función para manejar el envío del formulario.
-     * @param {Event} event - Objeto que representa el evento de formulario.
-     */
+   * Función para manejar el envío del formulario.
+   * @param {Event} event - Objeto que representa el evento de formulario.
+   */
   enviarFormulario (event) {
     event.preventDefault()
     this.borrarBotonInicio()
     this.controlador.manejarValidacionFormulario()
   }
 
+  /**
+   * Función para cancelar el envío del formulario.
+   */
   cancelarEnvio(){
     console.log("hola")
     this.borrarBotonInicio()
     this.controlador.verVista(Vista.VISTAMENU)
   }
 
+  /**
+   * Borra el botón de inicio.
+   */
   borrarBotonInicio(){
     this.controlador.borrarBotonInicio();
   }

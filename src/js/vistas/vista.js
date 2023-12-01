@@ -3,9 +3,9 @@
  */
 export class Vista {
   /**
-     * Símbolos que representan distintas vistas en la aplicación.
-     * @type {Symbol}
-     */
+   * Símbolos que representan distintas vistas en la aplicación.
+   * @type {Symbol}
+   */
   static VISTAMENU = Symbol('Inicio')
   static VISTAMAPA = Symbol('Mapa')
   static VISTARANKING = Symbol('Ranking')
@@ -17,19 +17,19 @@ export class Vista {
   static VISTAFECHA = Symbol('fecha')
 
   /**
-     * Constructor de la clase Vista.
-     * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista.
-     */
+   * Constructor de la clase Vista.
+   * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista.
+   */
   constructor (controlador, base) {
     this.controlador = controlador
     this.base = base
   }
 
   /**
-     * Muestra u oculta la vista.
-     * @param {boolean} ver - Indica si la vista debe mostrarse (true) u ocultarse (false).
-     */
+   * Muestra u oculta la vista.
+   * @param {boolean} ver - Indica si la vista debe mostrarse (true) u ocultarse (false).
+   */
   mostrar (ver) {
     if (ver) {
       this.base.style.display = 'block'
@@ -38,6 +38,9 @@ export class Vista {
     }
   }
 
+  /**
+   * Actualiza la puntuación en la interfaz, si es aplicable.
+   */
   actualizarPuntuacionEnInterfaz () {
     const puntuacionElemento = this.base.querySelector('.puntosMensaje')
     if (puntuacionElemento) {
