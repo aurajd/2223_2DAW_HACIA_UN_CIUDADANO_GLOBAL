@@ -88,7 +88,7 @@ export class Modelo {
    */
   async devolverPregunta(idContinente,idPregunta){
     let preguntas = await this.preguntas;
-    return preguntas[idContinente][idProblema];
+    return preguntas[idContinente][idPregunta];
   }
 
   /**
