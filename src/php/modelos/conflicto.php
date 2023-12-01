@@ -99,7 +99,7 @@ class conflictoModel extends Conexion{
      * @param array $motivos Lista de motivos asociados al conflicto.
      * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
      */
-    function insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos){
+    function insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos, $idContinente){
       
         if(file_exists($imagen["tmp_name"])){
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
@@ -107,56 +107,55 @@ class conflictoModel extends Conexion{
         } else{
             $nombreImagen = null;
         }
-
+    
         try {
             $this->conexion->autocommit(false);
-
+    
             $this->conexion->begin_transaction();
-
+    
             // Consulta SQL para insertar en la tabla 'situacion'
-            //real_escape_string escapa los carácteres especiales.
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
-            VALUES (?,?,?);";
-
+            $sql = "INSERT INTO situacion(titulo, informacion, imagen, idContinente) 
+            VALUES (?,?,?,?);";
+    
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("sss",$titulo,$informacion,$nombreImagen);
+            $stmt->bind_param("sssi", $titulo, $informacion, $nombreImagen, $idContinente);
             $stmt->execute();
-
+    
             // Recogemos la idSituacion de la inserción realizada
             $id = $stmt->insert_id;
             // Consulta SQL para insertar en la tabla 'conflicto'
             $sql = "INSERT INTO conflicto(idConflicto, fechaInicio) 
             VALUES (?,?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('is',$id,$fecha);
+            $stmt->bind_param('is', $id, $fecha);
             $stmt->execute();
-
+    
             $sql = "INSERT INTO motivo(idConflicto, numMotivo, textoMotivo) 
             VALUES (?,?,?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('iis',$id,$indice,$motivo);
-
+            $stmt->bind_param('iis', $id, $indice, $motivo);
+    
             foreach($motivos as $indice => $motivo){
                 $stmt->execute();
                 if($indice==$motivoCorrecto){
                     $sql = "UPDATE conflicto SET numMotivo = ? where idConflicto = ?;";
                     $actualizacion = $this->conexion->prepare($sql);
-                    $actualizacion->bind_param('ii',$motivoCorrecto,$id);
+                    $actualizacion->bind_param('ii', $motivoCorrecto, $id);
                     $actualizacion->execute();
                 }
             }
-
+    
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
             if (file_exists($imagen["tmp_name"])) {
                 // Ruta de destino para mover el archivo
                 $directorio_destino = __DIR__."/../../img";
                 $ruta_temporal = $imagen["tmp_name"];   
                 $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
-
+    
                 // Mover el archivo a la nueva ubicación
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
-
+    
         } catch (mysqli_sql_exception $e) {
             $this->conexion->rollback();
             $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
@@ -164,11 +163,11 @@ class conflictoModel extends Conexion{
         } finally {
             $stmt->close();
         }
-
+    
         $this->conexion->commit();
         return true;
-        
     }
+    
 
     /**
      * Modifica un conflicto existente en la base de datos.
