@@ -62,13 +62,6 @@ class VistaAdminConflicto {
         let radiosValidos = this.validarRadios();
         let textareasValidos = this.validarTextarea(); // Nueva validación para textarea
 
-        console.log("tituloValido:", tituloValido);
-        console.log("informacionValida:", informacionValida);
-        console.log("fechaValida:", fechaValida);
-        console.log("imagenValida:", imagenValida);
-        console.log("radiosValidos:", radiosValidos);
-        console.log("textareasValidos:", textareasValidos);
-
         // Verificar si todos los campos son válidos
         if (tituloValido && informacionValida && fechaValida && imagenValida && radiosValidos && textareasValidos) {
             // Aquí puedes enviar el formulario o realizar otras acciones
@@ -92,13 +85,6 @@ class VistaAdminConflicto {
         let imagenValida = this.validarTamanioImagen();
         let radiosValidos = this.validarRadios();
         let textareasValidos = this.validarTextarea(); // Nueva validación para textarea
-
-        console.log("tituloValido:", tituloValido);
-        console.log("informacionValida:", informacionValida);
-        console.log("fechaValida:", fechaValida);
-        console.log("imagenValida:", imagenValida);
-        console.log("radiosValidos:", radiosValidos);
-        console.log("textareasValidos:", textareasValidos);
 
         // Verificar si todos los campos son válidos
         if (!tituloValido || !informacionValida || !fechaValida || !imagenValida || !radiosValidos || !textareasValidos) {

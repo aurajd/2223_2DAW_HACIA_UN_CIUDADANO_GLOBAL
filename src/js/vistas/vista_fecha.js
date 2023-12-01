@@ -28,9 +28,7 @@ export class VistaFecha extends Vista {
    * @param {string} idContinente - Identificador único del continente.
    */
   actualizarFecha(fecha, idContinente){
-    console.log(idContinente)
     this.idContinente = idContinente
-    console.log(this.idContinente)
     let date = new Date(fecha)
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
     this.divFecha.textContent = "El conflicto comenzó el "+date.toLocaleDateString("es-ES", options)

@@ -35,7 +35,6 @@ export class VistaFormulario extends Vista {
    * Función para cancelar el envío del formulario.
    */
   cancelarEnvio(){
-    console.log("hola")
     this.borrarBotonInicio()
     this.controlador.verVista(Vista.VISTAMENU)
   }

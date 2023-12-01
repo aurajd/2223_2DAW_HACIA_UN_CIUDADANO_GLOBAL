@@ -40,7 +40,6 @@ export class VistaContinente extends Vista {
     }
     let i = 0;
     this.idContinente = id;
-    console.log(this.idContinente)
     this.modificarImagen(continente["imagen"])
     this.mostrarNombre(continente["nombre"])
     this.mostrarInformacion(continente["informacion"])

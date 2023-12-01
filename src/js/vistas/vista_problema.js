@@ -156,10 +156,7 @@ export class VistaProblema extends Vista {
       this.eliminarClickBotones(this.solucion2);
       this.eliminarClickBotones(this.solucion3);
       if (this.respuestasSeleccionadas.toString() === this.respuestasCorrectas.toString()) {
-        console.log('Respuesta correcta')
         this.controlador.acertarPregunta()
-      } else {
-        console.log('Respuesta incorrecta')
       }
       for (let [index,respuesta] of this.respuestasSeleccionadas.entries()) {
         if(respuesta){
@@ -192,8 +189,6 @@ export class VistaProblema extends Vista {
       event.target.classList.remove('marcado')
       this.respuestasSeleccionadas[idSeleccionado] = false;
     }
-    console.log("respuestas seleccionadas:"+this.respuestasSeleccionadas)
-    console.log("respuestas correctas:"+this.respuestasCorrectas)
   }
 
   /**

@@ -47,7 +47,6 @@ export class VistaConflicto extends Vista {
    * @param {string} idConflicto - Identificador único del conflicto.
    */
   actualizarConflicto(conflicto,idContinente,idConflicto){
-    console.log(idConflicto)
     this.resetearSeleccion();
     this.restaurarBotones(this.motivo1)
     this.restaurarBotones(this.motivo2)
@@ -61,7 +60,6 @@ export class VistaConflicto extends Vista {
     this.fecha = conflicto["fechaInicio"]
     this.idContinente = idContinente;
     this.idConflicto = idConflicto;
-    console.log(this.idContinente)
     for (let [index,solucion] of conflicto["respuestas"].entries()){
       this.modificarRespuesta(index,solucion,conflicto["numMotivo"])
     };
@@ -154,13 +152,10 @@ export class VistaConflicto extends Vista {
       this.eliminarClickBotones(this.motivo3);
       eval('this.motivo' + this.respuestaCorrecta).classList.add ("respuestaCorrecta")
       if (this.respuestaSeleccionada == this.respuestaCorrecta) {
-        console.log('Respuesta correcta')
         this.controlador.acertarPregunta()
       } else {
         eval('this.motivo' + this.respuestaSeleccionada).classList.add ("respuestaIncorrecta")
-        console.log('Respuesta incorrecta')
       }
-      console.log(this.idContinente)
       this.controlador.eliminarFila(this.idContinente,this.idConflicto)
     }
   }
@@ -181,15 +176,12 @@ export class VistaConflicto extends Vista {
       event.target.classList.add('marcado')
       this.respuestaSeleccionada = idRespuestaSeleccionada;
     }
-    console.log("respuesta seleccionada:"+this.respuestaSeleccionada)
-    console.log("respuesta correcta:"+this.respuestaCorrecta)
   }
 
   /**
    * Continúa con la siguiente vista después de responder el conflicto.
    */
   continuar(){
-    console.log(this.idConflicto)
     this.controlador.cambiarFecha(this.fecha, this.idContinente)
     this.resetearSeleccion();
     this.controlador.verVista(Vista.VISTAFECHA)

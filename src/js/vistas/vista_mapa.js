@@ -140,7 +140,6 @@ export class VistaMapa extends Vista {
    */
   eliminarContinente(idContinente){
     const boton = 'this.boton' + (idContinente+1)
-    console.log(boton)
     eval(boton).remove()
   }
 }

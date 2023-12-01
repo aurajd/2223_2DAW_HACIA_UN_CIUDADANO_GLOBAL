@@ -101,12 +101,10 @@ class Controlador {
     // Obtener el valor del nombre de usuario
     /** @type {string} */
     const username = document.getElementById('username').value
-    console.log(username)
 
     // Obtener el valor de la puntuación
     /** @type {number} */
     const puntuacion = this.modelo.obtenerPuntuacion()
-    console.log(puntuacion)
 
     /** @type {boolean} */
     const esValido = this.validarFormulario(username)
@@ -168,7 +166,6 @@ class Controlador {
    * @param {number} idConflicto - Identificador del conflicto.
    */
   async cambiarMotivos(idContinente,idConflicto){
-    console.log(idContinente)
     const conflicto = await this.modelo.devolverPregunta(idContinente,idConflicto);
     this.vistas.get(Vista.VISTACONFLICTO).actualizarConflicto(conflicto,idContinente,idConflicto)
   }
@@ -207,7 +204,6 @@ class Controlador {
    * @param {number} idContinente - Identificador del continente.
    */
   cambiarFecha(fecha,idContinente){
-    console.log(idContinente)
     this.vistas.get(Vista.VISTAFECHA).actualizarFecha(fecha,idContinente)
   }
 

@@ -153,9 +153,7 @@ export class Modelo {
    */
   async eliminarFilaContinente(idContinente){
     let preguntas = await this.preguntas
-    console.log(preguntas)
     preguntas.splice(idContinente,1)
-    console.log(preguntas)
   }
 
   /**
@@ -167,7 +165,6 @@ export class Modelo {
     return fetch('./index.php?controller=preguntas_ajax&action=devolver_problema_random&id='+id)
     .then(respuesta => respuesta.json() )
     .then(objeto => {
-      console.log(objeto)
         return objeto
     })
     
