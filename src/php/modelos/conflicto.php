@@ -37,7 +37,7 @@ class conflictoModel extends Conexion{
         
         $stmt->close();
         return $lista;
-    }
+    }   
 
      /**
      * Obtiene la información de un conflicto específico.

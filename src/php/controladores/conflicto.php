@@ -37,10 +37,10 @@ class conflictoController{
      *
      * @return array Array con todos los datos de los conflictos.
      */
-    function listar(){
+    function listar() {
         $this->view = "listar_conflicto";
         $this->titulo = "Listar conflictos";
-    
+        
         // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
         if (isset($_POST['continente']) || isset($_GET['continente'])) {
             // Obtén el ID del continente, dando prioridad al valor en el formulario ($_POST)
@@ -55,13 +55,15 @@ class conflictoController{
     
             // Llama al método listar con el ID del continente como argumento
             return $this->modelo->listar($idContinente);
+            
         } else {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
             return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
     }
-
+    
+    
     /**
      * Muestra una lista de conflictos con varias opciones para gestionarlos.
      *
@@ -211,7 +213,7 @@ class conflictoController{
         } else{
             $_GET["tipomsg"] = "error";
         }
-        return $this->mostrar_anadir();
+        $this->mostrar_anadir();
     }
 
     /**

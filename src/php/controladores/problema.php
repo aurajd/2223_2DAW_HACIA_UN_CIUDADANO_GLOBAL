@@ -55,6 +55,7 @@ class problemaController{
     
             // Llama al método listar con el ID del continente como argumento
             return $this->modelo->listar($idContinente);
+            
         } else {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
