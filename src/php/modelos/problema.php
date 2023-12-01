@@ -126,6 +126,7 @@ class problemaModel extends Conexion{
         $stmt->execute();
         $resultado = $stmt->get_result();
         $lista = $resultado->fetch_all(MYSQLI_ASSOC);
+        
         $stmt->close();
         return $lista;
     }

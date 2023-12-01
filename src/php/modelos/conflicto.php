@@ -23,14 +23,19 @@ class conflictoModel extends Conexion{
      *
      * @return array Lista de conflictos.
      */
-    function listar(){
+    function listar($idContinente){
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, c.fechaInicio
                 FROM situacion s
-                INNER JOIN conflicto c ON s.idSituacion = c.idConflicto;";
-        $resultado = $this->conexion->query($sql);
+                INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
+                WHERE s.idContinente = ?";
+                
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i', $idContinente);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $lista = $resultado->fetch_all(MYSQLI_ASSOC);
-        $resultado->close();
-        $this->conexion->close();
+        
+        $stmt->close();
         return $lista;
     }
 

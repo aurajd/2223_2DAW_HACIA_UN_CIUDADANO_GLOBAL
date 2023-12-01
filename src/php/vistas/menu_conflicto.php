@@ -17,7 +17,7 @@
 
         <script>
             function setAction(action) {
-                document.getElementById('formulario').action = 'index.php?controller=conflcito&action=' + action;
+                document.getElementById('formulario').action = 'index.php?controller=conflicto&action=' + action;
                 document.getElementById('formulario').submit();
             }
         </script>
