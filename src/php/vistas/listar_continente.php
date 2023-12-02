@@ -15,14 +15,6 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>Menú administrador</h1>
-        <a class="back-link">Continentes</a>
-        <a class="back-link">Problemas</a>
-        <a class="back-link">Conflictos</a>
-        <a class="back-link">Puntuaciones</a>
-    </div>
-
     <?php if(isset($infoContinente) && is_array($infoContinente) && count($infoContinente) > 0) { ?>
         <div>
             <?php if(isset($infoContinente["nombre"])) { ?>
@@ -59,9 +51,10 @@
         </div>
 
         <div class='opciones'>
-            <a href='index.php?controller=continente&action=modificar&id=<?php echo $infoContinente["idContinente"]; ?>'>Modificar</a>
-            <a href='index.php?controller=continente&action=borrar&id=<?php echo $infoContinente["idContinente"]; ?>'>Borrar</a>
-        </div>
+        <a href='index.php?controller=continente&action=mostrar_modificar&id=<?php echo $infoContinente["idContinente"]; ?>'>Modificar</a>
+    <a href='index.php?controller=continente&action=ver_continente&id=<?php echo $infoContinente["idContinente"]; ?>'>Volver atrás</a>
+</div>
+
 
     <?php } else { ?>
         <div class="no_lista">
