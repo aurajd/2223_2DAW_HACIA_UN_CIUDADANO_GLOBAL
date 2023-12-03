@@ -97,13 +97,12 @@ class ContinenteController {
             return $this->gestionar();
         }
 
-        $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
         $informacion = isset($_POST['informacion']) ? $_POST['informacion'] : '';
         $resumenInfo = isset($_POST['resumenInfo']) ? $_POST['resumenInfo'] : '';
         $imagen = $_FILES['imagen'] ?? null;
 
         // Validar los datos del continente
-        if (!$this->validar_continente($nombre, $informacion, $resumenInfo, $imagen)) {
+        if (!$this->validar_continente($informacion, $resumenInfo, $imagen)) {
             // Redirigir a la vista de "modificar_continente" con los datos actuales
             return $this->mostrar_modificar();
         }
@@ -115,11 +114,11 @@ class ContinenteController {
             move_uploaded_file($imagen['tmp_name'], __DIR__."/../../img/".$imagenNombre);
 
             // Actualizar la información del continente con la nueva imagen
-            $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, ['tmp_name' => __DIR__."/../../img/".$imagenNombre, 'name' => $imagenNombre]);
+            $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, ['tmp_name' => __DIR__."/../../img/".$imagenNombre, 'name' => $imagenNombre]);
         } else {
             // Si no se proporciona una nueva imagen, conservar la existente
             $imagenNombre = $infoContinente['imagen'] ?? null;
-            $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, null);
+            $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, null);
         }
 
         // Verificar si la modificación fue exitosa
@@ -151,29 +150,16 @@ class ContinenteController {
      *
      * @return bool True si los datos son válidos, false si no.
      */
-    function validar_continente($nombre, $informacion, $resumenInfo, $imagen) {
-        if (empty($nombre) || empty($informacion) || empty($resumenInfo)) {
+    function validar_continente($informacion, $resumenInfo, $imagen) {
+        if (empty($informacion) || empty($resumenInfo)) {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
         }
 
-        if (is_numeric(substr($nombre, 0, 1))) {
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "El nombre del continente no puede comenzar por un número.";
-            return false;
-        }
-
-        if (strlen($nombre) > 50 || strlen($informacion) > 2000 || strlen($resumenInfo) > 2000) {
+        if (strlen($informacion) > 2000 || strlen($resumenInfo) > 2000) {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Uno de los campos excede el límite de caracteres.";
-            return false;
-        }
-
-        // Comprueba que el campo nombre solo contenga letras, números, espacios y una serie de caracteres concretos
-        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/', $nombre)) {
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "El nombre del continente no puede contener caracteres especiales.";
             return false;
         }
 

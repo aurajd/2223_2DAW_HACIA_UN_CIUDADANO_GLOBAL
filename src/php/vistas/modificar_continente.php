@@ -6,8 +6,6 @@
             </p>
         <?php } ?>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=continente&action=modificar&id=<?php echo $dataToView["data"]["idContinente"] ?>'>
-            <label for='nombre'>Nombre:</label>
-            <input type='text' name='nombre' value='<?php echo htmlspecialchars($dataToView["data"]["nombre"],ENT_QUOTES) ?>'>
 
             <label for='informacion'>Información:</label>
             <textarea name='informacion'><?php echo htmlspecialchars($dataToView["data"]["informacion"], ENT_QUOTES) ?></textarea>

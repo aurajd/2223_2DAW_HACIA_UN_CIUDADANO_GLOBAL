@@ -98,22 +98,21 @@ class ContinenteModel extends Conexion {
     * Modifica un continente existente en la base de datos.
     *
     * @param int $id ID del continente a modificar.
-    * @param string $nombre Nuevo nombre del continente.
     * @param string $informacion Nueva información del continente.
     * @param string $resumenInfo Nuevo resumen de la información del continente.
     * @param array|null $imagen Datos de la nueva imagen del continente.
     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
     */
-    function modificar_continente($id, $nombre, $informacion, $resumenInfo, $imagen) {
+    function modificar_continente($id, $informacion, $resumenInfo, $imagen) {
         $stmt = null; // Inicializar $stmt a null
 
         try {
             $this->conexion->autocommit(false);
 
             // Actualizamos los datos del continente
-            $sql = "UPDATE continente SET nombre = ?, informacion = ?, resumenInfo = ? WHERE idContinente = ?;";
+            $sql = "UPDATE continente SET informacion = ?, resumenInfo = ? WHERE idContinente = ?;";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('sssi', $nombre, $informacion, $resumenInfo, $id);
+            $stmt->bind_param('ssi', $informacion, $resumenInfo, $id);
             $stmt->execute();
 
             if ($imagen !== null && file_exists($imagen["tmp_name"])) {
