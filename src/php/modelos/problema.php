@@ -162,22 +162,24 @@ class problemaModel extends Conexion{
         $problema = $this->listar_fila($id);
 
         $sql = "SELECT numSolucion, textoSolucion, correcta
-        FROM solucion  
-        WHERE idSituacion = ?;";
+                FROM solucion  
+                WHERE idSituacion = ?;";
                 
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param('i',$id);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
         $resultado = $stmt->get_result();
         $stmt->close();
         $arraySoluciones = $resultado->fetch_all(MYSQLI_ASSOC);
         $resultado->close();
         $this->conexion->close();
-        $problemaSolucion = array(
+
+        $problemaSoluciones = array(
             "problema" => $problema,
             "soluciones" => $arraySoluciones
         );
-        return $problemaSolucion;
+
+        return $problemaSoluciones;
     }
 
     /**

@@ -118,6 +118,27 @@ class problemaController{
         $this->titulo = "Ver problema";
         return $this->modelo->listar_fila($id);
     }
+
+    /**
+     * Lista las soluciones de un problema.
+     *
+     * @return void|array Resultado de la operación, si la ID que recibe no está asociada a ningún problema no devuelve nada.
+     */
+    function listar_soluciones(){
+        $id = $_GET['id'] ?? '';
+
+        // Si la ID que recibe no coincide con ningún problema (por ejemplo, URL modificada)
+        // devuelve a la lista de problemas y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->gestionar();
+        }
+
+        $this->view = "listar_soluciones";
+        $this->titulo = "Listar soluciones";
+        return $this->modelo->listar_problema_solucion($id);
+    }
     
     /**
      * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
