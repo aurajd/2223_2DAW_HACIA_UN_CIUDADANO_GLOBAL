@@ -78,49 +78,45 @@ class ContinenteController {
      * si no, uno de error. Si la id que recibe no existe, muestra la gestión de continentes.
      *
      * @return void
-     **/
-
+     */
     function modificar() {
         $id = $_GET['id'] ?? '';
-    if (!$this->modelo->comprobar_existe_continente($id)) {
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "No existe el continente seleccionado.";
-        return $this->gestionar();
-    }
+        if (!$this->modelo->comprobar_existe_continente($id)) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el continente seleccionado.";
+            return $this->gestionar();
+        }
 
-    // Obtener información del continente
-    $infoContinente = $this->modelo->obtener_informacion_continente($id);
+        // Obtener información del continente
+        $infoContinente = $this->modelo->obtener_informacion_continente($id);
 
-    // Verificar si se obtuvo la información del continente
-    if (!$infoContinente) {
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "Error al obtener la información del continente.";
-        return $this->gestionar();
-    }
+        // Verificar si se obtuvo la información del continente
+        if (!$infoContinente) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Error al obtener la información del continente.";
+            return $this->gestionar();
+        }
 
-    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
-    $informacion = isset($_POST['informacion']) ? $_POST['informacion'] : '';
-    $resumenInfo = isset($_POST['resumenInfo']) ? $_POST['resumenInfo'] : '';
-    $imagen = $_FILES['imagen'] ?? null;
-
-    // Call modificar_continente with the correct parameters
-    $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, $imagen);
+        $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+        $informacion = isset($_POST['informacion']) ? $_POST['informacion'] : '';
+        $resumenInfo = isset($_POST['resumenInfo']) ? $_POST['resumenInfo'] : '';
+        $imagen = $_FILES['imagen'] ?? null;
 
         // Verificar si se proporcionó una nueva imagen
         if ($imagen && $imagen['size'] > 0) {
             // Lógica para procesar la nueva imagen
-            // Puedes usar el nombre original o generar uno único
             $imagenNombre = $imagen['name'];
             move_uploaded_file($imagen['tmp_name'], __DIR__."/../../img/".$imagenNombre);
+
+            // Actualizar la información del continente con la nueva imagen
+            $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, ['tmp_name' => __DIR__."/../../img/".$imagenNombre, 'name' => $imagenNombre]);
         } else {
             // Si no se proporciona una nueva imagen, conservar la existente
             $imagenNombre = $infoContinente['imagen'] ?? null;
+            $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, null);
         }
 
-        $exito = $this->modelo->modificar_continente($id, $nombre, $informacion, $resumenInfo, null);
-
-
-       // Verificar si la modificación fue exitosa
+        // Verificar si la modificación fue exitosa
         if ($exito) {
             // Obtener la información actualizada del continente
             $infoContinente = $this->modelo->obtener_informacion_continente($id);
@@ -129,7 +125,6 @@ class ContinenteController {
             if ($infoContinente) {
                 // Redirigir a la vista de "listar_continente" con la información actualizada
                 include_once __DIR__.'/../vistas/listar_continente.php';
-            
             } else {
                 // Si no se puede obtener la información, mostrar un mensaje de error
                 $_GET["tipomsg"] = "error";

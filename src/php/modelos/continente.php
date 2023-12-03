@@ -95,15 +95,15 @@ class ContinenteModel extends Conexion {
 
 
     /**
-     * Modifica un continente existente en la base de datos.
-     *
-     * @param int $id ID del continente a modificar.
-     * @param string $nombre Nuevo nombre del continente.
-     * @param string $informacion Nueva información del continente.
-     * @param string $resumenInfo Nuevo resumen de la información del continente.
-     * @param array|null $imagen Datos de la nueva imagen del continente.
-     * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
-     */
+    * Modifica un continente existente en la base de datos.
+    *
+    * @param int $id ID del continente a modificar.
+    * @param string $nombre Nuevo nombre del continente.
+    * @param string $informacion Nueva información del continente.
+    * @param string $resumenInfo Nuevo resumen de la información del continente.
+    * @param array|null $imagen Datos de la nueva imagen del continente.
+    * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
+    */
     function modificar_continente($id, $nombre, $informacion, $resumenInfo, $imagen) {
         $stmt = null; // Inicializar $stmt a null
 
@@ -131,12 +131,15 @@ class ContinenteModel extends Conexion {
                 }
 
                 // Subimos la nueva imagen
-                move_uploaded_file($imagen["tmp_name"], __DIR__."/../../img/".$imagen["name"]);
+                $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+                $nombreImagen = uniqid() . "." . $ext;
+                $ruta_destino = __DIR__ . "/../../img/" . $nombreImagen;
+                move_uploaded_file($imagen["tmp_name"], $ruta_destino);
 
                 // Actualizamos la ruta de la imagen en la base de datos
                 $sql = "UPDATE continente SET imagen = ? WHERE idContinente = ?;";
                 $stmt = $this->conexion->prepare($sql);
-                $stmt->bind_param('si', $imagen["name"], $id);
+                $stmt->bind_param('si', $nombreImagen, $id);
                 $stmt->execute();
             }
 
