@@ -128,10 +128,11 @@ class ContinenteController {
             // Obtener la información actualizada del continente
             $infoContinente = $this->modelo->obtener_informacion_continente($id);
 
-            // Verificar si se obtuvo la información del continente
             if ($infoContinente) {
-                // Redirigir a la vista de "listar_continente" con la información actualizada
-                include_once __DIR__.'/../vistas/listar_continente.php';
+                // Pasar la información del continente a la vista
+                $this->titulo = 'Lista continente';
+                $this->view = "listar_continente";
+                return $infoContinente;
             } else {
                 // Si no se puede obtener la información, mostrar un mensaje de error
                 $_GET["tipomsg"] = "error";
@@ -159,7 +160,7 @@ class ContinenteController {
             return false;
         }
 
-        if (strlen($informacion) > 2000 || strlen($resumenInfo) > 2000) {
+        if (strlen($informacion) > 2000 || strlen($resumenInfo) > 100) {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Uno de los campos excede el límite de caracteres.";
             return false;
