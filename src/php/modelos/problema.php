@@ -26,61 +26,61 @@ class problemaModel extends Conexion{
      * @param array $imagen Información de la imagen asociada al problema.
      * @return bool Devuelve true si la operación fue exitosa, false en caso contrario.
      */
-    function insertar_problema($titulo, $informacion, $reflexion, $imagen){
-
-        if(file_exists($imagen["tmp_name"])){
+    function insertar_problema($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas,$idContinente) {
+        if (file_exists($imagen["tmp_name"])) {
             $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
-            $nombreImagen = uniqid().".".$ext;
-        } else{
+            $nombreImagen = uniqid() . "." . $ext;
+        } else {
             $nombreImagen = null;
         }
-
 
         try {
             $this->conexion->autocommit(false);
 
-            $this->conexion->begin_transaction();
-
             // Consulta SQL para insertar en la tabla 'situacion'
-            $sql = "INSERT INTO situacion(titulo, informacion,imagen) 
-            VALUES (?,?,?);";
-
+            $sql = "INSERT INTO situacion(titulo, informacion, imagen, idContinente) VALUES (?, ?, ?, ?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("sss",$titulo,$informacion,$nombreImagen);
+            $stmt->bind_param("sssi", $titulo, $informacion, $nombreImagen,$idContinente);
             $stmt->execute();
 
             // Recogemos la idSituacion de la inserción realizada
             $id = $stmt->insert_id;
-            
+
             // Consulta SQL para insertar en la tabla 'problema'
-            $sql = "INSERT INTO problema(idProblema, reflexion) 
-            VALUES (?,?);";
+            $sql = "INSERT INTO problema(idProblema, reflexion) VALUES (?, ?);";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('is',$id,$reflexion);
+            $stmt->bind_param('is', $id, $reflexion);
             $stmt->execute();
+
+            // Si hay soluciones, las insertamos en la tabla 'solucion'
+            if (!empty($soluciones)) {
+                foreach ($soluciones as $key => $solucion) {
+                    $correcta = in_array($key, $correctas) ? 1 : 0;
+                    $sql = "INSERT INTO solucion(idSituacion, numSolucion, textoSolucion, correcta) VALUES (?, ?, ?, ?);";
+                    $stmt = $this->conexion->prepare($sql);
+                    $stmt->bind_param('iisi', $id, $key, $solucion, $correcta);
+                    $stmt->execute();
+                }
+            }
 
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
             if (file_exists($imagen["tmp_name"])) {
-                // Ruta de destino para mover el archivo
-                $directorio_destino = __DIR__."/../../img";
-                $ruta_temporal = $imagen["tmp_name"];   
+                $directorio_destino = __DIR__ . "/../../img";
+                $ruta_temporal = $imagen["tmp_name"];
                 $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 
-                // Mover el archivo a la nueva ubicación
                 move_uploaded_file($ruta_temporal, $ruta_destino);
             }
-
-        }catch (mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             $this->conexion->rollback();
-            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
+            $this->error = "Error " . $e->getCode() . ": Contacte con el administrador.";
             return false;
-        }finally {
+        } finally {
             $stmt->close();
         }
 
         $this->conexion->commit();
         return true;
-        
     }
 
     /**
@@ -116,14 +116,18 @@ class problemaModel extends Conexion{
      *
      * @return array Lista de problemas.
      */
-    function listar(){
+    function listar($idContinente) {
         $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
                 FROM situacion s
-                INNER JOIN problema p ON s.idSituacion = p.idProblema;";
-        $resultado = $this->conexion->query($sql);
-        $this->conexion->close();
+                INNER JOIN problema p ON s.idSituacion = p.idProblema
+                WHERE s.idContinente = ?;";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i', $idContinente);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $lista = $resultado->fetch_all(MYSQLI_ASSOC);
-        $resultado->close();
+        
+        $stmt->close();
         return $lista;
     }
     
@@ -149,7 +153,37 @@ class problemaModel extends Conexion{
     }
 
     /**
-     * Modifica un conflicto existente en la base de datos.
+     * Obtiene la información de un problema y sus soluciones asociadas.
+     *
+     * @param int $id ID del problema.
+     * @return array Información del problema y sus soluciones.
+     */
+    function listar_problema_solucion($id){
+        $problema = $this->listar_fila($id);
+
+        $sql = "SELECT numSolucion, textoSolucion, correcta
+                FROM solucion  
+                WHERE idSituacion = ?;";
+                
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $stmt->close();
+        $arraySoluciones = $resultado->fetch_all(MYSQLI_ASSOC);
+        $resultado->close();
+        $this->conexion->close();
+
+        $problemaSoluciones = array(
+            "problema" => $problema,
+            "soluciones" => $arraySoluciones
+        );
+
+        return $problemaSoluciones;
+    }
+
+    /**
+     * Modifica un problema existente en la base de datos.
      *
      * @param int $id ID del problema a modificar.
      * @param string $titulo Nuevo título del problema.

@@ -33,6 +33,38 @@ class conflictoController{
     }
 
     /**
+     * Muestra una lista resumida de los conflictos.
+     *
+     * @return array Array con todos los datos de los conflictos.
+     */
+    function listar() {
+        $this->view = "listar_conflicto";
+        $this->titulo = "Listar conflictos";
+        
+        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
+        if (isset($_POST['continente']) || isset($_GET['continente'])) {
+            // Obtén el ID del continente, dando prioridad al valor en el formulario ($_POST)
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+            
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
+    }
+    
+    
+    /**
      * Muestra una lista de conflictos con varias opciones para gestionarlos.
      *
      * @return array Array con todos los datos de los conflictos.
@@ -40,20 +72,37 @@ class conflictoController{
     function gestionar(){
         $this->view = "gestionar_conflicto";
         $this->titulo = "Gestionar conflictos";
-        return $this->modelo->listar();
+        
+        // Verifica si se ha enviado el formulario o si se proporcionó el ID del continente en la URL
+        if (isset($_POST['continente']) || isset($_GET['continente']) ) {
+            $idContinente = $_POST['continente'] ?? $_GET['continente'];
+    
+            // Validar que el ID del continente sea un número
+            if (!is_numeric($idContinente)) {
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = "El ID del continente debe ser un número.";
+                return $this->listar();  // Redirecciona a la lista general en caso de error
+            }
+    
+            // Llama al método listar con el ID del continente como argumento
+            return $this->modelo->listar($idContinente);
+        } else {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Se requiere especificar el ID del continente.";
+            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+        }
     }
 
     /**
-     * Muestra una lista resumida de los conflictos.
-     *
-     * @return array Array con todos los datos de los conflictos.
+     * Muestra el formulario para añadir un conflicto.
+     * 
+     * @return void
      */
-    function listar(){
-        $this->view = "listar_conflicto";
-        $this->titulo = "Listar conflictos";
-        return $this->modelo->listar();
+    function mostrar_anadir(){
+        $this->view = "anadir_conflicto";
+        $this->titulo = "Añadir conflictos";
     }
-
+    
     /**
      * Muestra información detallada de un conflicto concreto.
      *
@@ -91,16 +140,6 @@ class conflictoController{
         $this->view = "listar_motivos";
         $this->titulo = "Listar motivos";
         return $this->modelo->listar_conflicto_motivo($id);
-    }
-
-    /**
-     * Muestra el formulario para añadir un conflicto.
-     * 
-     * @return void
-     */
-    function mostrar_anadir(){
-        $this->view = "anadir_conflicto";
-        $this->titulo = "Añadir conflictos";
     }
     
     /**
@@ -150,6 +189,8 @@ class conflictoController{
      * @return void
      */
     function insertar(){
+        $idContinente = isset($_GET['idContinente']) ? $_GET['idContinente'] : null;
+
         // Hacemos trim a los datos recibidos para eliminar espacios en blanco antes y después del texto
         $titulo = trim($_POST['titulo']);
         $informacion = trim($_POST['informacion']); 
@@ -160,7 +201,7 @@ class conflictoController{
         //Validamos que todos los datos recibidos sean correctos
         if ($this->validar($titulo,$informacion,$fecha,$imagen,$motivoCorrecto,$motivos)) {            
             // Llama al método del modelo para insertar el conflicto y sus motivos
-            $resultado = $this->modelo->insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos);
+            $resultado = $this->modelo->insertar_conflicto($titulo, $informacion, $fecha, $imagen, $motivoCorrecto, $motivos, $idContinente);
             if ($resultado) {
                 $_GET["tipomsg"] = "exito";
                 $_GET["msg"] = "Conflicto añadido con éxito.";
@@ -172,7 +213,7 @@ class conflictoController{
         } else{
             $_GET["tipomsg"] = "error";
         }
-        return $this->mostrar_anadir();
+        $this->mostrar_anadir();
     }
 
     /**

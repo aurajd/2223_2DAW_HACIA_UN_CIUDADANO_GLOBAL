@@ -1,5 +1,5 @@
 <main>
-    <?php if(count($dataToView["data"])>0){ ?>
+    <?php if(count($dataToView["data"]) > 0){ ?>
         <div>
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>">
@@ -15,7 +15,7 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Opciones</th>
+                    <th>Soluciones</th> <!-- Nueva columna para soluciones -->
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
                     <tr>
@@ -34,20 +34,29 @@
                                 <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
                         </td>
-                        <td>
-                            <ul>
-                                <li><a href='index.php?controller=problema&action=ver_problema&id=<?php echo $fila['idSituacion'] ?>'>Ver</a></li>
-                            </ul>
+                        <td><?php var_dump($dataToView["data"]); ?>
+
+                            <div class='scroll'>
+                                <!-- Verificar si existe la clave "soluciones" y no es nula -->
+                                <?php if (isset($fila['soluciones']) && is_array($fila['soluciones'])) {
+                                    foreach ($fila['soluciones'] as $solucion) {
+                                        echo htmlspecialchars($solucion['textoSolucion'], ENT_QUOTES) . '<br>';
+                                    }
+                                } else {
+                                    echo 'No hay soluciones disponibles.';
+                                }
+                                ?>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
-    <?php } else{ ?>
+    <?php } else { ?>
         <div class="no_lista">
-            <h1 >No hay ningún problema en la base de datos.</h1>
+            <h1>No hay ningún problema en la base de datos.</h1>
             <div class='opciones'>
-                <a href='index.php?controller=conflicto'>Volver atrás</a>
+                <a href='index.php?controller=problema'>Volver atrás</a>
             </div>
         </div>
     <?php } ?>
