@@ -3,7 +3,8 @@
 body {
     margin: 0;
     background-color: white;
-    font-family: 'Poppins', sans-serif;;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
 }
 
 a {
@@ -137,7 +138,6 @@ nav a {
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
     max-height: 90vh;
-    width: 100%;
     /* El aspect-ratio de la imagen de fondo, el tablero de juego, para posteriormente poder colocar las marcas en el
     mapamundi con posicionamiento absoluto con porcentajes y que no se descuadre */
     aspect-ratio: 577/333;
@@ -148,45 +148,52 @@ nav a {
     position: relative;
 }
 
+
 #boton_eu1{
     position: absolute;
-    top: 18%;
+    transform: translate(-50%, 0%); 
+    bottom: 65%;
     right: 47%;
     cursor: pointer;
 }
 
 #boton_eu2{
     position: absolute;
-    top: 22%;
-    right: 35%;
+    transform: translate(-50%, 0%); 
+    bottom: 70%;
+    right: 25%;
     cursor: pointer;
 }
 
 #boton_eu3{
     position: absolute;
-    bottom: 18%;
-    right: 20%;
+    transform: translate(-50%, 0%); 
+    bottom: 20%;
+    right: 10%;
     cursor: pointer;
 }
 
 #boton_eu4{
     position: absolute;
-    top: 18%;
-    left: 25%;
+    transform: translate(-50%, 0%); 
+    bottom: 70%;
+    left: 15%;
     cursor: pointer;
 }
 
 #boton_eu5{
     position: absolute;
+    transform: translate(-50%, 0%); 
     bottom: 25%;
-    left: 33%;
+    left: 28%;
     cursor: pointer;
 }
 
 #boton_eu6{
     position: absolute;
-    top: 43%;
-    right: 47%;
+    transform: translate(-50%, 0%); 
+    bottom: 45%;
+    right: 45%;
     cursor: pointer;
 }
 
@@ -204,25 +211,184 @@ nav a {
     padding: 2.5%;
     background-color: #002041;
     color: white;
+    text-align: center;
+    overflow: hidden;
 }
 
-/* Vista divvistaProb*/
 
-.maainJuego>div {
-    height: 60%;
-    width: 60%;
-    border: 2px solid black;
-    border-radius: 20px;
+/* Vista divvistaConf / Vista divvistaProb */
+
+.divProbConf h2{
+    height: 10vh;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divProbConf{
+    height: 100vh;
+    background-image: url("../img/fondoMapa.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.info{
     background-color: #ffffffcc;
-    padding: 5% 5%;
+    box-shadow: 0px 0px 40px black;
+    width: 60%;
+    height: 75vh;
+    margin: 4% 1.5% 0px 4%;
+    padding: 1%;
+    float: left;
+    text-align: center;
+    border-radius: 20px;
 }
 
+.info img{
+    max-height: 30vh;
+}
 
-/* Vista divvistaConf*/
+.infoTexto{
+    height: 35%;
+    overflow: auto;
+    margin-top: 5vh;
+}
 
+.preguntaContainer{
+    font-weight: bolder;
+}
 
-/* Vista divvistaProb*/
+.seleccion{
+    background-color: #ffffffcc;
+    box-shadow: 0px 0px 40px black;
+    width: 22.5%;
+    height: 50vh;
+    margin: 4% 4% 4% 1.5%;
+    padding: 1%;
+    float: left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content:space-between;
+    border-radius: 20px;
+    overflow: hidden;
+}
 
+.seleccion h2{
+    font-weight: normal;
+}
+
+.seleccion button{
+    height: 9vh;
+    width: 90%;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+.seleccion button:hover{
+    background-color: rgb(210, 210, 210);
+}
+
+.opcionesContainer{
+    height: 10vh;
+}
+
+/* Vista divvistaRef*/
+
+#divvistaRef{
+    background-image: url("../img/fondoMapa.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#divvistaRef main{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#divReflexion{
+    width: 70%;
+    height: 30vh;
+    background-color: #ffffffcc;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 40px black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#divReflexion h1{
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+#divReflexion button{
+    height: 3vh;
+    width: 10%;
+    border-radius: 20px;
+}
+
+#divReflexion button:hover{
+    background-color: rgb(210, 210, 210);
+}
+
+/* Vista divvistaRef*/
+
+#divvistaFech{
+    background-image: url("../img/fondoMapa.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#divvistaFech main{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#divFecha{
+    width: 70%;
+    height: 30vh;
+    background-color: #ffffffcc;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 40px black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#divFecha h1{
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+#divFecha button{
+    height: 3vh;
+    width: 10%;
+    border-radius: 20px;
+}
+
+#divFecha button:hover{
+    background-color: rgb(210, 210, 210);
+}
 
 /* Vista divvistaRank*/
 
@@ -394,7 +560,7 @@ th {
     max-width: 300px;
 }
 
-/* */
+/* JavaScript */
 .marcado{
     background-color: gray;
 }
