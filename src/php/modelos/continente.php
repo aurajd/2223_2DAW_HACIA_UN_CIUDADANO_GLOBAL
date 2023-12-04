@@ -64,7 +64,7 @@ class ContinenteModel extends Conexion {
         return $continente;
     }
 
-    // Agregado para obtener mensajes de error
+    // Obtener mensajes de error
     function getError() {
         return $this->error;
     }
