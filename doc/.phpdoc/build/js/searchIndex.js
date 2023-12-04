@@ -16,15 +16,20 @@ Search.appendIndex(
             "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020inicializa\u0020propiedades\u0020por\u0020defecto\u0020adem\u00E1s\u0020del\u0020modelo.",
             "url": "classes/conflictoController.html#method___construct"
         },                {
+            "fqsen": "\\conflictoController\u003A\u003Alistar\u0028\u0029",
+            "name": "listar",
+            "summary": "Muestra\u0020una\u0020lista\u0020resumida\u0020de\u0020los\u0020conflictos.",
+            "url": "classes/conflictoController.html#method_listar"
+        },                {
             "fqsen": "\\conflictoController\u003A\u003Agestionar\u0028\u0029",
             "name": "gestionar",
             "summary": "Muestra\u0020una\u0020lista\u0020de\u0020conflictos\u0020con\u0020varias\u0020opciones\u0020para\u0020gestionarlos.",
             "url": "classes/conflictoController.html#method_gestionar"
         },                {
-            "fqsen": "\\conflictoController\u003A\u003Alistar\u0028\u0029",
-            "name": "listar",
-            "summary": "Muestra\u0020una\u0020lista\u0020resumida\u0020de\u0020los\u0020conflictos.",
-            "url": "classes/conflictoController.html#method_listar"
+            "fqsen": "\\conflictoController\u003A\u003Amostrar_anadir\u0028\u0029",
+            "name": "mostrar_anadir",
+            "summary": "Muestra\u0020el\u0020formulario\u0020para\u0020a\u00F1adir\u0020un\u0020conflicto.",
+            "url": "classes/conflictoController.html#method_mostrar_anadir"
         },                {
             "fqsen": "\\conflictoController\u003A\u003Aver_conflicto\u0028\u0029",
             "name": "ver_conflicto",
@@ -35,11 +40,6 @@ Search.appendIndex(
             "name": "listar_motivos",
             "summary": "Lista\u0020los\u0020motivos\u0020de\u0020un\u0020conflicto.",
             "url": "classes/conflictoController.html#method_listar_motivos"
-        },                {
-            "fqsen": "\\conflictoController\u003A\u003Amostrar_anadir\u0028\u0029",
-            "name": "mostrar_anadir",
-            "summary": "Muestra\u0020el\u0020formulario\u0020para\u0020a\u00F1adir\u0020un\u0020conflicto.",
-            "url": "classes/conflictoController.html#method_mostrar_anadir"
         },                {
             "fqsen": "\\conflictoController\u003A\u003Amostrar_modificar\u0028\u0029",
             "name": "mostrar_modificar",
@@ -106,6 +106,56 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/conflictoController.html#property_view"
         },                {
+            "fqsen": "\\ContinenteController",
+            "name": "ContinenteController",
+            "summary": "Controlador\u0020para\u0020gestionar\u0020operaciones\u0020relacionadas\u0020con\u0020continentes.",
+            "url": "classes/ContinenteController.html"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020inicializa\u0020propiedades\u0020por\u0020defecto\u0020adem\u00E1s\u0020del\u0020modelo.",
+            "url": "classes/ContinenteController.html#method___construct"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003Agestionar\u0028\u0029",
+            "name": "gestionar",
+            "summary": "",
+            "url": "classes/ContinenteController.html#method_gestionar"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003Aver_continente\u0028\u0029",
+            "name": "ver_continente",
+            "summary": "",
+            "url": "classes/ContinenteController.html#method_ver_continente"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003Amostrar_modificar\u0028\u0029",
+            "name": "mostrar_modificar",
+            "summary": "Muestra\u0020el\u0020formulario\u0020para\u0020modificar\u0020un\u0020continente.\u0020Si\u0020la\u0020id\u0020que\u0020recibe\u0020no\u0020existe,\u0020muestra\u0020la\u0020vista\u0020de\u0020gesti\u00F3n\u0020de\u0020continentes.",
+            "url": "classes/ContinenteController.html#method_mostrar_modificar"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003Amodificar\u0028\u0029",
+            "name": "modificar",
+            "summary": "Modifica\u0020un\u0020continente.\u0020Si\u0020lo\u0020consigue,\u0020env\u00EDa\u0020por\u0020\u0024_GET\u0020un\u0020mensaje\u0020de\u0020\u00E9xito,\nsi\u0020no,\u0020uno\u0020de\u0020error.\u0020Si\u0020la\u0020id\u0020que\u0020recibe\u0020no\u0020existe,\u0020muestra\u0020la\u0020gesti\u00F3n\u0020de\u0020continentes.",
+            "url": "classes/ContinenteController.html#method_modificar"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003Avalidar_continente\u0028\u0029",
+            "name": "validar_continente",
+            "summary": "Valida\u0020los\u0020datos\u0020de\u0020un\u0020continente.",
+            "url": "classes/ContinenteController.html#method_validar_continente"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003A\u0024titulo",
+            "name": "titulo",
+            "summary": "",
+            "url": "classes/ContinenteController.html#property_titulo"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003A\u0024modelo",
+            "name": "modelo",
+            "summary": "",
+            "url": "classes/ContinenteController.html#property_modelo"
+        },                {
+            "fqsen": "\\ContinenteController\u003A\u003A\u0024view",
+            "name": "view",
+            "summary": "",
+            "url": "classes/ContinenteController.html#property_view"
+        },                {
             "fqsen": "\\menuController",
             "name": "menuController",
             "summary": "Controlador\u0020que\u0020gestiona\u0020el\u0020men\u00FA\u0020principal.",
@@ -126,6 +176,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/menuController.html#property_view"
         },                {
+            "fqsen": "\\preguntas_ajaxController",
+            "name": "preguntas_ajaxController",
+            "summary": "Controlador\u0020para\u0020gestionar\u0020operaciones\u0020relacionadas\u0020con\u0020ranking.",
+            "url": "classes/preguntas-ajaxController.html"
+        },                {
+            "fqsen": "\\preguntas_ajaxController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase",
+            "url": "classes/preguntas-ajaxController.html#method___construct"
+        },                {
+            "fqsen": "\\preguntas_ajaxController\u003A\u003Adevolver_problema_random\u0028\u0029",
+            "name": "devolver_problema_random",
+            "summary": "",
+            "url": "classes/preguntas-ajaxController.html#method_devolver_problema_random"
+        },                {
+            "fqsen": "\\preguntas_ajaxController\u003A\u003Adevolver_info_continentes\u0028\u0029",
+            "name": "devolver_info_continentes",
+            "summary": "",
+            "url": "classes/preguntas-ajaxController.html#method_devolver_info_continentes"
+        },                {
+            "fqsen": "\\preguntas_ajaxController\u003A\u003A\u0024modelo",
+            "name": "modelo",
+            "summary": "",
+            "url": "classes/preguntas-ajaxController.html#property_modelo"
+        },                {
             "fqsen": "\\problemaController",
             "name": "problemaController",
             "summary": "Controlador\u0020para\u0020gestionar\u0020operaciones\u0020relacionadas\u0020con\u0020problemas.",
@@ -136,25 +211,30 @@ Search.appendIndex(
             "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020inicializa\u0020propiedades\u0020por\u0020defecto\u0020adem\u00E1s\u0020del\u0020modelo.",
             "url": "classes/problemaController.html#method___construct"
         },                {
-            "fqsen": "\\problemaController\u003A\u003Amostrar_anadir\u0028\u0029",
-            "name": "mostrar_anadir",
-            "summary": "Muestra\u0020el\u0020formulario\u0020para\u0020a\u00F1adir\u0020un\u0020problema.",
-            "url": "classes/problemaController.html#method_mostrar_anadir"
-        },                {
             "fqsen": "\\problemaController\u003A\u003Alistar\u0028\u0029",
             "name": "listar",
             "summary": "Muestra\u0020una\u0020lista\u0020resumida\u0020de\u0020los\u0020problemas.",
             "url": "classes/problemaController.html#method_listar"
+        },                {
+            "fqsen": "\\problemaController\u003A\u003Agestionar\u0028\u0029",
+            "name": "gestionar",
+            "summary": "Muestra\u0020una\u0020lista\u0020de\u0020problemas\u0020con\u0020varias\u0020opciones\u0020para\u0020gestionarlos.",
+            "url": "classes/problemaController.html#method_gestionar"
+        },                {
+            "fqsen": "\\problemaController\u003A\u003Amostrar_anadir\u0028\u0029",
+            "name": "mostrar_anadir",
+            "summary": "Muestra\u0020el\u0020formulario\u0020para\u0020a\u00F1adir\u0020un\u0020problema.",
+            "url": "classes/problemaController.html#method_mostrar_anadir"
         },                {
             "fqsen": "\\problemaController\u003A\u003Aver_problema\u0028\u0029",
             "name": "ver_problema",
             "summary": "Muestra\u0020informaci\u00F3n\u0020detallada\u0020de\u0020un\u0020problema\u0020concreto.",
             "url": "classes/problemaController.html#method_ver_problema"
         },                {
-            "fqsen": "\\problemaController\u003A\u003Agestionar\u0028\u0029",
-            "name": "gestionar",
-            "summary": "Muestra\u0020una\u0020lista\u0020de\u0020problemas\u0020con\u0020varias\u0020opciones\u0020para\u0020gestionarlos.",
-            "url": "classes/problemaController.html#method_gestionar"
+            "fqsen": "\\problemaController\u003A\u003Alistar_soluciones\u0028\u0029",
+            "name": "listar_soluciones",
+            "summary": "Lista\u0020las\u0020soluciones\u0020de\u0020un\u0020problema.",
+            "url": "classes/problemaController.html#method_listar_soluciones"
         },                {
             "fqsen": "\\problemaController\u003A\u003Amostrar_modificar\u0028\u0029",
             "name": "mostrar_modificar",
@@ -173,7 +253,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\problemaController\u003A\u003Amodificar\u0028\u0029",
             "name": "modificar",
-            "summary": "Modifica\u0020un\u0020problema.\u0020Si\u0020lo\u0020consigue\u0020envia\u0020por\u0020\u0024_GET\u0020un\u0020mensaje\u0020de\u0020exito,\nsi\u0020no,\u0020uno\u0020de\u0020error.\u0020Si\u0020la\u0020id\u0020que\u0020recibe\u0020no\u0020existe\u0020muestra\u0020la\u0020gesti\u00F3n\u0020de\u0020problemas.",
+            "summary": "Modifica\u0020un\u0020problema.\u0020Si\u0020lo\u0020consigue,\u0020env\u00EDa\u0020por\u0020\u0024_GET\u0020un\u0020mensaje\u0020de\u0020\u00E9xito,\nsi\u0020no,\u0020uno\u0020de\u0020error.\u0020Si\u0020la\u0020id\u0020que\u0020recibe\u0020no\u0020existe,\u0020muestra\u0020la\u0020gesti\u00F3n\u0020de\u0020problemas.",
             "url": "classes/problemaController.html#method_modificar"
         },                {
             "fqsen": "\\problemaController\u003A\u003Aborrar_fila\u0028\u0029",
@@ -200,6 +280,36 @@ Search.appendIndex(
             "name": "view",
             "summary": "",
             "url": "classes/problemaController.html#property_view"
+        },                {
+            "fqsen": "\\rankingController",
+            "name": "rankingController",
+            "summary": "Controlador\u0020para\u0020gestionar\u0020operaciones\u0020relacionadas\u0020con\u0020ranking.",
+            "url": "classes/rankingController.html"
+        },                {
+            "fqsen": "\\rankingController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase",
+            "url": "classes/rankingController.html#method___construct"
+        },                {
+            "fqsen": "\\rankingController\u003A\u003Aanadir_puntuacion\u0028\u0029",
+            "name": "anadir_puntuacion",
+            "summary": "",
+            "url": "classes/rankingController.html#method_anadir_puntuacion"
+        },                {
+            "fqsen": "\\rankingController\u003A\u003Adevolver_puntuaciones_ajax\u0028\u0029",
+            "name": "devolver_puntuaciones_ajax",
+            "summary": "",
+            "url": "classes/rankingController.html#method_devolver_puntuaciones_ajax"
+        },                {
+            "fqsen": "\\rankingController\u003A\u003Avalidar\u0028\u0029",
+            "name": "validar",
+            "summary": "Valida\u0020los\u0020datos\u0020de\u0020un\u0020problema.",
+            "url": "classes/rankingController.html#method_validar"
+        },                {
+            "fqsen": "\\rankingController\u003A\u003A\u0024modelo",
+            "name": "modelo",
+            "summary": "",
+            "url": "classes/rankingController.html#property_modelo"
         },                {
             "fqsen": "\\Conexion",
             "name": "Conexion",
@@ -230,6 +340,11 @@ Search.appendIndex(
             "name": "listar",
             "summary": "Obtiene\u0020la\u0020lista\u0020de\u0020todos\u0020los\u0020conflictos.",
             "url": "classes/conflictoModel.html#method_listar"
+        },                {
+            "fqsen": "\\conflictoModel\u003A\u003Alistar_continentes\u0028\u0029",
+            "name": "listar_continentes",
+            "summary": "",
+            "url": "classes/conflictoModel.html#method_listar_continentes"
         },                {
             "fqsen": "\\conflictoModel\u003A\u003Alistar_conflicto\u0028\u0029",
             "name": "listar_conflicto",
@@ -266,6 +381,86 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/conflictoModel.html#property_error"
         },                {
+            "fqsen": "\\ContinenteModel",
+            "name": "ContinenteModel",
+            "summary": "Clase\u0020Conexion\u0020para\u0020manejar\u0020la\u0020conexi\u00F3n\u0020a\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/ContinenteModel.html"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020establece\u0020la\u0020conexi\u00F3n\u0020a\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/ContinenteModel.html#method___construct"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003Alistar_continentes\u0028\u0029",
+            "name": "listar_continentes",
+            "summary": "Obtiene\u0020la\u0020lista\u0020de\u0020todos\u0020los\u0020continentes.",
+            "url": "classes/ContinenteModel.html#method_listar_continentes"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003Aobtener_informacion_continente\u0028\u0029",
+            "name": "obtener_informacion_continente",
+            "summary": "Obtiene\u0020la\u0020informaci\u00F3n\u0020de\u0020un\u0020continente\u0020espec\u00EDfico.",
+            "url": "classes/ContinenteModel.html#method_obtener_informacion_continente"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003AgetError\u0028\u0029",
+            "name": "getError",
+            "summary": "",
+            "url": "classes/ContinenteModel.html#method_getError"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003Acomprobar_existe_continente\u0028\u0029",
+            "name": "comprobar_existe_continente",
+            "summary": "Comprueba\u0020si\u0020un\u0020continente\u0020existe\u0020en\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/ContinenteModel.html#method_comprobar_existe_continente"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003Amodificar_continente\u0028\u0029",
+            "name": "modificar_continente",
+            "summary": "Modifica\u0020un\u0020continente\u0020existente\u0020en\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/ContinenteModel.html#method_modificar_continente"
+        },                {
+            "fqsen": "\\ContinenteModel\u003A\u003A\u0024error",
+            "name": "error",
+            "summary": "",
+            "url": "classes/ContinenteModel.html#property_error"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel",
+            "name": "preguntas_ajaxModel",
+            "summary": "Clase\u0020preguntas_ajaxModel\u003A\u0020Proporciona\u0020m\u00E9todos\u0020para\u0020interactuar\u0020con\u0020la\u0020base\u0020de\u0020datos\u0020en\u0020relaci\u00F3n\u0020con\u0020situaciones\u0020y\u0020problemas.",
+            "url": "classes/preguntas-ajaxModel.html"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020establece\u0020la\u0020conexi\u00F3n\u0020a\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/preguntas-ajaxModel.html#method___construct"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003Adevolver_problemas\u0028\u0029",
+            "name": "devolver_problemas",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#method_devolver_problemas"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003Adevolver_info_continentes\u0028\u0029",
+            "name": "devolver_info_continentes",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#method_devolver_info_continentes"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003Adevolver_soluciones\u0028\u0029",
+            "name": "devolver_soluciones",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#method_devolver_soluciones"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003Adevolver_conflicto\u0028\u0029",
+            "name": "devolver_conflicto",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#method_devolver_conflicto"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003Adevolver_motivos\u0028\u0029",
+            "name": "devolver_motivos",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#method_devolver_motivos"
+        },                {
+            "fqsen": "\\preguntas_ajaxModel\u003A\u003A\u0024error",
+            "name": "error",
+            "summary": "",
+            "url": "classes/preguntas-ajaxModel.html#property_error"
+        },                {
             "fqsen": "\\problemaModel",
             "name": "problemaModel",
             "summary": "Clase\u0020problemaModel\u003A\u0020Proporciona\u0020m\u00E9todos\u0020para\u0020interactuar\u0020con\u0020la\u0020base\u0020de\u0020datos\u0020en\u0020relaci\u00F3n\u0020con\u0020situaciones\u0020y\u0020problemas.",
@@ -296,9 +491,14 @@ Search.appendIndex(
             "summary": "Obtiene\u0020la\u0020informaci\u00F3n\u0020de\u0020un\u0020problema\u0020espec\u00EDfico.",
             "url": "classes/problemaModel.html#method_listar_fila"
         },                {
+            "fqsen": "\\problemaModel\u003A\u003Alistar_problema_solucion\u0028\u0029",
+            "name": "listar_problema_solucion",
+            "summary": "Obtiene\u0020la\u0020informaci\u00F3n\u0020de\u0020un\u0020problema\u0020y\u0020sus\u0020soluciones\u0020asociadas.",
+            "url": "classes/problemaModel.html#method_listar_problema_solucion"
+        },                {
             "fqsen": "\\problemaModel\u003A\u003Amodificar_fila\u0028\u0029",
             "name": "modificar_fila",
-            "summary": "Modifica\u0020un\u0020conflicto\u0020existente\u0020en\u0020la\u0020base\u0020de\u0020datos.",
+            "summary": "Modifica\u0020un\u0020problema\u0020existente\u0020en\u0020la\u0020base\u0020de\u0020datos.",
             "url": "classes/problemaModel.html#method_modificar_fila"
         },                {
             "fqsen": "\\problemaModel\u003A\u003AcomprobarExisteProblema\u0028\u0029",
@@ -310,6 +510,31 @@ Search.appendIndex(
             "name": "error",
             "summary": "",
             "url": "classes/problemaModel.html#property_error"
+        },                {
+            "fqsen": "\\rankingModel",
+            "name": "rankingModel",
+            "summary": "Clase\u0020problemaModel\u003A\u0020Proporciona\u0020m\u00E9todos\u0020para\u0020interactuar\u0020con\u0020la\u0020base\u0020de\u0020datos\u0020en\u0020relaci\u00F3n\u0020con\u0020situaciones\u0020y\u0020problemas.",
+            "url": "classes/rankingModel.html"
+        },                {
+            "fqsen": "\\rankingModel\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase\u0020que\u0020establece\u0020la\u0020conexi\u00F3n\u0020a\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/rankingModel.html#method___construct"
+        },                {
+            "fqsen": "\\rankingModel\u003A\u003Ainsertar_puntuacion\u0028\u0029",
+            "name": "insertar_puntuacion",
+            "summary": "Inserta\u0020una\u0020nueva\u0020situaci\u00F3n\u0020con\u0020su\u0020problema\u0020asociado\u0020en\u0020la\u0020base\u0020de\u0020datos.",
+            "url": "classes/rankingModel.html#method_insertar_puntuacion"
+        },                {
+            "fqsen": "\\rankingModel\u003A\u003Adevolver_top_5\u0028\u0029",
+            "name": "devolver_top_5",
+            "summary": "",
+            "url": "classes/rankingModel.html#method_devolver_top_5"
+        },                {
+            "fqsen": "\\rankingModel\u003A\u003A\u0024error",
+            "name": "error",
+            "summary": "",
+            "url": "classes/rankingModel.html#property_error"
         },                {
             "fqsen": "\\",
             "name": "\\",
