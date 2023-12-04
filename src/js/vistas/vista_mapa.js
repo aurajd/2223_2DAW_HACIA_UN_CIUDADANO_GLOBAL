@@ -6,7 +6,7 @@ import { Vista } from './vista.js'
  */
 export class VistaMapa extends Vista {
   /**
-   * Construye una instancia de la clase Vista_mapa.
+   * Construye una instancia de la clase VistaMapa.
    * @constructor
    * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
    * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del mapa.
@@ -34,50 +34,45 @@ export class VistaMapa extends Vista {
 
     // Crear cuadros de texto
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(0,"texto_eur",this.boton1)
+    this.crearCuadroTexto(0, 'texto_eur', this.boton1)
 
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(1,"texto_asi",this.boton2)
+    this.crearCuadroTexto(1, 'texto_asi', this.boton2)
 
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(2,"texto_oce",this.boton3)
+    this.crearCuadroTexto(2, 'texto_oce', this.boton3)
 
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(3,"texto_ame_nor",this.boton4)
+    this.crearCuadroTexto(3, 'texto_ame_nor', this.boton4)
 
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(4,"texto_ame_sur",this.boton5)
+    this.crearCuadroTexto(4, 'texto_ame_sur', this.boton5)
 
     /** @type {HTMLElement} */
-    this.crearCuadroTexto(5,"texto_afr",this.boton6)
+    this.crearCuadroTexto(5, 'texto_afr', this.boton6)
 
     this.boton1.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el primer botón
 
-
     this.boton2.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el segundo botón
 
-
     this.boton3.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el tercer botón
 
-
     this.boton4.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el cuarto botón
 
-    
     this.boton5.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el quinto botón
 
-    
     this.boton6.addEventListener('click', (event) => {
-      this.modificarPreguntas(event);
+      this.modificarPreguntas(event)
     }) // Cambiamos a Vista Continente para el sexto botón
 
     this.enlaceRanking = this.base.querySelector('.verRanking')
@@ -89,19 +84,19 @@ export class VistaMapa extends Vista {
 
   /**
    * Crea un cuadro de texto con el texto proporcionado.
-   * @param {string} texto - Texto para el cuadro de texto.
-   * @returns {HTMLElement} - Cuadro de texto creado.
+   * @param {number} idContinente - ID del continente asociado al cuadro de texto.
+   * @param {string} idDiv - ID del cuadro de texto HTML.
+   * @param {HTMLElement} boton - Botón asociado al cuadro de texto.
    */
-  async crearCuadroTexto (idContinente,idDiv, boton) {
+  async crearCuadroTexto (idContinente, idDiv, boton) {
     const cuadroTexto = document.createElement('div')
     cuadroTexto.classList.add('cuadro-texto')
     const continente = await this.controlador.devolverContinente(idContinente)
-    cuadroTexto.textContent = continente["resumenInfo"]
+    cuadroTexto.textContent = continente.resumenInfo
     cuadroTexto.style.display = 'none'
     cuadroTexto.id = idDiv
     this.base.appendChild(cuadroTexto)
     this.cuadrosTexto.push(cuadroTexto)
-
 
     // Asociar eventos
     boton.addEventListener('mouseenter', () => this.mostrarCuadroTexto(this.cuadrosTexto[idContinente]))
@@ -124,14 +119,21 @@ export class VistaMapa extends Vista {
     cuadroTexto.style.display = 'none'
   }
 
-  modificarPreguntas(event){
-    let id = event.target.id.slice(-1)-1
-    this.controlador.cambiarContinentes(id);
+  /**
+   * Modifica las preguntas al hacer clic en un botón.
+   * @param {Event} event - Objeto que representa el evento de clic.
+   */
+  modificarPreguntas (event) {
+    const id = event.target.id.slice(-1) - 1
+    this.controlador.cambiarContinentes(id)
   }
 
-  eliminarContinente(idContinente){
-    const boton = 'this.boton' + (idContinente+1)
-    console.log(boton)
-    eval(boton).remove()
+  /**
+   * Elimina un continente.
+   * @param {number} idContinente - ID del continente a eliminar.
+   */
+  eliminarContinente (idContinente) {
+    const boton = 'this.boton' + (idContinente + 1)
+    eval(boton).remove() // eslint-disable-line no-eval
   }
 }

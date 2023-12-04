@@ -26,21 +26,24 @@ export class VistaMenu extends Vista {
   }
 
   /**
-     * Maneja el evento de hacer clic en el primer enlace del menú.
-     */
+   * Maneja el evento de hacer clic en el primer enlace del menú.
+   */
   pulsarEnlace1 () {
-    this.controlador.verVista(Vista.VISTA2) // Cambiamos a Vista Mapa
+    this.controlador.verVista(Vista.VISTAMAPA) // Cambiamos a Vista Mapa
   }
 
   /**
-     * Maneja el evento de hacer clic en el segundo enlace del menú.
-     */
+   * Maneja el evento de hacer clic en el segundo enlace del menú.
+   */
   pulsarEnlace2 () {
     this.controlador.cambiarEnlaceRankingInicio()
     this.controlador.mostrarRankingActualizado()
   }
 
-  borrarBotonInicio(){
+  /**
+   * Elimina el botón de inicio.
+   */
+  borrarBotonInicio () {
     this.enlace1.remove()
   }
 }

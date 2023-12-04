@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: vistas/vista.js</title>
+    <title>JSDoc: Source: vistas/vista_fecha.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: vistas/vista.js</h1>
+    <h1 class="page-title">Source: vistas/vista_fecha.js</h1>
 
     
 
@@ -26,55 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Clase que representa una vista en la aplicación.
- */
-export class Vista {
-  /**
-   * Símbolos que representan distintas vistas en la aplicación.
-   * @type {Symbol}
-   */
-  static VISTAMENU = Symbol('Inicio')
-  static VISTAMAPA = Symbol('Mapa')
-  static VISTARANKING = Symbol('Ranking')
-  static VISTACONTINENTE = Symbol('Continente')
-  static VISTAFORMULARIO = Symbol('Formulario')
-  static VISTAPROBLEMA = Symbol('Problema')
-  static VISTAREFLEXION = Symbol('Reflexion')
-  static VISTACONFLICTO = Symbol('conflicto')
-  static VISTAFECHA = Symbol('fecha')
+            <pre class="prettyprint source linenums"><code>import { Vista } from './vista.js'
 
+/**
+ * Clase que representa la vista de la fecha de inicio del conflicto en la aplicación.
+ * @extends Vista
+ */
+export class VistaFecha extends Vista {
   /**
-   * Constructor de la clase Vista.
+   * Construye una instancia de la clase VistaFecha.
+   * @constructor
    * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista de la fecha.
    */
   constructor (controlador, base) {
-    this.controlador = controlador
-    this.base = base
+    super(controlador, base)
+
+    this.divFecha = document.getElementById('fraseFecha')
+    this.botonVolver = document.getElementById('botonVolverFecha')
+    this.enlaceInicio = this.base.querySelector('.verMenu')
+
+    this.botonVolver.addEventListener('click', () => this.controlador.comprobarContinentesCambiar(this.idContinente))
+    this.enlaceInicio.addEventListener('click', () => this.controlador.comprobarContinentesMapa(this.idContinente))
   }
 
   /**
-   * Muestra u oculta la vista.
-   * @param {boolean} ver - Indica si la vista debe mostrarse (true) u ocultarse (false).
+   * Actualiza la vista de fecha con la información proporcionada.
+   * @param {string} fecha - Fecha en formato ISO.
+   * @param {string} idContinente - Identificador único del continente.
    */
-  mostrar (ver) {
-    if (ver) {
-      this.base.style.display = 'block'
-    } else {
-      this.base.style.display = 'none'
-    }
-  }
-
-  /**
-   * Actualiza la puntuación en la interfaz, si es aplicable.
-   */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    if (puntuacionElemento) {
-      const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-      puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
-    }
+  actualizarFecha (fecha, idContinente) {
+    this.idContinente = idContinente
+    const date = new Date(fecha)
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    this.divFecha.textContent = 'El conflicto comenzó el ' + date.toLocaleDateString('es-ES', options)
   }
 }
 </code></pre>
