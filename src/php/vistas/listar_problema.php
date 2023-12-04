@@ -15,7 +15,7 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Soluciones</th> <!-- Nueva columna para soluciones -->
+                    <th>Soluciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
                     <tr>
@@ -34,19 +34,16 @@
                                 <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
                             </div>
                         </td>
-                        <td><?php var_dump($dataToView["data"]); ?>
-
-                            <div class='scroll'>
-                                <!-- Verificar si existe la clave "soluciones" y no es nula -->
-                                <?php if (isset($fila['soluciones']) && is_array($fila['soluciones'])) {
-                                    foreach ($fila['soluciones'] as $solucion) {
-                                        echo htmlspecialchars($solucion['textoSolucion'], ENT_QUOTES) . '<br>';
-                                    }
-                                } else {
-                                    echo 'No hay soluciones disponibles.';
+                        <td>
+                            <?php 
+                            if (isset($fila['soluciones'])) {
+                                foreach ($fila['soluciones'] as $solucion) {
+                                    echo htmlspecialchars($solucion['textoSolucion'], ENT_QUOTES) . "<br>";
                                 }
-                                ?>
-                            </div>
+                            } else {
+                                echo "No hay soluciones disponibles";
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php } ?>
