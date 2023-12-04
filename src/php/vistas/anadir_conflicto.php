@@ -1,7 +1,7 @@
 <main>   
-    <div>
+    <aside>
         <div class="opciones">
-            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver atrás</a>
+            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver</a>
         </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">
@@ -12,16 +12,16 @@
         <form action="index.php?controller=conflicto&action=insertar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>" method="post" id="form" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Introducir título">
-
-                <label for="informacion">Información:</label>
-                <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
-
+                <div>
+                    <label for="informacion">Información:</label>
+                    <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
+                </div>
                 <label for="fecha">Fecha de inicio del conflicto:</label>
                 <input type="date" id="fecha" name="fecha"></input>
-
-                <label for="imagen">Imagen (opcional):</label>
-                <input type="file" id="imagen" name="imagen">
-
+                <div>
+                    <label for="imagen">Imagen (opcional):</label>
+                    <input type="file" id="imagen" name="imagen">
+                </div>
                 <p class='titulo'>Añadir motivos:</p>
                 <div class="motivos">
                     <h2>Motivo 1</h2>
@@ -61,6 +61,6 @@
                     <button type="button" name='enviar' id='enviar'>Enviar</button>
                 </div>
         </form>
-    </div>
+    </aside>
 </main>   
 <script type=module src="js/vistas/vista_admin_conflicto.js"></script>

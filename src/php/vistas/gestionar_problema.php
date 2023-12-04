@@ -1,9 +1,9 @@
 <main>
-    <div>
+    <aside>
         <?php if(count($dataToView["data"]) > 0){ ?>
             <div class='opciones'>
                 <a href='index.php?controller=problema'>Volver atrás</a>
-                <a href='index.php?controller=problema&action=mostrar_anadir&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Añadir problema</a>
+                <a href='index.php?controller=problema&action=mostrar_anadir&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Añadir</a>
             </div>
             
             <?php if(isset($_GET["msg"])){ ?>
@@ -18,7 +18,7 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Opciones</th>
+                    <th class="botones">Opciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila){ ?>
                     <tr>
@@ -38,9 +38,9 @@
                             </div>
                         </td>
                         <td>
-                            <ul>
-                                <li><a href='index.php?controller=problema&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Borrar</a></li>
-                                <li><a href='index.php?controller=problema&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Modificar</a></li>
+                            <ul class="contenedorBotones">
+                                <li><a href='index.php?controller=problema&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-solid fa-trash"></i></a></li>
+                                <li><a href='index.php?controller=problema&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-solid fa-pen"></i></a></li>
                             </ul>
                         </td>
                     </tr>
@@ -55,5 +55,5 @@
                 </div>
             </div>
         <?php } ?>
-    </div>
+    </aside>
 <main>

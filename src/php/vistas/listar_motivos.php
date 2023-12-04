@@ -1,5 +1,5 @@
 <main>
-    <div>
+    <aside>
         <h1><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"]) ?></h1>
         <table>
             <tr>
@@ -25,7 +25,7 @@
             <?php } ?>
         </table>
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver atrás</a>
+            <a href='index.php?controller=conflicto&action=gestionar'>Volver</a>
         </div>
-    </div>
+    </aside>
 </main>

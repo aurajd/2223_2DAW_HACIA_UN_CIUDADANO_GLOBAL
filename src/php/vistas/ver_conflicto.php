@@ -1,15 +1,18 @@
 <main>
-    <div>
+    <aside>
         <div>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>' readonly>
-
-            <label for="informacion">Informacion:</label>
-            <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
-
-            <label for="fecha">Fecha de inicio:</label>
-            <input type="date" id="fecha" value="<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>"readonly>
-            
+            <p>
+                <p><label for="titulo">Título:</label></p>
+                <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>' readonly>
+            </p>
+            <div>
+                <label for="informacion">Informacion:</label>
+                <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
+            </div>
+            <div>
+                <label for="fecha">Fecha de inicio:</label>
+                <input type="date" id="fecha" value="<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>"readonly>
+            </div>
             <?php if(!is_null($dataToView["data"]["conflicto"]["imagen"])){ ?>
                 <p class='titulo'>Imagen:</p>
                 <img src='img/<?php echo $dataToView["data"]["conflicto"]["imagen"] ?>' id='imagenMostrar'>
@@ -26,7 +29,7 @@
             <?php } ?>
 
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=listar&continente=<?php echo $dataToView["data"]["conflicto"]["idContinente"] ?>'>Volver atrás</a>
+        <a href='index.php?controller=conflicto&action=listar&continente=<?php echo $dataToView["data"]["conflicto"]["idContinente"] ?>'>Volver</a>
         </div>
-    </div>
+    </aside>
 </main>

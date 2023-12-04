@@ -1,6 +1,6 @@
 <main>
     <?php if(count($dataToView["data"]) > 0){ ?>
-        <div>
+        <aside>
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>">
                     <?php echo $_GET["msg"] ?>
@@ -48,7 +48,7 @@
                     </tr>
                 <?php } ?>
             </table>
-        </div>
+        </aside>
     <?php } else { ?>
         <div class="no_lista">
             <h1>No hay ningún problema en la base de datos.</h1>
