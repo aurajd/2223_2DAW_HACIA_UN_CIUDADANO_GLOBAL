@@ -15,6 +15,7 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
+                    <th>Soluciones</th>
                 </tr>
                 <?php foreach ($dataToView["data"] as $fila) { ?>
                     <tr>
@@ -33,29 +34,13 @@
                                 <?php echo htmlspecialchars($fila['reflexion'], ENT_QUOTES); ?>
                             </div>
                         </td>
-                    </tr>
-                    <!-- Mostrar soluciones -->
-                    <tr>
-                        <th colspan="3">
-                            <div>
-                                Soluciones
+                        <td>
+                            <div class='scroll'>
+                                <ul class="contenedorBotones">
+                                <li><a href='index.php?controller=problema&action=ver_problema&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-regular fa-eye"></i></a></li>
+                                </ul>
                             </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <?php
-                        $soluciones = $dataToView["data"]["soluciones"];
-                        $numSoluciones = $dataToView["data"]["soluciones"][$offset]["numSolucion"];
-                        $maxSolucionesPorFila = 3;
-
-                        for ($i = 0; $i < $numSoluciones; $i += $maxSolucionesPorFila) {
-                            echo '<tr>';
-                            for ($j = $i; $j < $i + $maxSolucionesPorFila && $j < $numSoluciones; $j++) {
-                                echo '<td>' . htmlspecialchars($soluciones[$j]['textoSolucion'], ENT_QUOTES) . '</td>';
-                            }
-                            echo '</tr>';
-                        }
-                        ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
