@@ -45,7 +45,7 @@
                     <tr>
                         <?php
                         $soluciones = $dataToView["data"]["soluciones"];
-                        $numSoluciones = count($soluciones);
+                        $numSoluciones = $dataToView["data"]["soluciones"][$offset]["numSolucion"];
                         $maxSolucionesPorFila = 3;
 
                         for ($i = 0; $i < $numSoluciones; $i += $maxSolucionesPorFila) {
