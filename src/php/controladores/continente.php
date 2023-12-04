@@ -101,7 +101,7 @@ class ContinenteController {
 
         $informacion = isset($_POST['informacion']) ? $_POST['informacion'] : '';
         $resumenInfo = isset($_POST['resumenInfo']) ? $_POST['resumenInfo'] : '';
-        $imagen = $_FILES['imagen'] ?? null;
+        $imagen = $_FILES['imagen'];
 
         // Validar los datos del continente
         if (!$this->validar_continente($informacion, $resumenInfo, $imagen)) {
@@ -119,7 +119,7 @@ class ContinenteController {
             $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, ['tmp_name' => __DIR__."/../../img/".$imagenNombre, 'name' => $imagenNombre]);
         } else {
             // Si no se proporciona una nueva imagen, conservar la existente
-            $imagenNombre = $infoContinente['imagen'] ?? null;
+            $imagenNombre = $infoContinente['imagen'];
             $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, null);
         }
 
@@ -167,10 +167,10 @@ class ContinenteController {
         }
 
         // Comprueba que los campos información y resumenInfo solo contengan letras, números, espacios y una serie de caracteres especiales concretos
-        $pattern = '/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/';
-        if (!preg_match($pattern, $informacion) || !preg_match($pattern, $resumenInfo)) {
+        $patron = '/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/';
+        if (!preg_match($patron, $informacion) || !preg_match($patron, $resumenInfo)) {
             $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "La información y el resumenInfo no pueden contener caracteres especiales.";
+            $_GET["msg"] = "La información y el resumen no pueden contener ciertos caracteres especiales.";
             return false;
         }
 

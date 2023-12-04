@@ -30,3 +30,4 @@
         </form>
     </aside>
 </main>
+<script type=module src="js/vistas/vista_admin_continente.js"></script>

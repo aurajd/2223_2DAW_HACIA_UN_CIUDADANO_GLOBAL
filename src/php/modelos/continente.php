@@ -132,7 +132,7 @@ class ContinenteModel extends Conexion {
                 // Subimos la nueva imagen
                 $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
                 $nombreImagen = uniqid() . "." . $ext;
-                $ruta_destino = __DIR__ . "/../../img/" . $nombreImagen;
+                $ruta_destino = __DIR__ ."/../../img/" . $nombreImagen;
                 move_uploaded_file($imagen["tmp_name"], $ruta_destino);
 
                 // Actualizamos la ruta de la imagen en la base de datos
@@ -141,19 +141,16 @@ class ContinenteModel extends Conexion {
                 $stmt->bind_param('si', $nombreImagen, $id);
                 $stmt->execute();
             }
-
-            $this->conexion->commit();
-            $stmt->close();
-
-            return true;
-        } catch (Exception $e) {
+        }catch (mysqli_sql_exception $e) {
             $this->conexion->rollback();
-            $this->error = "Error en la transacción: " . $e->getMessage();
-            $stmt->close();
+            $this->error = "Error ".$e->getCode().": Contacte con el administrador.";
             return false;
-        } finally {
-            $this->conexion->autocommit(true);
+        }finally {
+            $stmt->close();
         }
+
+        $this->conexion->commit();
+        return true;
     }
 }
 

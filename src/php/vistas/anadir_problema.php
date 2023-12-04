@@ -1,7 +1,7 @@
 <main>    
     <aside>
         <div class="opciones">
-            <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Volver atrás</a>
+            <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Volver</a>
         </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">

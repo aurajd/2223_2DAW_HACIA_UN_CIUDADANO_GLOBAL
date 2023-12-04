@@ -244,7 +244,9 @@ td li{
     text-align: center;
 }
 
-
+#listarContImg img{
+    max-height: 30vh;
+}
 
 
 

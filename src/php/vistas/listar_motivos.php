@@ -25,7 +25,7 @@
             <?php } ?>
         </table>
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=gestionar'>Volver atrás</a>
+            <a href='index.php?controller=conflicto&action=gestionar'>Volver</a>
         </div>
     </aside>
 </main>

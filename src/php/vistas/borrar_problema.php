@@ -1,16 +1,18 @@
 <main>
     <aside>
         <h1>Eliminar problema</h1>
-
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>' readonly>
-
-        <label for="informacion">Informacion:</label>
-        <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
-
-        <label for="reflexion">Reflexión:</label>
-        <textarea id="reflexion" readonly><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
-        
+        <p>
+            <p><label for="titulo">Título:</label></p>
+            <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>' readonly>
+        </p>
+        <div>
+            <label for="informacion">Informacion:</label>
+            <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
+        <div>
+        <div>
+            <label for="reflexion">Reflexión:</label>
+            <textarea id="reflexion" readonly><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
+        <div>
         <?php if(!is_null($dataToView["data"]["imagen"])){ ?>
             <p class='titulo'>Imagen:</p>
             <img src='img/<?php echo $dataToView["data"]["imagen"] ?>' id='imagenMostrar'>

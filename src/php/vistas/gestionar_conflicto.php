@@ -3,8 +3,8 @@
     
     <?php if(count($dataToView["data"])>0){ ?>
             <div class='opciones'>
-                <a href='index.php?controller=conflicto'>Volver atrás</a>
-                <a href='index.php?controller=conflicto&action=mostrar_anadir'>Añadir conflicto</a>
+                <a href='index.php?controller=conflicto'>Volver</a>
+                <a href='index.php?controller=conflicto&action=mostrar_anadir&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Añadir</a>
             </div>
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
@@ -49,9 +49,9 @@
                                 </td>
                             <td>
                                 <ul class="contenedorBotones">
-                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-solid fa-trash"></i></a></li>
-                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-solid fa-pen"></i></a></li>
-                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-regular fa-clipboard"></i></a></li>
+                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-solid fa-trash"></i></a></li>
+                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-solid fa-pen"></i></a></li>
+                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-solid fa-list"></i></a></li>
                                 </ul>
                             </td>
                         </tr>

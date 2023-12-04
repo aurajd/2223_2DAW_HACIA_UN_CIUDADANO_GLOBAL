@@ -1,10 +1,10 @@
 <main>
     <aside>
         <div>
-            <div>
-                <label for="titulo">Título:</label>
+            <p>
+                <p><label for="titulo">Título:</label></p>
                 <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>' readonly>
-            </div>
+            </p>
             <div>
                 <label for="informacion">Informacion:</label>
                 <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
@@ -29,7 +29,7 @@
             <?php } ?>
 
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=listar'>Volver atrás</a>
+        <a href='index.php?controller=conflicto&action=listar&continente=<?php echo $dataToView["data"]["conflicto"]["idContinente"] ?>'>Volver</a>
         </div>
     </aside>
 </main>
