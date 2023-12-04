@@ -48,7 +48,9 @@ class ContinenteController {
     
         if ($infoContinente) {
             // Pasar la información del continente a la vista
-            include_once __DIR__.'/../vistas/listar_continente.php';
+            $this->titulo = 'Lista continente';
+            $this->view = "listar_continente";
+            return $infoContinente;
         }
     }
     
