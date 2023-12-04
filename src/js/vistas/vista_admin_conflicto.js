@@ -15,7 +15,6 @@ class VistaAdminConflicto {
     this.regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/ // Ajustada para el formato de fecha "aaaa-mm-dd"
     this.regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1999}$/
 
-    this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
 
     // Referencias a los elementos del formulario
     this.titulo = document.getElementById('titulo')
@@ -29,6 +28,8 @@ class VistaAdminConflicto {
     this.divOriginal = document.getElementById('duplicadoOriginal')
     this.formulario = document.querySelector('form')
     this.botonEnviar = document.getElementById('enviar')
+
+    this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
 
     // Asignar eventos a los campos de entrada
     this.titulo.addEventListener('blur', this.validarTitulo.bind(this))
