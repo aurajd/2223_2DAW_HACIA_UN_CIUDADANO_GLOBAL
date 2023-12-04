@@ -4,7 +4,7 @@
             <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
         <?php } ?>
         <h1>Modificar problema</h1>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"]?>&continente=<?php echo $_GET["continente"]?>' id="form">
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["problema"]["idSituacion"]?>&continente=<?php echo $_GET["continente"]?>' id="form">
             <label for='titulo'>Título:</label>
             <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["problema"]["titulo"],ENT_QUOTES) ?>'>
             
@@ -34,9 +34,9 @@
                 <div class="motivos" <?php if ($numSolucion == 3) {echo 'id="duplicadoOriginal"';}?>>
                     <h2>Solución <?php echo $numSolucion?></h2>
                     <label for="motivo<?php echo $numSolucion?>">Información:</label>
-                    <textarea name="motivos[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
+                    <textarea name="soluciones[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
                     <label>
-                        <input type="checkbox" name="motivoCorrecto" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
+                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
                         Es correcto
                     </label>
                 </div>
@@ -51,9 +51,9 @@
                 <div class="motivos">
                     <h2>Solución <?php echo $numSolucion?></h2>
                     <label for="motivo<?php echo $numSolucion?>">Información:</label>
-                    <textarea name="motivos[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
+                    <textarea name="soluciones[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
                     <label>
-                        <input type="checkbox" name="motivoCorrecto" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
+                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
                         Es correcto
                     </label>
                 </div>
@@ -65,7 +65,7 @@
             </div>
             
             <div class='opciones'>
-                <button type="button" name='enviar' id='enviar'>Enviar</button>
+                <button name='enviar' id='enviar'>Enviar</button>
                 <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"]?>'>Cancelar</a>
             </div>
         </form>
