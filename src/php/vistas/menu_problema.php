@@ -23,22 +23,3 @@
         </script>
     </div>
 </div>
-
-<!--<div class="menu">
-    <div class="botones">
-        <h1>OPCIONES PROBLEMA</h1>
-        <form action="index.php?controller=problema&action=gestiona" method="post">
-            <label for="continente">Seleccionar continente:</label>
-            <select name="continentes" id="continente">
-                <option value="1">Europa</option>
-                <option value="2">Asia</option>
-                <option value="3">Oceanía</option>
-                <option value="4">América del norte</option>
-                <option value="5">América del sur</option>
-                <option value="6">África</option>
-            </select>
-            <button type="submit" name="action" value="gestionar">Gestionar</button>
-            <button type="submit" name="action" value="listar">Listar</button>
-        </form>
-    </div>
-</div>-->

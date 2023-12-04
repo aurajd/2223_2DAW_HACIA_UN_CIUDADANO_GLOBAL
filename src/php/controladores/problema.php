@@ -33,16 +33,6 @@ class problemaController{
     }
 
     /**
-     * Muestra el formulario para añadir un problema.
-     * 
-     * @return void
-     */
-    function mostrar_anadir(){
-        $this->view = "anadir_problema";
-        $this->titulo = "Añadir problemas";
-    }
-
-    /**
      * Muestra una lista resumida de los problemas.
      *
      * @return array Array con todos los datos de los problemas.
@@ -65,30 +55,12 @@ class problemaController{
     
             // Llama al método listar con el ID del continente como argumento
             return $this->modelo->listar($idContinente);
+            
         } else {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
             return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
-    }
-    
-    
-
-    /**
-     * Muestra información detallada de un problema concreto.
-     *
-     * @return array Array con todos los datos del problema.
-     */
-    function ver_problema(){
-        $id = $_GET['id'] ?? '';
-        if(!$this->modelo->comprobarExisteProblema($id)){
-            $_GET["tipomsg"] = "error";
-            $_GET["msg"] = "No existe el problema seleccionado.";
-            return $this->listar();
-        }
-        $this->view = "ver_problema";
-        $this->titulo = "Ver problema";
-        return $this->modelo->listar_fila($id);
     }
 
     /**
@@ -119,23 +91,71 @@ class problemaController{
             return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
     }
+
+    /**
+     * Muestra el formulario para añadir un problema.
+     * 
+     * @return void
+     */
+    function mostrar_anadir(){
+        $this->view = "anadir_problema";
+        $this->titulo = "Añadir problemas";
+    }
+
+    /**
+     * Muestra información detallada de un problema concreto.
+     *
+     * @return array Array con todos los datos del problema.
+     */
+    function ver_problema(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->listar();
+        }
+        $this->view = "ver_problema";
+        $this->titulo = "Ver problema";
+        return $this->modelo->listar_fila($id);
+    }
+
+    /**
+     * Lista las soluciones de un problema.
+     *
+     * @return void|array Resultado de la operación, si la ID que recibe no está asociada a ningún problema no devuelve nada.
+     */
+    function listar_soluciones(){
+        $id = $_GET['id'] ?? '';
+
+        // Si la ID que recibe no coincide con ningún problema (por ejemplo, URL modificada)
+        // devuelve a la lista de problemas y muestra un mensaje de error.
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->gestionar();
+        }
+
+        $this->view = "listar_soluciones";
+        $this->titulo = "Listar soluciones";
+        return $this->modelo->listar_problema_solucion($id);
+    }
     
     /**
- * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
- *
- * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
- */
-function mostrar_modificar(){
-    $id = $_GET['id'] ?? '';
-    if(!$this->modelo->comprobarExisteProblema($id)){
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "No existe el problema seleccionado.";
-        return $this->gestionar();
+     * Muestra el formulario para modificar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
+     *
+     * @return void|array Información del conflicto a modificar, si la id que recibe no está asociada a ningún conflicto no devuelve nada.
+     */
+    function mostrar_modificar(){
+        $id = $_GET['id'] ?? '';
+        if(!$this->modelo->comprobarExisteProblema($id)){
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
+            return $this->gestionar();
+        }
+        $this->view = "modificar_problema";
+        $this->titulo = "Modificar problema";
+        return $this->modelo->listar_fila($id);
     }
-    $this->view = "modificar_problema";
-    $this->titulo = "Modificar problema";
-    return $this->modelo->listar_fila($id);
-}
 
     /**
      * Muestra el formulario para eliminar un problema. Si la id que recibe no existe muestra la vista de gestión de problemas.
@@ -173,7 +193,7 @@ function mostrar_modificar(){
         $reflexion = trim($_POST['reflexion']);
         $imagen = $_FILES['imagen'];
         $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
-        $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
+        $correctas = $_POST['correctas'] ?? "";   // Se obtienen las respuestas correctas
     
         // Verificar que al menos una opción sea marcada como correcta
         if (empty($correctas)) {
@@ -206,41 +226,50 @@ function mostrar_modificar(){
     }
     
     
-    /**
- * Modifica un problema. Si lo consigue envía por $_GET un mensaje de éxito,
- * si no, uno de error. Si la id que recibe no existe muestra la gestión de problemas.
- *
- * @return void
- */
-function modificar(){
-    $id = $_GET['id'] ?? '';
-    if(!$this->modelo->comprobarExisteProblema($id)){
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = "No existe el problema seleccionado.";
-        return $this->gestionar();
-    }
-    $titulo = trim($_POST['titulo']);
-    $informacion = trim($_POST['informacion']);
-    $reflexion = trim($_POST['reflexion']);
-    $imagen = $_FILES['imagen'];
-    $soluciones = $_POST['soluciones'] ?? array(); // Se obtienen las soluciones
-    $correctas = $_POST['correctas'] ?? array();   // Se obtienen las respuestas correctas
-
-    // Verifica que los datos necesarios no estén vacíos antes de insertar
-    if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
-        // Llama al método del modelo para insertar la situación
-        $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
-        if($resultado){
-            $_GET["tipomsg"] = "exito";
-            $_GET["msg"] = "Problema modificado con éxito.";
+   /**
+     * Modifica un problema. Si lo consigue, envía por $_GET un mensaje de éxito,
+     * si no, uno de error. Si la id que recibe no existe, muestra la gestión de problemas.
+     *
+     * @return void
+     */
+    function modificar() {
+        $id = $_GET['id'] ?? '';
+        if (!$this->modelo->comprobarExisteProblema($id)) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "No existe el problema seleccionado.";
             return $this->gestionar();
         }
-        $_GET["tipomsg"] = "error";
-        $_GET["msg"] = $this->modelo->error;
-    }
-    $_GET["tipomsg"] = "error";
 
-    return $this->mostrar_modificar();
+        $titulo = trim($_POST['titulo']);
+        $informacion = trim($_POST['informacion']);
+        $reflexion = trim($_POST['reflexion']);
+        $imagen = $_FILES['imagen'];
+        $soluciones = $_POST['soluciones'] ?? [];  // Hay que asgurarse de tener $soluciones disponible
+        $correctas = $_POST['correctas'] ?? [];
+
+
+        // Verificar que al menos una opción sea marcada como correcta
+        if (empty($correctas)) {
+            $_GET["tipomsg"] = "error";
+            $_GET["msg"] = "Debes marcar al menos una opción como correcta.";
+            $this->mostrar_anadir();  // Redirecciona en caso de error
+        } else {
+            // Validar antes de modificar
+            if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
+                // Continuar con la lógica de modificación
+                $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $correctas);
+                if ($resultado) {
+                    $_GET["tipomsg"] = "exito";
+                    $_GET["msg"] = "Problema modificado con éxito.";
+                    return $this->gestionar();
+                }
+                $_GET["tipomsg"] = "error";
+                $_GET["msg"] = $this->modelo->error;
+            } else {
+                $_GET["tipomsg"] = "error";
+            }
+        }
+        return $this->mostrar_modificar();
 }
 
 
@@ -273,7 +302,7 @@ function modificar(){
      *
      * @return bool True si los datos son válidos, false si no.
      */
-    function validar($titulo,$informacion,$reflexion, $imagen){
+    function validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas){
         if(empty($titulo) || empty($informacion) || empty($reflexion)){
             $_GET["msg"] = "Debes rellenar todos los campos.";
             return false;
@@ -317,7 +346,28 @@ function modificar(){
                 return false;
             }    
         }
-        return true;
-    }
-    
+
+            // Validar soluciones
+        if (empty($soluciones) || !is_array($soluciones)) {
+            $_GET["msg"] = "Debes proporcionar al menos una solución.";
+            return false;
+        }
+
+        foreach ($soluciones as $solucion) {
+            // Comprobar si la solución está vacía o contiene caracteres especiales
+            if (empty($solucion) || !preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,199}$/', $solucion)) {
+                $_GET["msg"] = "Las soluciones no pueden estar vacías y deben contener solo caracteres válidos.";
+                return false;
+            }
+        }
+
+        foreach ($correctas as $respuestaCorrecta) {
+            if (!preg_match('/^[a-zA-Z0-9,]+$/', $respuestaCorrecta)) {
+                $_GET["msg"] = "Las respuestas correctas deben contener solo letras, números y comas.";
+                return false;
+            }
+        }
+        
+            return true;
+        }
 }

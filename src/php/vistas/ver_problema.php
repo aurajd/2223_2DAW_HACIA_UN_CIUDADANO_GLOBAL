@@ -1,5 +1,6 @@
 <main>
     <div>
+        <h1>Ver problema</h1>
         <div>
             <label for='titulo'>Título:</label>
             <input readonly type='text' name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>'>
