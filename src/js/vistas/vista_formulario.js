@@ -14,46 +14,35 @@ export class VistaFormulario extends Vista {
   constructor (controlador, base) {
     super(controlador, base)
 
-    document.addEventListener('keydown', this.irAtras.bind(this))
-
     this.formulario = this.base.querySelector('form')
     this.formulario.addEventListener('submit', (event) => this.enviarFormulario(event))
 
-    // Agregar evento al enlace de "Inicio"
-    const enlaceInicio = this.base.querySelector('nav ul li a')
-    enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
-
-    // Agregar evento al enlace de "Cancelar"
-    const enlaceCancelar = this.base.querySelector('form a')
-    enlaceCancelar.addEventListener('click', () => this.controlador.verVista(Vista.VISTA1))
+    this.botonCancelar = document.getElementById('botonCancelarFormulario')
+    this.botonCancelar.addEventListener('click', () => this.cancelarEnvio())
   }
 
   /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
-  irAtras (event) {
-    if (event.key === 'Enter') {
-      event.preventDefault() // Evitar el envío predeterminado del formulario
-      this.controlador.verVista(Vista.VISTA1)
-    }
-  }
-
-  /**
-     * Función para manejar el envío del formulario.
-     * @param {Event} event - Objeto que representa el evento de formulario.
-     */
+   * Función para manejar el envío del formulario.
+   * @param {Event} event - Objeto que representa el evento de formulario.
+   */
   enviarFormulario (event) {
     event.preventDefault()
+    this.borrarBotonInicio()
     this.controlador.manejarValidacionFormulario()
   }
 
   /**
-     * Actualiza la puntuación en la interfaz.
-     */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+   * Función para cancelar el envío del formulario.
+   */
+  cancelarEnvio () {
+    this.borrarBotonInicio()
+    this.controlador.verVista(Vista.VISTAMENU)
+  }
+
+  /**
+   * Borra el botón de inicio.
+   */
+  borrarBotonInicio () {
+    this.controlador.borrarBotonInicio()
   }
 }

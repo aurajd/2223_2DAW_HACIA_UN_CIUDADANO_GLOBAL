@@ -6,36 +6,50 @@ import { Vista } from './vista.js'
  */
 export class VistaRanking extends Vista {
   /**
-     * Construye una instancia de la clase Vista_ranking.
-     * @constructor
-     * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
-     * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del ranking.
-     */
+   * Construye una instancia de la clase VistaRanking.
+   * @constructor
+   * @param {Controlador} controlador - Instancia del controlador asociada a la vista.
+   * @param {HTMLElement} base - Elemento HTML que sirve como base para la vista del ranking.
+   */
   constructor (controlador, base) {
     super(controlador, base)
-
-    document.addEventListener('keydown', this.irAtras.bind(this))
+    this.filas = this.base.getElementsByTagName('tr')
 
     this.enlaceInicio = this.base.querySelector('.verMenu')
-    this.enlaceInicio.addEventListener('click', () => this.controlador.verVista(Vista.VISTA2))
   }
 
   /**
-     * Función para manejar la pulsación de tecla.
-     * @param {KeyboardEvent} event - Objeto que representa el evento de teclado.
-     */
-  irAtras (event) {
-    if (event.key === 'Enter') {
-      this.controlador.verVista(Vista.VISTA1)
+   * Actualiza la vista del ranking con la información proporcionada.
+   * @param {Object} ranking - Información del ranking.
+   */
+  actualizarRanking (ranking) {
+    for (const [index, fila] of ranking.filas.entries()) {
+      this.actualizarFila(fila, index)
     }
   }
 
   /**
-         * Actualiza la puntuación en la interfaz.
-         */
-  actualizarPuntuacionEnInterfaz () {
-    const puntuacionActual = this.controlador.obtenerPuntuacionActual()
-    const puntuacionElemento = this.base.querySelector('.puntosMensaje')
-    puntuacionElemento.textContent = `Puntuación: ${puntuacionActual}`
+   * Actualiza una fila específica en la tabla de ranking.
+   * @param {Object} fila - Información de la fila del ranking.
+   * @param {number} index - Índice de la fila en la tabla.
+   */
+  actualizarFila (fila, index) {
+    const filaRanking = this.filas[index + 1]
+    filaRanking.getElementsByTagName('td')[0].textContent = fila.nombreJugador
+    filaRanking.getElementsByTagName('td')[1].textContent = 'Puntuación: ' + fila.puntuacion
+  }
+
+  /**
+   * Cambia el enlace del botón de inicio para regresar al mapa.
+   */
+  cambiarEnlaceMapa () {
+    this.enlaceInicio.onclick = () => { this.controlador.verVista(Vista.VISTAMAPA) }
+  }
+
+  /**
+   * Cambia el enlace del botón de inicio para regresar al menú.
+   */
+  cambiarEnlaceInicio () {
+    this.enlaceInicio.onclick = () => { this.controlador.verVista(Vista.VISTAMENU) }
   }
 }

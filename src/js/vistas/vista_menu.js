@@ -16,36 +16,34 @@ export class VistaMenu extends Vista {
 
     // Coger referencias del interfaz
     /** @type {HTMLElement} */
-    this.enlace1 = this.base.querySelectorAll('p')[0]
+    this.enlace1 = this.base.querySelectorAll('a')[0]
     /** @type {HTMLElement} */
-    this.enlace2 = this.base.querySelectorAll('p')[1]
-    /** @type {HTMLElement} */
-    this.enlace3 = this.base.querySelectorAll('p')[2]
+    this.enlace2 = this.base.querySelectorAll('a')[1]
 
     // Asociar eventos
     this.enlace1.onclick = this.pulsarEnlace1.bind(this)
     this.enlace2.onclick = this.pulsarEnlace2.bind(this)
-    this.enlace3.onclick = this.pulsarEnlace3.bind(this)
   }
 
   /**
-     * Maneja el evento de hacer clic en el primer enlace del menú.
-     */
+   * Maneja el evento de hacer clic en el primer enlace del menú.
+   */
   pulsarEnlace1 () {
-    this.controlador.verVista(Vista.VISTA2) // Cambiamos a Vista Mapa
+    this.controlador.verVista(Vista.VISTAMAPA) // Cambiamos a Vista Mapa
   }
 
   /**
-     * Maneja el evento de hacer clic en el segundo enlace del menú.
-     */
+   * Maneja el evento de hacer clic en el segundo enlace del menú.
+   */
   pulsarEnlace2 () {
-    this.controlador.verVista(Vista.VISTA3) // Cambiamos a Vista Ranking
+    this.controlador.cambiarEnlaceRankingInicio()
+    this.controlador.mostrarRankingActualizado()
   }
 
   /**
-     * Maneja el evento de hacer clic en el tercer enlace del menú.
-     */
-  pulsarEnlace3 () {
-    this.controlador.verVista(Vista.VISTA5) // Cambiamos a Vista Formulario
+   * Elimina el botón de inicio.
+   */
+  borrarBotonInicio () {
+    this.enlace1.remove()
   }
 }
