@@ -15,10 +15,6 @@ class VistaAdminConflicto {
     this.regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/ // Ajustada para el formato de fecha "aaaa-mm-dd"
     this.regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1999}$/
 
-<<<<<<< HEAD
-=======
-    this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
->>>>>>> sprint3_mnieto
 
     // Referencias a los elementos del formulario
     this.titulo = document.getElementById('titulo')
@@ -33,7 +29,6 @@ class VistaAdminConflicto {
     this.formulario = document.querySelector('form')
     this.botonEnviar = document.getElementById('enviar')
 
-<<<<<<< HEAD
     this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
 
     // Asignar eventos a los campos de entrada
@@ -46,18 +41,6 @@ class VistaAdminConflicto {
       divSolucion.getElementsByTagName('textarea')[0].addEventListener('blur', (event) => this.validar(this.regexMotivo, event.target))
     }
 
-=======
-    // Asignar eventos a los campos de entrada
-    this.titulo.addEventListener('blur', this.validarTitulo.bind(this))
-    this.informacion.addEventListener('blur', this.validarInformacion.bind(this))
-    this.fecha.addEventListener('change', this.validarFecha.bind(this))
-    this.imagen.addEventListener('change', this.validarTamanioImagen.bind(this))
-
-    for (const divSolucion of this.divsSoluciones) {
-      divSolucion.getElementsByTagName('textarea')[0].addEventListener('blur', (event) => this.validar(this.regexMotivo, event.target))
-    }
-
->>>>>>> sprint3_mnieto
     this.botonAniadir.addEventListener('click', this.duplicarDiv.bind(this))
     this.botonBorrar.addEventListener('click', this.borrarDuplicado.bind(this))
     this.botonEnviar.addEventListener('click', (event) => this.validarFormulario())

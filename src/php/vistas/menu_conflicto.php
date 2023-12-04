@@ -21,8 +21,4 @@
             }
         </script>
     </aside>
-<<<<<<< HEAD
 </main>
-=======
-</main>
->>>>>>> sprint3_mnieto

@@ -53,8 +53,4 @@
         </div>
     <?php } ?>
     </aside>
-<<<<<<< HEAD
 </main>
-=======
-</main>
->>>>>>> sprint3_mnieto
