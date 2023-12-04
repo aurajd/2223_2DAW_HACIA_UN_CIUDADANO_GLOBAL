@@ -39,7 +39,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<article><img id="boton_eu1" src="img/boton.gif" alt="Europa"></article>
 				<article><img id="boton_eu2" src="img/boton.gif" alt="Asia"></article>
 				<article><img id="boton_eu3" src="img/boton.gif" alt="Oceanía"></article>
@@ -48,7 +48,7 @@
 				<article><img id="boton_eu6" src="img/boton.gif" alt="África"></article>
 			</main>
 		</div>
-		<div id="divvistaProb">
+		<div id="divvistaProb" class="divProbConf">
 			<nav>
 				<ul>
 					<li>
@@ -63,16 +63,16 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
-				<div id="infoProblema">
+			<main>
+				<div class="info">
 					<div>
 						<img src="" alt="Foto Problema" id="imagenProblema">
 					</div>
-					<div id="informacionProblema">
+					<div id="informacionProblema" class="infoTexto">
 						Información
 					</div>
 				</div>
-				<div>
+				<div class="seleccion">
 					<div id="divProblemas">
 						<div class="preguntaContainer">
 						</div>
@@ -92,7 +92,7 @@
 				</div>
 			</main>
 		</div>
-		<div id="divvistaConf">
+		<div id="divvistaConf" class="divProbConf">
 			<nav>
 				<ul>
 					<li>
@@ -107,16 +107,16 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
-				<div id="infoConflicto">
+			<main>
+				<div class="info">
 					<div>
 						<img src="" alt="Foto Problema" id="imagenConflicto">
 					</div>
-					<div id="informacionConflicto">
+					<div id="informacionConflicto" class="infoTexto">
 						Información
 					</div>
 				</div>
-				<div>
+				<div class="seleccion">
 					<div id="divConflictos">
 						<div class="preguntaContainer">
 						</div>
@@ -130,9 +130,9 @@
 						<div class="opcionesContainer">
 							<button id="motivo3">SOLUCIÓN C</button>
 						</div>
+						<button id="botonAceptarConflicto">ACEPTAR</button>
+						<button id="botonContinuarConflicto">CONTINUAR</button>
 					</div>
-					<button id="botonAceptarConflicto">ACEPTAR</button>
-					<button id="botonContinuarConflicto">CONTINUAR</button>
 				</div>
 			</main>
 		</div>
@@ -151,7 +151,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="divReflexion"> 
 					<h1>Reflexión</h1>
 					<div id="fraseReflexion">
@@ -175,7 +175,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div id="divFecha"> 
 					<h1>Fecha de inicio</h1>
 					<div id="fraseFecha">
@@ -184,7 +184,7 @@
 				</div>
 			</main>
 		</div>
-		<div id="divvistaCont">
+		<div id="divvistaCont" class="divProbConf">
 			<nav>
 				<ul>
 					<li>
@@ -199,17 +199,17 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
-				<div id="infoContinente">
+			<main>
+				<div id="infoContinente" class="info">
 					<h2 id="nombreContinente"></h2>
 					<div>
 						<img src="" alt="Foto Problema" id="imagenInfo">
 					</div>
-					<div id="informacionContinente">
+					<div id="informacionContinente" class="infoTexto">
 						Información
 					</div>
 				</div>
-				<div>
+				<div class="seleccion">
 					<div id="divProblemas">
 						<h2 class="encabezados">SITUACIONES DEL CONTINENTE</h2>
 						<div class="opcionesContainer">
@@ -232,7 +232,7 @@
 					</li>
 				</ul>
 			</nav>
-			<main class="mainJuego">
+			<main>
 				<div>
 					<table id="ranking">
 						<tr><th colspan="2">Ranking</th></tr>
@@ -261,15 +261,17 @@
 			</main>
 		</div>
 		<div id="divvistaForm">
-			<main class="mainJuego">
+			<main>
 				<div id="divPuntuacion">
 					<h1>Guardar puntuación:</h1>
 					<form>
-						<input type="text" id="username" placeholder="Introduce tu nombre">
 						<p id="usernameError" style="color: red;"></p>
+						<input type="text" id="username" placeholder="Introduce tu nombre">
 						<p class="puntosMensaje">0 Puntos</p>
-						<input type="submit" value="Enviar">
-						<button type="button" id="botonCancelarFormulario">Cancelar</button>
+						<aside>
+							<input type="submit" value="Enviar">
+							<button type="button" id="botonCancelarFormulario">Cancelar</button>
+						</aside>
 					</form>
 				</div>
 			</main>

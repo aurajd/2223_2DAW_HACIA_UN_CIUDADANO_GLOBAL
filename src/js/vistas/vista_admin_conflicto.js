@@ -11,9 +11,9 @@ class VistaAdminConflicto {
   constructor () {
     // Expresiones regulares para validaciones
     this.regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/
-    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"' ]{0,1998}$/
+    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"' ]{0,1999}$/
     this.regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/ // Ajustada para el formato de fecha "aaaa-mm-dd"
-    this.regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1998}$/
+    this.regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1999}$/
 
     this.contadorDuplicados = this.contenedorDuplicados.getElementsByTagName('div').length
 
