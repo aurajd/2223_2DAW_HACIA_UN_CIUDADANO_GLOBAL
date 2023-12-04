@@ -4,7 +4,7 @@
     <?php if(count($dataToView["data"])>0){ ?>
             <div class='opciones'>
                 <a href='index.php?controller=conflicto'>Volver atrás</a>
-                <a href='index.php?controller=conflicto&action=mostrar_anadir'>Añadir conflicto</a>
+                <a href='index.php?controller=conflicto&action=mostrar_anadir&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Añadir conflicto</a>
             </div>
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
@@ -49,9 +49,9 @@
                                 </td>
                             <td>
                                 <ul>
-                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'>Borrar</a></li>
-                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'>Modificar</a></li>
-                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>'>Listar motivos</a></li>
+                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Borrar</a></li>
+                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Modificar</a></li>
+                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Listar motivos</a></li>
                                 </ul>
                             </td>
                         </tr>

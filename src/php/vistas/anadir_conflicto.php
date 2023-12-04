@@ -1,7 +1,7 @@
 <main>   
     <div>
         <div class="opciones">
-            <a href='index.php?controller=conflicto&action=gestionar'>Volver atrás</a>
+            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver atrás</a>
         </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">
@@ -9,7 +9,7 @@
             </p>
         <?php } ?>
         <h1>Añadir conflicto</h1>
-        <form action="index.php?controller=conflicto&action=insertar" method="post" id="form" enctype="multipart/form-data">
+        <form action="index.php?controller=conflicto&action=insertar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>" method="post" id="form" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Introducir título">
 

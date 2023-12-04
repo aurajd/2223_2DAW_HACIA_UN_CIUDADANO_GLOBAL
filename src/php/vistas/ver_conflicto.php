@@ -26,7 +26,7 @@
             <?php } ?>
 
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=listar'>Volver atrás</a>
+            <a href='index.php?controller=conflicto&action=listar&continente=<?php echo $dataToView["data"]["conflicto"]["idContinente"] ?>'>Volver atrás</a>
         </div>
     </div>
 </main>

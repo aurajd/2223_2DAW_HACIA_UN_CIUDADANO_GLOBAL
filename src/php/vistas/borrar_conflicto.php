@@ -18,8 +18,8 @@
         </div>
 
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=borrar_fila&id=<?php echo $dataToView["data"]['idSituacion']?>'>Aceptar</a>
-            <a href='index.php?controller=conflicto&action=gestionar'>Cancelar</a>
+            <a href='index.php?controller=conflicto&action=borrar_fila&id=<?php echo $dataToView["data"]['idSituacion']?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Aceptar</a>
+            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Cancelar</a>
         </div>
     </div>
 </main>

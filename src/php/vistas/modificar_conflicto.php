@@ -4,7 +4,7 @@
             <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
         <?php } ?>
         <h1>Modificar conflicto</h1>
-        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"]?>'id="form">
+        <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"]?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'id="form">
             <label for='titulo'>Título:</label>
             <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>'>
             
@@ -65,7 +65,7 @@
             </div>
             <div class='opciones'>
                 <button type="button" name='enviar' id='enviar'>Enviar</button>
-                <a href='index.php?controller=conflicto&action=gestionar'>Cancelar</a>
+                <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Cancelar</a>
             </div>
         </form>
     </div>

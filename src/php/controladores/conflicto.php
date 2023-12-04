@@ -50,7 +50,7 @@ class conflictoController{
             if (!is_numeric($idContinente)) {
                 $_GET["tipomsg"] = "error";
                 $_GET["msg"] = "El ID del continente debe ser un número.";
-                return $this->listar();  // Redirecciona a la lista general en caso de error
+                return $this->modelo->listar_continentes();  // Redirecciona a la lista general en caso de error
             }
     
             // Llama al método listar con el ID del continente como argumento
@@ -59,7 +59,7 @@ class conflictoController{
         } else {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Se requiere especificar el ID del continente.";
-            return $this->listar();  // Redirecciona a la lista general en caso de no especificar el ID del continente
+            return $this->modelo->listar_continentes();  // Redirecciona a la lista general en caso de no especificar el ID del continente
         }
     }
     
@@ -189,7 +189,7 @@ class conflictoController{
      * @return void
      */
     function insertar(){
-        $idContinente = isset($_GET['idContinente']) ? $_GET['idContinente'] : null;
+        $idContinente = isset($_GET['continente']) ? $_GET['continente'] : null;
 
         // Hacemos trim a los datos recibidos para eliminar espacios en blanco antes y después del texto
         $titulo = trim($_POST['titulo']);

@@ -39,6 +39,17 @@ class conflictoModel extends Conexion{
         return $lista;
     }   
 
+    function listar_continentes(){
+        $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, c.fechaInicio
+                FROM situacion s
+                INNER JOIN conflicto c ON s.idSituacion = c.idConflicto";
+                
+        $resultado = $this->conexion->query($sql);
+        $lista = $resultado->fetch_all(MYSQLI_ASSOC);
+        
+        return $lista;
+    }  
+
      /**
      * Obtiene la información de un conflicto específico.
      *
@@ -46,7 +57,7 @@ class conflictoModel extends Conexion{
      * @return array Información del conflicto.
      */
     function listar_conflicto($id){
-        $sql = "SELECT s.idSituacion, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
+        $sql = "SELECT s.idContinente, s.idSituacion, c.numMotivo, s.titulo, s.informacion, s.imagen, c.fechaInicio
         FROM situacion s
         INNER JOIN conflicto c ON s.idSituacion = c.idConflicto
         WHERE s.idSituacion = ?;";
