@@ -1,4 +1,5 @@
 <main>
+    <aside>
     <?php if(count($dataToView["data"])>0){ ?>
         <div>
             <?php if(isset($_GET["msg"])){ ?>
@@ -13,7 +14,7 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Fecha de inicio</th>
-                    <th>Opciones</th>
+                    <th class="botones">Opciones</th>
                 </tr>
                 <?php
                     foreach ($dataToView["data"] as $fila){
@@ -35,8 +36,8 @@
                                 </div>
                             </td>
                             <td>
-                                <ul>
-                                    <li><a href='index.php?controller=conflicto&action=ver_conflicto&id=<?php echo $fila['idSituacion'] ?>'>Ver</a></li>
+                                <ul class="contenedorBotones">
+                                    <li><a href='index.php?controller=conflicto&action=ver_conflicto&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-regular fa-eye"></i></a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -53,4 +54,5 @@
             </div>
         </div>
     <?php } ?>
+    </aside>
 </main>

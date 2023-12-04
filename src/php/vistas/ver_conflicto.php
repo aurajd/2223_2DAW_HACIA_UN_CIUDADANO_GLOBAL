@@ -1,15 +1,18 @@
 <main>
-    <div>
+    <aside>
         <div>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>' readonly>
-
-            <label for="informacion">Informacion:</label>
-            <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
-
-            <label for="fecha">Fecha de inicio:</label>
-            <input type="date" id="fecha" value="<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>"readonly>
-            
+            <div>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>' readonly>
+            </div>
+            <div>
+                <label for="informacion">Informacion:</label>
+                <textarea id="informacion" readonly><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
+            </div>
+            <div>
+                <label for="fecha">Fecha de inicio:</label>
+                <input type="date" id="fecha" value="<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>"readonly>
+            </div>
             <?php if(!is_null($dataToView["data"]["conflicto"]["imagen"])){ ?>
                 <p class='titulo'>Imagen:</p>
                 <img src='img/<?php echo $dataToView["data"]["conflicto"]["imagen"] ?>' id='imagenMostrar'>
@@ -28,5 +31,5 @@
         <div class='opciones'>
             <a href='index.php?controller=conflicto&action=listar'>Volver atrás</a>
         </div>
-    </div>
+    </aside>
 </main>

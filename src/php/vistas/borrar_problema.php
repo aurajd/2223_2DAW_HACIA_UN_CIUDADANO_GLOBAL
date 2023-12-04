@@ -1,5 +1,5 @@
 <main>
-    <div>
+    <aside>
         <h1>Eliminar problema</h1>
 
         <label for="titulo">Título:</label>
@@ -19,5 +19,5 @@
             <a href='index.php?controller=problema&action=borrar_fila&id=<?php echo $dataToView["data"]['idSituacion']?>&continente=<?php echo $_GET["continente"]?>'>Aceptar</a>
             <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Cancelar</a>
         </div>
-    </div>
+    </aside>
 </main>

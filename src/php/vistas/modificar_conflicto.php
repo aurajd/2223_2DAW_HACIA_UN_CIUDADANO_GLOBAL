@@ -1,18 +1,22 @@
 <main>
-    <div>
+    <aside>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
         <?php } ?>
         <h1>Modificar conflicto</h1>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=conflicto&action=modificar&id=<?php echo $dataToView["data"]["conflicto"]["idSituacion"]?>'id="form">
-            <label for='titulo'>Título:</label>
-            <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>'>
-            
-            <label for='informacion'>Información:</label>
-            <textarea id="informacion" name='informacion'><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
-            
-            <label for='reflexion'>Fecha de inicio:</label>
-            <input type="date" id="fecha" name="fecha" value='<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>'>
+            <p>
+                <p><label for='titulo'>Título:</label></p>
+                <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"],ENT_QUOTES) ?>'>
+            </p>
+            <div>
+                <label for='informacion'>Información:</label>
+                <textarea id="informacion" name='informacion'><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["informacion"],ENT_QUOTES) ?></textarea>
+            </div>
+            <p>
+                <label for='reflexion'>Fecha de inicio:</label>
+                <input type="date" id="fecha" name="fecha" value='<?php echo $dataToView["data"]["conflicto"]["fechaInicio"] ?>'>
+            </p>
             
             <?php
                 if(!is_null($dataToView["data"]["conflicto"]["imagen"])){
@@ -68,6 +72,6 @@
                 <a href='index.php?controller=conflicto&action=gestionar'>Cancelar</a>
             </div>
         </form>
-    </div>
+    </aside>
 </main>
 <script type=module src="js/vistas/vista_admin_conflicto.js"></script>

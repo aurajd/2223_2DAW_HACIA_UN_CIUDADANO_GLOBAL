@@ -1,5 +1,5 @@
 <main>
-    <div>
+    <aside>
         <h1>Ver problema</h1>
         <div>
             <label for='titulo'>Título:</label>
@@ -23,5 +23,5 @@
         <div class='opciones'>
             <a href='index.php?controller=problema&action=listar'>Volver atrás</a>
         </div>
-    </div>
+    </aside>
 </main>

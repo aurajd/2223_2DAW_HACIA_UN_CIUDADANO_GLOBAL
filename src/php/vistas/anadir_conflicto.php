@@ -1,5 +1,5 @@
 <main>   
-    <div>
+    <aside>
         <div class="opciones">
             <a href='index.php?controller=conflicto&action=gestionar'>Volver atrás</a>
         </div>
@@ -12,16 +12,16 @@
         <form action="index.php?controller=conflicto&action=insertar" method="post" id="form" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Introducir título">
-
-                <label for="informacion">Información:</label>
-                <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
-
+                <div>
+                    <label for="informacion">Información:</label>
+                    <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
+                </div>
                 <label for="fecha">Fecha de inicio del conflicto:</label>
                 <input type="date" id="fecha" name="fecha"></input>
-
-                <label for="imagen">Imagen (opcional):</label>
-                <input type="file" id="imagen" name="imagen">
-
+                <div>
+                    <label for="imagen">Imagen (opcional):</label>
+                    <input type="file" id="imagen" name="imagen">
+                </div>
                 <p class='titulo'>Añadir motivos:</p>
                 <div class="motivos">
                     <h2>Motivo 1</h2>
@@ -61,6 +61,6 @@
                     <button type="button" name='enviar' id='enviar'>Enviar</button>
                 </div>
         </form>
-    </div>
+    </aside>
 </main>   
 <script type=module src="js/vistas/vista_admin_conflicto.js"></script>

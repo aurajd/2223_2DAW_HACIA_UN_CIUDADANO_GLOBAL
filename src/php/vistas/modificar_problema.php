@@ -1,18 +1,22 @@
 <main>
-    <div>
+    <aside>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>"><?php echo $_GET["msg"] ?></p>
         <?php } ?>
         <h1>Modificar problema</h1>
         <form method='post' enctype='multipart/form-data' action='index.php?controller=problema&action=modificar&id=<?php echo $dataToView["data"]["idSituacion"]?>&continente=<?php echo $_GET["continente"]?>' id="form">
-            <label for='titulo'>Título:</label>
-            <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>'>
-            
-            <label for='informacion'>Información:</label>
-            <textarea id="informacion" name='informacion'><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
-            
-            <label for='reflexion'>Reflexión:</label>
-            <textarea id="reflexion" name='reflexion'><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
+            <p>
+                <p><label for='titulo'>Título:</label></p>
+                <input type='text' id="titulo" name='titulo' value='<?php echo htmlspecialchars($dataToView["data"]["titulo"],ENT_QUOTES) ?>'>
+            </p>
+            <div>
+                <label for='informacion'>Información:</label>
+                <textarea id="informacion" name='informacion'><?php echo htmlspecialchars($dataToView["data"]["informacion"],ENT_QUOTES) ?></textarea>
+            </div>
+            <div>
+                <label for='reflexion'>Reflexión:</label>
+                <textarea id="reflexion" name='reflexion'><?php echo htmlspecialchars($dataToView["data"]["reflexion"],ENT_QUOTES) ?></textarea>
+            </div>
             
             <?php
                 if(!is_null($dataToView["data"]["imagen"])){
@@ -53,6 +57,6 @@
                 <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"]?>'>Cancelar</a>
             </div>
         </form>
-    </div>
+    </aside>
 </main>
 <script type=module src="js/vistas/vista_admin_problema.js"></script>

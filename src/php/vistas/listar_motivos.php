@@ -1,5 +1,5 @@
 <main>
-    <div>
+    <aside>
         <h1><?php echo htmlspecialchars($dataToView["data"]["conflicto"]["titulo"]) ?></h1>
         <table>
             <tr>
@@ -27,5 +27,5 @@
         <div class='opciones'>
             <a href='index.php?controller=conflicto&action=gestionar'>Volver atrás</a>
         </div>
-    </div>
+    </aside>
 </main>

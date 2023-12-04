@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $controlador->titulo ?></title>
     <link rel="stylesheet" href="css/style_admin.css">
+    <script src="https://kit.fontawesome.com/a0185357ca.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar">
+    <nav>
         <h1>Menú administrador</h1>
         <a href="index.php?controller=continente" class="back-link">Continentes</a>        
         <a href="index.php?controller=problema" class="back-link">Problemas</a>        

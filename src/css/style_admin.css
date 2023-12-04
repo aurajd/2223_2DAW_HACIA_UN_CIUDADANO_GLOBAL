@@ -7,13 +7,13 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     margin: 0;
+    color: white;
 }
 
-/* Navegador principal */
+/* Navegador principal NAV */
 nav{
     height: 10vh;
     background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
     box-shadow: 0px 0px 15px white;
     padding: 0 100px;
     display: flex;
@@ -42,18 +42,19 @@ nav a:hover{
     box-shadow: 0px 0px 15px white;
 }
 
-/* div general para el contenido */
+/* DIV MAIN (Contenedor general) */
+
 main{
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 90vh;
 }
 
-main>div{
+/* DIV ASIDE (Contenedor de elementos) */
+
+aside{
     font-family: 'Roboto', sans-serif;
     width: 85%;
-    min-height: 75%;
     margin: 10px 0px;
     padding: 2% 5%;
     border-radius: 20px;
@@ -63,8 +64,190 @@ main>div{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+/* DIV ARTICLE (Alineador de elementos) */
+
+article{
+    overflow: hidden;
+    height: 50vh;
+}
+
+/* Formularios FORM */
+
+form{
+    width: 100%;
+}
+
+.formMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50vh;
+}
+
+input[type="text"]{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+    width: 30%;
+}
+
+select{
+    font-size: x-large;
+}
+
+label{
+    font-size: x-large;
+}
+
+textarea{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 100px;  
+    padding: 0.5rem 1rem;
+    background-color: #efefef;
+    resize: vertical;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+input[type="file"]{
+    color: white;
+}
+
+/* Tablas TABLE */
+
+table{
+    width: 100%;
+    margin: auto;
+    background-color: lightgray;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: black;
+}
+
+#tablaMenuContinente{
+    width: 50%;
+}
+
+#tablaMenuContinente td{
+    padding: 5px;
+}
+
+#tablaMenuContinente a{
+    color: white;
+}
+
+tr{
+    width: 100%;
+}
+
+th,td{
+    border: 2px black solid;
+}
+
+th{
+    background-color: gray;
+    padding: 10px 0;
+    color: white;
+}
+
+td{
+    width: 20%;
+}
+
+.scroll{
+    width: 100%;
+    max-height: 200px;
+    margin: 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    /* Si sobrepasa los 200 pixeles (el max-height) overflow auto hace que aparezca una barra de scroll */
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+td img{
+    max-height: 200px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+
+td ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
+
+td a{
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+td a:hover {
+    background-color: #b9b9b9;
+}
+
+td li{
+    display: flex;
+    justify-content: center;
+}
+
+.botones{
+    width: 15%;
+}
+
+.contenedorBotones{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* listar continente */
+
+#listarContContenedor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#listarContTexto{
+    height: 50vh;
+    width: 45%;
+}
+
+#listarContImg{
+    height: 50vh;
+    width: 45%;
+    text-align: center;
+}
+
+
+
+
+
 
 .menu {
     background-color: #333;
@@ -83,10 +266,14 @@ main>div{
 
 img{
     border-radius: 50px;
+    max-width: 30%;
+}
+
+#menuLogo{
+    margin: 0 auto;
 }
 
 .boton {
-    font-family: 'Poppins', sans-serif;
     text-decoration: none;
     margin: 10px;
     padding: 10px; 
@@ -119,38 +306,10 @@ h1{
     color: white;
 }
 
-.titulo, label{
+.titulo{
     display: block;
     margin: 20px 0 5px;
     font-size: 1.3rem;
-    color: white;
-}
-
-form{
-    width: 100%;
-}
-
-input[type="text"]{
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-    background-color: #efefef;
-    width: 30%;
-}
-
-textarea{
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    width: 100%;
-    min-height: 100px;  
-    padding: 0.5rem 1rem;
-    background-color: #efefef;
-    resize: vertical;
-    box-sizing: border-box;
-    margin: 10px 0;
-}
-
-input[type="file"]{
     color: white;
 }
 
@@ -160,87 +319,6 @@ input[type="file"]{
     width: 10%;
     height: 40px;
     display: block;
-}
-
-table{
-    font-family: 'Roboto', sans-serif;
-    width: 80%;
-    margin: auto;
-    background-color: lightgray;
-    border-collapse: collapse;
-    table-layout: fixed
-}
-
-tr{
-    width: 100%;
-}
-
-th,td{
-    border: 2px black solid;
-}
-
-th{
-    background-color: gray;
-    padding: 10px 0;
-    color: white;
-}
-
-td{
-    width: 20%;
-}
-
-/* Div dentro de la celda para poner un scroll si sobrepasa 200px */
-.scroll{
-    width: 100%;
-    max-height: 200px;
-    margin: 0;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    /* Si sobrepasa los 200 pixeles (el max-height) overflow auto hace que aparezca una barra de scroll */
-    overflow-y: auto;
-    overflow-x: hidden;
-    word-wrap: break-word;
-}
-
-td img{
-    max-height: 200px;
-    max-width: 100%;
-    display: block;
-    margin: auto;
-}
-
-td ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    /* Usamos flex para centrar los enlaces los elementos de la lista */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-td li{
-    min-width: 60%;
-}
-
-td a{
-    text-decoration: none;
-    color: black;
-    padding: 10px 20px;
-    margin: 5px 0;
-    box-sizing: border-box;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    /* Usamos flex para centrar el texto del enlace */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-td a:hover {
-    background-color: #b9b9b9;
 }
 
 #imagenMostrar{
@@ -255,6 +333,7 @@ td a:hover {
     align-items: center;
     justify-content: center;
     column-gap: 10%;
+    width: 100%;
 }
 
 
@@ -267,6 +346,8 @@ td a:hover {
     background-color: white;
     border: 2px solid black;
     border-radius: 15px;
+    width: 20%;
+    text-align: center;
 }
 
 .opciones input:hover[type="submit"],
@@ -299,6 +380,7 @@ h2{
     background-color: rgba(185, 185, 185, 0.5);
     padding: 5px;
     border-radius: 22px;
+    width: 100%;
 }
 
 .botones-derecha {
@@ -328,6 +410,7 @@ h2{
 
 
 /*Modificaciones dinámicas por código*/
+
 .box_shadow_green{
     box-shadow: 0px 0px 30px #4caf50;
 }
@@ -348,51 +431,5 @@ h2{
     text-align: center;
     margin: 20px 0 0 ;
     font-family: 'Poppins', sans-serif;
-}
-
-/* Agrega reglas de estilo específicas para tablets (máximo 768px de ancho) */
-@media screen and (min-width: 768px) and (max-width: 1025px) {
-    body {
-        background-attachment: scroll; /* Cambia la fijación de fondo para permitir el desplazamiento */
-    }
-
-    nav {
-        height: 8vh; /* Reduzco la altura de la barra de navegación en tablets */
-    }
-
-    main>div {
-        width: 95%; /* Ajusta el ancho para pantallas más pequeñas */
-        min-height: 70vh; /* Reduzco la altura mínima del contenedor principal */
-        padding: 2% 3%; /* Ajusto el relleno para tablets */
-    }
-
-    input[type="text"] {
-        width: 100%; /* Ajusta el ancho del input para ocupar toda la pantalla */
-        box-sizing: border-box;
-    }
-
-    textarea {
-        width: 100%; /* Ajusta el ancho del textarea para ocupar toda la pantalla */
-    }
-
-    table {
-        width: 100%; /* Ocupa todo el ancho del contenedor */
-    }
-
-    th, td {
-        padding: 10px; /* Ajusta el espaciado interno de las celdas en tablets */
-    }
-
-    .opciones input[type="submit"],
-    .opciones a {
-        width: 100%; /* Ajusta el ancho de los botones para que se ajusten a las celdas */
-        box-sizing: border-box; /* Asegura que el padding no aumente el ancho total del botón */
-    }
-
-    .boton {
-        padding: 20px 50px; /* Ajuste del tamaño del botón para tablets */
-        font-size: 1.5em; /* Ajuste del tamaño de la fuente para tablets */
-        min-width: 70%; /* Ajuste del ancho mínimo del botón para tablets */
-    }
 }
 

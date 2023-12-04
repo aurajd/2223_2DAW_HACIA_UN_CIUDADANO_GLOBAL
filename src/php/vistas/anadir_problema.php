@@ -1,5 +1,5 @@
 <main>    
-    <div>
+    <aside>
         <div class="opciones">
             <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Volver atrás</a>
         </div>
@@ -10,12 +10,14 @@
         <?php } ?>
         <h1>Añadir problema</h1>
         <form action="index.php?controller=problema&action=insertar&continente=<?php echo $_GET["continente"] ?>" method="post" enctype="multipart/form-data">
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo" id="titulo" placeholder="Introducir título">
-
-            <label for="informacion">Informacion:</label>
-            <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
-
+            <div>
+                <label for="titulo">Título:</label>
+                <input type="text" name="titulo" id="titulo" placeholder="Introducir título">
+            </div>
+            <div>
+                <label for="informacion">Informacion:</label>
+                <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
+            </div>
             <label for="reflexion">Reflexión:</label>
             <textarea name="reflexion" id="reflexion" placeholder="Escribe aquí"></textarea>
 
@@ -60,6 +62,6 @@
                 <input type='submit' value='Aceptar' name='aceptar'>
             </div>
         </form>
-    </div>
+    </aside>
 </main>
 <script type=module src="js/vistas/vista_admin_problema.js"></script>

@@ -1,5 +1,5 @@
 <main>
-    <div>
+    <aside>
     
     <?php if(count($dataToView["data"])>0){ ?>
             <div class='opciones'>
@@ -17,7 +17,7 @@
                     <th>Información</th>
                     <th>Fecha de inicio</th>
                     <th>Imagen</th>
-                    <th>Opciones</th>
+                    <th class="botones">Opciones</th>
                 </tr>
                 <?php
                     foreach ($dataToView["data"] as $fila){
@@ -48,10 +48,10 @@
                                     ?>
                                 </td>
                             <td>
-                                <ul>
-                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'>Borrar</a></li>
-                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'>Modificar</a></li>
-                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>'>Listar motivos</a></li>
+                                <ul class="contenedorBotones">
+                                    <li><a href='index.php?controller=conflicto&action=confirmar_borrado&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-solid fa-trash"></i></a></li>
+                                    <li><a href='index.php?controller=conflicto&action=mostrar_modificar&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-solid fa-pen"></i></a></li>
+                                    <li><a href='index.php?controller=conflicto&action=listar_motivos&id=<?php echo $fila['idSituacion'] ?>'><i class="fa-regular fa-clipboard"></i></a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -69,5 +69,5 @@
             </div>
         </div>
     <?php } ?>
-    </div>
+    </aside>
 </main>
