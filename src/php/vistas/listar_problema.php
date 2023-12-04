@@ -15,36 +15,47 @@
                     <th>Título</th>
                     <th>Información</th>
                     <th>Reflexión</th>
-                    <th>Soluciones</th>
                 </tr>
-                <?php foreach ($dataToView["data"] as $fila){ ?>
+                <?php foreach ($dataToView["data"] as $fila) { ?>
                     <tr>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['titulo'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['titulo'], ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['informacion'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['informacion'], ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['reflexion'], ENT_QUOTES); ?>
                             </div>
                         </td>
-                        <td>
-                            <?php 
-                            if (isset($fila['soluciones'])) {
-                                foreach ($fila['soluciones'] as $solucion) {
-                                    echo htmlspecialchars($solucion['textoSolucion'], ENT_QUOTES) . "<br>";
-                                }
-                            } else {
-                                echo "No hay soluciones disponibles";
+                    </tr>
+                    <!-- Mostrar soluciones -->
+                    <tr>
+                        <th colspan="3">
+                            <div>
+                                Soluciones
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <?php
+                        $soluciones = $dataToView["data"]["soluciones"];
+                        $numSoluciones = count($soluciones);
+                        $maxSolucionesPorFila = 3;
+
+                        for ($i = 0; $i < $numSoluciones; $i += $maxSolucionesPorFila) {
+                            echo '<tr>';
+                            for ($j = $i; $j < $i + $maxSolucionesPorFila && $j < $numSoluciones; $j++) {
+                                echo '<td>' . htmlspecialchars($soluciones[$j]['textoSolucion'], ENT_QUOTES) . '</td>';
                             }
-                            ?>
-                        </td>
+                            echo '</tr>';
+                        }
+                        ?>
                     </tr>
                 <?php } ?>
             </table>
