@@ -1,11 +1,7 @@
 <main>    
     <aside>
         <div class="opciones">
-<<<<<<< HEAD
             <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Volver</a>
-=======
-            <a href='index.php?controller=problema&action=gestionar&continente=<?php echo $_GET["continente"] ?>'>Volver atrás</a>
->>>>>>> sprint3_ajaneiro
         </div>
         <?php if(isset($_GET["msg"])){ ?>
             <p id="<?php echo $_GET["tipomsg"] ?>">
@@ -14,7 +10,6 @@
         <?php } ?>
         <h1>Añadir problema</h1>
         <form action="index.php?controller=problema&action=insertar&continente=<?php echo $_GET["continente"] ?>" method="post" enctype="multipart/form-data">
-<<<<<<< HEAD
             <div>
                 <label for="titulo">Título:</label>
                 <input type="text" name="titulo" id="titulo" placeholder="Introducir título">
@@ -29,20 +24,6 @@
             <label for="imagen">Imagen (opcional):</label>
             <input type="file" id="imagen" name="imagen">
 
-=======
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo" id="titulo" placeholder="Introducir título">
-
-            <label for="informacion">Informacion:</label>
-            <textarea name="informacion" id="informacion" placeholder="Escribe aquí"></textarea>
-
-            <label for="reflexion">Reflexión:</label>
-            <textarea name="reflexion" id="reflexion" placeholder="Escribe aquí"></textarea>
-
-            <label for="imagen">Imagen (opcional):</label>
-            <input type="file" id="imagen" name="imagen">
-
->>>>>>> sprint3_ajaneiro
             <div class="motivos">
                 <h2>Solución 1</h2>
                 <label for="motivo1">Información:</label>
@@ -81,10 +62,6 @@
                 <input type='submit' value='Aceptar' name='aceptar'>
             </div>
         </form>
-<<<<<<< HEAD
     </aside>
-=======
-    </div>
->>>>>>> sprint3_ajaneiro
 </main>
 <script type=module src="js/vistas/vista_admin_problema.js"></script>
