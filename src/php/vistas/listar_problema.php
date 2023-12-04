@@ -17,33 +17,29 @@
                     <th>Reflexión</th>
                     <th>Soluciones</th>
                 </tr>
-                <?php foreach ($dataToView["data"] as $fila){ ?>
+                <?php foreach ($dataToView["data"] as $fila) { ?>
                     <tr>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['titulo'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['titulo'], ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['informacion'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['informacion'], ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
                             <div class='scroll'>
-                                <?php echo htmlspecialchars($fila['reflexion'],ENT_QUOTES); ?>
+                                <?php echo htmlspecialchars($fila['reflexion'], ENT_QUOTES); ?>
                             </div>
                         </td>
                         <td>
-                            <?php 
-                            if (isset($fila['soluciones'])) {
-                                foreach ($fila['soluciones'] as $solucion) {
-                                    echo htmlspecialchars($solucion['textoSolucion'], ENT_QUOTES) . "<br>";
-                                }
-                            } else {
-                                echo "No hay soluciones disponibles";
-                            }
-                            ?>
+                            <div class='scroll'>
+                                <ul class="contenedorBotones">
+                                <li><a href='index.php?controller=problema&action=ver_problema&id=<?php echo $fila['idSituacion'] ?>&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'><i class="fa-regular fa-eye"></i></a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>

@@ -143,6 +143,5 @@ export class VistaContinente extends Vista {
       this.imagenContinente.src = 'img/' + img
       this.imagenContinente.style = 'block'
     }
-
   }
 }

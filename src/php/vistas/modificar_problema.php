@@ -72,4 +72,8 @@
         </form>
     </aside>
 </main>
+<<<<<<< HEAD
 <script type=module src="js/vistas/vista_admin_problema.js"></script>
+=======
+<script type=module src="js/vistas/vista_admin_problema.js"></script>
+>>>>>>> sprint3_mnieto
