@@ -154,7 +154,7 @@ class problemaController{
         }
         $this->view = "modificar_problema";
         $this->titulo = "Modificar problema";
-        return $this->modelo->listar_fila($id);
+        return $this->modelo->listar_problema_solucion($id);
     }
 
     /**
