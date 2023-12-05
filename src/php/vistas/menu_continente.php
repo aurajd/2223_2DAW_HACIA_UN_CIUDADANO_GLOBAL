@@ -4,7 +4,7 @@
         <table id="tablaMenuContinente">
             <tr>
                 <th>Continente</th>
-                <th class="botones">Opciones</th>
+                <th class="botones" colspan="2">Opciones</th>
             </tr>
             <tr>
                 <td>Europa</td>
