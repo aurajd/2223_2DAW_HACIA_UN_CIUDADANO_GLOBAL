@@ -39,7 +39,7 @@
     </div>
         
     <div class='opciones'>
-        <a href='index.php?controller=continente&action=mostrar_modificar&id=<?php echo $dataToView["data"]["idContinente"]; ?>'>Modificar</a>
+        
         <a href='index.php?controller=continente&id=<?php echo $dataToView["data"]["idContinente"]; ?>'>Volver</a>
     </div>
 

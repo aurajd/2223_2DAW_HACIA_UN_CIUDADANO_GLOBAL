@@ -25,7 +25,7 @@
 
             <div class='opciones'>
                 <button type='submit' name='Aceptar' id='aceptar'>Enviar</button>
-                <a href='index.php?controller=continente&action=ver_continente&id=<?php echo $dataToView["data"]["idContinente"]; ?>'>Cancelar</a>
+                <a href='index.php?controller=continente&action=menu_continente'>Cancelar</a>
             </div>
         </form>
     </aside>

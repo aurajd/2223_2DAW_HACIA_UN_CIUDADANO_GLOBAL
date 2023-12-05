@@ -111,15 +111,10 @@ class ContinenteController {
 
         // Verificar si se proporcionó una nueva imagen
         if ($imagen && $imagen['size'] > 0) {
-            // Lógica para procesar la nueva imagen
-            $imagenNombre = $imagen['name'];
-            move_uploaded_file($imagen['tmp_name'], __DIR__."/../../img/".$imagenNombre);
-
             // Actualizar la información del continente con la nueva imagen
-            $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, ['tmp_name' => __DIR__."/../../img/".$imagenNombre, 'name' => $imagenNombre]);
+            $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, $imagen);
         } else {
             // Si no se proporciona una nueva imagen, conservar la existente
-            $imagenNombre = $infoContinente['imagen'];
             $exito = $this->modelo->modificar_continente($id, $informacion, $resumenInfo, null);
         }
 
