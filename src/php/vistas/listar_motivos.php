@@ -25,7 +25,7 @@
             <?php } ?>
         </table>
         <div class='opciones'>
-            <a href='index.php?controller=conflicto&action=gestionar'>Volver</a>
+            <a href='index.php?controller=conflicto&action=gestionar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver</a>
         </div>
     </aside>
 </main>
