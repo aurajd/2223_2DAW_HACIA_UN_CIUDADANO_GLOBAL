@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $controlador->titulo ?></title>
     <link rel="stylesheet" href="css/style_admin.css">
+    <link rel="icon" href="./img/logo.jpeg" type="image/x-icon">
     <script src="https://kit.fontawesome.com/a0185357ca.js" crossorigin="anonymous"></script>
 </head>
 <body>
