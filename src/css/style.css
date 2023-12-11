@@ -261,6 +261,8 @@ nav a {
 
 .info img {
     max-height: 30vh;
+    max-width: 100%;
+    margin: auto;
 }
 
 .infoTexto {

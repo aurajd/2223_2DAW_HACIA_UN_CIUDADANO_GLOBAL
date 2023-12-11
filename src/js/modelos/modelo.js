@@ -46,7 +46,7 @@ export class Modelo {
       method: 'POST',
       body: formData
     }
-    return fetch('./index.php?controller=ranking&action=anadir_puntuacion', opciones)
+    return fetch('./index.php?controller=puntuacion&action=anadir_puntuacion', opciones)
       .then(respuesta => respuesta.text())
       .then(texto => {
         return true
@@ -215,7 +215,7 @@ export class Modelo {
    * @returns {Promise<Array>} - Promesa que resuelve a un array de puntuaciones.
    */
   obtenerRanking () {
-    return fetch('./index.php?controller=ranking&action=devolver_puntuaciones_ajax')
+    return fetch('./index.php?controller=puntuacion&action=devolver_puntuaciones_ajax')
       .then(respuesta => respuesta.json())
       .then(objeto => {
         return objeto

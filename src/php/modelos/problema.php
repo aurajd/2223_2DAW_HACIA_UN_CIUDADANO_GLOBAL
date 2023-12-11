@@ -287,4 +287,15 @@ class problemaModel extends Conexion{
         $stmt->close();
         return $existe;
     }
+
+    function listar_continentes(){
+        $sql = "SELECT s.idSituacion, s.titulo, s.informacion, s.imagen, p.reflexion
+        FROM situacion s
+        INNER JOIN problema p ON s.idSituacion = p.idProblema";
+                
+        $resultado = $this->conexion->query($sql);
+        $lista = $resultado->fetch_all(MYSQLI_ASSOC);
+        
+        return $lista;
+    }  
 }

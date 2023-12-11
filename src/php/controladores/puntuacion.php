@@ -29,8 +29,8 @@ class puntuacionController{
      */
     public function __construct() {
         $this->modelo = new puntuacionModel();
-        $this->titulo = 'Menú puntuación';
-        $this->view="listar_puntuaciones";
+        $this->titulo = 'Menú Principal';
+        $this->view = "menu_principal";
     }
 
     function anadir_puntuacion(){
@@ -68,7 +68,6 @@ class puntuacionController{
         if($puntuaciones)  
         {
             return $puntuaciones;
-
         }
     }
 
