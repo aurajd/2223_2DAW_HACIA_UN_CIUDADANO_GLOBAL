@@ -13,6 +13,17 @@ a {
 
 /* vista divvistaMenu */
 
+#divvistaMapa,
+#divvistaProb,
+#divvistaConf,
+#divvistaRef,
+#divvistaFech,
+#divvistaCont,
+#divvistaRank,
+#divvistaForm {
+    display: none;
+}
+
 #divvistaMenu main {
     display: flex;
     flex-direction: column;
@@ -92,7 +103,7 @@ nav ul {
     margin: 0;
     height: 100%;
     width: 30%;
-    margin: 0  auto;
+    margin: 0 auto;
     list-style-type: none;
     display: flex;
     flex-flow: row nowrap;
@@ -118,14 +129,14 @@ nav a {
     align-items: center;
 }
 
-.puntosMensaje{
+.puntosMensaje {
     cursor: default;
 }
 
 
 /* vista divvistaMapa */
 
-#divvistaMapa{
+#divvistaMapa {
     background-image: url("../img/fondoMapa.jpg");
     background-size: cover;
     background-position: center;
@@ -149,59 +160,59 @@ nav a {
 }
 
 
-#boton_eu1{
+#boton_eu1 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 65%;
     right: 47%;
     cursor: pointer;
 }
 
-#boton_eu2{
+#boton_eu2 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 70%;
     right: 25%;
     cursor: pointer;
 }
 
-#boton_eu3{
+#boton_eu3 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 20%;
     right: 10%;
     cursor: pointer;
 }
 
-#boton_eu4{
+#boton_eu4 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 70%;
     left: 15%;
     cursor: pointer;
 }
 
-#boton_eu5{
+#boton_eu5 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 25%;
     left: 28%;
     cursor: pointer;
 }
 
-#boton_eu6{
+#boton_eu6 {
     position: absolute;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
     bottom: 45%;
     right: 45%;
     cursor: pointer;
 }
 
-#divvistaMapa img{
+#divvistaMapa img {
     height: 20%;
 }
 
-.cuadro-texto{
+.cuadro-texto {
     position: absolute;
     left: 1%;
     bottom: 1%;
@@ -219,7 +230,7 @@ nav a {
 
 /* Vista divvistaConf / Vista divvistaProb */
 
-.divProbConf h2{
+.divProbConf h2 {
     height: 10vh;
     font-weight: bolder;
     display: flex;
@@ -227,7 +238,7 @@ nav a {
     align-items: center;
 }
 
-.divProbConf{
+.divProbConf {
     height: 100vh;
     background-image: url("../img/fondoMapa.jpg");
     background-size: cover;
@@ -236,7 +247,7 @@ nav a {
     background-attachment: fixed;
 }
 
-.info{
+.info {
     background-color: #ffffffcc;
     box-shadow: 0px 0px 40px black;
     width: 60%;
@@ -248,21 +259,21 @@ nav a {
     border-radius: 20px;
 }
 
-.info img{
+.info img {
     max-height: 30vh;
 }
 
-.infoTexto{
+.infoTexto {
     height: 35%;
     overflow: auto;
     margin-top: 5vh;
 }
 
-.preguntaContainer{
+.preguntaContainer {
     font-weight: bolder;
 }
 
-.seleccion{
+.seleccion {
     background-color: #ffffffcc;
     box-shadow: 0px 0px 40px black;
     width: 22.5%;
@@ -273,33 +284,33 @@ nav a {
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-content:space-between;
+    align-content: space-between;
     border-radius: 20px;
     overflow: hidden;
 }
 
-.seleccion h2{
+.seleccion h2 {
     font-weight: normal;
 }
 
-.seleccion button{
+.seleccion button {
     height: 9vh;
     width: 90%;
     border-radius: 20px;
     margin: 0 auto;
 }
 
-.seleccion button:hover{
+.seleccion button:hover {
     background-color: rgb(210, 210, 210);
 }
 
-.opcionesContainer{
+.opcionesContainer {
     height: 10vh;
 }
 
 /* Vista divvistaRef*/
 
-#divvistaRef{
+#divvistaRef {
     background-image: url("../img/fondoMapa.jpg");
     height: 100vh;
     background-size: cover;
@@ -308,14 +319,14 @@ nav a {
     background-attachment: fixed;
 }
 
-#divvistaRef main{
+#divvistaRef main {
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#divReflexion{
+#divReflexion {
     width: 70%;
     height: 30vh;
     background-color: #ffffffcc;
@@ -329,24 +340,24 @@ nav a {
     overflow: hidden;
 }
 
-#divReflexion h1{
+#divReflexion h1 {
     font-weight: bolder;
     font-size: x-large;
 }
 
-#divReflexion button{
+#divReflexion button {
     height: 3vh;
     width: 10%;
     border-radius: 20px;
 }
 
-#divReflexion button:hover{
+#divReflexion button:hover {
     background-color: rgb(210, 210, 210);
 }
 
 /* Vista divvistaRef*/
 
-#divvistaFech{
+#divvistaFech {
     background-image: url("../img/fondoMapa.jpg");
     height: 100vh;
     background-size: cover;
@@ -355,14 +366,14 @@ nav a {
     background-attachment: fixed;
 }
 
-#divvistaFech main{
+#divvistaFech main {
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#divFecha{
+#divFecha {
     width: 70%;
     height: 30vh;
     background-color: #ffffffcc;
@@ -376,24 +387,24 @@ nav a {
     overflow: hidden;
 }
 
-#divFecha h1{
+#divFecha h1 {
     font-weight: bolder;
     font-size: x-large;
 }
 
-#divFecha button{
+#divFecha button {
     height: 3vh;
     width: 10%;
     border-radius: 20px;
 }
 
-#divFecha button:hover{
+#divFecha button:hover {
     background-color: rgb(210, 210, 210);
 }
 
 /* Vista divvistaRank*/
 
-#divvistaRank{
+#divvistaRank {
     background-image: url("../img/ranking.jpeg");
     height: 100vh;
     background-size: cover;
@@ -402,13 +413,13 @@ nav a {
     background-attachment: fixed;
 }
 
-#divvistaRank main{
+#divvistaRank main {
     height: calc(100vh - 10vh);
     display: flex;
     align-items: center;
 }
 
-#divvistaRank div{
+#divvistaRank div {
     margin: 0 auto;
     width: 40%;
     border: 2px solid black;
@@ -461,7 +472,7 @@ th {
 
 /* Vista divvistaForm*/
 
-#divvistaForm{
+#divvistaForm {
     height: 100vh;
     width: 100%;
     background-image: url("../img/fondoPuntuacion.jpeg");
@@ -549,9 +560,9 @@ th {
     cursor: pointer;
 }
 
-#divvistaForm aside{
+#divvistaForm aside {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
@@ -562,18 +573,18 @@ th {
 }
 
 /* JavaScript */
-.marcado{
+.marcado {
     background-color: gray;
 }
 
-.respuestaCorrecta{
+.respuestaCorrecta {
     background-color: greenyellow;
 }
 
-.respuestaIncorrecta{
+.respuestaIncorrecta {
     background-color: red;
 }
 
-.respuestaCorrectaNoMarcada{
+.respuestaCorrectaNoMarcada {
     background-color: yellow;
 }
