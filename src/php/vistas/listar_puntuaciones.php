@@ -1,6 +1,7 @@
 <main>
+    <aside>
     <?php if(!is_null($dataToView["data"])){ ?>
-        <aside>
+        
             <?php if(isset($_GET["msg"])){ ?>
                 <p id="<?php echo $_GET["tipomsg"] ?>">
                     <?php echo $_GET["msg"] ?>
@@ -26,13 +27,13 @@
                     </tr>
                 <?php } ?>
             </table>
-        </aside>
     <?php } else {  ?>
         <div class="no_lista">
             <h1>No hay ninguna puntuación en la base de datos.</h1>
             <div class='opciones'>
-                <a href='index.php'>Volver atrás</a>
+                <a href='index.php'>Volver</a>
             </div>
         </div>
     <?php } ?>
-<main>
+    </aside>
+</main>
