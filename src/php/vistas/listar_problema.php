@@ -7,7 +7,7 @@
                 </p>
             <?php } ?>
             <div class='opciones'>
-                <a href='index.php?controller=problema'>Volver atrás</a>
+                <a href='index.php?controller=problema'>Volver</a>
             </div>
             <h1>Lista problemas</h1>
             <table>
@@ -49,7 +49,7 @@
         <div class="no_lista">
             <h1>No hay ningún problema en la base de datos.</h1>
             <div class='opciones'>
-                <a href='index.php?controller=problema'>Volver atrás</a>
+                <a href='index.php?controller=problema'>Volver</a>
             </div>
         </div>
     <?php } ?>
