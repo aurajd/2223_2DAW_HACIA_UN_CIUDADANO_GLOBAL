@@ -1,24 +1,36 @@
 <?php
 // Incluye el archivo del modelo que se utiliza en este controlador
-require_once __DIR__.'/../modelos/ranking.php';
+require_once __DIR__.'/../modelos/puntuacion.php';
 
 /**
- * Controlador para gestionar operaciones relacionadas con ranking.
+ * Controlador para gestionar operaciones relacionadas con la puntuacion.
  */
-class rankingController{
+class puntuacionController{
+    
 
-
+    // Propiedades de la clase
     /**
-     * @var rankingModel Instancia del modelo de ranking.
+     * @var string Título de la página.
+     */
+    public $titulo;
+    /**
+     * @var problemaModel Instancia del modelo de conflicto.
      */
     public $modelo;
+    /**
+     * @var string Vista por defecto.
+     */
+    public $view;
+
     /**
      * Constructor de la clase
      * 
      * @return void
      */
     public function __construct() {
-        $this->modelo = new rankingModel();
+        $this->modelo = new puntuacionModel();
+        $this->titulo = 'Menú puntuación';
+        $this->view="listar_puntuaciones";
     }
 
     function anadir_puntuacion(){
@@ -47,6 +59,17 @@ class rankingController{
         }
         echo json_encode($objeto);
         die();
+    }
+
+    function mostrar_puntuaciones(){
+        $this->view = "listar_puntuaciones";
+        $this->titulo = "Listar puntuaciones";
+        $puntuaciones = $this->modelo->listar_puntuaciones();
+        if($puntuaciones)  
+        {
+            return $puntuaciones;
+
+        }
     }
 
     /**
@@ -84,4 +107,15 @@ class rankingController{
         return true;
     }
     
+
+    function confirmar_borrado(){
+        $this->view = "borrar_puntuacion";
+        $this->titulo = "Borrar puntuaciones";
+    }
+
+    function borrar_puntuaciones(){
+        $this->modelo->borrar_puntuaciones();
+        $this->mostrar_puntuaciones();
+    }
+
 }

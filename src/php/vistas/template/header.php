@@ -13,5 +13,5 @@
         <a href="index.php?controller=continente" class="back-link">Continentes</a>        
         <a href="index.php?controller=problema" class="back-link">Problemas</a>        
         <a href="index.php?controller=conflicto" class="back-link">Conflictos</a>
-        <a href="index.php?controller=puntuacion" class="back-link">Puntuaciones</a>
+        <a href="index.php?controller=puntuacion&action=mostrar_puntuaciones" class="back-link">Puntuaciones</a>
     </nav>

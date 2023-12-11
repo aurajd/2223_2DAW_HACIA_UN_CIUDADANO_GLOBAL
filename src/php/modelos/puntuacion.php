@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__.'/conexion.php';
 /**
- * Clase problemaModel: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
+ * Clase puntuacionModel: Proporciona métodos para interactuar con la base de datos en relación con situaciones y problemas.
  */
-class rankingModel extends Conexion{
+class puntuacionModel extends Conexion{
 
     /**
      * @var string|null $error Mensaje de error en caso de excepciones.
@@ -53,5 +53,20 @@ class rankingModel extends Conexion{
         $this->conexion->close();
         $top5 = $resultado->fetch_all(MYSQLI_ASSOC);
         return $top5;
+    }
+
+    function listar_puntuaciones(){
+        $sql = "SELECT puntuacion, nombreJugador
+        FROM ranking
+        ORDER BY puntuacion DESC";
+        $resultado = $this->conexion->query($sql);
+        $this->conexion->close();
+        $puntuaciones = $resultado->fetch_all(MYSQLI_ASSOC);
+        return $puntuaciones;
+    }
+
+    function borrar_puntuaciones(){
+        $sql = "DELETE FROM ranking";
+        $this->conexion->query($sql);
     }
 }
