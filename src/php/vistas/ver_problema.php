@@ -34,7 +34,7 @@
                 </div>
             <?php } ?>
         <div class='opciones'>
-            <a href='index.php?controller=problema&action=listar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver atrás</a>
+            <a href='index.php?controller=problema&action=listar&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Volver</a>
         </div>
     </aside>
 </main>
