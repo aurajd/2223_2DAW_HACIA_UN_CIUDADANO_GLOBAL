@@ -140,7 +140,7 @@ export class VistaContinente extends Vista {
     if (img == null) {
       this.imagenContinente.style.display = 'none'
     } else {
-      this.imagenContinente.src = 'img/' + img
+      this.imagenContinente.src = 'img_subidas/' + img
       this.imagenContinente.style = 'block'
     }
   }

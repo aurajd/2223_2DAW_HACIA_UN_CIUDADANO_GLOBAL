@@ -30,7 +30,7 @@
                     <div>
                         <h2>Imagen continente</h2>
                         <div>
-                        <img src='img/<?php echo $dataToView["data"]['imagen']; ?>'>
+                        <img src='img_subidas/<?php echo $dataToView["data"]['imagen']; ?>'>
                         </div>
                     </div>
                 <?php } ?>

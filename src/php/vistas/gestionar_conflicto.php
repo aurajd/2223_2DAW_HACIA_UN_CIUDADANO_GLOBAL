@@ -42,7 +42,7 @@
                                 <?php 
                                     if(!is_null($fila['imagen'])){
                                     ?>
-                                        <img src='img/<?php echo $fila['imagen']; ?>'>
+                                        <img src='img_subidas/<?php echo $fila['imagen']; ?>'>
                                         <?php
                                     }
                                     ?>

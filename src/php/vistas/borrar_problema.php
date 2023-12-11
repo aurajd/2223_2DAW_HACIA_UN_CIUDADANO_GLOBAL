@@ -15,7 +15,7 @@
         <div>
         <?php if(!is_null($dataToView["data"]["imagen"])){ ?>
             <p class='titulo'>Imagen:</p>
-            <img src='img/<?php echo $dataToView["data"]["imagen"] ?>' id='imagenMostrar'>
+            <img src='img_subidas/<?php echo $dataToView["data"]["imagen"] ?>' id='imagenMostrar'>
         <?php } ?>
         <div class='opciones'>
             <a href='index.php?controller=problema&action=borrar_fila&id=<?php echo $dataToView["data"]['idSituacion']?>&continente=<?php echo $_GET["continente"]?>'>Aceptar</a>

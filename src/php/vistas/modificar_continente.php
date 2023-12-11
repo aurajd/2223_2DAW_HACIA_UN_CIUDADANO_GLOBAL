@@ -17,7 +17,7 @@
             <p>
             <?php if(isset($dataToView["data"]["imagen"]) && !empty($dataToView["data"]["imagen"])) { ?>
                 <p class='titulo'>Imagen actual:</p>
-                <img src='img/<?php echo $dataToView["data"]["imagen"] ?>' id='imagenMostrar'>
+                <img src='img_subidas/<?php echo $dataToView["data"]["imagen"] ?>' id='imagenMostrar'>
             <?php } ?>
             </p>
             <label for='imagen'>Modificar imagen (opcional):</label>

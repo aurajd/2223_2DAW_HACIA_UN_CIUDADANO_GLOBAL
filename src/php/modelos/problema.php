@@ -65,7 +65,7 @@ class problemaModel extends Conexion{
 
             // Si hay una imagen, actualizamos la ruta en la tabla 'situacion'
             if (file_exists($imagen["tmp_name"])) {
-                $directorio_destino = __DIR__ . "/../../img";
+                $directorio_destino = __DIR__ . "/../../img_subidas";
                 $ruta_temporal = $imagen["tmp_name"];
                 $ruta_destino = $directorio_destino . DIRECTORY_SEPARATOR . $nombreImagen;
 
@@ -108,7 +108,7 @@ class problemaModel extends Conexion{
 
         // Borrar la imagen del servidor
         if(!is_null($img))
-            unlink(__DIR__."/../../img/".$img);
+            unlink(__DIR__."/../../img_subidas/".$img);
     }
 
     /**
@@ -226,8 +226,8 @@ class problemaModel extends Conexion{
                 $stmt->free_result();
 
 
-                if (!is_null($imagenBorrar) && file_exists(__DIR__."/../../img/".$imagenBorrar)) {
-                    unlink(__DIR__."/../../img/".$imagenBorrar);
+                if (!is_null($imagenBorrar) && file_exists(__DIR__."/../../img_subidas/".$imagenBorrar)) {
+                    unlink(__DIR__."/../../img_subidas/".$imagenBorrar);
                 }
 
                 // Metemos el nombre de la imagen en una variable
@@ -242,7 +242,7 @@ class problemaModel extends Conexion{
 
                 
                 // Ruta de destino para mover el archivo
-                $directorio_destino = __DIR__.'/../../img';
+                $directorio_destino = __DIR__.'/../../img_subidas';
                 $ruta_temporal = $imagen["tmp_name"];
 
                 // Ruta de destino completa

@@ -15,7 +15,7 @@
             </div>
             <?php if(!is_null($dataToView["data"]["conflicto"]["imagen"])){ ?>
                 <p class='titulo'>Imagen:</p>
-                <img src='img/<?php echo $dataToView["data"]["conflicto"]["imagen"] ?>' id='imagenMostrar'>
+                <img src='img_subidas/<?php echo $dataToView["data"]["conflicto"]["imagen"] ?>' id='imagenMostrar'>
             <?php } ?>
         </div>
 

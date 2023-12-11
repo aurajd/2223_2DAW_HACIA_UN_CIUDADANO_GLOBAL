@@ -112,7 +112,7 @@ export class VistaConflicto extends Vista {
     if (img == null) {
       this.imagenConflicto.style.display = 'none'
     } else {
-      this.imagenConflicto.src = 'img/' + img
+      this.imagenConflicto.src = 'img_subidas/' + img
       this.imagenConflicto.style.display = 'block'
     }
   }

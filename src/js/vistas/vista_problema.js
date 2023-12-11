@@ -100,7 +100,7 @@ export class VistaProblema extends Vista {
     if (img == null) {
       this.imagenProblema.style.display = 'none'
     } else {
-      this.imagenProblema.src = 'img/' + img
+      this.imagenProblema.src = 'img_subidas/' + img
       this.imagenProblema.style.display = 'block'
     }
   }
