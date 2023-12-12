@@ -125,14 +125,14 @@ class ContinenteModel extends Conexion {
                 $stmt->fetch();
                 $stmt->free_result();
 
-                if (!is_null($imagenBorrar) && file_exists(__DIR__."/../../img/".$imagenBorrar)) {
-                    unlink(__DIR__."/../../img/".$imagenBorrar);
+                if (!is_null($imagenBorrar) && file_exists(__DIR__."/../../img_subidas/".$imagenBorrar)) {
+                    unlink(__DIR__."/../../img_subidas/".$imagenBorrar);
                 }
 
                 // Subimos la nueva imagen
                 $ext = pathinfo($imagen["name"], PATHINFO_EXTENSION);
                 $nombreImagen = uniqid() . "." . $ext;
-                $ruta_destino = __DIR__ ."/../../img/" . $nombreImagen;
+                $ruta_destino = __DIR__ ."/../../img_subidas/" . $nombreImagen;
                 move_uploaded_file($imagen["tmp_name"], $ruta_destino);
 
                 // Actualizamos la ruta de la imagen en la base de datos
