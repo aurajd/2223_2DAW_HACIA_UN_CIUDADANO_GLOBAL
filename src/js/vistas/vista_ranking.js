@@ -23,8 +23,12 @@ export class VistaRanking extends Vista {
    * @param {Object} ranking - Información del ranking.
    */
   actualizarRanking (ranking) {
-    for (const [index, fila] of ranking.filas.entries()) {
-      this.actualizarFila(fila, index)
+    for (let index = 0; index < 5; index++) {
+      if(ranking.filas[index]){
+        this.actualizarFila(ranking.filas[index],index);
+      } else {
+        this.borrarFila(index);
+      } 
     }
   }
   
@@ -32,6 +36,12 @@ export class VistaRanking extends Vista {
     const filaRanking = this.filas[index+1]
     filaRanking.getElementsByTagName('td')[0].textContent = fila['nombreJugador']
     filaRanking.getElementsByTagName('td')[1].textContent = "Puntuación: "+fila['puntuacion']
+  }
+
+  borrarFila(index){
+    const filaRanking = this.filas[index+1]
+    filaRanking.getElementsByTagName('td')[0].textContent = "-"
+    filaRanking.getElementsByTagName('td')[1].textContent = "-"
   }
 
   /**
