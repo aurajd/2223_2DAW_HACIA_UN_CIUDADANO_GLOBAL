@@ -11,7 +11,7 @@
                     <label for="motivo<?php echo $numSolucion?>">Información:</label>
                     <textarea name="soluciones[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
                     <label>
-                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
+                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?> " <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?> disabled>
                         Es correcto
                     </label>
                 </div>
@@ -28,7 +28,7 @@
                     <label for="motivo<?php echo $numSolucion?>">Información:</label>
                     <textarea name="soluciones[<?php echo $numSolucion?>]" id="motivo<?php echo $numSolucion?>" placeholder="Escribe aquí"><?php echo htmlspecialchars($solucion,ENT_QUOTES)?></textarea>      
                     <label>
-                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?>>
+                        <input type="checkbox" name="correctas[<?php echo $numSolucion;?>]" value="<?php echo $numSolucion;?>" <?php if ($dataToView["data"]["soluciones"][$i]["correcta"]) {echo ' checked ';}?> disabled>
                         Es correcto
                     </label>
                 </div>
