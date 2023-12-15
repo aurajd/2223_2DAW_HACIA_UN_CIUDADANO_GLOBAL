@@ -453,3 +453,28 @@ h2{
     margin: 20px 0 0 ;
     font-family: 'Poppins', sans-serif;
 }
+
+#mensajeDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    z-index: 9999;
+    display: none;
+}
+
+@media (orientation: portrait) {
+    /* Estilos para pantalla en vertical */
+
+    #mensajeDiv{
+        display: block;
+    }
+
+}

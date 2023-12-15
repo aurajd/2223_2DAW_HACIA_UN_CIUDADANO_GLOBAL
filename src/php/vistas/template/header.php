@@ -16,3 +16,6 @@
         <a href="index.php?controller=conflicto" class="back-link">Conflictos</a>
         <a href="index.php?controller=puntuacion&action=mostrar_puntuaciones" class="back-link">Puntuaciones</a>
     </nav>
+    <div id="mensajeDiv">
+        Resolución no compatible
+    </div>
