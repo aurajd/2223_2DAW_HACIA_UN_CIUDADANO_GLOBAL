@@ -11,7 +11,7 @@
             <a href='index.php?controller=puntuacion&action=confirmar_borrado'>Eliminar</a>
             </div>
             <h1>Lista puntuaciones</h1>
-            <table>
+            <table id="tablaPuntuacion">
                 <tr>
                     <th>Nombre</th>
                     <th>Puntuación</th>

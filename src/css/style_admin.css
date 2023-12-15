@@ -223,6 +223,18 @@ td li{
     justify-content: center;
 }
 
+/* tabla de puntuaciones */
+
+#tablaPuntuacion{
+    width: 50%;
+    vertical-align: middle;
+}
+
+#tablaPuntuacion tr{
+    font-size: x-large;
+    text-align: center;
+}
+
 /* listar continente */
 
 #listarContContenedor{
@@ -412,6 +424,7 @@ h2{
 
 
 /*Modificaciones dinámicas por código*/
+
 .box_shadow_green{
     box-shadow: 0px 0px 30px #4caf50;
 }
