@@ -2,7 +2,7 @@ CREATE TABLE continente (
     idContinente TINYINT AUTO_INCREMENT PRIMARY KEY,
     nombre CHAR(17) NOT NULL,
     informacion VARCHAR(2000) NOT NULL,
-    resumenInfo VARCHAR(100) NOT NULL,
+    resumenInfo VARCHAR(500) NOT NULL,
     imagen VARCHAR(18) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

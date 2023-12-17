@@ -257,7 +257,7 @@ class problemaController{
             // Validar antes de modificar
             if ($this->validar($titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas)) {
                 // Continuar con la lógica de modificación
-                $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $correctas);
+                $resultado = $this->modelo->modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas);
                 if ($resultado) {
                     $_GET["tipomsg"] = "exito";
                     $_GET["msg"] = "Problema modificado con éxito.";

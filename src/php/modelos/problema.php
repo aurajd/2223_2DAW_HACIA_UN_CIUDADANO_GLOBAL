@@ -54,11 +54,11 @@ class problemaModel extends Conexion{
 
             // Si hay soluciones, las insertamos en la tabla 'solucion'
             if (!empty($soluciones)) {
+                $sql = "INSERT INTO solucion(idSituacion, numSolucion, textoSolucion, correcta) VALUES (?, ?, ?, ?);";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bind_param('iisi', $id, $key, $solucion, $correcta);
                 foreach ($soluciones as $key => $solucion) {
                     $correcta = in_array($key, $correctas) ? 1 : 0;
-                    $sql = "INSERT INTO solucion(idSituacion, numSolucion, textoSolucion, correcta) VALUES (?, ?, ?, ?);";
-                    $stmt = $this->conexion->prepare($sql);
-                    $stmt->bind_param('iisi', $id, $key, $solucion, $correcta);
                     $stmt->execute();
                 }
             }
@@ -192,7 +192,7 @@ class problemaModel extends Conexion{
      * @param array $imagen Datos de la nueva imagen (si se proporciona).
      * @return bool Retorna true si la operación fue exitosa, false en caso contrario.
      */
-    function modificar_fila($id, $titulo, $informacion, $reflexion, $imagen){
+    function modificar_fila($id, $titulo, $informacion, $reflexion, $imagen, $soluciones, $correctas){
         try {
             $this->conexion->autocommit(false);
 
@@ -214,6 +214,24 @@ class problemaModel extends Conexion{
             $stmt = $this->conexion->prepare($sql);
             $stmt->bind_param('si',$reflexion,$id);
             $stmt->execute();
+
+
+            // Si hay soluciones, las insertamos en la tabla 'solucion'
+            if (!empty($soluciones)) {
+                $sql = "DELETE FROM solucion WHERE idSituacion = ?;";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->close();
+
+                $sql = "INSERT INTO solucion(idSituacion, numSolucion, textoSolucion, correcta) VALUES (?, ?, ?, ?);";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bind_param('iisi', $id, $key, $solucion, $correcta);
+                foreach ($soluciones as $key => $solucion) {
+                    $correcta = in_array($key, $correctas) ? 1 : 0;
+                    $stmt->execute();
+                }
+            }
 
             if (file_exists($imagen["tmp_name"])) {
                 // Borramos imagen del fichero
