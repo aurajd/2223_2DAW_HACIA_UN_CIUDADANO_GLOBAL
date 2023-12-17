@@ -216,7 +216,7 @@ nav a {
     position: absolute;
     left: 1%;
     bottom: 1%;
-    height: 50%;
+    min-height: 50%;
     width: 13%;
     border-radius: 20px;
     padding: 2.5%;
@@ -266,7 +266,7 @@ nav a {
 }
 
 .infoTexto {
-    height: 35vh;
+    height: 30vh;
     overflow: auto;
     margin-top: 5vh;
 }
