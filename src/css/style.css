@@ -266,7 +266,7 @@ nav a {
 }
 
 .infoTexto {
-    height: 35%;
+    height: 35vh;
     overflow: auto;
     margin-top: 5vh;
 }
@@ -297,7 +297,7 @@ nav a {
 }
 
 .seleccion button {
-    font-size: 18px;
+    font-size: 16px;
     min-height: 10vh;
     width: 90%;
     border-radius: 20px;
@@ -335,7 +335,7 @@ nav a {
 
 #divReflexion {
     width: 70%;
-    height: 30vh;
+    min-height: 30vh;
     background-color: #ffffffcc;
     padding: 20px;
     display: flex;
@@ -360,6 +360,14 @@ nav a {
 
 #divReflexion button:hover {
     background-color: rgb(210, 210, 210);
+}
+
+#fraseReflexion{
+    overflow: auto;
+    width: 100%;
+    max-height: 50vh;
+    line-height: normal;
+    overflow-wrap: break-word;
 }
 
 /* Vista divvistaRef*/
