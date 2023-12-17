@@ -9,8 +9,8 @@ class VistaAdminContinente {
      * @constructor
      */
   constructor () {
-    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü!¡:;,.¿?"' ]{0,1999}$/
-    this.regexResumen= /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü0!¡:;,.¿?"' ]{0,499}$/
+    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü!¡:;,.¿?"'\r?\n ]{0,1999}$/
+    this.regexResumen= /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü0!¡:;,.¿?"'\r?\n ]{0,499}$/
 
     // Referencias a los elementos del formulario
     this.informacion = document.getElementsByTagName('textarea')[0]

@@ -11,7 +11,7 @@ class VistaAdminConflicto {
   constructor () {
     // Expresiones regulares para validaciones
     this.regexTitulo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-9ÑñÁáÉéÍíÓóÚúÜü ]{0,49}$/
-    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"' ]{0,1999}$/
+    this.regexInformacion = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-Z0-ÑñÁáÉéÍíÓóÚúÜü9!¡:;,.¿?"'\r?\n ]{0,1999}$/
     this.regexFecha = /^(?!$)\d{4}-\d{2}-\d{2}$/ // Ajustada para el formato de fecha "aaaa-mm-dd"
     this.regexMotivo = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"' ]{0,1999}$/
 
@@ -97,7 +97,7 @@ class VistaAdminConflicto {
      * @returns {boolean} - true si todos los campos son válidos, false si al menos uno es inválido.
      */
   validarTextarea () {
-    const textareas = document.querySelectorAll('textarea')
+    const textareas = document.querySelectorAll('textarea:not(#informacion)')
     let textareasValidos = true
 
     textareas.forEach(textarea => {
@@ -275,6 +275,7 @@ class VistaAdminConflicto {
      * @returns {boolean} - true si el elemento es válido, false si es inválido.
      */
   validar (regex, element) {
+    console.log(regex, element.value)
     if (regex.test(element.value)) {
       // La entrada es válida, aplicar estilo verde
       element.classList.remove('box_shadow_red')

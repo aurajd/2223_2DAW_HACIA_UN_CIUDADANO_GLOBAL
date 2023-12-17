@@ -326,7 +326,7 @@ class problemaController{
         }
 
         // Comprueba que el campo título solo contenga letras, números, espacios y una serie de carácteres especiales concretos
-        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/', $informacion))
+        if (!preg_match('/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\'\r?\n ]{0,1999}$/', $informacion))
         {
             $_GET["msg"] = "La información no puede contener carácteres especiales.";
             return false;

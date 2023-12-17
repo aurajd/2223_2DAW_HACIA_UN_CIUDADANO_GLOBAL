@@ -65,7 +65,7 @@
             <h1 >No hay ningún conflicto en la base de datos.</h1>
             <div class='opciones'>
                 <a href='index.php?controller=conflicto'>Volver atrás</a>
-                <a href='index.php?controller=conflicto&action=mostrar_anadir'>Añadir conflicto</a>
+                <a href='index.php?controller=conflicto&action=mostrar_anadir&continente=<?php echo isset($_POST["continente"]) ? $_POST["continente"] : $_GET["continente"]; ?>'>Añadir conflicto</a>
             </div>
         </div>
     <?php } ?>

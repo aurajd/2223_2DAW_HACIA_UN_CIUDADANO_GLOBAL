@@ -89,7 +89,7 @@ export class VistaMapa extends Vista {
    * @param {HTMLElement} boton - Botón asociado al cuadro de texto.
    */
   async crearCuadroTexto (idContinente, idDiv, boton) {
-    const cuadroTexto = document.createElement('div')
+    const cuadroTexto = document.createElement('pre')
     cuadroTexto.classList.add('cuadro-texto')
     const continente = await this.controlador.devolverContinente(idContinente)
     cuadroTexto.textContent = continente.resumenInfo

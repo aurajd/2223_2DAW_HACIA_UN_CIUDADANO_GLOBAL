@@ -162,7 +162,7 @@ class ContinenteController {
         }
 
         // Comprueba que los campos información y resumenInfo solo contengan letras, números, espacios y una serie de caracteres especiales concretos
-        $patron = '/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\' ]{0,1999}$/';
+        $patron = '/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü][a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!¡:;,.¿?"\'\r?\n ]{0,1999}$/';
         if (!preg_match($patron, $informacion) || !preg_match($patron, $resumenInfo)) {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "La información y el resumen no pueden contener ciertos caracteres especiales.";
