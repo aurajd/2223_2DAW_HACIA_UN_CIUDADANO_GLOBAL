@@ -155,7 +155,7 @@ class ContinenteController {
             return false;
         }
 
-        if (strlen($informacion) > 2000 || strlen($resumenInfo) > 100) {
+        if (strlen($informacion) > 2000 || strlen($resumenInfo) > 500) {
             $_GET["tipomsg"] = "error";
             $_GET["msg"] = "Uno de los campos excede el límite de caracteres.";
             return false;
