@@ -609,3 +609,33 @@ th {
 .respuestaCorrectaNoMarcada {
     background-color: yellow;
 }
+
+#mensajeDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(223, 114, 114);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    z-index: 9999;
+    display: none;
+}
+
+@media (orientation: portrait) {
+    /* Estilos para pantalla en vertical */
+
+    #mensajeDiv{
+        display: block;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+}
