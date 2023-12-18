@@ -639,3 +639,14 @@ th {
     }
 
 }
+
+@media (max-width: 1023px) and (orientation: landscape) {
+    #mensajeDiv{
+        display: block;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+    }
+}
