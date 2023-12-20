@@ -52,7 +52,7 @@ export class VistaRanking extends Vista {
   actualizarFila (fila, index) {
     const filaRanking = this.filas[index + 1]
     filaRanking.getElementsByTagName('td')[0].textContent = fila.nombreJugador
-    filaRanking.getElementsByTagName('td')[1].textContent = 'Puntuación: ' + fila.puntuacion
+    filaRanking.getElementsByTagName('td')[1].textContent = fila.puntuacion
   }
 
   /**
