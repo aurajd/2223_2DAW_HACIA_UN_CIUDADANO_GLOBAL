@@ -237,11 +237,13 @@ nav a {
 /* Vista divvistaConf / Vista divvistaProb */
 
 .divProbConf h2 {
-    height: 10vh;
-    font-weight: bolder;
+    margin: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Rubik Doodle Shadow', sans-serif;
+    font-weight: bolder;
+    font-size: xx-large;
 }
 
 .divProbConf {
@@ -276,17 +278,18 @@ nav a {
 }
 
 .infoTexto {
-    height: 30vh;
     white-space: pre-wrap;
     word-wrap: break-word;
-    margin-top: 5vh;
+    margin: 5vh 0px;
     text-align: justify;
     width: 90%;
     line-height: 1.5;
 }
 
 .preguntaContainer {
+    font-family: 'Rubik Doodle Shadow', sans-serif;
     font-weight: bolder;
+    font-size: large;
 }
 
 .seleccion {
@@ -307,7 +310,9 @@ nav a {
 }
 
 .seleccion h2 {
+    font-family: 'Rubik Doodle Shadow', sans-serif;
     font-weight: bolder;
+    font-size: large;
 }
 
 .seleccion button {
@@ -319,6 +324,8 @@ nav a {
     margin: 0 auto;
     overflow: hidden;
     overflow-wrap: break-word;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
 }
 
 .seleccion button:hover {
