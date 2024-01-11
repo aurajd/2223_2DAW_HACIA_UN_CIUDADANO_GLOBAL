@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__.'/php/config/configdb.php';
 
 /**
  * Clase Conexion para manejar la conexión a la base de datos.

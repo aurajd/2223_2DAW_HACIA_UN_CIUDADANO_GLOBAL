@@ -1,7 +1,6 @@
 <?php 
 
 require_once __DIR__.'/php/config/config.php';
-require_once __DIR__.'/php/config/configdb.php';
 
 
 if(isset($_GET["controller"])) {
