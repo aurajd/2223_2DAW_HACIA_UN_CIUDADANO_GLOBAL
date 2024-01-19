@@ -12,7 +12,7 @@ CREATE TABLE situacion (
     titulo VARCHAR(50) NOT NULL,
     informacion VARCHAR(2000) NOT NULL,
     imagen CHAR(18) DEFAULT NULL,
-    CONSTRAINT fk_situacion_continente FOREIGN KEY (idContinente) REFERENCES continente(idContinente);
+    CONSTRAINT fk_situacion_continente FOREIGN KEY (idContinente) REFERENCES continente(idContinente)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 CREATE TABLE problema (
